@@ -5,6 +5,11 @@
 
 Welcome to the **Trending Insights: Social Data Analysis and Visualization** or **Computer-Assisted Text Analysis** course!
 
+## Current Semester: Spring 2026
+**[Access Spring 2026 Course Materials](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2026)**
+
+---
+
 <table>
   <tr>
     <td>
@@ -28,32 +33,60 @@ Welcome to the **Trending Insights: Social Data Analysis and Visualization** or 
 
 ---
 
-## Repository Contents
-This repository contains resources, exercises, and supporting materials for both courses. Here’s what you’ll find:
-- [**Lecture Slides:**] Organized by week and supplemented with code examples for data analysis and visualization in Markdown format for easier visual reference during lectures.
-- [**Class Exercises:**] Detailed instructions, datasets, and R Markdown files for hands-on practice and in-class data exploration following the lecture slides.
-- [**Cheat Sheets:**] A compilation of R cheatsheet collected from external resources. 
+## Repository Structure
+
+### Current Semester
+- **[Spring2026](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2026)** - All current course materials including:
+  - [Lecture Slides](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2026/LectureSlides) (organized by week with code examples)
+  - [Class Exercises](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2026/exercises) (hands-on practice with datasets and R Markdown files)
+  - [Data](https://github.com/aysedeniz09/IntroCSS/tree/main/data) files for in-class exploration
+  - [Cheat Sheets](https://github.com/aysedeniz09/IntroCSS/tree/main/CheatSheets) (R reference materials)
+
+### Archived Semesters
+Previous versions of this course are maintained for reference:
+- [Spring 2025](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring25) - Archived
+
+---
 
 ## Getting Started
-1. [Install R and R Studio](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/Install_R.md)
 
-2. Download the repository as a ZIP file from the GitHub page:
-   - Click the green Code button at the top right of the repository page
-   - Select Download ZIP and save it to your computer.
-   - Extract the ZIP file to a folder on your local machine.
+### 1. Install Required Software
+[Install R and RStudio](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/Install_R.md)
 
-   or 
+### 2. Download Course Materials
 
-2. Download each [class exercise] R markdown file.
+**Option A: Download entire repository**
+   - Click the green **Code** button at the top right
+   - Select **Download ZIP** and save to your computer
+   - Extract the ZIP file to a folder on your local machine
+   - Navigate to the `Spring2026/` folder for current materials
 
-3. Follow the course schedule for weekly tasks and project deadlines.
+**Option B: Download individual files**
+   - Browse to the [Spring2026 folder](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2026)
+   - Download specific lecture slides or exercise R Markdown files as needed
+
+### 3. Follow Along
+- Check the course schedule for weekly topics
+- Complete exercises before deadlines
+- Reference cheat sheets as needed
+
+---
 
 ## Contact Information
 
-For questions or further assistance, feel free to reach out:
+**Instructor:** [Ayse Lokmanoglu](https://www.bu.edu/com/profile/ayse-lokmanoglu/)
 
-Instructor: [Ayse Lokmanoglu](https://www.bu.edu/com/profile/ayse-lokmanoglu/)
+**GitHub:** [@aysedeniz09](https://aysedeniz09.github.io/pages/repositories.html)
 
-GitHub: [@aysedeniz09](https://aysedeniz09.github.io/pages/repositories.html)
+**Teaching Assistant:** [Max Wong](https://www.bu.edu/com/profile/maximilian-wei-jie-wong/)
 
-TA: 
+---
+
+## Note for Students
+
+This repository is updated regularly throughout the semester. Make sure to:
+- Star this repository to easily find it later
+- Watch for updates to get notifications about new materials
+- Pull/download updates before each class
+
+For questions about course content, please use the course discussion board or email the instructor directly.
