@@ -1,0 +1,178 @@
+---
+title: "Course Schedule - PhD"
+---
+
+## Mondays 2:30-5:15 PM
+
+| Session | Date | Topic | Assignment | Readings |
+|---------|------|-------|------------|----------|
+| 1 | Jan 21 | Why Computational Social Science? | | [View](#readings-1) |
+| 2 | Jan 28 | Big Data: Data Collection and Wrangling | | [View](#readings-2) |
+| 3 | Feb 4 | Computational Research | **Benchmark 1 Due** | [View](#readings-3) |
+| 4 | Feb 11 | Data Cleaning & Wrangling, GGPlot | | [View](#readings-4) |
+| 5 | Feb 18 | Statistics | | [View](#readings-5) |
+| 6 | Feb 25 | Optional: AI API, Images | | |
+| 7 | Mar 4 | Text as Data: Dictionary Methods | **Benchmark 2 Due** | [View](#readings-7) |
+| 8 | Mar 18 | **No Class** | | |
+| 9 | Mar 25 | Text as Data: Topic Modeling | | [View](#readings-9) |
+| 10 | Apr 1 | Unsupervised Machine Learning | | [View](#readings-10) |
+| 11 | Apr 8 | Networks | | [View](#readings-11) |
+| 12 | Apr 15 | Online Social Movements | | [View](#readings-12) |
+| 13 | Apr 29 | From Data to Conclusions | | [View](#readings-13) |
+| | **May 4** | | **Final Paper Due** | |
+
+---
+
+## Required Readings
+
+### Session 1: Why Computational Social Science? {#readings-1}
+
+- Hofman, J. M., Watts, D. J., Athey, S., Garip, F., Griffiths, T. L., Kleinberg, J., Margetts, H., Mullainathan, S., Salganik, M. J., Vazire, S., Vespignani, A., & Yarkoni, T. (2021). Integrating explanation and prediction in computational social science. *Nature*, 595(7866), 181-188. https://doi.org/10.1038/s41586-021-03659-0
+
+- Lazer, D. M. J., Pentland, A., Watts, D. J., Aral, S., Athey, S., Contractor, N., Freelon, D., Gonzalez-Bailon, S., King, G., Margetts, H., Nelson, A., Salganik, M. J., Strohmaier, M., Vespignani, A., & Wagner, C. (2020). Computational social science: Obstacles and opportunities. *Science*, 369(6507), 1060-1062. https://doi.org/10.1126/science.aaz8170
+
+- Peng, Y., Lu, Y., & Shen, C. (2023). An Agenda for Studying Credibility Perceptions of Visual Misinformation. *Political Communication*, 40(2), 225-237. https://doi.org/10.1080/10584609.2023.2175398
+
+- Petchler, R., & González-Bailón, S. (2015). Automated content analysis of online political communication. In S. Coleman & D. Freelon (Eds.), *Handbook of Digital Politics* (pp. 433-450). Edward Elgar Publishing. https://doi.org/10.4337/9781782548768
+
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Whole Section. Available at: https://r4ds.hadley.nz/
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 2: Big Data - Data Collection and Wrangling {#readings-2}
+
+- Cappella, J. N. (2017). Vectors into the Future of Mass and Interpersonal Communication Research: Big Data, Social Media, and Computational Social Science. *Human Communication Research*, 43(4), 545-558. https://doi.org/10.1111/hcre.12114
+
+- Freelon, D. (2018). Computational Research in the Post-API Age. *Political Communication*, 35(4), 665-668. https://doi.org/10.1080/10584609.2018.1477506
+
+- Healy, K. (2018). *Data Visualization: A Practical Introduction* - Chapter 2: Make a Plot.
+
+- Theocharis, Y., & Jungherr, A. (2021). Computational Social Science and the Study of Political Communication. *Political Communication*, 38(1-2), 1-22. https://doi.org/10.1080/10584609.2020.1833121
+
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Section: Visualize. Available at: https://r4ds.hadley.nz/
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 3: Computational Research {#readings-3}
+
+- Peng, R. D. (2022). *R Programming for Data Science* - Chapters 13 & 14. Available at: https://bookdown.org/rdpeng/rprogdatascience/functions.html
+
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Section: Transform. Available at: https://r4ds.hadley.nz/
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 4: Data Cleaning & Wrangling {#readings-4}
+
+- Thulin, M. (2024). *Modern Statistics with R* - Chapter 5: Dealing with messy data. Available at: https://www.modernstatisticswithr.com/messychapter.html
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 5: Statistics {#readings-5}
+
+- Cernat, A. (2014). Introduction to Regression Models. In *Longitudinal Data Analysis Using R*.
+
+- Healy, K. (2018). *Data Visualization: A Practical Introduction* - Section 6: Work with models.
+
+- Thulin, M. (2024). *Modern Statistics with R* - Chapter 8: Regression models. Available at: https://www.modernstatisticswithr.com/
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 7: Text as Data - Dictionary Methods {#readings-7}
+
+- Carley, K. (1994). Extracting culture through textual analysis. *Poetics*, 22(4), 291-312. https://doi.org/10.1016/0304-422X(94)90011-6
+
+- Fraser, K. C., Zeller, F., Smith, D. H., Mohammad, S., & Rudzicz, F. (2019). How do we feel when a robot dies? Emotions expressed on Twitter before and after hitch. *Proceedings of the Tenth Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis*, 62-71. https://doi.org/10.18653/v1/W19-1308
+
+- Hart, R. P. (2013). The Rhetoric of Political Comedy: A Tragedy?
+
+- Mora, M., Dupas de Matos, A., Fernández-Ruiz, V., Briz, T., & Chaya, C. (2020). Comparison of methods to develop an emotional lexicon of wine: Conventional vs rapid-method approach. *Food Quality and Preference*, 83, 103920. https://doi.org/10.1016/j.foodqual.2020.103920
+
+- Ophir, Y., & Walter, D. (2023). Computational Sentiment Analysis. In R. L. Nabi & J. G. Myrick, *Emotions in the Digital World: Exploring Affective Experience and Expression in Online Interactions* (pp. 114-133). Oxford University Press.
+
+- Pang, B., Lee, L., & Vaithyanathan, S. (2002). Thumbs up? Sentiment Classification using Machine Learning Techniques. arXiv. http://arxiv.org/abs/cs/0205070
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 9: Text as Data - Topic Modeling {#readings-9}
+
+- DiMaggio, P., Nag, M., & Blei, D. (2013). Exploiting affinities between topic modeling and the sociological perspective on culture: Application to newspaper coverage of U.S. government arts funding. *Poetics*, 41(6), 570-606. https://doi.org/10.1016/j.poetic.2013.08.004
+
+- Grimmer, J., & Stewart, B. M. (2013). Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts. *Political Analysis*, 21(3), 267-297. https://doi.org/10.1093/pan/mps028
+
+- Rudkowsky, E., Haselmayer, M., Wastian, M., Jenny, M., Emrich, Š., & Sedlmair, M. (2018). More than Bags of Words: Sentiment Analysis with Word Embeddings. *Communication Methods and Measures*, 12(2-3), 140-157. https://doi.org/10.1080/19312458.2018.1455817
+
+- Stracqualursi, L., & Agati, P. (2022). Tweet topics and sentiments relating to distance learning among Italian Twitter users. *Scientific Reports*, 12(1). https://doi.org/10.1038/s41598-022-12915-w
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 10: Unsupervised Machine Learning {#readings-10}
+
+No assigned readings for this session.
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 11: Networks {#readings-11}
+
+- Breiger, R. L. (1974). The Duality of Persons and Groups. *Social Forces*, 53(2), 181. https://doi.org/10.2307/2576011
+
+- Ophir, Y., Walter, D., Arnon, D., Lokmanoglu, A. D., Tizzoni, M., Carota, J., D'Antiga, L., & Nicastro, E. (2021). The Framing of COVID-19 in Italian Media and Its Relationship with Community Mobility: A Mixed-Method Approach. *Journal of Health Communication*, 26(3), 161-173. https://doi.org/10.1080/10810730.2021.1899344
+
+- Torres, M., & Cantú, F. (2022). Learning to See: Convolutional Neural Networks for the Analysis of Social Science Data. *Political Analysis*, 30(1), 113-131. https://doi.org/10.1017/pan.2021.9
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 12: Online Social Movements {#readings-12}
+
+- Kraidy, M. (2017). Burning Man. In *Naked Blogger of Cairo: Creative Insurgency in the Arab World* (pp. 23-52). Harvard University Press.
+
+- Casas, A., & Williams, N. W. (2019). Images that Matter: Online Protests and the Mobilizing Role of Pictures. *Political Research Quarterly*, 72(2), 360-375. https://doi.org/10.1177/1065912918786805
+
+- Freelon, D. (2018). Computational Research in the Post-API Age. *Political Communication*, 35(4), 665-668. https://doi.org/10.1080/10584609.2018.1477506
+
+- Jackson, S. J., Bailey, M., & Welles, B. F. (2020). From #Ferguson to #FalconHeights: The Networked Case of Black Lives. In *#hashtagactivism: Networks of race and gender justice* (pp. 123-152). The MIT Press.
+
+- Thulin, M. (2024). *Modern Statistics with R* - Chapter 11: Predictive modelling and machine learning. Available at: https://www.modernstatisticswithr.com/
+
+- Tufekci, Z. (2017). Movement of Cultures. In *Twitter and tear gas: The power and fragility of networked protest* (pp. 83-114). Yale University Press.
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 13: From Data to Conclusions {#readings-13}
+
+- Bower, B. (2018, July 27). 'Replication crisis' spurs reforms in how science studies are done. *Science News*. https://www.sciencenews.org/blog/science-the-public/replication-crisis-psychology-science-studies-statistics
+
+- Brown, M. A., Gruen, A., Maldoff, G., Messing, S., Sanderson, Z., & Zimmer, M. (2024). Web Scraping for Research: Legal, Ethical, Institutional, and Scientific Considerations. arXiv. https://doi.org/10.48550/arXiv.2410.23432
+
+- Grimmer, J., & Stewart, B. M. (2013). Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts. *Political Analysis*, 21(3), 267-297. https://doi.org/10.1093/pan/mps028
+
+- Kasy, M. (2019). No Data in the Void: Values and Distributional Conflicts in Empirical Policy Research and Artificial Intelligence. *Economics for Inclusive Prosperity*. https://econfip.org/policy-briefs/no-data-in-the-void-values-and-distributional-conflicts-in-empirical-policy-research-and-artificial-intelligence/
+
+- Lazer, D., Kennedy, R., King, G., & Vespignani, A. (2014). The Parable of Google Flu: Traps in Big Data Analysis. *Science*, 343(6176), 1203-1205. https://doi.org/10.1126/science.1248506
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+## Notes
+
+All readings are available on Blackboard under the "Readings" folder.

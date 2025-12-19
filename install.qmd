@@ -1,0 +1,126 @@
+---
+title: "How to Install R Studio"
+execute:
+  eval: false
+---
+
+## Installation Steps
+
+**It is very important to install in order: first R, then R Studio**
+
+1. **Install R** from the download [link](https://cran.r-project.org/mirrors.html). You can pick which mirror to choose. For example, Duke Mirror: https://archive.linux.duke.edu/cran/
+
+2. **Install R Studio** (free desktop version) **AFTER** you installed R, from the [link](https://www.rstudio.com/products/rstudio/download/). You will only use R Studio but need to have both on your computer.
+
+---
+
+## How to Use R Studio
+
+### Step 1: Open R Studio from applications folder
+
+![](https://github.com/nwccpp/install_R/blob/images/Presentation1.jpg?raw=true)
+
+### Step 2: Create a new project
+
+![](https://github.com/nwccpp/install_R/blob/images/Presentation2.jpg?raw=true)
+
+### Step 3: Click on "File/New File/R script"
+
+![](https://github.com/nwccpp/install_R/blob/main/R_Script_1.png?raw=true)
+
+### Step 4: Running commands
+
+Commands in R Studio can be written directly into the console area (bottom left), or in the script. To run a completed command press **Control + Enter** (Windows/Linux) or **Command + Enter** (Mac).
+
+### Step 5: Install Required Packages
+
+Type the following code in the script and run it:
+
+```r
+install.packages("tidyverse")    # data wrangling
+install.packages("tidyr")        # data wrangling
+install.packages("tidytext")     # text analysis
+install.packages("dplyr")        # data wrangling
+install.packages("tm")           # topic modeling
+install.packages("topicmodels")  # topic modeling
+install.packages("quanteda")     # text analysis
+install.packages("lubridate")    # dates
+install.packages("ggplot2")      # visualizations
+install.packages("ggthemes")     # visualizations
+install.packages("scales")       # visualizations
+install.packages("wesanderson")  # visualizations
+```
+
+
+### Step 6: Load Packages into Library
+
+After installation, load the packages before using them:
+
+```r
+library(tidyverse)
+library(tidytext)
+library(tidyr)
+library(dplyr)
+library(tm)
+library(topicmodels)
+library(quanteda)
+library(lubridate)
+library(ggplot2)
+library(ggthemes)
+library(scales)
+library(wesanderson)
+```
+
+
+### Step 7: Getting Help
+
+For help with any command, type `?` followed by the command name and run:
+
+```r
+?merge
+?ggplot
+?install.packages
+```
+
+For keyboard shortcuts in R Studio, see the [official documentation](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts-in-the-RStudio-IDE).
+
+
+**You're Ready!**
+
+Now you are ready to work in R Studio! If you have any issues with installation, please email the instructor or TA, or come to office hours.
+
+---
+
+## Troubleshooting
+
+**Problem: Package installation fails**
+
+- Make sure you're connected to the internet
+
+- Try selecting a different CRAN mirror
+
+- Check if you have write permissions
+
+**Problem: R Studio won't open**
+
+- Make sure R is installed first
+
+- Try reinstalling R Studio
+
+- Check system requirements
+
+**Problem: Can't load a package**
+
+- Make sure the package is installed first using `install.packages()`
+
+- Check the package name spelling
+
+- Try reinstalling the package
+
+---
+
+## Additional Resources
+
+- [RStudio Cheatsheets](https://rstudio.com/resources/cheatsheets/)
+
+- [Stack Overflow R Questions](https://stackoverflow.com/questions/tagged/r)

@@ -1,0 +1,44 @@
+---
+title: "Session 08 - MIDTERM EXAM"
+---
+
+::: {.panel-tabset}
+
+## Lecture
+
+### Lecture Materials
+
+- [View Lecture Notes](../../Spring2026/LectureSlides/bigdata_L8-github.html)
+- [View Source on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2026/LectureSlides/bigdata_L8-github.md)
+
+---
+
+## Exercise
+
+### Exercise Materials
+
+- [Download Exercise (.Rmd file)](../../Spring2026/exercises/bigdata_L8-github.Rmd)
+- [View on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2026/exercises/bigdata_L8-github.Rmd)
+
+**Instructions:**
+
+1. Right-click the download link above and select "Save Link As"
+2. Save the `.Rmd` file to your computer
+3. Open the file in RStudio
+4. Complete the exercises
+
+:::
+
+---
+
+::: {.grid}
+::: {.g-col-4}
+← [Session 07](../07/session.qmd)
+:::
+::: {.g-col-4 style="text-align: center;"}
+[Schedule](../../schedule.qmd)
+:::
+::: {.g-col-4 style="text-align: right;"}
+[Session 09 →](../09/session.qmd)
+:::
+:::

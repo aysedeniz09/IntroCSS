@@ -51,7 +51,7 @@ Previous versions of this course are maintained for reference:
 ## Getting Started
 
 ### 1. Install Required Software
-[Install R and RStudio](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/Install_R.md)
+[Install R and RStudio](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/install.html)
 
 ### 2. Download Course Materials
 
@@ -76,7 +76,7 @@ Previous versions of this course are maintained for reference:
 
 **Instructor:** [Ayse Lokmanoglu](https://www.bu.edu/com/profile/ayse-lokmanoglu/)
 
-**GitHub:** [@aysedeniz09](https://aysedeniz09.github.io/pages/repositories.html)
+**GitHub:** [@aysedeniz09](https://aysedeniz09.github.io)
 
 **Teaching Assistant:** [Max Wong](https://www.bu.edu/com/profile/maximilian-wei-jie-wong/)
 
@@ -89,4 +89,4 @@ This repository is updated regularly throughout the semester. Make sure to:
 - Watch for updates to get notifications about new materials
 - Pull/download updates before each class
 
-For questions about course content, please use the course discussion board or email the instructor directly.
+For questions about course content, please email me directly.

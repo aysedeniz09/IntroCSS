@@ -1,0 +1,364 @@
+/* Custom CSS for Social Data Analysis Course Website */
+
+/* ==================== */
+/* Gray Color Scheme */
+/* ==================== */
+:root {
+  --primary-gray: #2C3E50;      /* Dark gray for headers */
+  --accent-gray: #4A5568;       /* Medium gray for accents */
+  --light-gray: #E5E7EB;        /* Light gray for backgrounds */
+  --border-gray: #9CA3AF;       /* Gray for borders */
+  --text-gray: #374151;         /* Dark gray for text */
+  --bu-red: #4A5568;            /* Medium gray */
+  --bu-white: #FFFFFF;
+  --bu-gray: #2C3E50;           /* Dark gray */
+  --bu-light-gray: #F3F4F6;
+  --accent-blue: #6B7280;       /* Gray */
+}
+
+/* ==================== */
+/* Global Styling */
+/* ==================== */
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* Force light background in dark mode */
+[data-bs-theme="dark"] body {
+  background-color: #FFFFFF !important;
+  color: #374151 !important;
+}
+
+[data-bs-theme="dark"] .navbar {
+  background-color: #F3F4F6 !important;
+  color: #2C3E50 !important;
+}
+
+[data-bs-theme="dark"] .sidebar {
+  background-color: #FAFAFA !important;
+  color: #2C3E50 !important;
+}
+
+[data-bs-theme="dark"] .sidebar a {
+  color: #4A5568 !important;
+}
+
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h3 {
+  color: #2C3E50 !important;
+}
+
+[data-bs-theme="dark"] .nav-tabs .nav-link {
+  color: #4A5568 !important;
+}
+
+[data-bs-theme="dark"] .nav-tabs .nav-link.active {
+  color: #2C3E50 !important;
+  background-color: #FFFFFF !important;
+}
+
+/* ==================== */
+/* Navigation Bar */
+/* ==================== */
+.navbar {
+  border-bottom: 3px solid var(--accent-gray);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--primary-gray) !important;
+}
+
+.nav-link:hover {
+  color: var(--accent-gray) !important;
+}
+
+/* ==================== */
+/* Headers */
+/* ==================== */
+h1, h2, h3 {
+  color: var(--primary-gray);
+  font-weight: 600;
+}
+
+h1 {
+  border-bottom: 2px solid var(--accent-gray);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+  border-left: 4px solid var(--accent-gray);
+}
+
+/* ==================== */
+/* Links */
+/* ==================== */
+a {
+  color: var(--accent-gray);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-gray);
+  text-decoration: underline;
+}
+
+/* ==================== */
+/* Callout Boxes */
+/* ==================== */
+.callout {
+  border-radius: 5px;
+  margin: 1.5rem 0;
+}
+
+.callout-note {
+  border-left: 5px solid #6B7280;
+  background-color: #F3F4F6;
+}
+
+.callout-warning {
+  border-left: 5px solid #9CA3AF;
+  background-color: #F9FAFB;
+}
+
+.callout-important {
+  border-left: 5px solid #4A5568;
+  background-color: #F9FAFB;
+}
+
+.callout-tip {
+  border-left: 5px solid #6B7280;
+  background-color: #F3F4F6;
+}
+
+/* ==================== */
+/* Code Blocks */
+/* ==================== */
+pre {
+  border-left: 3px solid var(--accent-gray);
+  border-radius: 5px;
+  background-color: var(--bu-light-gray);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+code {
+  background-color: var(--bu-light-gray);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* ==================== */
+/* Tables */
+/* ==================== */
+table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: var(--primary-gray);
+  color: var(--bu-white);
+}
+
+th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #DDD;
+}
+
+tbody tr:hover {
+  background-color: var(--bu-light-gray);
+}
+
+/* ==================== */
+/* Sidebar */
+/* ==================== */
+.sidebar-title {
+  color: var(--primary-gray);
+  font-weight: 600;
+}
+
+.sidebar-section-title {
+  color: var(--bu-gray);
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.sidebar nav[role=doc-toc] ul > li > a.active {
+  border-left: 2px solid var(--accent-gray);
+  color: var(--accent-gray);
+}
+
+/* ==================== */
+/* Footer */
+/* ==================== */
+.nav-footer {
+  border-top: 3px solid var(--accent-gray);
+  background-color: var(--bu-light-gray);
+}
+
+/* ==================== */
+/* Buttons */
+/* ==================== */
+.btn-primary {
+  background-color: var(--accent-gray);
+  border-color: var(--accent-gray);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-gray);
+  border-color: var(--primary-gray);
+}
+
+/* ==================== */
+/* Grid Layout */
+/* ==================== */
+.grid {
+  margin: 2rem 0;
+}
+
+.g-col-4 {
+  padding: 1rem;
+}
+
+/* ==================== */
+/* Tab Panels */
+/* ==================== */
+.panel-tabset {
+  margin: 1.5rem 0;
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom: 3px solid var(--accent-gray);
+  color: var(--primary-gray);
+  font-weight: 600;
+}
+
+.nav-tabs .nav-link:hover {
+  border-bottom: 3px solid var(--border-gray);
+}
+
+/* ==================== */
+/* Special Elements */
+/* ==================== */
+.subtitle {
+  color: var(--bu-gray);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+blockquote {
+  border-left: 4px solid var(--accent-gray);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--bu-gray);
+}
+
+/* ==================== */
+/* Icons */
+/* ==================== */
+.bi {
+  color: var(--accent-gray);
+}
+
+/* ==================== */
+/* Search */
+/* ==================== */
+#quarto-search {
+  border-color: var(--accent-gray);
+}
+
+/* ==================== */
+/* Print Styling */
+/* ==================== */
+@media print {
+  .navbar, .sidebar, .nav-footer {
+    display: none;
+  }
+  
+  a {
+    color: black;
+  }
+  
+  pre {
+    border: 1px solid black;
+  }
+}
+
+/* ==================== */
+/* Responsive Design */
+/* ==================== */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .grid {
+    display: block;
+  }
+  
+  .g-col-4 {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+/* ==================== */
+/* Custom Classes */
+/* ==================== */
+.highlight-box {
+  background-color: var(--bu-light-gray);
+  border: 2px solid var(--accent-gray);
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.session-header {
+  background: linear-gradient(135deg, var(--primary-gray) 0%, var(--accent-gray) 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.deadline {
+  background-color: #F9FAFB;
+  border-left: 4px solid var(--border-gray);
+  padding: 1rem;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.resource-card {
+  border: 1px solid #DDD;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  transition: box-shadow 0.3s ease;
+}
+
+.resource-card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-color: var(--accent-gray);
+}

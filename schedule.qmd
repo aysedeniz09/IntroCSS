@@ -1,0 +1,173 @@
+---
+title: "Course Schedule - Masters"
+---
+
+## Section A - Mondays 2:30-5:15 PM
+
+| Session | Date | Topic | Assignment | Readings |
+|---------|------|-------|------------|----------|
+| 1 | Jan 26 | Why Computational Social Science? | | [View](#readings-1) |
+| 2 | Feb 2 | Big Data: Data Collection and Wrangling | | [View](#readings-2) |
+| 3 | Feb 9 | Big Data: GGPlot and Visualizations | | [View](#readings-3) |
+| 4 | Feb 17* | Computational Research | | [View](#readings-4) |
+| 5 | Feb 23 | Descriptive Data | | [View](#readings-5) |
+| 6 | Mar 2 | Statistics | **Benchmark 1 Due** | [View](#readings-6) |
+| 7 | Mar 16 | Text as Data: Dictionary Methods | | [View](#readings-7) |
+| 8 | Mar 23 | **Midterm Exam** | **Midterm** | |
+| 9 | Mar 30 | Text as Data: Topic Modeling | | [View](#readings-9) |
+| 10 | Apr 6 | Unsupervised Machine Learning | | [View](#readings-10) |
+| 11 | Apr 13 | Networks | | [View](#readings-11) |
+| 12 | Apr 22* | Online Social Movements | | [View](#readings-12) |
+| 13 | Apr 27 | From Data to Conclusions | | [View](#readings-13) |
+| | **May 4** | | **Final Papers Due** | |
+
+*Monday schedule (university holiday adjustment)
+
+---
+
+## Section B - Wednesdays 2:30-5:15 PM
+
+| Session | Date | Topic | Assignment | Readings |
+|---------|------|-------|------------|----------|
+| 1 | Jan 21 | Why Computational Social Science? | | [View](#readings-1) |
+| 2 | Jan 28 | Big Data: Data Collection and Wrangling | | [View](#readings-2) |
+| 3 | Feb 4 | Big Data: GGPlot and Visualizations | | [View](#readings-3) |
+| 4 | Feb 11 | Computational Research | | [View](#readings-4) |
+| 5 | Feb 18 | Descriptive Data | | [View](#readings-5) |
+| 6 | Feb 25 | Statistics | **Benchmark 1 Due** | [View](#readings-6) |
+| 7 | Mar 4 | Text as Data: Dictionary Methods | | [View](#readings-7) |
+| 8 | Mar 18 | **Midterm Exam** | **Midterm** | |
+| 9 | Mar 25 | Text as Data: Topic Modeling | | [View](#readings-9) |
+| 10 | Apr 1 | Unsupervised Machine Learning | | [View](#readings-10) |
+| 11 | Apr 8 | Networks | | [View](#readings-11) |
+| 12 | Apr 15 | Online Social Movements | | [View](#readings-12) |
+| 13 | Apr 29 | From Data to Conclusions | | [View](#readings-13) |
+| | **May 4** | | **Final Papers Due** | |
+
+---
+
+## Required Readings
+
+### Session 1: Why Computational Social Science? {#readings-1}
+
+- Hofman, J. M., Watts, D. J., Athey, S., Garip, F., Griffiths, T. L., Kleinberg, J., Margetts, H., Mullainathan, S., Salganik, M. J., Vazire, S., Vespignani, A., & Yarkoni, T. (2021). Integrating explanation and prediction in computational social science. *Nature*, 595(7866), 181-188.
+
+- Lazer, D. M. J., Pentland, A., Watts, D. J., Aral, S., Athey, S., Contractor, N., Freelon, D., Gonzalez-Bailon, S., King, G., Margetts, H., Nelson, A., Salganik, M. J., Strohmaier, M., Vespignani, A., & Wagner, C. (2020). Computational social science: Obstacles and opportunities. *Science*, 369(6507), 1060-1062.
+
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Whole Game: Chapters 1-8. Available at: https://r4ds.hadley.nz/
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 2: Big Data - Data Collection and Wrangling {#readings-2}
+
+- Cappella, J. N. (2017). Vectors into the Future of Mass and Interpersonal Communication Research: Big Data, Social Media, and Computational Social Science. *Human Communication Research*, 43(4), 545-558.
+
+- Healy, K. (2018). *Data Visualization: A Practical Introduction* - Chapter 2: Make a Plot.
+
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Section: Visualize. Available at: https://r4ds.hadley.nz/
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 3: Big Data - GGPlot and Visualizations {#readings-3}
+
+- Thulin, M. (2024). *Modern Statistics with R* - Chapter 5: Dealing with messy data. Available at: https://www.modernstatisticswithr.com/
+
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Section: Transform. Available at: https://r4ds.hadley.nz/
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 4: Computational Research {#readings-4}
+
+- Peng, R. D. (2022). *R Programming for Data Science* - Chapters 13 & 14. Available at: https://bookdown.org/rdpeng/rprogdatascience/
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 5: Descriptive Data {#readings-5}
+
+- Cernat, A. (2014). Introduction to Regression Models. In *Longitudinal Data Analysis Using R*.
+
+- Healy, K. (2018). *Data Visualization: A Practical Introduction* - Section 6: Work with models.
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 6: Statistics {#readings-6}
+
+- Thulin, M. (2024). *Modern Statistics with R* - Chapter 8: Regression models. Available at: https://www.modernstatisticswithr.com/
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 7: Text as Data - Dictionary Methods {#readings-7}
+
+- Carley, K. (1994). Extracting culture through textual analysis. *Poetics*, 22(4), 291-312.
+
+- Pang, B., Lee, L., & Vaithyanathan, S. (2002). Thumbs up? Sentiment Classification using Machine Learning Techniques. arXiv. http://arxiv.org/abs/cs/0205070
+
+- Stracqualursi, L., & Agati, P. (2022). Tweet topics and sentiments relating to distance learning among Italian Twitter users. *Scientific Reports*, 12(1).
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 9: Text as Data - Topic Modeling {#readings-9}
+
+- DiMaggio, P., Nag, M., & Blei, D. (2013). Exploiting affinities between topic modeling and the sociological perspective on culture: Application to newspaper coverage of U.S. government arts funding. *Poetics*, 41(6), 570-606.
+
+- Grimmer, J., & Stewart, B. M. (2013). Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts. *Political Analysis*, 21(3), 267-297.
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 10: Unsupervised Machine Learning {#readings-10}
+
+No assigned readings for this session.
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 11: Networks {#readings-11}
+
+- Breiger, R. L. (1974). The Duality of Persons and Groups. *Social Forces*, 53(2), 181.
+
+- Ophir, Y., Walter, D., Arnon, D., Lokmanoglu, A. D., Tizzoni, M., Carota, J., D'Antiga, L., & Nicastro, E. (2021). The Framing of COVID-19 in Italian Media and Its Relationship with Community Mobility: A Mixed-Method Approach. *Journal of Health Communication*, 26(3), 161-173.
+
+- Torres, M., & Cantú, F. (2022). Learning to See: Convolutional Neural Networks for the Analysis of Social Science Data. *Political Analysis*, 30(1), 113-131.
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 12: Online Social Movements {#readings-12}
+
+- Thulin, M. (2024). *Modern Statistics with R* - Chapter 11: Predictive modelling and machine learning. Available at: https://www.modernstatisticswithr.com/
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+### Session 13: From Data to Conclusions {#readings-13}
+
+- Bower, B. (2018, July 27). 'Replication crisis' spurs reforms in how science studies are done. *Science News*. https://www.sciencenews.org/blog/science-the-public/replication-crisis-psychology-science-studies-statistics
+
+- Lazer, D., Kennedy, R., King, G., & Vespignani, A. (2014). The Parable of Google Flu: Traps in Big Data Analysis. *Science*, 343(6176), 1203-1205.
+
+[Back to Schedule](#section-a---mondays-230-515-pm)
+
+---
+
+## Notes
+
+All readings are available on Blackboard under the "Readings" folder.

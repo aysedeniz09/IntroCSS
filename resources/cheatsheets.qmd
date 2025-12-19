@@ -1,0 +1,18 @@
+---
+title: "R Cheatsheets"
+---
+
+## Essential R Cheatsheets
+
+Collection of helpful R cheatsheets for the course.
+
+- [R Markdown](https://github.com/aysedeniz09/IntroCSS/blob/main/CheatSheets/RMarkdown.pdf)
+- [tidyr](https://github.com/aysedeniz09/IntroCSS/blob/main/CheatSheets/tidyr.pdf)
+- [data import](https://github.com/aysedeniz09/IntroCSS/blob/main/CheatSheets/data-import.pdf)
+- [Regular Expression](https://github.com/aysedeniz09/IntroCSS/blob/main/CheatSheets/Regex.pdf)
+- [Lubridate](https://github.com/aysedeniz09/IntroCSS/blob/main/CheatSheets/Lubridate.pdf)
+- [ggplot2](https://github.com/aysedeniz09/IntroCSS/blob/main/CheatSheets/Ggplot2.pdf)
+
+## External Resources
+
+- [RStudio Cheatsheets](https://rstudio.com/resources/cheatsheets/)

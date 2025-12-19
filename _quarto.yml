@@ -1,0 +1,90 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "!*.md"
+
+website:
+  title: "Social Data Analysis and Visualization"
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "Masters Schedule"
+        file: schedule.qmd
+      - text: "PhD Schedule"
+        file: schedule_phd.qmd
+      - text: "Install R"
+        file: install.qmd
+    right:
+      - icon: github
+        href: https://github.com/aysedeniz09/IntroCSS
+        aria-label: GitHub
+
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Getting Started"
+        contents:
+          - index.qmd
+          - schedule.qmd
+          - schedule_phd.qmd
+          - install.qmd
+      - section: "Class Sessions"
+        contents:
+          - text: "Session 1 - Why Computational Social Science?"
+            file: sessions/01/session.qmd
+          - text: "Session 2 - Data Collection and Wrangling"
+            file: sessions/02/session.qmd
+          - text: "Session 3 - GGPlot and Visualizations"
+            file: sessions/03/session.qmd
+          - text: "Session 4 - Computational Research"
+            file: sessions/04/session.qmd
+          - text: "Session 5 - Descriptive Data"
+            file: sessions/05/session.qmd
+          - text: "Session 6 - Statistics"
+            file: sessions/06/session.qmd
+          - text: "Session 7 - Dictionary Methods & Word Embeddings"
+            file: sessions/07/session.qmd
+          - text: "Session 8 - Midterm Exam"
+            file: sessions/08/session.qmd
+          - text: "Session 9 - Topic Modeling"
+            file: sessions/09/session.qmd
+          - text: "Session 10 - Unsupervised Machine Learning"
+            file: sessions/10/session.qmd
+          - text: "Session 11 - Networks"
+            file: sessions/11/session.qmd
+          - text: "Session 12 - Online Social Movements"
+            file: sessions/12/session.qmd
+          - text: "Session 13 - From Data to Conclusions"
+            file: sessions/13/session.qmd
+      - section: "Resources"
+        contents:
+          - text: "R Cheatsheets"
+            file: resources/cheatsheets.qmd
+          - text: "Datasets"
+            file: resources/datasets.qmd
+
+  page-footer:
+    left: "© 2026 Ayse D. Lokmanoglu, Boston University"
+    right:
+      - icon: envelope
+        href: mailto:alokman@bu.edu
+      - icon: github
+        href: https://github.com/aysedeniz09
+
+format:
+  html:
+    theme: 
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-fold: false
+    link-external-newwindow: true

@@ -1,0 +1,103 @@
+---
+title: "Social Data Analysis and Visualization"
+subtitle: "COM GR 787 | Spring 2026"
+---
+
+## Welcome
+
+Welcome to **Social Data Analysis and Visualization** (Masters) and **Computer-Assisted Text Analysis** (PhD)!
+
+As researchers, we now have various big data and tools to learn about human behavior and nature. With the growth of electronic sources such as cell phones, online messaging platforms, and applications, every second new data is being added globally. This course provides a hands-on tutorial on introductory methods in Computational Social Science, which can be used in academic research and the non-academic industry specializing in data science.
+
+## Course Information
+
+**Instructor:** Dr. Ayse D. Lokmanoglu  
+**Email:** [alokman@bu.edu](mailto:alokman@bu.edu)  
+**Office Hours:** Wednesdays 10:00 am - 1:30 pm  
+**[Office Hours Sign-up Link](https://github.com/aysedeniz09/IntroCSS)**
+
+**Teaching Assistant:** Max Wong, [maxwong@bu.edu](mailto:maxwong@bu.edu)
+
+## Course Goals
+
+The course has three main goals:
+
+1. **Technical Skills**: Introduce students to R Studio and methods of text-mining and analysis
+2. **Critical Thinking**: Connect theory and methods while discussing ethical and practical concerns
+3. **Independent Learning**: Prepare students with skills to adapt to evolving methodologies and programming languages
+
+## Learning Outcomes
+
+By the end of the course, students will be able to:
+
+- Understand various computational methods available to social scientists
+- Implement these methods in social science research
+- Be aware of ethical and practical concerns with these methods
+- Use these methods in current and future research
+- Develop independent learning and problem-solving skills
+
+## Quick Links
+
+::: {.grid}
+::: {.g-col-4}
+### Course Materials
+- [Syllabus on Blackboard](https://learn.bu.edu)
+- [Schedule](schedule.qmd)
+- [Installation Guide](install.qmd)
+:::
+
+::: {.g-col-4}
+### Resources
+- [R Cheatsheets](resources/cheatsheets.qmd)
+- [Datasets](resources/datasets.qmd)
+- [Blackboard](https://learn.bu.edu)
+:::
+
+::: {.g-col-4}
+### External Links
+- [GitHub Repository](https://github.com/aysedeniz09/IntroCSS)
+
+:::
+:::
+
+## Getting Started
+
+::: {.callout-important}
+## Before the First Class
+
+1. **Install R and RStudio** - Follow our [installation guide](install.qmd)
+2. **Join Blackboard** - Access course materials and readings
+3. **Review the syllabus** - Familiarize yourself with [course policies](https://learn.bu.edu)
+4. **Check the schedule** - See [upcoming topics and due dates](schedule.qmd)
+:::
+
+## What You'll Learn
+
+This course covers the following computational methods:
+
+| Week | Topic | Methods |
+|------|-------|---------|
+| 1-3 | **R Fundamentals** | R Studio basics, data wrangling, visualization |
+| 4-6 | **Statistical Analysis** | Descriptive statistics, regression models, trend analysis |
+| 7-10 | **Text Analysis** | Dictionary methods, sentiment analysis, topic modeling |
+| 11-12 | **Advanced Methods** | Network analysis, machine learning, predictive modeling |
+| 13 | **Ethics & Best Practices** | Data statements, reproducibility, ethical considerations |
+
+## Required Materials
+
+- **Software:** R and RStudio (free, open-source)
+- **Textbooks:** All readings provided on Blackboard
+- **Computer:** Reliable laptop with internet access (contact IT if needed)
+
+## Support Resources
+
+Need help? Check out these resources:
+
+- **COM Writing Center**: Writing assistance for all assignments
+- **BU IT Support**: Technical help with software and computers
+- **Office of Disability Services**: Accommodations for students with disabilities
+- **Dean of Students**: Support for food/housing insecurity or other challenges
+
+See [syllabus at blackboard](https://learn.bu.edu) for complete contact information.
+
+

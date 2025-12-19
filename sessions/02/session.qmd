@@ -1,0 +1,44 @@
+---
+title: "Session 02 - Big Data: Data Collection and Wrangling"
+---
+
+::: {.panel-tabset}
+
+## Lecture
+
+### Lecture Materials
+
+- [View Lecture Notes](../../Spring2026/LectureSlides/bigdata_L2-github.html)
+- [View Source on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2026/LectureSlides/bigdata_L2-github.md)
+
+---
+
+## Exercise
+
+### Exercise Materials
+
+- [Download Exercise (.Rmd file)](../../Spring2026/exercises/bigdata_L2-github.Rmd)
+- [View on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2026/exercises/bigdata_L2-github.Rmd)
+
+**Instructions:**
+
+1. Right-click the download link above and select "Save Link As"
+2. Save the `.Rmd` file to your computer
+3. Open the file in RStudio
+4. Complete the exercises
+
+:::
+
+---
+
+::: {.grid}
+::: {.g-col-4}
+← [Session 01](../01/session.qmd)
+:::
+::: {.g-col-4 style="text-align: center;"}
+[Schedule](../../schedule.qmd)
+:::
+::: {.g-col-4 style="text-align: right;"}
+[Session 03 →](../03/session.qmd)
+:::
+:::

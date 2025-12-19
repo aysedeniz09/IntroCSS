@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>bigdata_l2-github – Social Data Analysis and Visualization</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-956b8a4ec41f03f761f91fad8c3a3e27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c2a6d3abc2894eadef3e844b666af903.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-956b8a4ec41f03f761f91fad8c3a3e27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Social Data Analysis and Visualization</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Masters Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule_phd.html"> 
+<span class="menu-text">PhD Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../install.html"> 
+<span class="menu-text">Install R</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aysedeniz09/IntroCSS"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Getting Started</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Social Data Analysis and Visualization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Schedule - Masters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule_phd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Schedule - PhD</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Install R Studio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Class Sessions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/01/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 1 - Why Computational Social Science?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/02/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 2 - Data Collection and Wrangling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/03/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 3 - GGPlot and Visualizations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/04/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 4 - Computational Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/05/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 5 - Descriptive Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/06/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 6 - Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/07/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 7 - Dictionary Methods &amp; Word Embeddings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/08/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 8 - Midterm Exam</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/09/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 9 - Topic Modeling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/10/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 10 - Unsupervised Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/11/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 11 - Networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/12/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 12 - Online Social Movements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/13/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 13 - From Data to Conclusions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/cheatsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Cheatsheets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#big-data-data-collection-and-wrangling" id="toc-big-data-data-collection-and-wrangling" class="nav-link active" data-scroll-target="#big-data-data-collection-and-wrangling">Big Data: Data Collection and Wrangling</a>
+  <ul class="collapse">
+  <li><a href="#lecture-2-table-of-contents" id="toc-lecture-2-table-of-contents" class="nav-link" data-scroll-target="#lecture-2-table-of-contents">Lecture 2 Table of Contents</a></li>
+  <li><a href="#create-data-frames" id="toc-create-data-frames" class="nav-link" data-scroll-target="#create-data-frames">1. Create Data Frames</a>
+  <ul class="collapse">
+  <li><a href="#we-can-load-from-csv-excel-or-txt" id="toc-we-can-load-from-csv-excel-or-txt" class="nav-link" data-scroll-target="#we-can-load-from-csv-excel-or-txt">1.1 We can load from csv, excel or txt</a></li>
+  <li><a href="#you-can-also-load-it-from-your-computer-using-r-studio-files" id="toc-you-can-also-load-it-from-your-computer-using-r-studio-files" class="nav-link" data-scroll-target="#you-can-also-load-it-from-your-computer-using-r-studio-files">1.2 You can also load it from your computer using R Studio Files</a></li>
+  </ul></li>
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data">2. Tidy Data</a></li>
+  <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr">3. DPLYR</a>
+  <ul class="collapse">
+  <li><a href="#common-dplyr-functions" id="toc-common-dplyr-functions" class="nav-link" data-scroll-target="#common-dplyr-functions">3.1 Common <code>dplyr</code> functions</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter">3.2 <code>filter()</code></a></li>
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select">3.3 <code>select()</code></a></li>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">3.4 <code>mutate()</code></a></li>
+  <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize">3.5 <code>summarize()</code></a></li>
+  <li><a href="#group_by" id="toc-group_by" class="nav-link" data-scroll-target="#group_by">3.6 <code>group_by()</code></a></li>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange">3.7 <code>arrange()</code></a></li>
+  <li><a href="#rename" id="toc-rename" class="nav-link" data-scroll-target="#rename">3.8 <code>rename()</code></a></li>
+  </ul></li>
+  <li><a href="#data-reshaping" id="toc-data-reshaping" class="nav-link" data-scroll-target="#data-reshaping">4. Data Reshaping</a>
+  <ul class="collapse">
+  <li><a href="#pivot-longer" id="toc-pivot-longer" class="nav-link" data-scroll-target="#pivot-longer">4.1 Pivot Longer</a></li>
+  <li><a href="#pivot-wider" id="toc-pivot-wider" class="nav-link" data-scroll-target="#pivot-wider">4.2 Pivot wider</a></li>
+  <li><a href="#separate" id="toc-separate" class="nav-link" data-scroll-target="#separate">4.3 <code>separate()</code></a></li>
+  <li><a href="#unite" id="toc-unite" class="nav-link" data-scroll-target="#unite">4.4 <code>unite()</code></a></li>
+  <li><a href="#class-exercise-1" id="toc-class-exercise-1" class="nav-link" data-scroll-target="#class-exercise-1"><span style="color: purple;">Class Exercise</span></a></li>
+  </ul></li>
+  <li><a href="#joins-in-tidyverse" id="toc-joins-in-tidyverse" class="nav-link" data-scroll-target="#joins-in-tidyverse">5. Joins in Tidyverse</a>
+  <ul class="collapse">
+  <li><a href="#left_join" id="toc-left_join" class="nav-link" data-scroll-target="#left_join">5.1 <code>left_join()</code></a></li>
+  <li><a href="#right_join" id="toc-right_join" class="nav-link" data-scroll-target="#right_join">5.2 <code>right_join()</code></a></li>
+  <li><a href="#anti_join" id="toc-anti_join" class="nav-link" data-scroll-target="#anti_join">5.3 <code>anti_join()</code></a></li>
+  <li><a href="#class-exercise-2" id="toc-class-exercise-2" class="nav-link" data-scroll-target="#class-exercise-2"><span style="color: purple;">Class Exercise</span></a></li>
+  </ul></li>
+  <li><a href="#ggplot" id="toc-ggplot" class="nav-link" data-scroll-target="#ggplot">6. Ggplot</a>
+  <ul class="collapse">
+  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2">6.1 <code>ggplot2()</code></a></li>
+  <li><a href="#geoms-the-type-of-graph" id="toc-geoms-the-type-of-graph" class="nav-link" data-scroll-target="#geoms-the-type-of-graph">6.2 <code>Geoms</code>: the type of graph</a></li>
+  <li><a href="#mapping-vs.-setting-aesthetics" id="toc-mapping-vs.-setting-aesthetics" class="nav-link" data-scroll-target="#mapping-vs.-setting-aesthetics">6.3 Mapping vs.&nbsp;Setting Aesthetics</a></li>
+  <li><a href="#creating-a-basic-ggplot" id="toc-creating-a-basic-ggplot" class="nav-link" data-scroll-target="#creating-a-basic-ggplot">6.4 Creating a Basic ggplot</a></li>
+  <li><a href="#customizing-visualizations" id="toc-customizing-visualizations" class="nav-link" data-scroll-target="#customizing-visualizations">6.5 Customizing Visualizations</a></li>
+  <li><a href="#bar-charts" id="toc-bar-charts" class="nav-link" data-scroll-target="#bar-charts">6.6 Bar Charts</a></li>
+  <li><a href="#class-exercise-3" id="toc-class-exercise-3" class="nav-link" data-scroll-target="#class-exercise-3"><span style="color: purple;">Class Exercise</span></a></li>
+  <li><a href="#adjusting-labels-with-labs" id="toc-adjusting-labels-with-labs" class="nav-link" data-scroll-target="#adjusting-labels-with-labs">6.7 Adjusting Labels with <code>labs()</code></a></li>
+  <li><a href="#customizing-axis" id="toc-customizing-axis" class="nav-link" data-scroll-target="#customizing-axis">6.8 Customizing Axis</a></li>
+  <li><a href="#scale-syntax-formatting" id="toc-scale-syntax-formatting" class="nav-link" data-scroll-target="#scale-syntax-formatting">6.9 Scale Syntax &amp; Formatting</a></li>
+  <li><a href="#customizing-y-axis-labels" id="toc-customizing-y-axis-labels" class="nav-link" data-scroll-target="#customizing-y-axis-labels">6.10 Customizing Y-Axis Labels</a></li>
+  <li><a href="#customizing-axis-breaks" id="toc-customizing-axis-breaks" class="nav-link" data-scroll-target="#customizing-axis-breaks">6.11 Customizing Axis Breaks</a></li>
+  <li><a href="#customizing-the-x-axis" id="toc-customizing-the-x-axis" class="nav-link" data-scroll-target="#customizing-the-x-axis">6.12 Customizing the X-Axis</a></li>
+  <li><a href="#adjusting-date-scales" id="toc-adjusting-date-scales" class="nav-link" data-scroll-target="#adjusting-date-scales">6.14 Adjusting Date Scales</a></li>
+  <li><a href="#class-exercises" id="toc-class-exercises" class="nav-link" data-scroll-target="#class-exercises"><span style="color: purple;">Class Exercises</span>:</a></li>
+  </ul></li>
+  <li><a href="#lecture-2-cheat-sheet" id="toc-lecture-2-cheat-sheet" class="nav-link" data-scroll-target="#lecture-2-cheat-sheet">Lecture 2 Cheat Sheet</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="big-data-data-collection-and-wrangling" class="level1">
+<h1>Big Data: Data Collection and Wrangling</h1>
+<p>Dr.&nbsp;Ayse D. Lokmanoglu Lecture 2, (B) Jan 29, (A) Feb 2</p>
+<section id="lecture-2-table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-2-table-of-contents">Lecture 2 Table of Contents</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Create Data Frames</td>
+</tr>
+<tr class="even">
+<td>1.1</td>
+<td>Loading from CSV, Excel, or TXT</td>
+</tr>
+<tr class="odd">
+<td>1.2</td>
+<td>Loading via RStudio Files Pane</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Tidy Data</td>
+</tr>
+<tr class="odd">
+<td>2.1</td>
+<td>Tidying Data with tidyr &amp; Pipe Operator</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>DPLYR</td>
+</tr>
+<tr class="odd">
+<td>3.1</td>
+<td>Common dplyr Functions Overview</td>
+</tr>
+<tr class="even">
+<td>3.2</td>
+<td><code>filter()</code></td>
+</tr>
+<tr class="odd">
+<td>3.3</td>
+<td><code>select()</code></td>
+</tr>
+<tr class="even">
+<td>3.4</td>
+<td><code>mutate()</code></td>
+</tr>
+<tr class="odd">
+<td>3.5</td>
+<td><code>summarize()</code></td>
+</tr>
+<tr class="even">
+<td>3.6</td>
+<td><code>group_by()</code></td>
+</tr>
+<tr class="odd">
+<td>3.7</td>
+<td><code>arrange()</code></td>
+</tr>
+<tr class="even">
+<td>3.8</td>
+<td><code>rename()</code></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Data Reshaping</td>
+</tr>
+<tr class="even">
+<td>4.1</td>
+<td><code>pivot_longer()</code></td>
+</tr>
+<tr class="odd">
+<td>4.2</td>
+<td><code>pivot_wider()</code></td>
+</tr>
+<tr class="even">
+<td>4.3</td>
+<td><code>separate()</code></td>
+</tr>
+<tr class="odd">
+<td>4.4</td>
+<td><code>unite()</code></td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Joins in Tidyverse</td>
+</tr>
+<tr class="odd">
+<td>5.1</td>
+<td><code>left_join()</code></td>
+</tr>
+<tr class="even">
+<td>5.2</td>
+<td><code>right_join()</code></td>
+</tr>
+<tr class="odd">
+<td>5.3</td>
+<td><code>anti_join()</code></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>GGPlot</td>
+</tr>
+<tr class="odd">
+<td>6.1</td>
+<td>Introduction to ggplot2</td>
+</tr>
+<tr class="even">
+<td>6.2</td>
+<td>Geoms Overview</td>
+</tr>
+<tr class="odd">
+<td>6.3</td>
+<td>Mapping vs.&nbsp;Setting Aesthetics</td>
+</tr>
+<tr class="even">
+<td>6.4</td>
+<td>Creating a Basic Scatter Plot</td>
+</tr>
+<tr class="odd">
+<td>6.5</td>
+<td>Customizing Visualizations (Aesthetics)</td>
+</tr>
+<tr class="even">
+<td>6.6</td>
+<td>Bar Charts</td>
+</tr>
+<tr class="odd">
+<td>6.7</td>
+<td>Adjusting Labels with <code>labs()</code></td>
+</tr>
+<tr class="even">
+<td>6.8</td>
+<td>Customizing Axes</td>
+</tr>
+<tr class="odd">
+<td>6.9</td>
+<td>Scale Syntax &amp; Formatting</td>
+</tr>
+<tr class="even">
+<td>6.10</td>
+<td>Customizing Y-Axis Labels</td>
+</tr>
+<tr class="odd">
+<td>6.11</td>
+<td>Customizing Axis Breaks</td>
+</tr>
+<tr class="even">
+<td>6.12</td>
+<td>Customizing X-Axis</td>
+</tr>
+<tr class="odd">
+<td>6.13</td>
+<td>Adjusting Date Scales</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="create-data-frames" class="level2">
+<h2 class="anchored" data-anchor-id="create-data-frames">1. Create Data Frames</h2>
+<ul>
+<li>We can create our own or use ones already in tidy (e.g., <code>mtcars</code>, <code>iris</code>)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Movie_Title =</span> <span class="fu">c</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"YOLO"</span>, <span class="st">"Successor"</span>, <span class="st">"Pegasus 2"</span>, <span class="st">"Deadpool &amp; Wolverine"</span>, <span class="st">"Moana 2"</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The Hidden Blade"</span>, <span class="st">"Avatar: The Spirit Returns"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Release_Date =</span> <span class="fu">c</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"January 2024"</span>, <span class="st">"February 2024"</span>, <span class="st">"March 2024"</span>, <span class="st">"July 2024"</span>, </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"November 2024"</span>, <span class="st">"April 2024"</span>, <span class="st">"December 2024"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">China_Box_Office_Gross =</span> <span class="fu">c</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">479597304</span>, <span class="dv">469612890</span>, <span class="dv">466930272</span>, <span class="dv">450000000</span>, <span class="dv">350000000</span>, <span class="dv">320000000</span>, <span class="dv">550000000</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">US_Box_Office_Gross =</span> <span class="fu">c</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">310000000</span>, <span class="dv">280000000</span>, <span class="dv">290000000</span>, <span class="dv">438000000</span>, <span class="dv">221000000</span>, <span class="dv">75000000</span>, <span class="dv">600000000</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Total_Worldwide_Gross =</span> <span class="fu">c</span>(</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="dv">479597304</span>, <span class="dv">469612890</span>, <span class="dv">466930272</span>, <span class="dv">850000000</span>, <span class="dv">421000000</span>, <span class="dv">400000000</span>, <span class="dv">1300000000</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the dataframe</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##            Movie_Title  Release_Date China_Box_Office_Gross US_Box_Office_Gross
+## 1                 YOLO  January 2024              479597304            3.10e+08
+## 2            Successor February 2024              469612890            2.80e+08
+## 3            Pegasus 2    March 2024              466930272            2.90e+08
+## 4 Deadpool &amp; Wolverine     July 2024              450000000            4.38e+08
+## 5              Moana 2 November 2024              350000000            2.21e+08
+## 6     The Hidden Blade    April 2024              320000000            7.50e+07
+##   Total_Worldwide_Gross
+## 1             479597304
+## 2             469612890
+## 3             466930272
+## 4             850000000
+## 5             421000000
+## 6             400000000</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a built-in dataset</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"mtcars"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<hr>
+<section id="hint-to-find-built-in-datasets" class="level4">
+<h4 class="anchored" data-anchor-id="hint-to-find-built-in-datasets">Hint: To find built-in datasets</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="we-can-load-from-csv-excel-or-txt" class="level3">
+<h3 class="anchored" data-anchor-id="we-can-load-from-csv-excel-or-txt">1.1 We can load from csv, excel or txt</h3>
+<p>Using URL</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data from the URL</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aysedeniz09/Social_Media_Listening/refs/heads/main/MSC_social_media_list_data/Starbucks_User_Data.csv"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>starbucks_user_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(starbucks_user_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 6 × 16
+##   author_id conversation_id created_at          hashtag lang  like_count mention
+##       &lt;dbl&gt;           &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;  
+## 1     30973         1.61e18 2022-12-27 15:43:16 &lt;NA&gt;    en            10 &lt;NA&gt;   
+## 2     30973         1.60e18 2022-11-29 05:23:55 &lt;NA&gt;    en             9 Mo_sha…
+## 3     30973         1.59e18 2022-11-28 20:14:09 &lt;NA&gt;    en             2 Mixxed…
+## 4     30973         1.60e18 2022-11-28 12:51:28 &lt;NA&gt;    en             0 BihhKa…
+## 5     30973         1.60e18 2022-11-27 15:14:26 &lt;NA&gt;    en             0 BihhKa…
+## 6     30973         1.60e18 2022-11-24 17:47:24 &lt;NA&gt;    en             1 therea…
+## # ℹ 9 more variables: quote_count &lt;dbl&gt;, referenced_status_id &lt;dbl&gt;,
+## #   referenced_user_id &lt;dbl&gt;, reply_count &lt;dbl&gt;, retweet_count &lt;dbl&gt;,
+## #   row_id &lt;dbl&gt;, status_id &lt;dbl&gt;, text &lt;chr&gt;, type &lt;chr&gt;</code></pre>
+<p>From your computer</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>starbucks_user_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Starbucks_User_Data.csv"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(starbucks_user_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="you-can-also-load-it-from-your-computer-using-r-studio-files" class="level3">
+<h3 class="anchored" data-anchor-id="you-can-also-load-it-from-your-computer-using-r-studio-files">1.2 You can also load it from your computer using R Studio Files</h3>
+<p><img src="https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/import_data.png?raw=true" class="img-fluid"> <img src="https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/import_data2.png?raw=true" class="img-fluid"></p>
+<hr>
+</section>
+</section>
+<section id="tidy-data" class="level2">
+<h2 class="anchored" data-anchor-id="tidy-data">2. Tidy Data</h2>
+<p>Tidy data ensures consistency by following these principles:</p>
+<ul>
+<li><p>Each variable is a column.</p></li>
+<li><p>Each observation is a row.</p></li>
+<li><p>Each type of observational unit forms a table.</p></li>
+</ul>
+<p>Why Tidy Data?</p>
+<ul>
+<li><p>Simplifies data manipulation and visualization.</p></li>
+<li><p>Facilitates integration with R packages like dplyr and ggplot2.</p></li>
+</ul>
+<p><img src="https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/tidy_data.jpg?raw=true" class="img-fluid"></p>
+<p><em>image from: Hassan, F. (2023, March 21). Tidy Data in Python. Medium. <a href="https://blog.devgenius.io/tidy-data-in-python-1f20db66f427" class="uri">https://blog.devgenius.io/tidy-data-in-python-1f20db66f427</a></em></p>
+<hr>
+<section id="tidying-data-with-tidyr" class="level4">
+<h4 class="anchored" data-anchor-id="tidying-data-with-tidyr">2.1 Tidying Data with tidyr</h4>
+<p><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf">Tidy Cheat Sheet</a></p>
+<p>The <strong>pipe</strong> operator <code>|&gt;</code></p>
+<p><em>N.b. old version of the pipe is <code>%&gt;%</code></em></p>
+<ul>
+<li><p>Instead of nesting multiple functions, you can write the code in a sequence that mirrors the flow of data. Shortcut:</p></li>
+<li><p>Mac: <span class="inline-button"><strong>Cmd + Shift + M</strong></span> - Windows:<span class="inline-button"><strong>Ctrl + Shift + M</strong></span></p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="dplyr" class="level2">
+<h2 class="anchored" data-anchor-id="dplyr">3. DPLYR</h2>
+<p>What is dplyr?</p>
+<ul>
+<li>A part of the <code>tidyverse</code> package, <code>dplyr</code> provides a powerful toolkit for data manipulation.</li>
+<li>Designed for efficiency, readability, and compatibility with tidy data.</li>
+<li>Key Features:
+<ul>
+<li>Works seamlessly with the pipe operator (|&gt; or %&gt;%).</li>
+<li>Offers simple and intuitive verbs for common data manipulation tasks</li>
+</ul></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+<section id="common-dplyr-functions" class="level3">
+<h3 class="anchored" data-anchor-id="common-dplyr-functions">3.1 Common <code>dplyr</code> functions</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 79%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>filter()</code></td>
+<td>Select rows based on conditions</td>
+</tr>
+<tr class="even">
+<td><code>select()</code></td>
+<td>Choose specific columns</td>
+</tr>
+<tr class="odd">
+<td><code>mutate()</code></td>
+<td>Create or transform columns</td>
+</tr>
+<tr class="even">
+<td><code>summarize()</code></td>
+<td>Compute summary statistics for data</td>
+</tr>
+<tr class="odd">
+<td><code>group_by()</code></td>
+<td>Group data by one or more variables for grouped summaries</td>
+</tr>
+<tr class="even">
+<td><code>arrange()</code></td>
+<td>Sort rows by one or more variables</td>
+</tr>
+<tr class="odd">
+<td><code>rename()</code></td>
+<td>Rename columns in the dataset</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="filter" class="level3">
+<h3 class="anchored" data-anchor-id="filter">3.2 <code>filter()</code></h3>
+<ul>
+<li>Select rows based on specific conditions.</li>
+<li>Useful for subsetting your dataset.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(China_Box_Office_Gross <span class="sc">&gt;</span> <span class="dv">400000000</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(mpg <span class="sc">&gt;</span> <span class="dv">20</span> <span class="sc">&amp;</span> cyl <span class="sc">==</span> <span class="dv">6</span> <span class="sc">|</span> hp <span class="sc">&gt;</span><span class="dv">110</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(hp, vs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                      hp vs
+## Mazda RX4           110  0
+## Mazda RX4 Wag       110  0
+## Hornet 4 Drive      110  1
+## Hornet Sportabout   175  0
+## Duster 360          245  0
+## Merc 280            123  1
+## Merc 280C           123  1
+## Merc 450SE          180  0
+## Merc 450SL          180  0
+## Merc 450SLC         180  0
+## Cadillac Fleetwood  205  0
+## Lincoln Continental 215  0
+## Chrysler Imperial   230  0
+## Dodge Challenger    150  0
+## AMC Javelin         150  0
+## Camaro Z28          245  0
+## Pontiac Firebird    175  0
+## Lotus Europa        113  1
+## Ford Pantera L      264  0
+## Ferrari Dino        175  0
+## Maserati Bora       335  0</code></pre>
+<hr>
+</section>
+<section id="select" class="level3">
+<h3 class="anchored" data-anchor-id="select">3.3 <code>select()</code></h3>
+<ul>
+<li>Choose specific columns from a dataset.</li>
+<li>Useful for reducing the number of columns for analysis.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Movie_Title, Total_Worldwide_Gross)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                  Movie_Title Total_Worldwide_Gross
+## 1                       YOLO             479597304
+## 2                  Successor             469612890
+## 3                  Pegasus 2             466930272
+## 4       Deadpool &amp; Wolverine             850000000
+## 5                    Moana 2             421000000
+## 6           The Hidden Blade             400000000
+## 7 Avatar: The Spirit Returns            1300000000</code></pre>
+<hr>
+</section>
+<section id="mutate" class="level3">
+<h3 class="anchored" data-anchor-id="mutate">3.4 <code>mutate()</code></h3>
+<ul>
+<li>Create or transform columns.</li>
+<li>Add calculated columns to your dataset.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Profit =</span> Total_Worldwide_Gross <span class="sc">-</span> US_Box_Office_Gross)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Profit =</span> Total_Worldwide_Gross <span class="sc">-</span> US_Box_Office_Gross) <span class="sc">|&gt;</span> </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Profit <span class="sc">&gt;</span> <span class="dv">5000000</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Movie_Title, Profit)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">=</span> mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mycolumn =</span> gear <span class="sc">+</span> carb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="summarize" class="level3">
+<h3 class="anchored" data-anchor-id="summarize">3.5 <code>summarize()</code></h3>
+<ul>
+<li>Compute summary statistics for your data.</li>
+<li>Often used with <code>group_by()</code> for grouped summaries.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Total =</span> <span class="fu">sum</span>(China_Box_Office_Gross))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>mtcars2 <span class="ot">=</span> mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mpg =</span> <span class="fu">mean</span>(mpg))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="group_by" class="level3">
+<h3 class="anchored" data-anchor-id="group_by">3.6 <code>group_by()</code></h3>
+<ul>
+<li>Group data by one or more variables for grouped operations.</li>
+<li>Commonly used before applying functions like <code>summarize()</code>, <code>mutate()</code>.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Movie_Title) <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Total =</span> <span class="fu">sum</span>(Total_Worldwide_Gross))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 7 × 2
+##   Movie_Title                     Total
+##   &lt;chr&gt;                           &lt;dbl&gt;
+## 1 Avatar: The Spirit Returns 1300000000
+## 2 Deadpool &amp; Wolverine        850000000
+## 3 Moana 2                     421000000
+## 4 Pegasus 2                   466930272
+## 5 Successor                   469612890
+## 6 The Hidden Blade            400000000
+## 7 YOLO                        479597304</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mt_cars3 <span class="ot">=</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mpg =</span> <span class="fu">mean</span>(mpg))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>mt_cars4 <span class="ot">=</span> mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hp) <span class="sc">|&gt;</span> </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">median_cyl =</span> <span class="fu">median</span>(cyl))</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>mt_cars5 <span class="ot">=</span> mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(drat) <span class="sc">|&gt;</span> </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sum_vs =</span> <span class="fu">sum</span>(vs))</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>mt_cars6 <span class="ot">=</span> mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span> </span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="arrange" class="level3">
+<h3 class="anchored" data-anchor-id="arrange">3.7 <code>arrange()</code></h3>
+<ul>
+<li>Sort rows by one or more variables.</li>
+<li>Can be used to order data in ascending or descending order.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_Worldwide_Gross))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                  Movie_Title  Release_Date China_Box_Office_Gross
+## 1 Avatar: The Spirit Returns December 2024              550000000
+## 2       Deadpool &amp; Wolverine     July 2024              450000000
+## 3                       YOLO  January 2024              479597304
+## 4                  Successor February 2024              469612890
+## 5                  Pegasus 2    March 2024              466930272
+## 6                    Moana 2 November 2024              350000000
+## 7           The Hidden Blade    April 2024              320000000
+##   US_Box_Office_Gross Total_Worldwide_Gross    Profit
+## 1            6.00e+08            1300000000 700000000
+## 2            4.38e+08             850000000 412000000
+## 3            3.10e+08             479597304 169597304
+## 4            2.80e+08             469612890 189612890
+## 5            2.90e+08             466930272 176930272
+## 6            2.21e+08             421000000 200000000
+## 7            7.50e+07             400000000 325000000</code></pre>
+<hr>
+</section>
+<section id="rename" class="level3">
+<h3 class="anchored" data-anchor-id="rename">3.8 <code>rename()</code></h3>
+<ul>
+<li>Rename columns in a dataset.</li>
+<li><code>rename(new_name = old_name)</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_renamed <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">China_Gross =</span> China_Box_Office_Gross,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">US_happy =</span> US_Box_Office_Gross,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Worldwide_sad =</span> Total_Worldwide_Gross</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the updated dataframe</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_renamed)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                  Movie_Title  Release_Date China_Gross US_happy Worldwide_sad
+## 1                       YOLO  January 2024   479597304 3.10e+08     479597304
+## 2                  Successor February 2024   469612890 2.80e+08     469612890
+## 3                  Pegasus 2    March 2024   466930272 2.90e+08     466930272
+## 4       Deadpool &amp; Wolverine     July 2024   450000000 4.38e+08     850000000
+## 5                    Moana 2 November 2024   350000000 2.21e+08     421000000
+## 6           The Hidden Blade    April 2024   320000000 7.50e+07     400000000
+## 7 Avatar: The Spirit Returns December 2024   550000000 6.00e+08    1300000000
+##      Profit
+## 1 169597304
+## 2 189612890
+## 3 176930272
+## 4 412000000
+## 5 200000000
+## 6 325000000
+## 7 700000000</code></pre>
+<hr>
+<section id="class-exercise" class="level4">
+<h4 class="anchored" data-anchor-id="class-exercise"><span style="color: purple;">Class Exercise:</span></h4>
+<p>Use the movies dataset and perform the following:</p>
+<ol type="1">
+<li><code>filter()</code>: Select movies with a total worldwide gross greater than $500M.</li>
+<li><code>summarize()</code>: Compute the total gross for both China and the U.S.</li>
+<li><code>mutate()</code>: Add a new column for the profit (worldwide gross - U.S. gross).</li>
+<li>Use <code>group_by()</code> and <code>summarize()</code> to calculate the average gross per country.</li>
+<li>Use <code>rename()</code> to rename columns</li>
+</ol>
+<hr>
+</section>
+</section>
+</section>
+<section id="data-reshaping" class="level2">
+<h2 class="anchored" data-anchor-id="data-reshaping">4. Data Reshaping</h2>
+<p><img src="https://github.com/aysedeniz09/IntroCSS/blob/main/images/pivot_meme.jpg?raw=true" class="img-fluid"></p>
+<p><img src="https://github.com/aysedeniz09/IntroCSS/blob/main/images/pivot_long.png?raw=true" class="img-fluid"></p>
+<hr>
+<section id="pivot-longer" class="level3">
+<h3 class="anchored" data-anchor-id="pivot-longer">4.1 Pivot Longer</h3>
+<ul>
+<li><code>pivot_longer()</code> transforms data from wide format to long format. In wide format, variables are spread across multiple columns, while in long format, they are stacked into two key columns: one for variable names and one for their corresponding values.</li>
+<li>When to Use:
+<ul>
+<li>When you have many columns representing variables (e.g., scores, metrics) that you want to consolidate into fewer columns.</li>
+<li>Ideal for tidying datasets to meet the principles of tidy data.</li>
+</ul></li>
+<li>Key Arguments:
+<ul>
+<li><code>cols</code>: Columns to pivot into rows.</li>
+<li><code>names_to</code>: Name of the new column that will hold the original column names.</li>
+<li><code>values_to</code>: Name of the new column that will hold the data values.</li>
+</ul></li>
+</ul>
+<hr>
+<section id="convert-our-movie-dataframe-to-long" class="level4">
+<h4 class="anchored" data-anchor-id="convert-our-movie-dataframe-to-long">Convert our movie dataframe to long</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to long format</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>long_df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> China_Box_Office_Gross<span class="sc">:</span>Total_Worldwide_Gross,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Box_Office_Type"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Gross"</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(long_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 21 × 5
+##    Movie_Title          Release_Date     Profit Box_Office_Type            Gross
+##    &lt;chr&gt;                &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;                      &lt;dbl&gt;
+##  1 YOLO                 January 2024  169597304 China_Box_Office_Gross 479597304
+##  2 YOLO                 January 2024  169597304 US_Box_Office_Gross    310000000
+##  3 YOLO                 January 2024  169597304 Total_Worldwide_Gross  479597304
+##  4 Successor            February 2024 189612890 China_Box_Office_Gross 469612890
+##  5 Successor            February 2024 189612890 US_Box_Office_Gross    280000000
+##  6 Successor            February 2024 189612890 Total_Worldwide_Gross  469612890
+##  7 Pegasus 2            March 2024    176930272 China_Box_Office_Gross 466930272
+##  8 Pegasus 2            March 2024    176930272 US_Box_Office_Gross    290000000
+##  9 Pegasus 2            March 2024    176930272 Total_Worldwide_Gross  466930272
+## 10 Deadpool &amp; Wolverine July 2024     412000000 China_Box_Office_Gross 450000000
+## # ℹ 11 more rows</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mtcars_long <span class="ot">=</span> mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> am<span class="sc">:</span>carb,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Power"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Value"</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="pivot-wider" class="level3">
+<h3 class="anchored" data-anchor-id="pivot-wider">4.2 Pivot wider</h3>
+<ul>
+<li><code>pivot_wider()</code> is the reverse of <code>pivot_longer()</code>. It transforms data from long format to wide format by spreading values across multiple columns.</li>
+<li>When to Use:
+<ul>
+<li>When data is in long format and you need a more compact or spreadsheet-like representation.</li>
+<li>Useful for presenting summary tables or reshaping data for analysis.</li>
+</ul></li>
+<li>Key Arguments:
+<ul>
+<li><code>names_from</code>: Column whose unique values will become new column names.</li>
+<li><code>values_from</code>: Column whose values will populate the new columns.</li>
+</ul></li>
+</ul>
+<p>Let’s change the long df to wide df again</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert back to wide format</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>wide_df <span class="ot">&lt;-</span> long_df <span class="sc">|&gt;</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> Box_Office_Type,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> Gross</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(wide_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 7 × 6
+##   Movie_Title     Release_Date Profit China_Box_Office_Gross US_Box_Office_Gross
+##   &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt;                  &lt;dbl&gt;               &lt;dbl&gt;
+## 1 YOLO            January 2024 1.70e8              479597304           310000000
+## 2 Successor       February 20… 1.90e8              469612890           280000000
+## 3 Pegasus 2       March 2024   1.77e8              466930272           290000000
+## 4 Deadpool &amp; Wol… July 2024    4.12e8              450000000           438000000
+## 5 Moana 2         November 20… 2   e8              350000000           221000000
+## 6 The Hidden Bla… April 2024   3.25e8              320000000            75000000
+## 7 Avatar: The Sp… December 20… 7   e8              550000000           600000000
+## # ℹ 1 more variable: Total_Worldwide_Gross &lt;dbl&gt;</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mtcars_wide <span class="ot">&lt;-</span> mtcars_long <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> Power,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> Value</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+<section id="differences-between-pivot-longer-and-wider" class="level4">
+<h4 class="anchored" data-anchor-id="differences-between-pivot-longer-and-wider">Differences between pivot longer and wider</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th><code>pivot_longer()</code></th>
+<th><code>pivot_wider()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Direction</strong></td>
+<td>Wide → Long</td>
+<td>Long → Wide</td>
+</tr>
+<tr class="even">
+<td><strong>Purpose</strong></td>
+<td>Condense multiple columns into fewer columns.</td>
+<td>Spread values across new columns.</td>
+</tr>
+<tr class="odd">
+<td><strong>Key Arguments</strong></td>
+<td><code>cols</code>, <code>names_to</code>, <code>values_to</code></td>
+<td><code>names_from</code>, <code>values_from</code></td>
+</tr>
+<tr class="even">
+<td><strong>Typical Use Case</strong></td>
+<td>Tidying data for analysis.</td>
+<td>Summarizing or reshaping for presentation.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="separate" class="level3">
+<h3 class="anchored" data-anchor-id="separate">4.3 <code>separate()</code></h3>
+<ul>
+<li>Splits the contents of a single column into multiple columns.</li>
+<li>Useful when a column contains combined values (e.g., “Month Year”).</li>
+</ul>
+<p><strong>TRY: Separate Release_Date into Month and Year</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate Release_Date into Month and Year</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df_separated <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Release_Date, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Month"</span>, <span class="st">"Year"</span>), <span class="at">sep =</span> <span class="st">" "</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the updated dataframe</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_separated)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                  Movie_Title    Month Year China_Box_Office_Gross
+## 1                       YOLO  January 2024              479597304
+## 2                  Successor February 2024              469612890
+## 3                  Pegasus 2    March 2024              466930272
+## 4       Deadpool &amp; Wolverine     July 2024              450000000
+## 5                    Moana 2 November 2024              350000000
+## 6           The Hidden Blade    April 2024              320000000
+## 7 Avatar: The Spirit Returns December 2024              550000000
+##   US_Box_Office_Gross Total_Worldwide_Gross    Profit
+## 1            3.10e+08             479597304 169597304
+## 2            2.80e+08             469612890 189612890
+## 3            2.90e+08             466930272 176930272
+## 4            4.38e+08             850000000 412000000
+## 5            2.21e+08             421000000 200000000
+## 6            7.50e+07             400000000 325000000
+## 7            6.00e+08            1300000000 700000000</code></pre>
+<hr>
+</section>
+<section id="unite" class="level3">
+<h3 class="anchored" data-anchor-id="unite">4.4 <code>unite()</code></h3>
+<ul>
+<li>Combines multiple columns into a single column.</li>
+<li>Useful when you need to merge information for simplicity.</li>
+</ul>
+</section>
+<section id="class-exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="class-exercise-1"><span style="color: purple;">Class Exercise</span></h3>
+<p>Use the movies df to separate the date</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine Month and Year into Release_Date again</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df_united <span class="ot">&lt;-</span> df_separated <span class="sc">|&gt;</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">"Release_Date"</span>, Month, Year, <span class="at">sep =</span> <span class="st">" "</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the updated dataframe</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_united)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                  Movie_Title  Release_Date China_Box_Office_Gross
+## 1                       YOLO  January 2024              479597304
+## 2                  Successor February 2024              469612890
+## 3                  Pegasus 2    March 2024              466930272
+## 4       Deadpool &amp; Wolverine     July 2024              450000000
+## 5                    Moana 2 November 2024              350000000
+## 6           The Hidden Blade    April 2024              320000000
+## 7 Avatar: The Spirit Returns December 2024              550000000
+##   US_Box_Office_Gross Total_Worldwide_Gross    Profit
+## 1            3.10e+08             479597304 169597304
+## 2            2.80e+08             469612890 189612890
+## 3            2.90e+08             466930272 176930272
+## 4            4.38e+08             850000000 412000000
+## 5            2.21e+08             421000000 200000000
+## 6            7.50e+07             400000000 325000000
+## 7            6.00e+08            1300000000 700000000</code></pre>
+<hr>
+</section>
+</section>
+<section id="joins-in-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="joins-in-tidyverse">5. Joins in Tidyverse</h2>
+<p><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">Joins</a> combine two datasets based on a common key (column).</p>
+<ul>
+<li><p>Merging additional data into an existing dataset.</p></li>
+<li><p>Identifying differences or commonalities between datasets.</p></li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Join Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>left_join()</code></td>
+<td>Keeps all rows from the <strong>left dataset</strong>, adding matching rows from the right.</td>
+</tr>
+<tr class="even">
+<td><code>right_join()</code></td>
+<td>Keeps all rows from the <strong>right dataset</strong>, adding matching rows from the left.</td>
+</tr>
+<tr class="odd">
+<td><code>inner_join()</code></td>
+<td>Keeps only rows that have matches in <strong>both datasets</strong>.</td>
+</tr>
+<tr class="even">
+<td><code>full_join()</code></td>
+<td>Keeps all rows from <strong>both datasets</strong>, filling missing values with <code>NA</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>anti_join()</code></td>
+<td>Returns rows from the <strong>left dataset</strong> that <strong>do not</strong> match in the right.</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://raw.githubusercontent.com/aysedeniz09/IntroCSS/9c1569009e815b5939498acabbea278cb2e022aa/images/joins.svg" class="img-fluid"></p>
+<hr>
+<section id="left_join" class="level3">
+<h3 class="anchored" data-anchor-id="left_join">5.1 <code>left_join()</code></h3>
+<p>Create a new dataset</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Additional dataset with Directors</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>df_directors <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Movie_Title =</span> <span class="fu">c</span>(<span class="st">"YOLO"</span>, <span class="st">"Successor"</span>, <span class="st">"Deadpool &amp; Wolverine"</span>, <span class="st">"Moana 2"</span>),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Director =</span> <span class="fu">c</span>(<span class="st">"John Doe"</span>, <span class="st">"Jane Smith"</span>, <span class="st">"Ryan Coogler"</span>, <span class="st">"Ron Clements"</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Let’s <code>left_join()</code> with our dataset</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join the directors' dataset to the main dataset</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>df_left <span class="ot">&lt;-</span> <span class="fu">left_join</span>(df, df_directors, <span class="at">by =</span> <span class="st">"Movie_Title"</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview the result</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_left)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                  Movie_Title  Release_Date China_Box_Office_Gross
+## 1                       YOLO  January 2024              479597304
+## 2                  Successor February 2024              469612890
+## 3                  Pegasus 2    March 2024              466930272
+## 4       Deadpool &amp; Wolverine     July 2024              450000000
+## 5                    Moana 2 November 2024              350000000
+## 6           The Hidden Blade    April 2024              320000000
+## 7 Avatar: The Spirit Returns December 2024              550000000
+##   US_Box_Office_Gross Total_Worldwide_Gross    Profit     Director
+## 1            3.10e+08             479597304 169597304     John Doe
+## 2            2.80e+08             469612890 189612890   Jane Smith
+## 3            2.90e+08             466930272 176930272         &lt;NA&gt;
+## 4            4.38e+08             850000000 412000000 Ryan Coogler
+## 5            2.21e+08             421000000 200000000 Ron Clements
+## 6            7.50e+07             400000000 325000000         &lt;NA&gt;
+## 7            6.00e+08            1300000000 700000000         &lt;NA&gt;</code></pre>
+<hr>
+</section>
+<section id="right_join" class="level3">
+<h3 class="anchored" data-anchor-id="right_join">5.2 <code>right_join()</code></h3>
+<p>Do the same but now <code>right_join()</code> so what we want to join will be on the right</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join the main dataset to the directors' dataset</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>df_right <span class="ot">&lt;-</span> </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(df, df_directors, <span class="at">by =</span> <span class="st">"Movie_Title"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview the result</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_right)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##            Movie_Title  Release_Date China_Box_Office_Gross US_Box_Office_Gross
+## 1                 YOLO  January 2024              479597304            3.10e+08
+## 2            Successor February 2024              469612890            2.80e+08
+## 3 Deadpool &amp; Wolverine     July 2024              450000000            4.38e+08
+## 4              Moana 2 November 2024              350000000            2.21e+08
+##   Total_Worldwide_Gross    Profit     Director
+## 1             479597304 169597304     John Doe
+## 2             469612890 189612890   Jane Smith
+## 3             850000000 412000000 Ryan Coogler
+## 4             421000000 200000000 Ron Clements</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df_left <span class="ot">&lt;-</span> <span class="fu">left_join</span>(df_directors, df, <span class="at">by =</span> <span class="st">"Movie_Title"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="anti_join" class="level3">
+<h3 class="anchored" data-anchor-id="anti_join">5.3 <code>anti_join()</code></h3>
+<p>Now we remove or <code>anti_join()</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find movies in the main dataset without directors</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df_anti <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(df_directors, <span class="at">by =</span> <span class="st">"Movie_Title"</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview the result</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_anti)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                  Movie_Title  Release_Date China_Box_Office_Gross
+## 1                  Pegasus 2    March 2024              466930272
+## 2           The Hidden Blade    April 2024              320000000
+## 3 Avatar: The Spirit Returns December 2024              550000000
+##   US_Box_Office_Gross Total_Worldwide_Gross    Profit
+## 1             2.9e+08             466930272 176930272
+## 2             7.5e+07             400000000 325000000
+## 3             6.0e+08            1300000000 700000000</code></pre>
+<hr>
+</section>
+<section id="class-exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="class-exercise-2"><span style="color: purple;">Class Exercise</span></h3>
+<p>Use the provided datasets (df and df_directors). Perform the following joins:</p>
+<ol type="1">
+<li><p><code>left_join()</code>: Merge the directors into the main dataset.</p></li>
+<li><p><code>right_join()</code>: Merge the main dataset into the directors’ dataset.</p></li>
+<li><p><code>anti_join()</code>: Identify movies without directors.</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="ggplot">6. Ggplot</h2>
+<section id="ggplot2" class="level3">
+<h3 class="anchored" data-anchor-id="ggplot2">6.1 <code>ggplot2()</code></h3>
+<ul>
+<li>A part of the <code>tidyverse</code>, <code>ggplot2</code> is a powerful tool for creating complex and elegant visualizations.</li>
+<li>Follows the Grammar of Graphics:
+<ul>
+<li>Data: The input dataset.</li>
+<li>Aesthetics: Mappings between variables and visual properties (e.g., x, y, color).</li>
+<li>Geometries: The type of plot (e.g., points, bars, lines).</li>
+</ul></li>
+</ul>
+<p><a href="https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf">GGPlot Cheat Sheet</a></p>
+<p><strong>Load the package</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="geoms-the-type-of-graph" class="level3">
+<h3 class="anchored" data-anchor-id="geoms-the-type-of-graph">6.2 <code>Geoms</code>: the type of graph</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Geom Function</th>
+<th>Description</th>
+<th>Key <code>aes()</code> Arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>geom_blank()</code></td>
+<td>Ensures that limits include values across all plots.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td><code>geom_curve()</code></td>
+<td>Draw a curved line from <code>(x, y)</code> to <code>(xend, yend)</code>.</td>
+<td><code>x</code>, <code>xend</code>, <code>y</code>, <code>yend</code>, <code>curvature</code>, <code>color</code>, <code>size</code></td>
+</tr>
+<tr class="odd">
+<td><code>geom_path()</code></td>
+<td>Connect observations in the order they appear.</td>
+<td><code>x</code>, <code>y</code>, <code>alpha</code>, <code>color</code>, <code>group</code>, <code>linetype</code>, <code>size</code></td>
+</tr>
+<tr class="even">
+<td><code>geom_polygon()</code></td>
+<td>Connect points into polygons.</td>
+<td><code>x</code>, <code>y</code>, <code>alpha</code>, <code>color</code>, <code>fill</code>, <code>group</code>, <code>subgroup</code>, <code>linetype</code>, <code>size</code></td>
+</tr>
+<tr class="odd">
+<td><code>geom_rect()</code></td>
+<td>Draw rectangles by connecting four corners (<code>xmin</code>, <code>xmax</code>, <code>ymin</code>, <code>ymax</code>).</td>
+<td><code>xmin</code>, <code>xmax</code>, <code>ymin</code>, <code>ymax</code>, <code>alpha</code>, <code>color</code>, <code>fill</code>, <code>size</code></td>
+</tr>
+<tr class="even">
+<td><code>geom_ribbon()</code></td>
+<td>Plot intervals for each <code>x</code> from <code>ymin</code> to <code>ymax</code>.</td>
+<td><code>x</code>, <code>ymin</code>, <code>ymax</code>, <code>alpha</code>, <code>color</code>, <code>fill</code>, <code>group</code>, <code>linetype</code>, <code>size</code></td>
+</tr>
+<tr class="odd">
+<td><code>geom_abline()</code></td>
+<td>Draw a diagonal reference line with a given slope and intercept.</td>
+<td><code>intercept</code>, <code>slope</code>, <code>color</code>, <code>size</code>, <code>linetype</code></td>
+</tr>
+<tr class="even">
+<td><code>geom_hline()</code></td>
+<td>Draw a horizontal reference line with a given <code>yintercept</code>.</td>
+<td><code>yintercept</code>, <code>color</code>, <code>size</code>, <code>linetype</code></td>
+</tr>
+<tr class="odd">
+<td><code>geom_vline()</code></td>
+<td>Draw a vertical reference line with a given <code>xintercept</code>.</td>
+<td><code>xintercept</code>, <code>color</code>, <code>size</code>, <code>linetype</code></td>
+</tr>
+<tr class="even">
+<td><code>geom_segment()</code></td>
+<td>Draw a straight line from <code>(x, y)</code> to <code>(xend, yend)</code>.</td>
+<td><code>x</code>, <code>xend</code>, <code>y</code>, <code>yend</code>, <code>alpha</code>, <code>color</code>, <code>linetype</code>, <code>size</code></td>
+</tr>
+<tr class="odd">
+<td><code>geom_spoke()</code></td>
+<td>Draw line segments using polar coordinates (<code>angle</code> and <code>radius</code>).</td>
+<td><code>x</code>, <code>y</code>, <code>angle</code>, <code>radius</code>, <code>color</code>, <code>size</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="mapping-vs.-setting-aesthetics" class="level3">
+<h3 class="anchored" data-anchor-id="mapping-vs.-setting-aesthetics">6.3 Mapping vs.&nbsp;Setting Aesthetics</h3>
+<p>A common mistake! There’s an important difference between <strong>mapping</strong> a variable to an aesthetic and <strong>setting</strong> an aesthetic to a fixed value.</p>
+<p><strong>Mapping</strong> (inside <code>aes()</code>) - connects a <em>variable</em> to a visual property:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Color varies BY the data (each movie gets a different color)</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> China_Box_Office_Gross, </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> US_Box_Office_Gross, </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> Movie_Title)) <span class="sc">+</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-23-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Setting</strong> (outside <code>aes()</code>) - applies a <em>fixed value</em> to all points:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ALL points are purple</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> China_Box_Office_Gross, </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> US_Box_Office_Gross)) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"purple"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-24-1.png" class="img-fluid"><!-- --></p>
+<p><mark><strong>Common Error:</strong></mark> What happens if you put a fixed value inside <code>aes()</code>?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRONG! This creates a weird legend</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> China_Box_Office_Gross, </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> US_Box_Office_Gross, </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> <span class="st">"purple"</span>)) <span class="sc">+</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-25-1.png" class="img-fluid"><!-- --></p>
+<p>R thinks “purple” is a variable name, recycles it for every row, and picks its default color (red) — not what you wanted!</p>
+<hr>
+</section>
+<section id="creating-a-basic-ggplot" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-basic-ggplot">6.4 Creating a Basic ggplot</h3>
+<p><strong>TRY: Scatter Plot</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a scatter plot of China vs US Box Office Gross</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> China_Box_Office_Gross, <span class="at">y =</span> US_Box_Office_Gross)) <span class="sc">+</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"China vs US Box Office Gross"</span>,</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"China Box Office Gross"</span>,</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"US Box Office Gross"</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-26-1.png" class="img-fluid"><!-- --></p>
+<hr>
+</section>
+<section id="customizing-visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="customizing-visualizations">6.5 Customizing Visualizations</h3>
+<ul>
+<li>Adding Aesthetic Mappings
+<ul>
+<li>Use <code>aes()</code> to map data to visual properties like color, size, and shape.</li>
+</ul></li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aesthetic</th>
+<th>Description</th>
+<th>Example Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><code>color</code></strong></td>
+<td>Color of points, lines, or text</td>
+<td><code>"red"</code>, <code>"#RRGGBB"</code>, <code>"blue"</code></td>
+</tr>
+<tr class="even">
+<td><strong><code>fill</code></strong></td>
+<td>Fill color for shapes (e.g., bars, areas)</td>
+<td><code>"green"</code>, <code>"yellow"</code>, <code>"#FF5733"</code></td>
+</tr>
+<tr class="odd">
+<td><strong><code>linetype</code></strong></td>
+<td>Style of lines</td>
+<td><code>"solid"</code>, <code>"dashed"</code>, <code>"dotted"</code></td>
+</tr>
+<tr class="even">
+<td><strong><code>size</code></strong></td>
+<td>Size of points or text (in mm)</td>
+<td><code>2</code>, <code>4</code>, <code>6</code></td>
+</tr>
+<tr class="odd">
+<td><strong><code>linewidth</code></strong></td>
+<td>Thickness of lines (in mm)</td>
+<td><code>1</code>, <code>2</code>, <code>3</code></td>
+</tr>
+<tr class="even">
+<td><strong><code>shape</code></strong></td>
+<td>Shape of points (integer, shape name, or character)</td>
+<td><code>16</code> = <code>"circle"</code>, <code>17</code> = <code>"triangle"</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>Point Shapes (Integer or Name)</strong>:</p>
+<ul>
+<li>Integers represent specific shapes, e.g., <code>shape = 16</code> produces a circle.</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Shape Integer</th>
+<th>Shape Name</th>
+<th>Shape Visualization</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td><code>"square open"</code></td>
+<td>□</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td><code>"circle open"</code></td>
+<td>○</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><code>"triangle open"</code></td>
+<td>△</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><code>"plus"</code></td>
+<td>+</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><code>"cross"</code></td>
+<td>✕</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td><code>"diamond open"</code></td>
+<td>◇</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td><code>"triangle down open"</code></td>
+<td>▽</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td><code>"square"</code></td>
+<td>■</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td><code>"circle"</code></td>
+<td>●</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td><code>"triangle"</code></td>
+<td>▲</td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td><code>"diamond"</code></td>
+<td>◆</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add color mapping based on Total Worldwide Gross</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> China_Box_Office_Gross, </span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">y =</span> US_Box_Office_Gross, </span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">color =</span> Total_Worldwide_Gross)) <span class="sc">+</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">10</span>, </span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"China vs US Box Office with Worldwide Gross"</span>,</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"China Box Office Gross"</span>,</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"US Box Office Gross"</span>,</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Worldwide Gross"</span></span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-27-1.png" class="img-fluid"><!-- --></p>
+<p><strong>TRY: Change the shapes and colors</strong></p>
+<hr>
+</section>
+<section id="bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="bar-charts">6.6 Bar Charts</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a bar chart of Total Worldwide Gross by Movie Title</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">y =</span> Total_Worldwide_Gross, <span class="at">x =</span> Movie_Title, <span class="at">fill =</span> Movie_Title)) <span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total Worldwide Gross by Movie Title"</span>,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Movie Title"</span>,</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Worldwide Gross"</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-28-1.png" class="img-fluid"><!-- --></p>
+<p><strong>TRY: Change the colors</strong></p>
+<hr>
+<p><strong>TRY: Flip the y and x axis</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a bar chart of Total Worldwide Gross by Movie Title</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> Movie_Title, <span class="at">y =</span> Total_Worldwide_Gross)) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total Worldwide Gross by Movie Title"</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Movie Title"</span>,</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Worldwide Gross"</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-29-1.png" class="img-fluid"><!-- --></p>
+<hr>
+</section>
+<section id="class-exercise-3" class="level3">
+<h3 class="anchored" data-anchor-id="class-exercise-3"><span style="color: purple;">Class Exercise</span></h3>
+<ol type="1">
+<li>Create a scatter plot showing the relationship between <code>hp</code> (horsepower) and <code>mpg</code> (miles per gallon).</li>
+<li>Modify the scatter plot by:
+<ul>
+<li>Changing point size based on <code>wt</code> (weight).</li>
+<li>Coloring points based on <code>cyl</code> (number of cylinders).</li>
+<li>Adjusting transparency (alpha) for better visibility.</li>
+</ul></li>
+<li>Create a bar chart showing how many cars belong to each <code>cyl</code> (number of cylinders) category.</li>
+<li>Customize the chart by:
+<ul>
+<li>Changing the bar fill color.</li>
+<li>Adding axis labels and a title.</li>
+<li>Flipping the coordinates (<code>coord_flip()</code>) to make the bars horizontal.</li>
+</ul></li>
+<li>Create a line plot showing the trend of mpg (miles per gallon) as wt (weight) increases.</li>
+<li>Modify the line plot by:
+<ul>
+<li>Changing the line color based on the number of cylinders (<code>cyl</code>).</li>
+<li>Adjusting line thickness for better visibility.</li>
+</ul></li>
+</ol>
+<hr>
+</section>
+<section id="adjusting-labels-with-labs" class="level3">
+<h3 class="anchored" data-anchor-id="adjusting-labels-with-labs">6.7 Adjusting Labels with <code>labs()</code></h3>
+<p>Use labs() to set plot labels:</p>
+<ul>
+<li><p><code>title</code>: Main title of the plot.</p></li>
+<li><p><code>subtitle</code>: Secondary description.</p></li>
+<li><p><code>caption</code>: Notes or source information.</p></li>
+<li><p><code>x and y</code>: Axis labels.</p></li>
+<li><p><code>color</code>, <code>fill</code>, <code>size</code>: Legend titles.</p></li>
+</ul>
+<hr>
+</section>
+<section id="customizing-axis" class="level3">
+<h3 class="anchored" data-anchor-id="customizing-axis">6.8 Customizing Axis</h3>
+<ul>
+<li>Default axes in <code>ggplot2</code> are often sufficient but might need adjustment for:
+<ul>
+<li>Readability e.g., showing full numbers instead of scientific notation.</li>
+<li>Specific analysis needs e.g., custom breaks or labels.</li>
+<li>Improved presentation e.g., date formats.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="scale-syntax-formatting" class="level3">
+<h3 class="anchored" data-anchor-id="scale-syntax-formatting">6.9 Scale Syntax &amp; Formatting</h3>
+<section id="scale_y_continuous-scale_x_continuous" class="level4">
+<h4 class="anchored" data-anchor-id="scale_y_continuous-scale_x_continuous"><code>scale_y_continuous()</code> &amp; <code>scale_x_continuous()</code></h4>
+<ul>
+<li>Functions used to customize the y-axis (<code>scale_y_continuous()</code>) and x-axis (<code>scale_x_continuous()</code>).</li>
+<li>These functions are part of the <code>scales</code> package, which is included with <code>ggplot2</code>.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"scales"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>N.B. if you are using a package only once or twice in the script rather than loading the package, you can just use it for the specific function by <code>::</code>. So in this case, since I will only use scales for one instance, I will not load the package but will tell R to go to the package just for the function <code>comma()</code>, by <code>scales::comma()</code>.</strong></p>
+<hr>
+<p><strong>What Can Scales Package Do?</strong></p>
+<ol type="1">
+<li><p>Set Breaks: Specify where the axis labels appear using breaks.</p>
+<ul>
+<li>E.g., Show labels at every $100 million.</li>
+</ul></li>
+<li><p>Format Labels:</p>
+<ul>
+<li><p>Use functions like <code>scales::comma()</code> to display full numbers or add custom formatting.</p></li>
+<li><p>E.g., Convert scientific notation (e.g., 1e+06) into 1,000,000.</p></li>
+</ul></li>
+<li><p>Limits: - Specify the range of the axis using limits.</p>
+<ul>
+<li>E.g., Limit the y-axis to values between $200 million and $1 billion.</li>
+</ul></li>
+<li><p>Other Customizations:</p>
+<ul>
+<li><p>Adjust scales for log-transformed data (<code>scale_y_log10()</code>).</p></li>
+<li><p>Handle reversed axes using <code>scale_y_reverse()</code>.</p></li>
+</ul></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_y_continuous</span>(</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="fu">c</span>(...),  <span class="co"># Define custom breaks</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(...),  <span class="co"># Define custom labels or use functions like scales::comma()</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">limits =</span> <span class="fu">c</span>(min, max)  <span class="co"># Set minimum and maximum axis limits</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_continuous</span>(</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="fu">c</span>(...),  <span class="co"># Same as y-axis but for x-axis</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(...),  <span class="co"># Same as y-axis but for x-axis</span></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">limits =</span> <span class="fu">c</span>(min, max)  <span class="co"># Same as y-axis but for x-axis</span></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="customizing-y-axis-labels" class="level3">
+<h3 class="anchored" data-anchor-id="customizing-y-axis-labels">6.10 Customizing Y-Axis Labels</h3>
+<ul>
+<li>By default, ggplot abbreviates large numbers (e.g., 1e+06 for millions). Use <code>comma()</code> from <code>scales</code> package to display full numbers.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Bar chart with full numbers on y-axis</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> Movie_Title, <span class="at">y =</span> Total_Worldwide_Gross)) <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span> <span class="do">### I added scales:: before the comma</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total Worldwide Gross by Movie Title"</span>,</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Movie Title"</span>,</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Worldwide Gross"</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-32-1.png" class="img-fluid"><!-- --></p>
+<hr>
+</section>
+<section id="customizing-axis-breaks" class="level3">
+<h3 class="anchored" data-anchor-id="customizing-axis-breaks">6.11 Customizing Axis Breaks</h3>
+<p>Use <code>scale_y_continuous(breaks = c(...))</code> to manually set axis breaks.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales) <span class="co"># this time I used library to load it</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Custom y-axis breaks</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> Movie_Title, <span class="at">y =</span> Total_Worldwide_Gross)) <span class="sc">+</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1500000000</span>, <span class="at">by =</span> <span class="dv">100000000</span>),</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span>comma <span class="co"># so kept the function as it is</span></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total Worldwide Gross by Movie Title"</span>,</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Movie Title"</span>,</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Worldwide Gross"</span></span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-33-1.png" class="img-fluid"><!-- --></p>
+<hr>
+</section>
+<section id="customizing-the-x-axis" class="level3">
+<h3 class="anchored" data-anchor-id="customizing-the-x-axis">6.12 Customizing the X-Axis</h3>
+<section id="adjust-x-axis-for-continuous-variables" class="level5">
+<h5 class="anchored" data-anchor-id="adjust-x-axis-for-continuous-variables">Adjust X-Axis for Continuous Variables</h5>
+<p>Use <code>scale_x_continuous()</code> to control breaks and labels for numerical x-axes.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Scatter plot with custom x-axis breaks</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> China_Box_Office_Gross, <span class="at">y =</span> US_Box_Office_Gross)) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">600000000</span>),</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">600000000</span>, <span class="at">by =</span> <span class="dv">50000000</span>),</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span>comma </span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"China vs US Box Office Gross"</span>,</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"China Box Office Gross"</span>,</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"US Box Office Gross"</span></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-34-1.png" class="img-fluid"><!-- --></p>
+<hr>
+</section>
+</section>
+<section id="adjusting-date-scales" class="level3">
+<h3 class="anchored" data-anchor-id="adjusting-date-scales">6.14 Adjusting Date Scales</h3>
+<p>Use <code>scale_x_date()</code> for Date Variables:</p>
+<ul>
+<li><p>When working with date columns, scale_x_date() allows you to format axis labels and control breaks.</p></li>
+<li><p><a href="https://ggplot2.tidyverse.org/reference/scale_date.html">Cheat Sheet</a></p></li>
+</ul>
+<p><strong>Notes:</strong></p>
+<ul>
+<li><p>For this we first need to change our Release Date to a <strong><em>date</em></strong> type object using package <code>lubridate</code>. Install the package <code>install.packages("lubridate")</code>. <a href="https://rstudio.github.io/cheatsheets/html/lubridate.html"><code>Lubridate</code></a> is a very useful package.</p>
+<p>Before we do it let’s learn these functions:</p></li>
+<li><p><code>paste()</code> function:</p>
+<ul>
+<li><p>The <code>paste0()</code> function has space as its default separator and limits your opportunities in the output as well.</p></li>
+<li><p>e.g.,</p></li>
+</ul></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="dv">1</span>,<span class="st">'two'</span>,<span class="dv">3</span>,<span class="st">'four'</span>,<span class="dv">5</span>,<span class="st">'six'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "1 two 3 four 5 six"</code></pre>
+<ul>
+<li><p><code>paste0()</code> function:</p>
+<ul>
+<li>The <code>paste0()</code> function acts just like <code>paste</code> function but with a default separator.</li>
+</ul></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="dv">1</span>,<span class="st">'two'</span>,<span class="dv">3</span>,<span class="st">'four'</span>,<span class="dv">5</span>,<span class="st">'six'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "1two3four5six"</code></pre>
+<ul>
+<li>so, we need to add a seperator using the <code>collapse</code> argument, and you need to make the values a vector</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="st">'two'</span>, <span class="dv">3</span>, <span class="st">'four'</span>, <span class="dv">5</span>, <span class="st">'six'</span>), <span class="at">collapse =</span> <span class="st">" "</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "1 two 3 four 5 six"</code></pre>
+<ul>
+<li>or,</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="st">'two'</span>, <span class="dv">3</span>, <span class="st">'four'</span>, <span class="dv">5</span>, <span class="st">'six'</span>), <span class="at">collapse =</span> <span class="st">"_"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "1_two_3_four_5_six"</code></pre>
+<hr>
+<p>1. First we need to create a date column and make it into a date using date-month-year function <code>dmy()</code>.</p>
+<ul>
+<li><p>However our data only has month and year</p></li>
+<li><p>Let’s create a <strong><em>Day</em></strong> by adding 01 in front of it using <code>paste()</code>, then converting to date.</p></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Line chart with date scale</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a new column with parsed dates</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>df_dates <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Release_Date_Parsed =</span> <span class="fu">dmy</span>(<span class="fu">paste</span>(<span class="st">"01"</span>, Release_Date))) </span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_dates<span class="sc">$</span>Release_Date_Parsed)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "2024-01-01" "2024-02-01" "2024-03-01" "2024-07-01" "2024-11-01"
+## [6] "2024-04-01" "2024-12-01"</code></pre>
+<hr>
+<p>2. Now let’s graph it!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df_dates, <span class="fu">aes</span>(<span class="at">x =</span> Release_Date_Parsed, <span class="at">y =</span> Total_Worldwide_Gross)) <span class="sc">+</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_breaks =</span> <span class="st">"1 month"</span>,</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_labels =</span> <span class="st">"%b"</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Worldwide Gross Over Time (2024)"</span>,</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Release Date"</span>,</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Worldwide Gross"</span></span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L2-github_files/figure-gfm/unnamed-chunk-40-1.png" class="img-fluid"><!-- --></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">scale_x_date</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="class-exercises" class="level3">
+<h3 class="anchored" data-anchor-id="class-exercises"><span style="color: purple;">Class Exercises</span>:</h3>
+<p>Modify a bar chart to:</p>
+<ol type="1">
+<li><p>Display y-axis values as full numbers (e.g., 1,000,000 instead of 1e+06).</p></li>
+<li><p>Add custom y-axis breaks every $200 million.</p></li>
+</ol>
+<p>Create a scatter plot:</p>
+<ol type="1">
+<li><p>Adjust x-axis breaks for China Box Office Gross.</p></li>
+<li><p>Use <code>seq()</code> to set breaks in $50 million increments.</p></li>
+</ol>
+<p>Create a line chart:</p>
+<ol type="1">
+<li><p>Parse Release_Date as dates using <code>lubridate::dmy()</code>.</p></li>
+<li><p>Use <code>scale_x_date()</code> to display one label per month.</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="lecture-2-cheat-sheet" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-2-cheat-sheet">Lecture 2 Cheat Sheet</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Topic</strong></th>
+<th><strong>Key Points</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tidy Data Principles</td>
+<td>Each variable is a column; Each observation is a row; Each type of observational unit forms a table.</td>
+</tr>
+<tr class="even">
+<td>Pipe Operator (<code>|&gt;</code> or <code>%&gt;%</code>)</td>
+<td>Simplifies sequential data transformations; Shortcuts: Cmd + Shift + M (Mac), Ctrl + Shift + M (Windows).</td>
+</tr>
+<tr class="odd">
+<td>DPLYR Functions</td>
+<td><code>filter()</code>: Select rows based on conditions; <code>select()</code>: Choose specific columns; <code>mutate()</code>: Add or transform columns; <code>summarize()</code>: Compute summary statistics; <code>group_by()</code>: Group data for grouped operations; <code>arrange()</code>: Sort rows by variables; <code>rename()</code>: Rename columns.</td>
+</tr>
+<tr class="even">
+<td>Data Reshaping</td>
+<td><code>pivot_longer()</code>: Wide → Long format; <code>pivot_wider()</code>: Long → Wide format. Arguments: <code>cols</code>, <code>names_to</code>, <code>values_to</code> (longer) / <code>names_from</code>, <code>values_from</code> (wider).</td>
+</tr>
+<tr class="odd">
+<td>Column Operations</td>
+<td><code>separate()</code>: Split a column into multiple columns; <code>unite()</code>: Combine multiple columns into one.</td>
+</tr>
+<tr class="even">
+<td>Joins in Tidyverse</td>
+<td><code>left_join()</code>: Keeps all rows from the left dataset; <code>right_join()</code>: Keeps all rows from the right dataset; <code>inner_join()</code>: Rows with matches in both datasets; <code>full_join()</code>: Keeps all rows from both datasets; <code>anti_join()</code>: Rows from the left dataset not in the right.</td>
+</tr>
+<tr class="odd">
+<td>GGPlot2 Basics</td>
+<td>Data: Input dataset; Aesthetics: Mappings (e.g., x, y, color, size); Geometries: Plot types (e.g., <code>geom_point()</code>, <code>geom_bar()</code>, <code>geom_line()</code>).</td>
+</tr>
+<tr class="even">
+<td>GGPlot Customization</td>
+<td>Use <code>aes()</code> for mappings (e.g., color, size, shape). Adjust axis labels with <code>scale_y_continuous()</code> or <code>scale_x_continuous()</code> (e.g., breaks, labels, limits). Format full numbers with <code>scales::comma</code>. Customize date axes with <code>scale_x_date()</code> after converting to date.</td>
+</tr>
+<tr class="odd">
+<td>Lubridate Package</td>
+<td>Parse dates with <code>dmy()</code>, <code>mdy()</code>, <code>ymd()</code>. Extract components: <code>year()</code>, <code>month()</code>, <code>day()</code>. Manipulate with <code>today()</code>, <code>now()</code>.</td>
+</tr>
+<tr class="even">
+<td>Regex Basics</td>
+<td>Match patterns in text with <code>stringr</code>. Key patterns: <code>.</code> (any character), <code>^</code> (start), <code>$</code> (end), <code>*</code> (zero or more), <code>+</code> (one or more), <code>[]</code> (set).</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Ayse D. Lokmanoglu, Boston University</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alokman@bu.edu">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aysedeniz09">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
