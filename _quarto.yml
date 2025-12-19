@@ -4,6 +4,8 @@ project:
   render:
     - "*.qmd"
     - "!*.md"
+resources:
+  - .nojekyll
 
 website:
   title: "Social Data Analysis and Visualization"
