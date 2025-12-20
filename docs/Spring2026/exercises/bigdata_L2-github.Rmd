@@ -1,0 +1,1283 @@
+---
+title: "Big Data: Data Collection and Wrangling"
+subtitle: "COM EM757"
+author: "Dr. Ayse D. Lokmanoglu"
+date: 'Lecture 2, (B) Jan 28, (A) Feb 2'
+output: github_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  error = TRUE
+)
+```
+
+## Lecture 2 Table of Contents
+
+| Section | Topic |
+|---------|-------|
+| 1 | Data Import |
+| 1.1 | Understanding File Paths |
+| 1.2 | Reading CSV Files with readr |
+| 1.3 | Reading Excel Files with readxl |
+| 1.4 | Loading via RStudio Files Pane |
+| 1.5 | Column Specifications |
+| 2 | Tidy Data Principles |
+| 2.1 | What is Tidy Data? |
+| 2.2 | Tibbles |
+| 2.3 | The Pipe Operator |
+| 3 | DPLYR |
+| 3.1 | Common dplyr Functions Overview |
+| 3.2 | `filter()` |
+| 3.3 | `select()` |
+| 3.4 | `mutate()` |
+| 3.5 | `summarize()` |
+| 3.6 | `group_by()` |
+| 3.7 | `arrange()` |
+| 3.8 | `rename()` |
+| 4 | Data Reshaping |
+| 4.1 | `pivot_longer()` |
+| 4.2 | `pivot_wider()` |
+| 4.3 | `separate()` |
+| 4.4 | `unite()` |
+| 5 | Handling Missing Values |
+| 5.1 | `drop_na()` |
+| 5.2 | `fill()` |
+| 5.3 | `replace_na()` |
+| 6 | Expanding Tables |
+| 6.1 | `expand()` |
+| 6.2 | `complete()` |
+| 7 | Joins in Tidyverse |
+| 7.1 | `left_join()` |
+| 7.2 | `right_join()` |
+| 7.3 | `inner_join()` |
+| 7.4 | `full_join()` |
+| 7.5 | `anti_join()` |
+| 8 | Regular Expressions |
+| 8.1 | Introduction to Regex |
+| 8.2 | Basic Pattern Matching |
+| 8.3 | stringr Functions |
+| 8.4 | Common Regex Patterns |
+| 8.5 | Practical Examples |
+
+------------------------------------------------------------------------
+
+## 1. Data Import
+
+One of the first steps of any project is importing data into R. Data is often stored in tabular formats like CSV files, Excel spreadsheets, or databases.
+
+```{r}
+library(tidyverse)
+library(readr)
+library(readxl)
+library(stringr)
+```
+
+------------------------------------------------------------------------
+
+### 1.1 Understanding File Paths
+
+In Lecture 1, we set up our project folder structure:
+
+```text
+EMS747_Project/
+  EMS747_Project.Rproj
+  data/
+  scripts/
+  bigdata_L2_github.Rmd
+```
+
+When you open your project (by clicking the `.Rproj` file), R automatically sets your **working directory** to the project folder. This means you can use **relative paths** to access files.
+
+#### Relative Paths vs Absolute Paths
+
+| Type | Description | Example |
+|------|-------------|---------|
+| **Absolute Path** | Full path from the root of your computer | `"/Users/ayse/Documents/EMS747_Project/data/file.csv"` |
+| **Relative Path** | Path relative to your working directory | `"data/file.csv"` |
+
+<mark>Always use relative paths in your projects!</mark> They make your code portable and reproducible.
+
+#### Understanding `../` (Parent Directory)
+
+The `../` means "go up one folder level" (to the parent directory).
+
+**Example project structure:**
+
+```text
+EMS747_Project/
+  data/
+    Starbucks_User_Data.csv
+  scripts/
+    my_analysis.R          <- If you're working here
+  bigdata_L2_github.Rmd    <- Or working here
+```
+
+- If your script is in the **main project folder**: use `"data/file.csv"`
+- If your script is in the **scripts folder**: use `"../data/file.csv"` (go up one level, then into data)
+
+```{r, eval=FALSE}
+# From the main project folder
+starbucks_user_data <- read_csv("data/Starbucks_User_Data.csv")
+
+# From the scripts folder (need to go up one level first)
+starbucks_user_data <- read_csv("../data/Starbucks_User_Data.csv")
+```
+
+**TRY: Check your working directory**
+
+```{r}
+getwd()  # This should show your project folder path
+```
+
+------------------------------------------------------------------------
+
+### 1.2 Reading CSV Files with readr
+
+The `readr` package provides fast and friendly functions for reading rectangular data.
+
+| Function | Description |
+|----------|-------------|
+| `read_csv()` | Read comma delimited files |
+| `read_csv2()` | Read semicolon delimited files (European format) |
+| `read_tsv()` | Read tab delimited files |
+| `read_delim()` | Read files with any delimiter |
+
+**TRY: Load data from a URL**
+
+```{r, eval=TRUE}
+# Load the data from the URL
+url <- "https://raw.githubusercontent.com/aysedeniz09/Social_Media_Listening/refs/heads/main/MSC_social_media_list_data/Starbucks_User_Data.csv"
+starbucks_user_data <- read_csv(url)
+
+head(starbucks_user_data)
+```
+
+**Load from your computer**
+
+```{r, eval=FALSE}
+# From the main project folder (data is a subfolder)
+starbucks_user_data <- read_csv("data/Starbucks_User_Data.csv")
+
+# From a scripts folder (need to go up one level first)
+starbucks_user_data <- read_csv("../data/Starbucks_User_Data.csv")
+```
+
+------------------------------------------------------------------------
+
+#### Useful read_csv() Arguments
+
+| Argument | Description | Example |
+|----------|-------------|---------|
+| `col_names` | Use first row as names or provide your own | `col_names = FALSE` or `col_names = c("x", "y", "z")` |
+| `skip` | Number of lines to skip before reading | `skip = 1` |
+| `n_max` | Maximum number of rows to read | `n_max = 100` |
+| `na` | Character vector of strings to interpret as NA | `na = c("", "NA", "NULL")` |
+
+```{r, eval=FALSE}
+# Skip header row and provide custom column names
+read_csv("data/file.csv", col_names = c("x", "y", "z"), skip = 1)
+
+# Read only first 100 rows
+read_csv("data/file.csv", n_max = 100)
+
+# Treat "NULL" as missing values
+read_csv("data/file.csv", na = c("", "NA", "NULL"))
+```
+
+------------------------------------------------------------------------
+
+### 1.3 Reading Excel Files with readxl
+
+The `readxl` package reads both `.xls` and `.xlsx` files.
+
+```{r, eval=FALSE}
+# Install if needed
+install.packages("readxl")
+```
+
+```{r, eval=FALSE}
+library(readxl)
+
+# Read an Excel file
+data <- read_excel("../data/Starbucks_User_Data.xlsx")
+
+# Read a specific sheet by name or position
+data <- read_excel("../data/Starbucks_User_Data.xlsx", sheet = "Sheet2")
+data <- read_excel("../data/Starbucks_User_Data.xlsx", sheet = 2)
+
+# Get all sheet names
+excel_sheets("../data/Starbucks_User_Data.xlsx")
+
+# Read a specific range of cells
+data <- read_excel("../data/Starbucks_User_Data.xlsx", range = "B1:D10")
+```
+
+------------------------------------------------------------------------
+
+### 1.4 Loading via RStudio Files Pane
+
+You can also import data using RStudio's point-and-click interface:
+
+1. Click on the **Files** pane
+2. Navigate to your data file
+3. Click **Import Dataset**
+4. Configure import options
+5. Click **Import**
+
+![](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/import_data.png?raw=true)
+![](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/import_data2.png?raw=true)
+
+------------------------------------------------------------------------
+
+### 1.5 Column Specifications
+
+Column specifications define what data type each column will be imported as. By default, `readr` guesses column types based on the first 1000 rows.
+
+**Column Types:**
+
+| Type | Function | Abbreviation |
+|------|----------|--------------|
+| Logical | `col_logical()` | "l" |
+| Integer | `col_integer()` | "i" |
+| Double | `col_double()` | "d" |
+| Character | `col_character()` | "c" |
+| Factor | `col_factor()` | "f" |
+| Date | `col_date()` | "D" |
+| DateTime | `col_datetime()` | "T" |
+| Skip | `col_skip()` | "-" or "_" |
+
+```{r, eval=FALSE}
+# Set specific column types
+read_csv("file.csv", 
+         col_types = list(
+           x = col_double(),
+           y = col_character(),
+           z = col_date()
+         ))
+
+# Use abbreviation string
+read_csv("file.csv", col_types = "dcD")
+
+# Select specific columns to import
+read_csv("file.csv", col_select = c(name, age, score))
+```
+
+------------------------------------------------------------------------
+
+#### Hint: Built-in Datasets
+
+R comes with many built-in datasets for practice:
+
+```{r, eval=TRUE}
+# See all available datasets
+data()
+
+# Load a built-in dataset
+data("mtcars")
+head(mtcars)
+```
+
+------------------------------------------------------------------------
+
+## 2. Tidy Data Principles
+
+### 2.1 What is Tidy Data?
+
+Tidy data is a consistent way to organize tabular data. A dataset is **tidy** if:
+
+1. Each **variable** is in its own **column**
+2. Each **observation** (case) is in its own **row**
+3. Each **value** is in its own **cell**
+
+![](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/tidy_data.jpg?raw=true)
+
+*Image from: Hassan, F. (2023, March 21). Tidy Data in Python. Medium.*
+
+**Why Tidy Data?**
+
+- Simplifies data manipulation and visualization
+- Works seamlessly with tidyverse packages (dplyr, ggplot2, tidyr)
+- Makes data analysis more reproducible
+
+[Tidy Cheat Sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf)
+
+------------------------------------------------------------------------
+
+### 2.2 Tibbles
+
+**Tibbles** are a modern reimagining of data frames provided by the `tibble` package. They have improved behaviors:
+
+- Better printing (shows only first 10 rows and columns that fit on screen)
+- No partial matching when subsetting columns
+- Never convert strings to factors automatically
+- Subset with `[]` for a tibble, `[[]]` or `$` for a vector
+
+```{r, eval=TRUE}
+library(tibble)
+
+# Create a tibble by columns
+my_tibble <- tibble(
+  x = 1:3,
+  y = c("a", "b", "c"),
+  z = c(TRUE, FALSE, TRUE)
+)
+my_tibble
+
+# Create a tibble by rows (useful for small datasets)
+my_tibble2 <- tribble(
+  ~x, ~y, ~z,
+  1, "a", TRUE,
+  2, "b", FALSE,
+  3, "c", TRUE
+)
+my_tibble2
+```
+
+```{r, eval=TRUE}
+# Convert data frame to tibble
+as_tibble(mtcars)
+
+# Check if something is a tibble
+is_tibble(my_tibble)
+is_tibble(mtcars)
+```
+
+------------------------------------------------------------------------
+
+### 2.3 The Pipe Operator
+
+The **pipe** operator `|>` (or `%>%` from magrittr) allows you to chain operations together, making code more readable.
+
+**Shortcut:** 
+- Mac: **Cmd + Shift + M**
+- Windows: **Ctrl + Shift + M**
+
+```{r, eval=TRUE}
+# Without pipe (nested functions - hard to read)
+head(arrange(filter(mtcars, mpg > 20), desc(hp)), 3)
+
+# With pipe (sequential - easy to read)
+mtcars |> 
+  filter(mpg > 20) |> 
+  arrange(desc(hp)) |> 
+  head(3)
+```
+
+The pipe takes the output of the left side and passes it as the first argument to the function on the right side.
+
+------------------------------------------------------------------------
+
+## 3. DPLYR
+
+The `dplyr` package provides a powerful toolkit for data manipulation with intuitive "verb" functions.
+
+```{r}
+library(dplyr)
+```
+
+**Create a sample dataset:**
+
+```{r, eval=TRUE}
+df <- data.frame(
+  Movie_Title = c(
+    "YOLO", "Successor", "Pegasus 2", "Deadpool & Wolverine", "Moana 2", 
+    "The Hidden Blade", "Avatar: The Spirit Returns"
+  ),
+  Release_Date = c(
+    "January 2024", "February 2024", "March 2024", "July 2024", 
+    "November 2024", "April 2024", "December 2024"
+  ),
+  China_Box_Office_Gross = c(
+    479597304, 469612890, 466930272, 450000000, 350000000, 320000000, 550000000
+  ),
+  US_Box_Office_Gross = c(
+    310000000, 280000000, 290000000, 438000000, 221000000, 75000000, 600000000
+  ),
+  Total_Worldwide_Gross = c(
+    479597304, 469612890, 466930272, 850000000, 421000000, 400000000, 1300000000
+  )
+)
+
+head(df)
+```
+
+------------------------------------------------------------------------
+
+### 3.1 Common dplyr Functions
+
+| Function | Description |
+|----------|-------------|
+| `filter()` | Select rows based on conditions |
+| `select()` | Choose specific columns |
+| `mutate()` | Create or transform columns |
+| `summarize()` | Compute summary statistics |
+| `group_by()` | Group data by variables |
+| `arrange()` | Sort rows |
+| `rename()` | Rename columns |
+
+------------------------------------------------------------------------
+
+### 3.2 `filter()`
+
+Select rows based on specific conditions.
+
+```{r, eval=TRUE}
+# Filter movies with China gross > 400 million
+df |> 
+  filter(China_Box_Office_Gross > 400000000)
+
+# Multiple conditions with AND (&)
+mtcars |> 
+  filter(mpg > 20 & cyl == 6)
+
+# Multiple conditions with OR (|)
+mtcars |> 
+  filter(mpg > 25 | hp > 200)
+```
+
+------------------------------------------------------------------------
+
+### 3.3 `select()`
+
+Choose specific columns from a dataset.
+
+```{r, eval=TRUE}
+# Select specific columns by name
+df |> 
+  select(Movie_Title, Total_Worldwide_Gross)
+
+# Select a range of columns
+df |> 
+  select(Movie_Title:US_Box_Office_Gross)
+
+# Exclude columns with minus sign
+df |> 
+  select(-Release_Date)
+```
+
+**Helper functions for select():**
+
+| Helper | Description |
+|--------|-------------|
+| `starts_with("x")` | Columns starting with "x" |
+| `ends_with("x")` | Columns ending with "x" |
+| `contains("x")` | Columns containing "x" |
+| `everything()` | All columns |
+
+```{r, eval=TRUE}
+# Select columns containing "Gross"
+df |> 
+  select(Movie_Title, contains("Gross"))
+```
+
+------------------------------------------------------------------------
+
+### 3.4 `mutate()`
+
+Create new columns or transform existing ones.
+
+```{r, eval=TRUE}
+# Create a new column
+df <- df |> 
+  mutate(Profit = Total_Worldwide_Gross - US_Box_Office_Gross)
+
+# Multiple new columns at once
+df |> 
+  mutate(
+    Profit = Total_Worldwide_Gross - US_Box_Office_Gross,
+    China_Pct = China_Box_Office_Gross / Total_Worldwide_Gross * 100
+  ) |> 
+  select(Movie_Title, Profit, China_Pct)
+```
+
+------------------------------------------------------------------------
+
+### 3.5 `summarize()`
+
+Compute summary statistics. Often used with `group_by()`.
+
+```{r, eval=TRUE}
+# Overall summary
+df |> 
+  summarize(
+    Total_China = sum(China_Box_Office_Gross),
+    Avg_Worldwide = mean(Total_Worldwide_Gross),
+    Count = n()
+  )
+
+# Summary with mtcars
+mtcars |> 
+  summarize(
+    mean_mpg = mean(mpg),
+    sd_mpg = sd(mpg),
+    median_hp = median(hp)
+  )
+```
+
+------------------------------------------------------------------------
+
+### 3.6 `group_by()`
+
+Group data by one or more variables for grouped operations.
+
+```{r, eval=TRUE}
+# Group by cylinders and summarize
+mtcars |> 
+  group_by(cyl) |> 
+  summarize(
+    mean_mpg = mean(mpg),
+    count = n()
+  )
+
+# Group by multiple variables
+mtcars |> 
+  group_by(cyl, gear) |> 
+  summarize(
+    mean_mpg = mean(mpg),
+    count = n(),
+    .groups = "drop"  # Ungroup after summarizing
+  )
+```
+
+------------------------------------------------------------------------
+
+### 3.7 `arrange()`
+
+Sort rows by one or more variables.
+
+```{r, eval=TRUE}
+# Sort ascending (default)
+df |> 
+  arrange(Total_Worldwide_Gross)
+
+# Sort descending
+df |> 
+  arrange(desc(Total_Worldwide_Gross))
+
+# Sort by multiple columns
+mtcars |> 
+  arrange(cyl, desc(mpg)) |> 
+  head()
+```
+
+------------------------------------------------------------------------
+
+### 3.8 `rename()`
+
+Rename columns. Syntax: `rename(new_name = old_name)`
+
+```{r, eval=TRUE}
+df_renamed <- df |> 
+  rename(
+    China_Gross = China_Box_Office_Gross,
+    US_Gross = US_Box_Office_Gross,
+    Worldwide_Gross = Total_Worldwide_Gross
+  )
+
+names(df_renamed)
+```
+
+------------------------------------------------------------------------
+
+#### <span style="color: purple;">Class Exercise: dplyr Practice</span>
+
+Use the movies dataset and perform the following:
+
+1. `filter()`: Select movies with a total worldwide gross greater than $500M.
+2. `select()`: Choose only Movie_Title and columns containing "Gross".
+3. `mutate()`: Add a new column for US percentage of worldwide gross.
+4. `summarize()`: Compute the total and average gross for China.
+5. `group_by()` + `summarize()`: Calculate average gross by release month (hint: you'll need to extract month first).
+6. `arrange()`: Sort movies by worldwide gross in descending order.
+
+```{r}
+### Your workspace
+
+
+```
+
+------------------------------------------------------------------------
+
+## 4. Data Reshaping
+
+Data often needs to be reshaped between "wide" and "long" formats for different analyses.
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/pivot_meme.jpg?raw=true)
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/pivot_long.png?raw=true)
+
+------------------------------------------------------------------------
+
+### 4.1 `pivot_longer()`
+
+Transform data from **wide** to **long** format by collapsing multiple columns into two: one for names and one for values.
+
+**Key Arguments:**
+- `cols`: Columns to pivot
+- `names_to`: Name for the new column holding original column names
+- `values_to`: Name for the new column holding values
+
+```{r, eval=TRUE}
+# Convert movie data to long format
+long_df <- df |> 
+  pivot_longer(
+    cols = China_Box_Office_Gross:Total_Worldwide_Gross,
+    names_to = "Box_Office_Type",
+    values_to = "Gross"
+  )
+
+print(long_df)
+```
+
+```{r, eval=TRUE}
+# Another example with mtcars
+mtcars_long <- mtcars |> 
+  rownames_to_column("car") |> 
+  pivot_longer(
+    cols = mpg:carb,
+    names_to = "metric",
+    values_to = "value"
+  )
+
+head(mtcars_long)
+```
+
+------------------------------------------------------------------------
+
+### 4.2 `pivot_wider()`
+
+Transform data from **long** to **wide** format by spreading values across multiple columns.
+
+**Key Arguments:**
+- `names_from`: Column whose values become new column names
+- `values_from`: Column whose values fill the new columns
+
+```{r, eval=TRUE}
+# Convert back to wide format
+wide_df <- long_df |> 
+  pivot_wider(
+    names_from = Box_Office_Type,
+    values_from = Gross
+  )
+
+print(wide_df)
+```
+
+------------------------------------------------------------------------
+
+#### Differences Between pivot_longer and pivot_wider
+
+| Feature | `pivot_longer()` | `pivot_wider()` |
+|---------|------------------|-----------------|
+| **Direction** | Wide → Long | Long → Wide |
+| **Purpose** | Consolidate columns | Spread values across columns |
+| **Key Arguments** | `cols`, `names_to`, `values_to` | `names_from`, `values_from` |
+| **Typical Use** | Tidying data for analysis | Summarizing for presentation |
+
+------------------------------------------------------------------------
+
+### 4.3 `separate()`
+
+Split the contents of a single column into multiple columns.
+
+```{r, eval=TRUE}
+# Separate Release_Date into Month and Year
+df_separated <- df |> 
+  separate(Release_Date, into = c("Month", "Year"), sep = " ")
+
+print(df_separated)
+```
+
+**Related functions:**
+- `separate_wider_delim()`: Separate by delimiter into columns
+- `separate_wider_position()`: Separate by position into columns
+- `separate_longer_delim()`: Separate into rows instead of columns
+
+------------------------------------------------------------------------
+
+### 4.4 `unite()`
+
+Combine multiple columns into a single column.
+
+```{r, eval=TRUE}
+# Combine Month and Year back into Release_Date
+df_united <- df_separated |> 
+  unite("Release_Date", Month, Year, sep = " ")
+
+print(df_united)
+```
+
+------------------------------------------------------------------------
+
+## 5. Handling Missing Values
+
+Missing values (`NA`) are common in real-world data. The `tidyr` package provides functions to handle them.
+
+```{r, eval=TRUE}
+# Create sample data with missing values
+missing_df <- tibble(
+  x1 = c("A", "B", "C", "D", "E"),
+  x2 = c(1, NA, NA, 3, NA)
+)
+missing_df
+```
+
+------------------------------------------------------------------------
+
+### 5.1 `drop_na()`
+
+Remove rows containing `NA` values.
+
+```{r, eval=TRUE}
+# Drop rows with NA in any column
+missing_df |> 
+  drop_na()
+
+# Drop rows with NA only in specific columns
+missing_df |> 
+  drop_na(x2)
+```
+
+------------------------------------------------------------------------
+
+### 5.2 `fill()`
+
+Fill in `NA` values using the previous or next value.
+
+```{r, eval=TRUE}
+# Fill down (default)
+missing_df |> 
+  fill(x2, .direction = "down")
+
+# Fill up
+missing_df |> 
+  fill(x2, .direction = "up")
+
+# Fill in both directions (down first, then up)
+missing_df |> 
+  fill(x2, .direction = "downup")
+```
+
+------------------------------------------------------------------------
+
+### 5.3 `replace_na()`
+
+Replace `NA` values with a specified value.
+
+```{r, eval=TRUE}
+# Replace NA with a specific value
+missing_df |> 
+  replace_na(list(x2 = 0))
+
+# Replace NA with the mean (requires mutate)
+missing_df |> 
+  mutate(x2 = replace_na(x2, mean(x2, na.rm = TRUE)))
+```
+
+------------------------------------------------------------------------
+
+## 6. Expanding Tables
+
+Create new combinations of variables or identify implicit missing values.
+
+------------------------------------------------------------------------
+
+### 6.1 `expand()`
+
+Create a tibble with all possible combinations of specified variables.
+
+```{r, eval=TRUE}
+# All combinations of cyl and gear
+mtcars |> 
+  expand(cyl, gear)
+```
+
+------------------------------------------------------------------------
+
+### 6.2 `complete()`
+
+Add missing combinations of values to a dataset, filling other variables with `NA`.
+
+```{r, eval=TRUE}
+# Sample data with implicit missing combinations
+sales_df <- tibble(
+  store = c("A", "A", "B"),
+  product = c("X", "Y", "X"),
+  sales = c(100, 150, 200)
+)
+sales_df
+
+# Complete with all combinations
+sales_df |> 
+  complete(store, product)
+
+# Complete and fill missing values with 0
+sales_df |> 
+  complete(store, product, fill = list(sales = 0))
+```
+
+------------------------------------------------------------------------
+
+## 7. Joins in Tidyverse
+
+[Joins](https://dplyr.tidyverse.org/reference/mutate-joins.html) combine two datasets based on a common key (column).
+
+| Join Type | Description |
+|-----------|-------------|
+| `left_join()` | Keep all rows from the **left** dataset |
+| `right_join()` | Keep all rows from the **right** dataset |
+| `inner_join()` | Keep only rows that match in **both** datasets |
+| `full_join()` | Keep all rows from **both** datasets |
+| `anti_join()` | Keep rows from left that **don't** match right |
+
+![](https://raw.githubusercontent.com/aysedeniz09/IntroCSS/9c1569009e815b5939498acabbea278cb2e022aa/images/joins.svg)
+
+------------------------------------------------------------------------
+
+**Create datasets for joining:**
+
+```{r, eval=TRUE}
+# Directors dataset
+df_directors <- tibble(
+  Movie_Title = c("YOLO", "Successor", "Deadpool & Wolverine", "Moana 2"),
+  Director = c("Jia Ling", "Xu Zheng", "Shawn Levy", "David Derrick Jr.")
+)
+
+# Ratings dataset  
+df_ratings <- tibble(
+  Movie_Title = c("YOLO", "Pegasus 2", "Moana 2", "Wicked"),
+  Rating = c(8.1, 7.5, 7.8, 8.0)
+)
+```
+
+------------------------------------------------------------------------
+
+### 7.1 `left_join()`
+
+Keep all rows from the left dataset, add matching data from the right.
+
+```{r, eval=TRUE}
+# Add directors to movies (keep all movies)
+df |> 
+  select(Movie_Title, Total_Worldwide_Gross) |> 
+  left_join(df_directors, by = "Movie_Title")
+```
+
+------------------------------------------------------------------------
+
+### 7.2 `right_join()`
+
+Keep all rows from the right dataset, add matching data from the left.
+
+```{r, eval=TRUE}
+# Keep all directors, add movie data
+df |> 
+  select(Movie_Title, Total_Worldwide_Gross) |> 
+  right_join(df_directors, by = "Movie_Title")
+```
+
+------------------------------------------------------------------------
+
+### 7.3 `inner_join()`
+
+Keep only rows that have matches in both datasets.
+
+```{r, eval=TRUE}
+# Only movies that have both gross data AND ratings
+df |> 
+  select(Movie_Title, Total_Worldwide_Gross) |> 
+  inner_join(df_ratings, by = "Movie_Title")
+```
+
+------------------------------------------------------------------------
+
+### 7.4 `full_join()`
+
+Keep all rows from both datasets, filling with `NA` where there's no match.
+
+```{r, eval=TRUE}
+# Combine all movies and ratings
+df |> 
+  select(Movie_Title, Total_Worldwide_Gross) |> 
+  full_join(df_ratings, by = "Movie_Title")
+```
+
+------------------------------------------------------------------------
+
+### 7.5 `anti_join()`
+
+Return rows from the left dataset that do NOT have a match in the right.
+
+```{r, eval=TRUE}
+# Movies WITHOUT directors
+df |> 
+  select(Movie_Title) |> 
+  anti_join(df_directors, by = "Movie_Title")
+
+# Movies WITHOUT ratings
+df |> 
+  select(Movie_Title) |> 
+  anti_join(df_ratings, by = "Movie_Title")
+```
+
+------------------------------------------------------------------------
+
+#### <span style="color: purple;">Class Exercise: Joins Practice</span>
+
+Use the provided datasets (df, df_directors, df_ratings):
+
+1. `left_join()`: Merge directors into the main movie dataset.
+2. `inner_join()`: Find movies that have both director and rating information.
+3. `anti_join()`: Identify movies without ratings.
+4. `full_join()`: Create a comprehensive dataset with all movies, directors, and ratings.
+
+```{r}
+### Your workspace
+
+
+```
+
+------------------------------------------------------------------------
+
+## 8. Regular Expressions
+
+Regular expressions (regex) are powerful patterns used to match, search, and manipulate text. They are essential for data cleaning and text processing.
+
+We will use the [`stringr` package](https://stringr.tidyverse.org/), which is part of the tidyverse.
+
+```{r}
+library(stringr)
+```
+
+------------------------------------------------------------------------
+
+### 8.1 Introduction to Regex
+
+A regular expression is a sequence of characters that defines a search pattern. Think of it as a sophisticated "find and replace" tool.
+
+**Why use regex?**
+
+- Clean messy text data (remove special characters, standardize formats)
+- Extract specific patterns (emails, phone numbers, dates)
+- Filter rows based on text patterns
+- Transform text data
+
+------------------------------------------------------------------------
+
+### 8.2 Basic Pattern Matching
+
+#### Literal Characters
+
+The simplest regex matches exact text:
+
+```{r, eval=TRUE}
+fruits <- c("apple", "banana", "pineapple", "grape", "grapefruit")
+
+# Find fruits containing "apple"
+str_detect(fruits, "apple")
+
+# Extract matches
+str_subset(fruits, "apple")
+```
+
+------------------------------------------------------------------------
+
+#### Special Characters (Metacharacters)
+
+These characters have special meanings in regex:
+
+| Character | Meaning | Example | Matches |
+|-----------|---------|---------|---------|
+| `.` | Any single character | `"a.c"` | "abc", "a1c", "a c" |
+| `^` | Start of string | `"^The"` | "The dog" but not "See The dog" |
+| `$` | End of string | `"end$"` | "the end" but not "endless" |
+| `*` | Zero or more of previous | `"ab*c"` | "ac", "abc", "abbc" |
+| `+` | One or more of previous | `"ab+c"` | "abc", "abbc" but not "ac" |
+| `?` | Zero or one of previous | `"colou?r"` | "color", "colour" |
+| `\\` | Escape special character | `"\\."` | Literal period "." |
+
+```{r, eval=TRUE}
+text <- c("cat", "car", "card", "care", "scar")
+
+# Match "ca" followed by any character
+str_subset(text, "ca.")
+
+# Match words starting with "ca"
+str_subset(text, "^ca")
+
+# Match words ending with "r"
+str_subset(text, "r$")
+```
+
+------------------------------------------------------------------------
+
+#### Character Classes
+
+Use square brackets `[]` to match any character in a set:
+
+| Pattern | Meaning | Example |
+|---------|---------|---------|
+| `[abc]` | Match a, b, or c | `"[aeiou]"` matches vowels |
+| `[a-z]` | Match any lowercase letter | |
+| `[A-Z]` | Match any uppercase letter | |
+| `[0-9]` | Match any digit | Same as `\\d` |
+| `[^abc]` | Match anything EXCEPT a, b, c | `[^0-9]` matches non-digits |
+
+```{r, eval=TRUE}
+words <- c("hello", "HELLO", "Hello", "h3llo", "12345")
+
+# Match words with lowercase letters
+str_subset(words, "[a-z]")
+
+# Match words with digits
+str_subset(words, "[0-9]")
+
+# Match words starting with uppercase
+str_subset(words, "^[A-Z]")
+```
+
+------------------------------------------------------------------------
+
+#### Shorthand Character Classes
+
+| Shorthand | Meaning | Equivalent |
+|-----------|---------|------------|
+| `\\d` | Any digit | `[0-9]` |
+| `\\D` | Any non-digit | `[^0-9]` |
+| `\\w` | Any word character | `[a-zA-Z0-9_]` |
+| `\\W` | Any non-word character | `[^a-zA-Z0-9_]` |
+| `\\s` | Any whitespace | Space, tab, newline |
+| `\\S` | Any non-whitespace | |
+
+```{r, eval=TRUE}
+mixed <- c("abc123", "hello world", "test_case", "no-hyphens")
+
+# Find strings with digits
+str_subset(mixed, "\\d")
+
+# Find strings with whitespace
+str_subset(mixed, "\\s")
+
+# Find strings with word characters only (no spaces or hyphens)
+str_detect(mixed, "^\\w+$")
+```
+
+------------------------------------------------------------------------
+
+### 8.3 stringr Functions
+
+The `stringr` package provides consistent, easy-to-use functions for working with strings and regex.
+
+| Function | Purpose | Example |
+|----------|---------|---------|
+| `str_detect()` | Does pattern exist? (returns TRUE/FALSE) | `str_detect(x, "pattern")` |
+| `str_subset()` | Return elements that match | `str_subset(x, "pattern")` |
+| `str_extract()` | Extract first match | `str_extract(x, "pattern")` |
+| `str_extract_all()` | Extract all matches | `str_extract_all(x, "pattern")` |
+| `str_replace()` | Replace first match | `str_replace(x, "pattern", "replacement")` |
+| `str_replace_all()` | Replace all matches | `str_replace_all(x, "pattern", "replacement")` |
+| `str_match()` | Extract groups from first match | `str_match(x, "pattern")` |
+| `str_count()` | Count matches | `str_count(x, "pattern")` |
+| `str_split()` | Split string by pattern | `str_split(x, "pattern")` |
+
+------------------------------------------------------------------------
+
+#### `str_detect()` - Check for Pattern
+
+Returns `TRUE` or `FALSE` for each element. Great for filtering with `dplyr::filter()`.
+
+```{r, eval=TRUE}
+emails <- c("user@gmail.com", "test@yahoo.com", "invalid-email", "admin@bu.edu")
+
+# Check which are valid emails (simple check)
+str_detect(emails, "@")
+
+# Use with filter
+data.frame(email = emails) |>
+  filter(str_detect(email, "\\.edu$"))
+```
+
+------------------------------------------------------------------------
+
+#### `str_extract()` - Extract Matches
+
+Pulls out the first matching pattern from each string.
+
+```{r, eval=TRUE}
+sentences <- c("Call me at 555-1234", "My number is 555-5678", "No phone here")
+
+# Extract phone numbers
+str_extract(sentences, "\\d{3}-\\d{4}")
+
+# Extract first word
+str_extract(sentences, "^\\w+")
+```
+
+------------------------------------------------------------------------
+
+#### `str_replace()` and `str_replace_all()` - Replace Patterns
+
+```{r, eval=TRUE}
+messy_text <- c("Hello   World", "Too    many   spaces", "Normal text")
+
+# Replace multiple spaces with single space
+str_replace_all(messy_text, "\\s+", " ")
+
+# Remove all digits
+str_replace_all("Phone: 555-1234", "\\d", "X")
+```
+
+------------------------------------------------------------------------
+
+#### `str_match()` - Extract Groups
+
+Use parentheses `()` to create capture groups. `str_match()` returns a matrix with the full match and each group.
+
+```{r, eval=TRUE}
+dates <- c("2024-01-15", "2023-12-25", "2025-06-30")
+
+# Extract year, month, day separately
+str_match(dates, "(\\d{4})-(\\d{2})-(\\d{2})")
+```
+
+------------------------------------------------------------------------
+
+### 8.4 Common Regex Patterns
+
+Here are some useful patterns for common data cleaning tasks:
+
+| Task | Pattern | Example |
+|------|---------|---------|
+| Email | `[\\w.-]+@[\\w.-]+\\.\\w+` | user@example.com |
+| Phone (US) | `\\d{3}[-.\\s]?\\d{3}[-.\\s]?\\d{4}` | 555-123-4567 |
+| URL | `https?://[\\w./]+` | https://example.com |
+| Twitter handle | `@\\w+` | @username |
+| Hashtag | `#\\w+` | #DataScience |
+| Date (YYYY-MM-DD) | `\\d{4}-\\d{2}-\\d{2}` | 2024-01-15 |
+| Time (HH:MM) | `\\d{2}:\\d{2}` | 14:30 |
+
+------------------------------------------------------------------------
+
+### 8.5 Practical Examples
+
+#### Example 1: Cleaning Twitter Data
+
+```{r, eval=TRUE}
+tweets <- c(
+  "@user1 Check out this link https://t.co/abc123 #DataScience",
+  "Hello @user2! Great post! #RStats #coding",
+  "Just a regular tweet with no mentions"
+)
+
+# Extract mentions (@username)
+str_extract_all(tweets, "@\\w+")
+
+# Extract hashtags
+str_extract_all(tweets, "#\\w+")
+
+# Remove URLs
+str_replace_all(tweets, "https?://\\S+", "[URL]")
+```
+
+------------------------------------------------------------------------
+
+#### Example 2: Extracting Information with dplyr
+
+```{r, eval=TRUE}
+# Sample data
+customer_data <- data.frame(
+  info = c(
+    "John Smith, Email: john@gmail.com, Phone: 555-1234",
+    "Jane Doe, Email: jane@yahoo.com, Phone: 555-5678",
+    "Bob Wilson, Email: bob@bu.edu, Phone: 555-9999"
+  )
+)
+
+# Extract emails and phones into new columns
+customer_data |>
+  mutate(
+    email = str_extract(info, "[\\w.-]+@[\\w.-]+\\.\\w+"),
+    phone = str_extract(info, "\\d{3}-\\d{4}"),
+    name = str_extract(info, "^[A-Za-z]+ [A-Za-z]+")
+  )
+```
+
+------------------------------------------------------------------------
+
+#### Example 3: Text Pattern Matching with Jane Austen
+
+```{r, eval=FALSE}
+library(janeaustenr)
+
+# Get all Jane Austen books
+books <- austen_books()
+
+# Find lines mentioning "Mr." followed by a name
+books |>
+  filter(str_detect(text, "Mr\\.\\s[A-Z][a-z]+")) |>
+  mutate(mr_name = str_extract(text, "Mr\\.\\s[A-Z][a-z]+")) |>
+  count(mr_name, sort = TRUE) |>
+  head(10)
+```
+
+------------------------------------------------------------------------
+
+#### <span style="color: purple;">Class Exercise: Regex Practice</span>
+
+Using the Starbucks Twitter data:
+
+1. Extract all Twitter usernames (mentions starting with @) from the `text` column
+2. Count how many tweets contain hashtags
+3. Find tweets that mention "coffee" (case insensitive - hint: use `(?i)` or `str_to_lower()`)
+4. Extract any URLs from the tweets
+5. Create a new column with the text cleaned of URLs and mentions
+
+```{r}
+### Your workspace
+# Load the data if needed
+url <- "https://raw.githubusercontent.com/aysedeniz09/Social_Media_Listening/refs/heads/main/MSC_social_media_list_data/Starbucks_User_Data.csv"
+starbucks <- read_csv(url)
+
+# 1. Extract mentions
+
+
+# 2. Count hashtag tweets
+
+
+# 3. Find coffee tweets
+
+
+# 4. Extract URLs
+
+
+# 5. Clean text
+
+
+```
+
+------------------------------------------------------------------------
+
+## Lecture 2 Cheat Sheet
+
+| **Topic** | **Key Points** |
+|-----------|----------------|
+| **File Paths** | Use relative paths (e.g., `"data/file.csv"`). Use `../` to go up one directory level. Always use projects to set working directory automatically. |
+| **Data Import** | `read_csv()`, `read_excel()`, `read_delim()` for different file types. Use `col_types` to specify column types. |
+| **Tibbles** | Modern data frames with better printing and subsetting. Create with `tibble()` or `tribble()`. Convert with `as_tibble()`. |
+| **Pipe Operator** | `|>` or `%>%` chains operations together. Shortcut: Cmd/Ctrl + Shift + M. |
+| **Tidy Data** | Each variable in a column, each observation in a row, each value in a cell. |
+| **DPLYR Functions** | `filter()`: rows by condition; `select()`: columns; `mutate()`: create/transform; `summarize()`: aggregate; `group_by()`: group operations; `arrange()`: sort; `rename()`: rename columns. |
+| **Data Reshaping** | `pivot_longer()`: wide → long; `pivot_wider()`: long → wide. |
+| **Split/Combine** | `separate()`: split column into multiple; `unite()`: combine columns into one. |
+| **Missing Values** | `drop_na()`: remove NA rows; `fill()`: fill NA with adjacent values; `replace_na()`: replace NA with specific value. |
+| **Expand Tables** | `expand()`: all combinations; `complete()`: add missing combinations with NA. |
+| **Joins** | `left_join()`: keep all left; `right_join()`: keep all right; `inner_join()`: only matches; `full_join()`: keep all; `anti_join()`: non-matches. |
+| **Regex Basics** | `.` any char; `^` start; `$` end; `*` zero+; `+` one+; `?` zero/one; `[]` character class; `\\d` digit; `\\w` word char; `\\s` whitespace. |
+| **stringr Functions** | `str_detect()`: check pattern; `str_extract()`: get match; `str_replace()`: replace match; `str_match()`: extract groups; `str_subset()`: filter by pattern. |

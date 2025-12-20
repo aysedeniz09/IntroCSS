@@ -1,0 +1,1080 @@
+---
+title: "Computational Research"
+subtitle: "COM EM757"
+author: "Dr. Ayse D. Lokmanoglu"
+date: 'Lecture 4, (B) Feb 11, (A) Feb 17'
+output: github_document
+always_allow_html: true
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE, 
+  error = TRUE
+)
+```
+
+## Lecture 4 Table of Contents
+
+| Section | Topic |
+|---------|-------|
+| 1 | Control Structures |
+| 1.1 | if-else Statements |
+| 1.2 | for Loops |
+| 1.3 | Looping Over Vectors |
+| 1.4 | Nested Loops |
+| 1.5 | while Loops |
+| 1.6 | break and next |
+| 2 | Functions |
+| 2.1 | Why Write Functions? |
+| 2.2 | Creating Your First Function |
+| 2.3 | Function Arguments |
+| 2.4 | Default Arguments |
+| 2.5 | Return Values |
+| 2.6 | Argument Matching |
+| 3 | Text Analysis with TidyText |
+| 3.1 | Introduction to TidyText |
+| 3.2 | Tokenizing Text with unnest_tokens() |
+| 3.3 | Removing Stopwords |
+| 4 | Keyword in Context (KWIC) |
+| 4.1 | What is KWIC? |
+| 4.2 | Extracting Keywords |
+| 4.3 | Extracting Surrounding Context |
+| 5 | Document-Term Matrix (DTM) |
+| 5.1 | What is a DTM? |
+| 5.2 | From Text to DTM: The Pipeline |
+| 5.3 | Creating the DTM |
+| 5.4 | Visualizing the DTM as a Heatmap |
+| 5.5 | Visualizing Top Words per Document |
+| 5.6 | Converting DTM Back to Tidy Format |
+| 6 | TF-IDF |
+| 6.1 | Understanding TF-IDF |
+| 6.2 | Calculating TF-IDF |
+| 6.3 | Visualizing TF-IDF |
+| 7 | Word Clouds |
+| 7.1 | Creating Word Clouds |
+| 7.2 | Customizing Word Clouds |
+
+------------------------------------------------------------------------
+
+**ALWAYS** load our libraries first
+
+```{r, eval=TRUE}
+library(tidyverse)
+library(dplyr)
+library(stringr)
+library(tidytext)
+library(ggplot2)
+```
+
+------------------------------------------------------------------------
+
+## 1. Control Structures
+
+Control structures allow you to control the flow of execution in your R code. Instead of running the same code every time, you can add logic to respond to different inputs or data conditions.
+
+Common control structures include:
+
+| Structure | Purpose |
+|-----------|---------|
+| `if`, `else` | Test a condition and act on it |
+| `for` | Execute a loop a fixed number of times |
+| `while` | Execute a loop while a condition is true |
+| `break` | Exit a loop immediately |
+| `next` | Skip to the next iteration of a loop |
+
+------------------------------------------------------------------------
+
+### 1.1 if-else Statements
+
+The `if-else` combination tests a condition and executes different code depending on whether it's `TRUE` or `FALSE`.
+
+**Basic if statement:**
+
+```{r, eval=TRUE}
+x <- 7
+
+if (x > 5) {
+  print("x is greater than 5")
+}
+```
+
+**if-else statement:**
+
+```{r, eval=TRUE}
+x <- 3
+
+if (x > 5) {
+  print("x is greater than 5")
+} else {
+  print("x is NOT greater than 5")
+}
+```
+
+**Multiple conditions with else if:**
+
+```{r, eval=TRUE}
+x <- 5
+
+if (x > 5) {
+  print("x is greater than 5")
+} else if (x == 5) {
+  print("x is exactly 5")
+} else {
+  print("x is less than 5")
+}
+```
+
+**Compact if-else (single line):**
+
+```{r, eval=TRUE}
+x <- 8
+y <- if (x > 5) "big" else "small"
+print(y)
+```
+
+------------------------------------------------------------------------
+
+### 1.2 for Loops
+
+`for` loops iterate over elements in a sequence (vector, list, etc.) and execute code for each element.
+
+**Basic for loop:**
+
+```{r, eval=TRUE}
+for (i in 1:5) {
+  print(i)
+}
+```
+
+**Looping over a character vector:**
+
+```{r, eval=TRUE}
+fruits <- c("apple", "banana", "cherry")
+
+for (fruit in fruits) {
+  print(paste("I like", fruit))
+}
+```
+
+------------------------------------------------------------------------
+
+### 1.3 Looping Over Vectors
+
+There are multiple ways to loop over vectors. The `seq_along()` function is particularly useful:
+
+```{r, eval=TRUE}
+colors <- c("red", "green", "blue", "yellow")
+
+# Method 1: Loop over indices
+for (i in 1:length(colors)) {
+  print(paste("Color", i, "is", colors[i]))
+}
+```
+
+```{r, eval=TRUE}
+# Method 2: Using seq_along() - safer!
+for (i in seq_along(colors)) {
+  print(paste("Color", i, "is", colors[i]))
+}
+```
+
+```{r, eval=TRUE}
+# Method 3: Loop directly over elements
+for (color in colors) {
+  print(color)
+}
+```
+
+<mark>**Why use `seq_along()`?** It's safer because if the vector is empty, `1:length(x)` would give `1:0` which creates `c(1, 0)`, but `seq_along(x)` correctly returns an empty sequence.</mark>
+
+------------------------------------------------------------------------
+
+### 1.4 Nested Loops
+
+Loops can be nested inside each other. This is useful for working with matrices or multidimensional data:
+
+```{r, eval=TRUE}
+# Create a 3x3 matrix
+mat <- matrix(1:9, nrow = 3, ncol = 3)
+print(mat)
+
+# Loop through rows and columns
+for (i in 1:nrow(mat)) {
+  for (j in 1:ncol(mat)) {
+    print(paste("Row", i, "Col", j, "=", mat[i, j]))
+  }
+}
+```
+
+<mark>**Warning:** Avoid nesting more than 2-3 levels deep. If you need more, consider using functions to break up the code.</mark>
+
+------------------------------------------------------------------------
+
+### 1.5 while Loops
+
+`while` loops execute as long as a condition is `TRUE`:
+
+```{r, eval=TRUE}
+count <- 1
+
+while (count <= 5) {
+  print(paste("Count is:", count))
+  count <- count + 1
+}
+```
+
+<mark>**Caution:** `while` loops can run forever if the condition never becomes `FALSE`. Always make sure your loop has a way to exit!</mark>
+
+**Example with multiple conditions:**
+
+```{r, eval=TRUE}
+set.seed(123)  # For reproducibility
+value <- 5
+
+while (value >= 2 && value <= 8) {
+  # Random walk: add or subtract 1
+  coin <- sample(c(-1, 1), 1)
+  value <- value + coin
+  print(paste("Value is now:", value))
+}
+```
+
+------------------------------------------------------------------------
+
+### 1.6 break and next
+
+- `break`: Exit the loop immediately
+- `next`: Skip the current iteration and continue to the next
+
+**Using break:**
+
+```{r, eval=TRUE}
+for (i in 1:10) {
+  if (i > 5) {
+    print("Breaking out of loop!")
+    break
+  }
+  print(i)
+}
+```
+
+**Using next:**
+
+```{r, eval=TRUE}
+# Print only odd numbers
+for (i in 1:10) {
+  if (i %% 2 == 0) {  # If i is even, skip it
+    next
+  }
+  print(i)
+}
+```
+
+------------------------------------------------------------------------
+
+#### Class Exercise: Control Structures
+
+1. Write an `if-else` statement that checks if a number is positive, negative, or zero.
+
+2. Create a `for` loop that prints the squares of numbers 1 through 10.
+
+3. Write a `while` loop that starts at 100 and divides by 2 until the value is less than 1.
+
+4. Use a `for` loop with `next` to print only numbers divisible by 3 from 1 to 20.
+
+```{r}
+### Your workspace
+
+
+```
+
+------------------------------------------------------------------------
+
+## 2. Functions
+
+Functions allow you to encapsulate code that you want to reuse. Instead of copying and pasting code, you write it once as a function and call it whenever needed.
+
+------------------------------------------------------------------------
+
+### 2.1 Why Write Functions?
+
+-   **Reusability**: Write code once, use it many times
+-   **Readability**: Give meaningful names to complex operations
+-   **Maintainability**: Fix bugs in one place instead of many
+-   **Abstraction**: Hide implementation details from users
+
+<mark>**Rule of thumb:** If you find yourself copying and pasting code more than twice, write a function!</mark>
+
+------------------------------------------------------------------------
+
+### 2.2 Creating Your First Function
+
+Functions are created using the `function()` keyword:
+
+```{r, eval=TRUE}
+# A simple function that prints a greeting
+say_hello <- function() {
+  print("Hello, world!")
+}
+
+# Call the function
+say_hello()
+```
+
+**A function with a body that does computation:**
+
+```{r, eval=TRUE}
+# Function to calculate the area of a circle
+circle_area <- function(radius) {
+  area <- pi * radius^2
+  return(area)
+}
+
+# Use the function
+circle_area(5)
+circle_area(10)
+```
+
+------------------------------------------------------------------------
+
+### 2.3 Function Arguments
+
+Arguments are the inputs to your function. They let users customize the function's behavior:
+
+```{r, eval=TRUE}
+# Function with multiple arguments
+greet_person <- function(name, greeting) {
+  message <- paste(greeting, name)
+  print(message)
+}
+
+greet_person("Alice", "Hello")
+greet_person("Bob", "Good morning")
+```
+
+------------------------------------------------------------------------
+
+### 2.4 Default Arguments
+
+You can set default values for arguments. This makes the function easier to use for common cases:
+
+```{r, eval=TRUE}
+# Function with default argument
+greet_person <- function(name, greeting = "Hello") {
+  message <- paste(greeting, name)
+  print(message)
+}
+
+# Using default
+greet_person("Alice")
+
+# Overriding default
+greet_person("Bob", "Good evening")
+```
+
+**Another example:**
+
+```{r, eval=TRUE}
+# Function to repeat a message
+repeat_message <- function(msg, times = 3) {
+  for (i in seq_len(times)) {
+    print(msg)
+  }
+}
+
+repeat_message("R is fun!")
+repeat_message("Learning loops!", times = 2)
+```
+
+------------------------------------------------------------------------
+
+### 2.5 Return Values
+
+Functions return the last expression evaluated, or you can use `return()` explicitly:
+
+```{r, eval=TRUE}
+# Implicit return (last expression)
+add_numbers <- function(a, b) {
+  a + b  # This is returned
+}
+
+result <- add_numbers(3, 5)
+print(result)
+```
+
+```{r, eval=TRUE}
+# Explicit return
+calculate_stats <- function(numbers) {
+  if (length(numbers) == 0) {
+    return(NULL)  # Early return for edge case
+  }
+  
+  stats <- list(
+    mean = mean(numbers),
+    sd = sd(numbers),
+    min = min(numbers),
+    max = max(numbers)
+  )
+  
+  return(stats)
+}
+
+my_stats <- calculate_stats(c(10, 20, 30, 40, 50))
+print(my_stats)
+```
+
+------------------------------------------------------------------------
+
+### 2.6 Argument Matching
+
+R matches arguments by position or by name:
+
+```{r, eval=TRUE}
+# Define a function
+power_calc <- function(base, exponent) {
+  base^exponent
+}
+
+# Positional matching
+power_calc(2, 3)  # 2^3 = 8
+
+# Named matching
+power_calc(exponent = 3, base = 2)  # Same result
+
+# Mixed matching
+power_calc(2, exponent = 3)  # Same result
+```
+
+<mark>**Tip:** For functions with many arguments, use named arguments for clarity!</mark>
+
+------------------------------------------------------------------------
+
+#### Class Exercise: Functions
+
+1. Write a function called `fahrenheit_to_celsius` that converts temperature from Fahrenheit to Celsius. Formula: `C = (F - 32) * 5/9`
+
+2. Write a function called `word_count` that takes a text string and returns the number of words.
+
+3. Write a function that takes a vector of numbers and returns a named list with the sum, mean, and length.
+
+4. Modify your `word_count` function to have a default argument `remove_punct = TRUE` that removes punctuation before counting.
+
+```{r}
+### Your workspace
+
+
+```
+
+------------------------------------------------------------------------
+
+## 3. Text Analysis with TidyText
+
+Now let's apply what we've learned to text analysis! The [`tidytext` package](https://github.com/juliasilge/tidytext) provides tools for working with text in a tidy data format.
+
+------------------------------------------------------------------------
+
+### 3.1 Introduction to TidyText
+
+Tidy text format means having **one token per row**. A token can be:
+
+-   A word
+-   A sentence
+-   An n-gram (sequence of n words)
+-   A paragraph
+
+This format works seamlessly with tidyverse tools like `dplyr` and `ggplot2`.
+
+**Load the Jane Austen books dataset:**
+
+```{r, eval=TRUE}
+# install.packages("janeaustenr")
+library(janeaustenr)
+
+# Combine all books into a single dataframe
+original_books <- austen_books() |> 
+  group_by(book) |> 
+  mutate(
+    linenumber = row_number(),
+    chapter = cumsum(str_detect(text, 
+                                regex("^chapter [\\divxlc]",
+                                      ignore_case = TRUE)))
+  ) |> 
+  ungroup()
+
+head(original_books)
+```
+
+------------------------------------------------------------------------
+
+### 3.2 Tokenizing Text with `unnest_tokens()`
+
+`unnest_tokens()` breaks text into individual tokens (usually words):
+
+**Syntax:**
+
+```{r, eval=FALSE}
+unnest_tokens(tbl, output, input, token = "words", ...)
+```
+
+| Argument | Description |
+|----------|-------------|
+| `tbl` | The data frame |
+| `output` | Name of the new column for tokens |
+| `input` | Name of the column containing text |
+| `token` | Type: "words", "sentences", "ngrams", etc. |
+
+**Tokenize the Jane Austen books:**
+
+```{r, eval=TRUE}
+tidy_books <- original_books |> 
+  unnest_tokens(word, text)
+
+head(tidy_books)
+```
+
+Notice that:
+- Punctuation is removed
+- Text is converted to lowercase
+- Each word is now its own row
+
+**Count words:**
+
+```{r, eval=TRUE}
+tidy_books |> 
+  count(word, sort = TRUE)
+```
+
+------------------------------------------------------------------------
+
+### 3.3 Removing Stopwords
+
+Stopwords are common words like "the", "and", "of" that don't carry much meaning. The `tidytext` package includes a stopwords dataset:
+
+```{r, eval=TRUE}
+# View stopwords
+head(stop_words)
+
+# How many stopwords?
+nrow(stop_words)
+```
+
+**Remove stopwords using `anti_join()`:**
+
+```{r, eval=TRUE}
+tidy_books_clean <- tidy_books |> 
+  anti_join(stop_words, by = "word")
+
+# Compare counts
+nrow(tidy_books)        # Before
+nrow(tidy_books_clean)  # After
+
+# Most common words without stopwords
+tidy_books_clean |> 
+  count(word, sort = TRUE) |> 
+  head(15)
+```
+
+------------------------------------------------------------------------
+
+#### Class Exercise: TidyText Basics
+
+Load the Starbucks Twitter data and practice tokenization:
+
+```{r, eval=TRUE}
+library(readr)
+
+url <- "https://raw.githubusercontent.com/aysedeniz09/Social_Media_Listening/refs/heads/main/MSC_social_media_list_data/Starbucks_User_Data.csv"
+starbucks_data <- read_csv(url)
+
+head(starbucks_data)
+```
+
+1. Tokenize the `text` column into words.
+2. Remove stopwords.
+3. Find the 20 most common words.
+4. How many total words are there before and after removing stopwords?
+
+```{r}
+### Your workspace
+
+
+```
+
+------------------------------------------------------------------------
+
+## 4. Keyword in Context (KWIC)
+
+### 4.1 What is KWIC?
+
+**Keyword in Context (KWIC)** extracts and analyzes how specific keywords appear in text along with their surrounding context.
+
+**Why use KWIC?**
+
+-   Identify patterns in how words are used
+-   Understand the context around specific terms
+-   Useful for sentiment analysis and content understanding
+
+------------------------------------------------------------------------
+
+### 4.2 Extracting Keywords
+
+Use `str_detect()` to filter text containing a keyword:
+
+```{r, eval=TRUE}
+# Find all lines containing "family"
+filtered_text <- original_books |> 
+  filter(str_detect(text, "family"))
+
+head(filtered_text)
+nrow(filtered_text)
+```
+
+------------------------------------------------------------------------
+
+### 4.3 Extracting Surrounding Context
+
+Use regex to extract characters before and after a keyword:
+
+```{r, eval=TRUE}
+# Extract 15 characters before and after "family"
+context <- original_books |>
+  filter(str_detect(text, "family")) |>
+  mutate(context = str_extract(text, ".{0,15}family.{0,15}"))
+
+head(context$context, 10)
+```
+
+**Create a function for KWIC:**
+
+```{r, eval=TRUE}
+# KWIC function
+kwic <- function(data, text_col, keyword, window = 10) {
+  pattern <- paste0(".{0,", window, "}", keyword, ".{0,", window, "}")
+  
+  data |>
+    filter(str_detect({{ text_col }}, keyword)) |>
+    mutate(context = str_extract({{ text_col }}, pattern)) |>
+    select(context)
+}
+
+# Use the function
+kwic(original_books, text, "love", window = 20) |> 
+  head(10)
+```
+
+------------------------------------------------------------------------
+
+#### Class Exercise: KWIC
+
+Using the Starbucks data:
+
+1. Find all tweets containing "coffee".
+2. Extract 20 characters of context around "coffee".
+3. Find tweets containing mentions (@username) using regex.
+4. Create a KWIC analysis for the word "Starbucks".
+
+```{r}
+### Your workspace
+
+
+```
+
+------------------------------------------------------------------------
+
+## 5. Document-Term Matrix (DTM)
+
+### 5.1 What is a DTM?
+
+A **Document-Term Matrix (DTM)** is a mathematical representation of text where:
+
+-   **Rows** represent documents (e.g., books, tweets, articles)
+-   **Columns** represent terms (words)
+-   **Values** indicate the frequency of each term in each document
+
+**Example DTM:**
+
+|        | love | family | money | marriage | happy |
+|--------|------|--------|-------|----------|-------|
+| Book 1 | 45   | 23     | 12    | 67       | 34    |
+| Book 2 | 32   | 45     | 56    | 23       | 12    |
+| Book 3 | 67   | 12     | 8     | 89       | 45    |
+
+<mark>**Note:** A Term-Document Matrix (TDM) is simply the **transpose** - terms as rows, documents as columns. In R's `tidytext`, we typically create DTMs.</mark>
+
+------------------------------------------------------------------------
+
+### 5.2 From Text to DTM: The Pipeline
+
+The transformation from raw text to DTM follows these steps:
+
+```
+Raw Text → Tokenize → Remove Stopwords → Count → DTM
+```
+
+**Step-by-step visualization:**
+
+```{r, eval=TRUE}
+# STEP 1: Start with raw text
+original_books |> 
+  select(book, text) |> 
+  head(3)
+```
+
+```{r, eval=TRUE}
+# STEP 2: Tokenize (one word per row)
+tokenized <- original_books |> 
+  unnest_tokens(word, text)
+
+tokenized |> 
+  select(book, word) |> 
+  head(10)
+```
+
+```{r, eval=TRUE}
+# STEP 3: Remove stopwords
+cleaned <- tokenized |> 
+  anti_join(stop_words, by = "word")
+
+cleaned |> 
+  select(book, word) |> 
+  head(10)
+```
+
+```{r, eval=TRUE}
+# STEP 4: Count words per document
+word_counts <- cleaned |> 
+  count(book, word, sort = TRUE)
+
+head(word_counts, 10)
+```
+
+------------------------------------------------------------------------
+
+### 5.3 Creating the DTM
+
+Use `cast_dtm()` to convert tidy word counts to a DTM:
+ 
+```{r, eval=TRUE}
+# Create DTM
+book_dtm <- word_counts |> 
+  cast_dtm(document = book, term = word, value = n)
+
+# Inspect the DTM
+book_dtm
+
+# View dimensions: documents x terms
+dim(book_dtm)
+```
+
+**Understanding the output:**
+- 6 documents (the 6 Jane Austen books)
+- 13,914 terms (unique words across all books)
+- 99% sparse means 99% of the cells are zeros (most words don't appear in most books)
+
+------------------------------------------------------------------------
+
+### 5.4 Visualizing the DTM as a Heatmap
+
+Let's visualize a small portion of the DTM to understand its structure:
+
+```{r, eval=TRUE}
+# Get top 10 words overall
+top_10_words <- word_counts |> 
+  group_by(word) |> 
+  summarize(total = sum(n)) |> 
+  slice_max(total, n = 10) |> 
+  pull(word)
+
+# Filter to just these words
+dtm_subset <- word_counts |> 
+  filter(word %in% top_10_words)
+
+# Create heatmap
+ggplot(dtm_subset, aes(x = word, y = book, fill = n)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = n), color = "white", size = 3) +
+  scale_fill_gradient(low = "steelblue", high = "darkred") +
+  labs(
+    title = "Document-Term Matrix Heatmap",
+    subtitle = "Top 10 words across Jane Austen books",
+    x = "Term",
+    y = "Document",
+    fill = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+**Reading the heatmap:**
+- Darker colors = higher frequency
+- Each row is a book (document)
+- Each column is a word (term)
+- The numbers show exact word counts
+
+------------------------------------------------------------------------
+
+### 5.5 Visualizing Top Words per Document
+
+**Top words per book:**
+
+```{r, eval=TRUE}
+top_words <- word_counts |> 
+  group_by(book) |> 
+  slice_max(n, n = 5) |> 
+  ungroup()
+
+head(top_words, 12)
+```
+
+**Bar chart visualization:**
+
+```{r, eval=TRUE}
+ggplot(top_words, aes(x = reorder(word, n), y = n, fill = book)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  facet_wrap(~ book, scales = "free_y") +
+  labs(
+    title = "Top 5 Words in Each Jane Austen Book",
+    x = "Word",
+    y = "Frequency"
+  ) +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+### 5.6 Converting DTM Back to Tidy Format
+
+You can convert a DTM back to tidy format using `tidy()`:
+
+```{r, eval=TRUE}
+# Convert DTM back to tidy
+tidy_dtm <- tidy(book_dtm)
+
+head(tidy_dtm)
+```
+
+This is useful when you receive a DTM from another package and want to use tidyverse tools.
+
+------------------------------------------------------------------------
+
+## 6. TF-IDF
+
+### 6.1 Understanding TF-IDF
+
+**TF-IDF** (Term Frequency - Inverse Document Frequency) measures how important a word is to a document within a collection.
+
+-   **TF (Term Frequency)**: How often a term appears in a document
+-   **IDF (Inverse Document Frequency)**: How rare a term is across all documents
+
+$$\text{TF-IDF} = \text{TF} \times \log\left(\frac{\text{Total Documents}}{\text{Documents containing term}}\right)$$
+
+**Interpretation:**
+
+-   **High TF-IDF**: Word is frequent in this document but rare overall → important/distinctive
+-   **Low TF-IDF**: Word is common everywhere → less distinctive
+
+------------------------------------------------------------------------
+
+### 6.2 Calculating TF-IDF
+
+Use `bind_tf_idf()` from tidytext:
+
+```{r, eval=TRUE}
+# Calculate TF-IDF
+book_tfidf <- original_books |> 
+  unnest_tokens(word, text) |> 
+  count(book, word, sort = TRUE) |> 
+  bind_tf_idf(word, book, n)
+
+head(book_tfidf)
+```
+
+**Find distinctive words for each book:**
+
+```{r, eval=TRUE}
+# Top TF-IDF words per book
+top_tfidf <- book_tfidf |> 
+  group_by(book) |> 
+  slice_max(tf_idf, n = 5) |> 
+  ungroup()
+
+head(top_tfidf, 12)
+```
+
+------------------------------------------------------------------------
+
+### 6.3 Visualizing TF-IDF
+
+```{r, eval=TRUE}
+ggplot(top_tfidf, aes(x = reorder(word, tf_idf), y = tf_idf, fill = book)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  facet_wrap(~ book, scales = "free") +
+  labs(
+    title = "Most Distinctive Words by TF-IDF",
+    x = "Word",
+    y = "TF-IDF Score"
+  ) +
+  theme_minimal()
+```
+
+Notice that TF-IDF highlights **character names** and **distinctive terms** for each book, rather than common words!
+
+------------------------------------------------------------------------
+
+#### Class Exercise: TDM and TF-IDF
+
+Using the Starbucks data:
+
+1. Create word counts grouped by `mention` (the user being replied to).
+2. Calculate TF-IDF scores.
+3. Find the top 5 distinctive words for the 3 most active mentions.
+4. Visualize the results.
+
+```{r}
+### Your workspace
+
+
+```
+
+------------------------------------------------------------------------
+
+## 7. Word Clouds
+
+### 7.1 Creating Word Clouds
+
+Word clouds display words with size proportional to their frequency. Install the `wordcloud2` package:
+
+```{r, eval=FALSE}
+install.packages("wordcloud2")
+```
+
+```{r, eval=TRUE}
+library(wordcloud2)
+
+# Prepare word frequencies
+word_freq <- original_books |>
+  unnest_tokens(word, text) |>
+  anti_join(stop_words, by = "word") |>
+  count(word, sort = TRUE)
+
+head(word_freq)
+```
+
+**Create a basic word cloud:**
+
+```{r, eval=TRUE}
+wordcloud2(data = word_freq, size = 0.5)
+```
+
+------------------------------------------------------------------------
+
+### 7.2 Customizing Word Clouds
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| `size` | Scale factor for word sizes | `size = 0.5` |
+| `color` | Color scheme | `color = "random-light"` |
+| `backgroundColor` | Background color | `backgroundColor = "black"` |
+| `shape` | Shape of cloud | `shape = "circle"` or `"star"` |
+| `minRotation`, `maxRotation` | Word rotation angles | `minRotation = -pi/4` |
+
+**Custom colors:**
+
+```{r, eval=TRUE}
+wordcloud2(data = word_freq, size = 0.5, color = "random-light")
+```
+
+**Change shape and background:**
+
+```{r, eval=TRUE}
+wordcloud2(data = word_freq, size = 0.4, shape = "star", backgroundColor = "black", color = "random-light")
+```
+
+**With rotation:**
+
+```{r, eval=TRUE}
+wordcloud2(data = word_freq, size = 0.5, 
+           minRotation = -pi/4, maxRotation = pi/4, rotateRatio = 0.3)
+```
+
+------------------------------------------------------------------------
+
+#### Saving Word Clouds
+
+```{r, eval=FALSE}
+library(htmlwidgets)
+library(webshot)
+webshot::install_phantomjs()
+
+# Create word cloud
+my_cloud <- wordcloud2(word_freq, size = 1)
+
+# Save as HTML
+saveWidget(my_cloud, "wordcloud.html", selfcontained = FALSE)
+
+# Save as image
+webshot("wordcloud.html", "wordcloud.png", delay = 5)
+```
+
+------------------------------------------------------------------------
+
+## Class Exercises: Putting It All Together
+
+### Comprehensive Exercise
+
+Using either the Jane Austen or Starbucks dataset:
+
+1. **Write a function** that takes a data frame and text column, then returns:
+   - Total word count (after removing stopwords)
+   - Top 10 most frequent words
+   - A word cloud object
+
+2. **Use a loop** to analyze each book (or group) separately and store the results in a list.
+
+3. **Create a KWIC analysis** for a keyword of your choice.
+
+4. **Calculate TF-IDF** and identify what makes each document/group distinctive.
+
+5. **Visualize** your findings with at least two different plot types.
+
+```{r}
+### Your workspace
+
+
+```
+
+------------------------------------------------------------------------
+
+## Lecture 4 Cheat Sheet
+
+| **Topic** | **Description** | **Code Example** |
+|-----------|-----------------|------------------|
+| `if-else` | Conditional execution | `if (x > 5) { ... } else { ... }` |
+| `for` loop | Fixed iterations | `for (i in 1:10) { print(i) }` |
+| `while` loop | Conditional iterations | `while (x < 10) { x <- x + 1 }` |
+| `seq_along()` | Safe sequence for loops | `for (i in seq_along(vec)) { ... }` |
+| `break` | Exit loop | `if (cond) break` |
+| `next` | Skip iteration | `if (cond) next` |
+| `function()` | Create function | `my_func <- function(arg) { ... }` |
+| Default arguments | Set defaults | `function(x, y = 10) { ... }` |
+| `return()` | Explicit return | `return(result)` |
+| `unnest_tokens()` | Tokenize text | `unnest_tokens(word, text)` |
+| `anti_join(stop_words)` | Remove stopwords | `data |> anti_join(stop_words)` |
+| `str_detect()` | Find pattern | `filter(str_detect(text, "word"))` |
+| `str_extract()` | Extract pattern | `mutate(x = str_extract(text, ".{10}word.{10}"))` |
+| KWIC | Keyword in context | Extract surrounding text for keywords |
+| `cast_dtm()` | Create DTM from tidy | `cast_dtm(document, term, value)` |
+| `tidy()` | Convert DTM to tidy | `tidy(dtm_object)` |
+| `geom_tile()` | Create heatmap | `geom_tile(aes(x, y, fill = value))` |
+| `bind_tf_idf()` | Calculate TF-IDF | `bind_tf_idf(word, document, n)` |
+| `wordcloud2()` | Create word cloud | `wordcloud2(data = freq_df, size = 0.5)` |
+| `count()` | Count occurrences | `count(word, sort = TRUE)` |
+| `slice_max()` | Top n by value | `slice_max(n, n = 10)` |
