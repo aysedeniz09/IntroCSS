@@ -27,46 +27,43 @@ knitr::opts_chunk$set(
 | 1.1 | The Console |
 | 1.2 | The Terminal |
 | 1.3 | Projects |
-| 1.4 | Scripts |
-| 1.5 | R Markdown |
-| 2 | R Basic Grammar |
-| 2.1 | Variable Assignment |
-| 2.2 | Case Sensitivity |
-| 2.3 | Comments |
-| 2.4 | Reserved Keywords |
-| 3 | Data Types |
-| 3.1 | Numeric, Character, Logical, Factor |
-| 3.2 | Dates |
-| 4 | Basic Arithmetic |
-| 5 | Vectors |
-| 5.1 | Creating Vectors |
-| 5.2 | Vector Indexing |
-| 5.3 | Vector Functions |
-| 5.4 | Sequences |
-| 5.5 | Combining Vectors & Type Coercion |
-| 5.6 | Vector Arithmetic & Recycling |
-| 6 | Data Frames |
-| 6.1 | Creating Data Frames |
-| 6.2 | Exploring/Inspecting Data Frames |
-| 6.3 | Accessing Data |
-| 6.4 | Adding and Removing Data |
-| 6.5 | Filtering and Subsetting |
-| 6.6 | Ordering Data |
-| 6.7 | Common Data Frame Functions |
-| 6.8 | Basic Aggregations |
-| 7 | Functions |
-| 8 | Conditional Statements |
-| 9 | Loops |
-| 10 | Regular Expressions (Regex) |
-| 10.1 | Basic Syntax |
-| 10.2 | Extracting Text |
-| 10.3 | Validating Text |
-| 10.4 | Pattern Matching |
-| 11 | R Packages |
-| 11.1 | Installing & Loading |
-| 11.2 | Lubridate |
+| 1.4 | Organize your project file |
+| 1.5 | Scripts |
+| 2 | Working directory and paths |
+| 2.1 | Check your working directory |
+| 3| R Markdown |
+| 3.1 | How to create a document in R Markdown |
+| 3.2 | Running vs knitting |
+| 4 | R Packages |
+| 4.1 | Installing & Loading |
+| 5 | R Basic Grammar |
+| 5.1 | Variable Assignment |
+| 5.2 | Case Sensitivity |
+| 5.3 | Comments |
+| 5.4 | Reserved Keywords |
+| 6 | Data Types |
+| 6.1 | Numeric, Character, Logical, Factor |
+| 6.2 | Dates |
+| 6.3 | Lubridate Package |
+| 7 | Basic Arithmetic |
+| 8 | Vectors |
+| 8.1 | Creating Vectors |
+| 8.2 | Vector Indexing |
+| 8.3 | Vector Functions |
+| 8.4 | Sequences |
+| 8.5 | Combining Vectors & Type Coercion |
+| 8.6 | Vector Arithmetic & Recycling |
+| 9 | Data Frames |
+| 9.1 | Creating Data Frames |
+| 9.2 | Exploring/Inspecting Data Frames |
+| 9.3 | Accessing Data |
+| 9.4 | Adding and Removing Data |
+| 9.5 | Filtering and Subsetting |
+| 9.6 | Ordering Data |
+| 9.7 | Common Data Frame Functions |
+| 9.8 | Basic Aggregations |
 
-
+------------------------------------------------------------------------
 
 ## 1. Intro to R Studio
 
@@ -117,36 +114,60 @@ list files in your current directory.***
 
 ### 1.3 Project
 
-An RStudio Project is a way to organize your work by grouping files,
-data, and scripts for a specific task or analysis.
+An RStudio Project is a way to organize your work by grouping files, data, and scripts for a specific task or analysis.
 
-Why Use Projects? - Keeps your workspace clean and focused. -
-Automatically sets the working directory to the project folder. -
-Ensures reproducibility by keeping everything needed for a project in
-one place.
+Why Use Projects? 
+- Keeps your workspace clean and focused. 
+- Automatically sets the working directory to the project folder. 
+- Ensures reproducibility by keeping everything needed for a project in one place.
 
-How to Create a Project: 1. Click on [**File → New
-Project....**]{.inline-button}. 2. Choose whether to create a new
-directory, use an existing directory, or clone a Git repository. 3. Give
-it a name and location.
+How to Create a Project: 
+1. Click on [**File → New Project....**]{.inline-button}. 
+2. Choose whether to create a new directory, use an existing directory, or clone a Git repository. 
+3. Give it a clear name (example: EMS747_Project) 
+4. Choose a location you can easily find again 
 
-***TRY: Create a project called "EMS747_Class_Exercises" and notice how
-RStudio creates a .Rproj file for managing it.***
+***TRY: Create a project called "EMS747_Class_Exercises" and notice how RStudio creates a .Rproj file for managing it.***
 
-------------------------------------------------------------------------
+<mark>When you create a project, RStudio makes a file ending in `.Rproj`. Always open your work by clicking that `.Rproj` file.</mark>
 
 ![](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/Rproject.jpg?raw=true)
 
 ------------------------------------------------------------------------
 
-### 1.4 Scripts
+### 1.4 Organize your project file
+
+Inside your project folder, create these folders:
+
+- `data/` for datasets (CSV, Excel, etc.)  
+- `scripts/` for R scripts you write during the semester  
+
+In RStudio: use the Files pane → New Folder.
+
+![](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/new_folder_rproject.png?raw=true)
+
+Your project should look like this:
+
+```text
+EMS747_Project/
+  EMS747_Project.Rproj
+  data/
+  scripts/
+  bigdata_L1_github.Rmd
+```
+
+------------------------------------------------------------------------
+
+### 1.5 Scripts
 
 A script is a text file where you write and save R code for future
-use. - Scripts let you document your work, making it reproducible and
-shareable. - You can save time by re-running pre-written code instead of
-typing commands repeatedly. How to Create and Use a Script: - Click on
-[**File → New File → R Script**]{.inline-button}. - Write R code in the
-script editor. - E.g.
+use. 
+- Scripts let you document your work, making it reproducible and shareable. 
+- You can save time by re-running pre-written code instead of typing commands repeatedly. How to Create and Use a Script: 
+- Click on [**File → New File → R Script**]{.inline-button}. 
+- Write R code in the
+script editor. 
+- E.g.
 
 ```{r eval=TRUE}
 x <- 5
@@ -160,54 +181,134 @@ print(z)
     [**Cmd+Enter**]{.inline-button} (Mac) to execute it in the Console.
 
 
-![](images/R_Script_1.png)
+![](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/R_Script_1.png?raw=true)
 
 ------------------------------------------------------------------------
 
-### 1.5 R Markdown in R Studio
+## 2. Working directory and paths
 
--   [R
-    Markdown](https://rstudio.github.io/cheatsheets/html/rmarkdown.html)
-    is a framework that allows you to integrate code, output, and
-    narrative in one document.
+### 2.1 Check your working directory
+
+When your project is open, run:
+
+```{r}
+getwd()
+```
+
+You should see a path ending in your project folder name.
+
+#### Why this matters
+
+In the next lecture, we will load datasets from your `data/` folder using relative paths like:
+
+```r
+read.csv("data/my_file.csv")
+```
+
+------------------------------------------------------------------------
+
+## 3. R Markdown
+
+-   [R Markdown](https://rstudio.github.io/cheatsheets/html/rmarkdown.html)
+    is a framework that allows you to integrate code, output, and text in one document.
 -   You can produce reports in multiple formats: HTML, PDF, Word, etc.
 
-Why do we use R Markdown? - Combine code and text for reproducible
-research. - Create interactive and visually appealing documents. - Easy
-to share analyses with others.
+**Instead of copying results into a separate document, you generate the document directly from the code.**
+
+
+Why do we use R Markdown? 
+- Combine code and text for reproducible research. 
+- Create interactive and visually appealing documents. 
+- Easy to share analyses with others.
 
 [R Markdown Cheathseet](https://rmarkdown.rstudio.com/lesson-15.HTML)
 
 ------------------------------------------------------------------------
 
-#### How to create a document in R Markdown
+### 3.1 How to create a document in R Markdown
 
--   Click on [**File**]{.inline-button} \> [**New
-    File**]{.inline-button} \> [**R Markdown**]{.inline-button}.
+-   Click on [**File**]{.inline-button} \> [**New File**]{.inline-button} \> [**R Markdown**]{.inline-button}.
 -   Choose a title, author, and output format (HTML, PDF, or Word).
 -   Edit the template provided in the new .Rmd file.
--   <mark>For our class you can use the Markdown from BB and take notes
-    on that!</mark>
+-   <mark>For our class you can use the Markdown from BB and take notes on that!</mark>
 
-To run code you use code Chunks - Surround code chunks with `{r}` at the
-beginning and close them with three backticks at the end. - or use the
-Insert Code Chunk button. Add a chunk label and/or chunk options inside
+
+------------------------------------------------------------------------
+
+### 3.2 Running vs knitting
+
+- Run a chunk to execute code line by line  
+- Knit to rebuild the entire document from top to bottom.
+
+In RMD empty space is for text. 
+
+To run code you use code Chunks 
+- Surround code chunks with `{r}` at the beginning and close them with three backticks at the end. 
+- or use the Insert Code Chunk button. Add a chunk label and/or chunk options inside
 the curly braces after r.
 
 ![](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/rcodechunk.png?raw=true)
 
 ------------------------------------------------------------------------
 
-## 2. R: Basic Grammar
+## 4. R Packages
 
-### 2.1 Variable Assignment
+-   Packages are collections of R functions, data, and compiled code.
+-   Extend the functionality of base R.
+-   Simplifies complex tasks.
+-   Widely used for specialized analyses.
+
+E.g., [`tidy`](https://tidyr.tidyverse.org/),
+[`dplyr`](https://dplyr.tidyverse.org/),
+[`ggplot2`](https://ggplot2.tidyverse.org/)
+
+------------------------------------------------------------------------
+
+### 4.1 Installing & Loading Packages
+
+-   Installation
+    -   Use the `install.packages()` function to install a package from
+        CRAN.
+
+```{r, eval= FALSE}
+install.packages("tidyr")
+install.packages("dplyr")
+install.packages("stringr")
+
+```
+
+-   Loading
+    -   Use the `library()` function to load an installed package.
+
+```{r, eval= TRUE}
+library(tidyr)
+library(dplyr)
+library(stringr)
+```
+
+-   Check the package documentation with `?`
+
+```{r, eval=FALSE}
+?tidyr
+```
+
+```{r, eval=FALSE}
+?dplyr
+```
+
+***N.B. Packages only need to be installed once but must be loaded in each session `library()`. Keep packages updated with `update.packages()`***
+
+------------------------------------------------------------------------
+
+## 5. R: Basic Grammar
+
+### 5.1 Variable Assignment
 
 Variables are used to store data or values.
 
 `=` (Simple Assignment) **Similar to python**
 
-<mark>`<-` (Leftward Assignment) **Most Common used by R coders and we
-will use this**</mark>
+<mark>`<-` (Leftward Assignment) **Most Common used by R coders and we will use this**</mark>
 
 `->` (Rightward Assignment) **Rarely used**
 
@@ -226,7 +327,7 @@ print(z)
 
 ------------------------------------------------------------------------
 
-### 2.2 R is case-sensitive
+### 5.2 R is case-sensitive
 
 ```{r, eval=TRUE, error=TRUE}
 
@@ -246,7 +347,7 @@ print(x)
 
 ------------------------------------------------------------------------
 
-### 2.3 Comments
+### 5.3 Comments
 
 To comment - Comments are notes in the code that R ignores. Use `#` to
 write comments. - R only has single line comments so if you want
@@ -261,7 +362,7 @@ variable_2 <- "Leftward Assignment" ## this is the most common used by R coders
 
 ------------------------------------------------------------------------
 
-### 2.4 R Reserved Keywords
+### 5.4 R Reserved Keywords
 
 You cannot use these keywords as variable names. These are reserved
 keywords for R.
@@ -289,9 +390,9 @@ keywords for R.
 
 ------------------------------------------------------------------------
 
-## 3. Data Types
+## 6. Data Types
 
-### 3.1 Numeric, Character, Logical, Factor
+### 6.1 Numeric, Character, Logical, Factor
 
 
 -   Numeric: Numbers
@@ -337,7 +438,7 @@ Question? What is double?
 
 ------------------------------------------------------------------------
 
-### 3.2 Dates
+### 6.2 Dates
 
 -   Date: Represents calendar dates.
     -   e.g., "2023-01-01"
@@ -375,9 +476,79 @@ print(future_date)
 class(future_date)
 ```
 
+
+### 6.3 Lubridate Package
+
+[`Lubridate`](https://lubridate.tidyverse.org/) is a package that makes
+working with dates easier.
+
+-    [`Lubridate` Cheat
+    Sheet](https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf) -
+    It provides easy functions to parse, manipulate, and extract
+    date-time components.
+
+```{r, eval=FALSE}
+install.packages("lubridate") # only once
+library(lubridate) # everytime you start R
+```
+
+Key Functions:
+
+-   Parsing Dates and Times:
+
+    -   `ymd()`, `dmy()`, `mdy(`): Convert strings to dates.
+
+    -   `ymd_hms()`, `mdy_hms()`: Handle date-time strings with hours,
+        minutes, seconds.
+
+-   Extracting Components:
+
+    -   `year()`, `month()`, `day()`: Extract parts of a date.
+
+    -   `hour()`, `minute()`, `second()`: Extract time components.
+
+-   Manipulating Dates:
+
+    -   `today()`, `now()`: Current date or date-time.
+
+    -   Arithmetic: Add or subtract days, months, etc.
+
+-   Time Zones:
+
+    -   Set or change time zones with `with_tz()` or `force_tz()`.
+
 ------------------------------------------------------------------------
 
-## 4. Basic Arithmetic
+**TRY: Play with dates**
+
+```{r, eval=TRUE}
+library(lubridate)
+
+# Parse a date
+my_date <- ymd("2023-01-01")
+
+# Parse a date-time
+my_datetime <- ymd_hms("2023-01-01 12:34:56")
+
+# Extract components
+year(my_date)    # 2023
+month(my_date)   # 1
+day(my_date)     # 1
+hour(my_datetime) # 12
+
+# Add 7 days
+future_date <- my_date + days(7)
+my_date + months(6)
+
+# Set a time zone
+new_timezone <- with_tz(my_datetime, tzone = "America/New_York")
+print(new_timezone)
+```
+
+
+------------------------------------------------------------------------
+
+## 7. Basic Arithmetic
 
 Operators in R:
 
@@ -408,7 +579,6 @@ print(power)
 
 ```
 
-------------------------------------------------------------------------
 
 **TRY** - Create variables and use basic arithmetic, I started for you
 play with them more!
@@ -425,13 +595,13 @@ x*y
 
 ------------------------------------------------------------------------
 
-## 5. Vectors
+## 8. Vectors
 
 A vector is a sequence of data elements of the same type. 
 
 ------------------------------------------------------------------------
 
-### 5.1 Creating Vectors 
+### 8.1 Creating Vectors 
 
 - Creating Vectors: Use the `c()` function.
 
@@ -477,7 +647,7 @@ fruits
 
 ------------------------------------------------------------------------
 
-### 5.2 Vector functions
+### 8.2 Vector functions
 
 -   Access specific items with `[]` (we practices above)
 -   `length()`: Finds the number of elements in a vector.
@@ -495,7 +665,7 @@ Why does `fruits * 2` produce an error?
 
 ------------------------------------------------------------------------
 
-### 5.3 Vector Sequences
+### 8.3 Vector Sequences
 
 We can create sequences with vectors using `:`
 
@@ -521,7 +691,7 @@ A[-c(1, 4)]     # Exclude items 1 and 4
 
 ------------------------------------------------------------------------
 
-### 5.4 Vector Indexing
+### 8.4 Vector Indexing
 
 -   Access items with `[]`
 -   Exclude an item with `-`:
@@ -535,8 +705,9 @@ fruits[-2]  # Exclude the second item
 
 ```
 
-Practice: - How do you select only items 1, 3, and 5? - How do you
-exclude items 2 and 4?
+Practice: 
+- How do you select only items 1, 3, and 5? 
+- How do you exclude items 2 and 4?
 
 ```{r}
 # Selecting items:
@@ -552,7 +723,7 @@ favorite_fruits
 
 ------------------------------------------------------------------------
 
-### 5.5 Combining Vectors & Type Coercion
+### 8.5 Combining Vectors & Type Coercion
 
 Combine vectors of different types:
 
@@ -563,10 +734,10 @@ combo <- c(numbers, text)
 combo
 ```
 
-Type Coercion: - R converts all elements in a vector to the same type.
+Type Coercion: 
 
--   Order of precedence:
-
+- R converts all elements in a vector to the same type.
+- Order of precedence:
     -   `Character > Numeric > Logical`.
 
 ```{r}
@@ -610,7 +781,7 @@ combined <- c(numbers, strings)
 
 ------------------------------------------------------------------------
 
-### 5.6 Vector Arithmetic & Recycling
+### 8.6 Vector Arithmetic & Recycling
 
 We can also do artihmetics with vectors!
 
@@ -641,14 +812,14 @@ R applies **recycling** which means...
 
 ------------------------------------------------------------------------
 
-## 6. Data Frames
+## 9. Data Frames
 
 A data frame is a table-like structure (multiple vectors combined into
 rows and column) in R where each column can have a different data type
 (numeric, character, logical, etc.). Think of it as a spreadsheet where
 each column is a variable, and each row is an observation.
 
-### 6.1 Create a dataframe
+### 9.1 Create a dataframe
 
 -   Use the `data.frame()` function to create a data frame.
 
@@ -732,7 +903,7 @@ people
 
 ------------------------------------------------------------------------
 
-### 6.2 Exploring/Inspecting Data Frames
+### 9.2 Exploring/Inspecting Data Frames
 
 Basic Functions to Explore a Data Frame:
 
@@ -764,7 +935,7 @@ summary(df)     # Summary statistics
 
 ------------------------------------------------------------------------
 
-### 6.3 Accessing Data
+### 9.3 Accessing Data
 
 Accessing Columns:
 
@@ -802,7 +973,7 @@ print(df[2, "Professor"])
 
 ------------------------------------------------------------------------
 
-### 6.4 Adding and Removing Data
+### 9.4 Adding and Removing Data
 
 <mark> Don't forget `[row, column]`</mark>
 
@@ -850,7 +1021,7 @@ print(df3)
 
 ------------------------------------------------------------------------
 
-### 6.5 Filtering and Subsetting
+### 9.5 Filtering and Subsetting
 
 Manipulating data is key to preparing it for analysis.
 
@@ -892,7 +1063,7 @@ df_subset <- df[, c(1, 2)]
 
 ------------------------------------------------------------------------
 
-### 6.6 Ordering Data
+### 9.6 Ordering Data
 
 Rearrange rows based on column values.
 
@@ -913,7 +1084,7 @@ sorted_df_desc <- df[order(-df$Age), ]
 
 ------------------------------------------------------------------------
 
-### 6.7 Common Data Frame Functions
+### 9.7 Common Data Frame Functions
 
 -   `nrow(df)`: Returns the number of rows.
 -   `ncol(df)`: Returns the number of columns.
@@ -924,7 +1095,7 @@ sorted_df_desc <- df[order(-df$Age), ]
 
 ------------------------------------------------------------------------
 
-### 6.8 Basic Aggregations
+### 9.8 Basic Aggregations
 
 Compute summary statistics (e.g., mean, sum) for groups of data.
 
@@ -958,352 +1129,37 @@ others**
 
 ------------------------------------------------------------------------
 
-## 7. Functions
-
-Functions perform specific tasks. They take inputs (arguments) and
-return outputs.
-
--   Syntax: `function_name(arguments)`
-
-**TRY**
-
-```{r, eval=TRUE}
-sum_result <- sum(c(1, 2, 3))  # Sum of a vector
-print(sum_result) 
-
-mean_result <- mean(c(4, 5, 6))  # Mean of a vector
-print(mean_result) 
-
-```
-
-------------------------------------------------------------------------
-
-## 8. Conditional Statements
-
-Conditional statements allow you to perform different actions based on
-conditions.
-
--   Keywords: `if`, `else if`, `else`
-
-**TRY**
-
-```{r, eval=TRUE}
-x <- "w"
-
-if (x > 10) {
-  print("x is greater than 10")
-} else if (x == 10) {
-  print("x is equal to 10")
-} else {
-  print("x is less than 10")
-}
-```
-
-------------------------------------------------------------------------
-
-## 9. Loops
-
-Loops allow repetitive tasks to be automated.
-
-Common Loops:
-
--    `for`: Iterates over a sequence.
-
-```{r, eval=TRUE}
-# for loop
-for (BreaD in 1:5) {
-  print(BreaD)
-}
-```
-
--   `while`: Repeats as long as a condition is TRUE.
-
-```{r, eval=TRUE}
-# while loop
-x <- 1
-while (x <= 5) {
-  print(x)
-  x <- x + 1
-}
-
-```
-
-------------------------------------------------------------------------
-
-## 10. Regular Expressions (Regex)
-
-What is Regex (Regular Expression)?
-
--   A regular expression (regex) is a sequence of characters that
-    defines a search pattern.
--   Used for:
-    -   Matching patterns in text.
-    -   Extracting or replacing specific text.
-    -   Validating strings (e.g., usernames, email addresses).
--   Easily process large text datasets.
--   Clean and analyze text data efficiently.
-
-------------------------------------------------------------------------
-
-### 10.1 RegEx Basic Syntax
-
-[Regex Cheat Sheet](https://rstudio.github.io/cheatsheets/regex.pdf)
-
-We will use the [`stringr` package](https://stringr.tidyverse.org/)
-
-```{r, eval=FALSE}
-install.packages("stringr")
-```
-
-```{r, eval=TRUE}
-library(stringr)
-```
-
-```{r, echo=FALSE}
-library(knitr)
-regex_table <- data.frame(
-  `Regex Pattern` = c(".", "^", "$", "*", "+", "[]", "|"),
-  `Matches` = c(
-    "Any single character",
-    "Start of a string",
-    "End of a string",
-    "Zero or more of the preceding character",
-    "One or more of the preceding character",
-    "Match any character in the set",
-    "Logical OR"
-  ),
-  `Example` = c(
-    '"Mario1" matches "M.rio1"',
-    '"^Zelda" matches "Zelda..."',
-    '"end$" matches "The end"',
-    '"A*B" matches "AAAB"',
-    '"Go+" matches "Gooo"',
-    '"[PS]" matches "P", "S"',
-    '"Mario|Zelda" matches either'
-  )
-)
-
-kable(regex_table, caption = "Regex Patterns and Examples")
-```
-
-------------------------------------------------------------------------
-
-### 10.2 Extracting Text
-
-Let's create a dataset:
-
-```{r, eval=TRUE}
-reviews <- c(
-  "The new Mario Kart is amazing!",
-  "Zelda: Breath of the Wild is a masterpiece.",
-  "I can't wait for Final Fantasy XVI.",
-  "Have you tried playing God of War: Ragnarok?",
-  "Elden Ring redefined the RPG genre."
-)
-```
-
-Let's extract the titles: Maria Kart, Zelda, Final Fantasy XVI, God of
-War: Ragnarok
-
-```{r, eval=TRUE}
-# Extract video game titles using regex
-titles <- str_extract(reviews, "Mario Kart|Zelda: Breath of the Wild|Final Fantasy XVI|God of War: Ragnarok|Elden Ring")
-
-print(titles)
-
-```
-
-------------------------------------------------------------------------
-
-### 10.3 Validating Text
-
-You can use regex to validate if a text or pattern of text is in your
-data
-
-```{r, eval=TRUE}
-game_codes <- c("GAME-1234", "INVALID", "PLAY-5678", "GAMEX-9999", "GAME-567")
-
-valid_codes <- str_detect(game_codes, "^(GAME|PLAY)-\\d{4}$")
-
-print(valid_codes)
-```
-
-------------------------------------------------------------------------
-
-### 10.4 Pattern Matching 
-
-Let's extract years --- numbers of 4 digits
-
-```{r, eval=TRUE}
-release_info <- c(
-  "The Legend of Zelda was released in 2023.",
-  "Elden Ring: GOTY Edition, releasing in 2024.",
-  "Final Fantasy XVI came out in 2023."
-)
-
-years <- str_extract(release_info, "\\b\\d{4}\\b")
-
-print(years)
-```
-
-------------------------------------------------------------------------
-
-#### Match words using patterns
-
-Identify words that start with G or R
-
-```{r, eval=TRUE}
-text <- c("God of War is great", "Ragnarok is a masterpiece", "Mario Kart rules")
-
-# Find words starting with G or R
-matches <- str_extract_all(text, "\\b[G|R]\\w+")
-
-print(matches)
-
-```
-
-------------------------------------------------------------------------
-
-## 11. R Packages
-
--   Packages are collections of R functions, data, and compiled code.
--   Extend the functionality of base R.
--   Simplifies complex tasks.
--   Widely used for specialized analyses.
-
-E.g., [`tidy`](https://tidyr.tidyverse.org/),
-[`dplyr`](https://dplyr.tidyverse.org/),
-[`ggplot2`](https://ggplot2.tidyverse.org/)
-
-------------------------------------------------------------------------
-
-### 11.1 Installing & Loading Packages
-
--   Installation
-    -   Use the `install.packages()` function to install a package from
-        CRAN.
-
-```{r, eval= FALSE}
-install.packages("tidyr")
-install.packages("dplyr")
-install.packages("lubridate")
-
-```
-
--   Loading
-    -   Use the `library()` function to load an installed package.
-
-```{r, eval= TRUE}
-library(tidyr)
-library(dplyr)
-library(lubridate)
-```
-
--   Check the package documentation with `?`
-
-```{r, eval=FALSE}
-?tidyr
-```
-
-```{r, eval=FALSE}
-?dplyr
-```
-
-***N.B. Packages only need to be installed once but must be loaded in
-each session `library()`. Keep packages updated with
-`update.packages()`***
-
-------------------------------------------------------------------------
-
-### 11.2 Lubridate Package
-
-[`Lubridate`](https://lubridate.tidyverse.org/) is a package that makes
-working with dates easier.
-
--    [`Lubridate` Cheat
-    Sheet](https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf) -
-    It provides easy functions to parse, manipulate, and extract
-    date-time components.
-
-```{r, eval=FALSE}
-install.packages("lubridate") # only once
-library(lubridate) # everytime you start R
-```
-
-Key Functions:
-
--   Parsing Dates and Times:
-
-    -   `ymd()`, `dmy()`, `mdy(`): Convert strings to dates.
-
-    -   `ymd_hms()`, `mdy_hms()`: Handle date-time strings with hours,
-        minutes, seconds.
-
--   Extracting Components:
-
-    -   `year()`, `month()`, `day()`: Extract parts of a date.
-
-    -   `hour()`, `minute()`, `second()`: Extract time components.
-
--   Manipulating Dates:
-
-    -   `today()`, `now()`: Current date or date-time.
-
-    -   Arithmetic: Add or subtract days, months, etc.
-
--   Time Zones:
-
-    -   Set or change time zones with `with_tz()` or `force_tz()`.
-
-------------------------------------------------------------------------
-
-**TRY: Play with dates**
-
-```{r, eval=TRUE}
-library(lubridate)
-
-# Parse a date
-my_date <- ymd("2023-01-01")
-
-# Parse a date-time
-my_datetime <- ymd_hms("2023-01-01 12:34:56")
-
-# Extract components
-year(my_date)    # 2023
-month(my_date)   # 1
-day(my_date)     # 1
-hour(my_datetime) # 12
-
-# Add 7 days
-future_date <- my_date + days(7)
-my_date + months(6)
-
-# Set a time zone
-new_timezone <- with_tz(my_datetime, tzone = "America/New_York")
-print(new_timezone)
-```
-
-------------------------------------------------------------------------
-
 ### Lecture 1 Cheat Sheet
 
-| **Topic** | **Key Points** |
-|-----------------|-------------------------------------------------------|
-| **Variable Assignment** | `=` (simple assignment), `<-` (most common), and `->` (rare). R is case-sensitive. |
-| **Comments** | Use `#` for single-line comments. |
-| **R Reserved Keywords** | Reserved for R’s functionality, e.g., `if`, `for`, `TRUE`, `NULL`, `Inf`, `NA`. |
-| **Data Types** | Numeric, Character, Logical, Factor, and Dates (`Date`, `POSIXct`). |
-| **Basic Arithmetic** | Addition `+`, Subtraction `-`, Multiplication `*`, Division `/`, Exponentiation `^`. |
-| **Vectors** | Sequences of data elements of the same type. Created with `c()`. |
-| **Vector Functions** | `length()`, indexing with `[]`, `rep()`, sequence generation with `:`. |
-| **Combining Vectors** | Use `c()`. Type coercion converts all elements to the same type (Character \> Numeric \> Logical). |
-| **Data Frames** | Table-like structures combining multiple vectors with the same length. Created with `data.frame()`. |
-| **Inspecting Data Frames** | `head()`, `tail()`, `str()`, `summary()`, `dim()`, `colnames()`, `rownames()`. |
-| **Manipulating Data Frames** | Filter rows (`df[df$col > value, ]`), select columns (`df[, c("col1", "col2")]`), sort with `order()`. |
-| **Basic Aggregations** | Group and summarize data using `aggregate()` and functions like `mean()`, `sum()`, `max()`. |
-| **R Packages** | Install with `install.packages()` and load with `library()`. E.g., `tidy`, `dplyr`, `lubridate`. |
-| **Dates with Lubridate** | Parse dates (`ymd()`, `mdy()`, etc.), extract components (`year()`, `month()`), manipulate (`+ days`). |
-| **Functions** | Perform tasks with inputs (arguments) and outputs. E.g., `sum()`, `mean()`, custom-defined functions. |
-| **Conditional Statements** | Use `if`, `else if`, `else` for logic. |
-| **Loops** | Automate repetitive tasks with `for` and `while`. |
-| **Regular Expressions (Regex)** | Match patterns in text (`str_extract()`, `str_detect()`), extract years, validate patterns. |
+| **Topic** | **Key Points / Commands** |
+|---------|---------------------------|
+| **RStudio** | Integrated Development Environment (IDE) for R. Main panes: Console, Source, Environment, Files/Plots/Packages/Help. |
+| **Console** | Runs R code line by line. Good for quick tests. Code is not saved unless written in a script or R Markdown file. |
+| **Terminal** | System command line (not R). Used for OS-level commands (e.g., `ls`, `dir`). We will rarely use it. |
+| **RStudio Projects** | Organize files for one analysis. Automatically sets working directory. Always open work via the `.Rproj` file. |
+| **Project Folder Structure** | Recommended folders: `data/` (datasets), `scripts/` (R scripts), `.Rmd` files for notes/analysis. |
+| **Scripts (`.R`)** | Plain text files for writing and saving R code. Run selected lines with `Cmd/Ctrl + Enter`. |
+| **Working Directory** | Check with `getwd()`. Should point to your project folder. Enables relative paths like `"data/file.csv"`. |
+| **R Markdown (`.Rmd`)** | Combines text, code, and output in one reproducible document. Used for notes, assignments, and reports. |
+| **Running vs Knitting** | Run chunks to execute code interactively. Knit rebuilds the entire document from top to bottom in a clean session. |
+| **Code Chunks** | R code lives inside chunks: ```{r} code ``` . Output appears below the chunk. |
+| **R Packages** | Extend R functionality. Install once with `install.packages()`, load every session with `library()`. |
+| **Variable Assignment** | `<-` (preferred), `=` (allowed), `->` (rare). R is case-sensitive. |
+| **Comments** | Use `#` for comments. R only supports single-line comments. |
+| **Reserved Keywords** | Cannot be used as variable names (e.g., `if`, `for`, `TRUE`, `FALSE`, `NA`, `NULL`, `Inf`). |
+| **Basic Data Types** | Numeric, Character, Logical, Factor. Check with `typeof()`. |
+| **Dates** | `Date`, `POSIXct`, `POSIXlt`. Use `as.Date()`, `Sys.Date()`, `Sys.time()`. |
+| **Lubridate** | Easier date handling: `ymd()`, `mdy()`, `year()`, `month()`, `day()`, `+ days()`, `+ months()`. |
+| **Basic Arithmetic** | `+`, `-`, `*`, `/`, `^`. Works on numbers and vectors. |
+| **Vectors** | One-dimensional objects with same data type. Create with `c()`. |
+| **Vector Indexing** | Use `[]`. Select (`x[1:3]`), exclude (`x[-2]`), multiple indices (`x[c(1,3)]`). |
+| **Vector Functions** | `length()`, sequences with `:`, recycling in vector arithmetic. |
+| **Type Coercion** | Combining types converts to one type: Character > Numeric > Logical. |
+| **Data Frames** | Table-like structure with columns of equal length. Create with `data.frame()`. |
+| **Inspecting Data Frames** | `head()`, `tail()`, `str()`, `summary()`, `dim()`, `nrow()`, `ncol()`. |
+| **Accessing Data** | Columns: `df$col`, `df[, "col"]`. Rows: `df[row, ]`. Elements: `df[row, col]`. |
+| **Adding/Removing Data** | Add columns with `$`. Add rows with `rbind()`. Remove with `NULL` or negative indexing. |
+| **Filtering & Subsetting** | Use logical conditions: `df[df$Age > 25, ]`. Select columns by name or index. |
+| **Sorting Data** | `order(df$col)` for ascending, `order(-df$col)` for descending. |
+| **Basic Aggregations** | `mean()`, `max()`, `min()`, `sum()`, `sd()` on vectors or data frame columns. |
+
