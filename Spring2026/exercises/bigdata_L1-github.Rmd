@@ -33,7 +33,9 @@ knitr::opts_chunk$set(
 | 2.1 | Check your working directory |
 | 3| R Markdown |
 | 3.1 | How to create a document in R Markdown |
-| 3.2 | Running vs knitting |
+| 3.2 | Embed Code |
+| 3.3 | Global Chunk Options |
+| 3.4 | Running vs knitting |
 | 4 | R Packages |
 | 4.1 | Installing & Loading |
 | 5 | R Basic Grammar |
@@ -232,22 +234,81 @@ Why do we use R Markdown?
 -   Edit the template provided in the new .Rmd file.
 -   <mark>For our class you can use the Markdown from BB and take notes on that!</mark>
 
+------------------------------------------------------------------------
+
+### 3.2 Embed Code
+
+R code in R Markdown is written inside **code chunks**.  
+You can create a chunk by typing it manually or by using the **Insert Code Chunk** button in RStudio.
+
+Code chunks start with ```{r} and end with ```.
+
+You can also add:
+- OPTIONAL: a **chunk label** (for identification)
+- **chunk options** (to control how code and output appear)
+
+Example:
+
+```{r chunk-label, include = FALSE}
+
+```
+
+- Chunk labels are ***OPTIONAL*** and if you do put one it should be short and descriptive. 
+- Chunk options are written after the label, separated by commas.
+
+
+![](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/rcodechunk.png?raw=true)
 
 ------------------------------------------------------------------------
 
-### 3.2 Running vs knitting
+### 3.3 Global Chunk Options
+
+You can set options that apply to all code chunks in the document.
+This is usually done in the first chunk of the file.
+
+Example, this displays code in the output document, prevents messages (such as package startup messages) and warnings from appearing in the output document.
+:
+
+```{r}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE
+)
+```
+
+| **Option** | **Default** | **Effects** |
+|---|---:|---|
+| `echo` | `TRUE` | Display code in the output document |
+| `error` | `FALSE` | `TRUE` = display error messages in the document; `FALSE` = stop rendering when an error occurs |
+| `eval` | `TRUE` | Run code in the chunk |
+| `include` | `TRUE` | Include the chunk output in the document after running |
+| `message` | `TRUE` | Display messages in the document |
+| `warning` | `TRUE` | Display warnings in the document |
+| `results` | `"markup"` | `"asis"` = pass results through as-is; `"hide"` = hide results; `"hold"` = show all results after all code |
+| `fig.align` | `"default"` | Align figure: `"left"`, `"right"`, or `"center"` |
+| `fig.alt` | `NULL` | Alt text for a figure |
+| `fig.cap` | `NULL` | Figure caption (character string) |
+| `fig.path` | `"figure/"` | Prefix folder for generated figure file paths |
+| `fig.width` / `fig.height` | `7` | Plot dimensions in inches |
+| `out.width` | *(none)* | Rescale output width (e.g., `"75%"`, `"300px"`) |
+| `collapse` | `FALSE` | Collapse source and output into a single block |
+| `comment` | `"##"` | Prefix for each line of results |
+| `child` | `NULL` | File(s) to knit and include in the document |
+| `purl` | `TRUE` | Include/exclude chunk when extracting code with `knitr::purl()` |
+
+See more options and defaults by running `str(knitr::opts_chunk$get())`.
+
+
+------------------------------------------------------------------------
+
+### 3.4 Running vs knitting
 
 - Run a chunk to execute code line by line  
 - Knit to rebuild the entire document from top to bottom.
+- In RMD empty space is for text. 
+- When you add  `{r, eval = FALSE}` that code chunk will NOT run.
 
-In RMD empty space is for text. 
-
-To run code you use code Chunks 
-- Surround code chunks with `{r}` at the beginning and close them with three backticks at the end. 
-- or use the Insert Code Chunk button. Add a chunk label and/or chunk options inside
-the curly braces after r.
-
-![](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/rcodechunk.png?raw=true)
 
 ------------------------------------------------------------------------
 
