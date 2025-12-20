@@ -512,56 +512,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-console" id="toc-the-console" class="nav-link" data-scroll-target="#the-console">1.1 The Console</a></li>
   <li><a href="#the-terminal" id="toc-the-terminal" class="nav-link" data-scroll-target="#the-terminal">1.2 The Terminal</a></li>
   <li><a href="#project" id="toc-project" class="nav-link" data-scroll-target="#project">1.3 Project</a></li>
-  <li><a href="#scripts" id="toc-scripts" class="nav-link" data-scroll-target="#scripts">1.4 Scripts</a></li>
-  <li><a href="#r-markdown-in-r-studio" id="toc-r-markdown-in-r-studio" class="nav-link" data-scroll-target="#r-markdown-in-r-studio">1.5 R Markdown in R Studio</a></li>
+  <li><a href="#organize-your-project-file" id="toc-organize-your-project-file" class="nav-link" data-scroll-target="#organize-your-project-file">1.4 Organize your project file</a></li>
+  <li><a href="#scripts" id="toc-scripts" class="nav-link" data-scroll-target="#scripts">1.5 Scripts</a></li>
   </ul></li>
-  <li><a href="#r-basic-grammar" id="toc-r-basic-grammar" class="nav-link" data-scroll-target="#r-basic-grammar">2. R: Basic Grammar</a>
+  <li><a href="#working-directory-and-paths" id="toc-working-directory-and-paths" class="nav-link" data-scroll-target="#working-directory-and-paths">2. Working directory and paths</a>
   <ul class="collapse">
-  <li><a href="#variable-assignment" id="toc-variable-assignment" class="nav-link" data-scroll-target="#variable-assignment">2.1 Variable Assignment</a></li>
-  <li><a href="#r-is-case-sensitive" id="toc-r-is-case-sensitive" class="nav-link" data-scroll-target="#r-is-case-sensitive">2.2 R is case-sensitive</a></li>
-  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments">2.3 Comments</a></li>
-  <li><a href="#r-reserved-keywords" id="toc-r-reserved-keywords" class="nav-link" data-scroll-target="#r-reserved-keywords">2.4 R Reserved Keywords</a></li>
+  <li><a href="#check-your-working-directory" id="toc-check-your-working-directory" class="nav-link" data-scroll-target="#check-your-working-directory">2.1 Check your working directory</a></li>
   </ul></li>
-  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types">3. Data Types</a>
+  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown">3. R Markdown</a>
   <ul class="collapse">
-  <li><a href="#numeric-character-logical-factor" id="toc-numeric-character-logical-factor" class="nav-link" data-scroll-target="#numeric-character-logical-factor">3.1 Numeric, Character, Logical, Factor</a></li>
-  <li><a href="#dates" id="toc-dates" class="nav-link" data-scroll-target="#dates">3.2 Dates</a></li>
+  <li><a href="#how-to-create-a-document-in-r-markdown" id="toc-how-to-create-a-document-in-r-markdown" class="nav-link" data-scroll-target="#how-to-create-a-document-in-r-markdown">3.1 How to create a document in R Markdown</a></li>
+  <li><a href="#running-vs-knitting" id="toc-running-vs-knitting" class="nav-link" data-scroll-target="#running-vs-knitting">3.2 Running vs knitting</a></li>
   </ul></li>
-  <li><a href="#basic-arithmetic" id="toc-basic-arithmetic" class="nav-link" data-scroll-target="#basic-arithmetic">4. Basic Arithmetic</a></li>
-  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">5. Vectors</a>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">4. R Packages</a>
   <ul class="collapse">
-  <li><a href="#creating-vectors" id="toc-creating-vectors" class="nav-link" data-scroll-target="#creating-vectors">5.1 Creating Vectors</a></li>
-  <li><a href="#vector-functions" id="toc-vector-functions" class="nav-link" data-scroll-target="#vector-functions">5.2 Vector functions</a></li>
-  <li><a href="#vector-sequences" id="toc-vector-sequences" class="nav-link" data-scroll-target="#vector-sequences">5.3 Vector Sequences</a></li>
-  <li><a href="#vector-indexing" id="toc-vector-indexing" class="nav-link" data-scroll-target="#vector-indexing">5.4 Vector Indexing</a></li>
-  <li><a href="#combining-vectors-type-coercion" id="toc-combining-vectors-type-coercion" class="nav-link" data-scroll-target="#combining-vectors-type-coercion">5.5 Combining Vectors &amp; Type Coercion</a></li>
-  <li><a href="#vector-arithmetic-recycling" id="toc-vector-arithmetic-recycling" class="nav-link" data-scroll-target="#vector-arithmetic-recycling">5.6 Vector Arithmetic &amp; Recycling</a></li>
+  <li><a href="#installing-loading-packages" id="toc-installing-loading-packages" class="nav-link" data-scroll-target="#installing-loading-packages">4.1 Installing &amp; Loading Packages</a></li>
   </ul></li>
-  <li><a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames">6. Data Frames</a>
+  <li><a href="#r-basic-grammar" id="toc-r-basic-grammar" class="nav-link" data-scroll-target="#r-basic-grammar">5. R: Basic Grammar</a>
   <ul class="collapse">
-  <li><a href="#create-a-dataframe" id="toc-create-a-dataframe" class="nav-link" data-scroll-target="#create-a-dataframe">6.1 Create a dataframe</a></li>
-  <li><a href="#exploringinspecting-data-frames" id="toc-exploringinspecting-data-frames" class="nav-link" data-scroll-target="#exploringinspecting-data-frames">6.2 Exploring/Inspecting Data Frames</a></li>
-  <li><a href="#accessing-data" id="toc-accessing-data" class="nav-link" data-scroll-target="#accessing-data">6.3 Accessing Data</a></li>
-  <li><a href="#adding-and-removing-data" id="toc-adding-and-removing-data" class="nav-link" data-scroll-target="#adding-and-removing-data">6.4 Adding and Removing Data</a></li>
-  <li><a href="#filtering-and-subsetting" id="toc-filtering-and-subsetting" class="nav-link" data-scroll-target="#filtering-and-subsetting">6.5 Filtering and Subsetting</a></li>
-  <li><a href="#ordering-data" id="toc-ordering-data" class="nav-link" data-scroll-target="#ordering-data">6.6 Ordering Data</a></li>
-  <li><a href="#common-data-frame-functions" id="toc-common-data-frame-functions" class="nav-link" data-scroll-target="#common-data-frame-functions">6.7 Common Data Frame Functions</a></li>
-  <li><a href="#basic-aggregations" id="toc-basic-aggregations" class="nav-link" data-scroll-target="#basic-aggregations">6.8 Basic Aggregations</a></li>
+  <li><a href="#variable-assignment" id="toc-variable-assignment" class="nav-link" data-scroll-target="#variable-assignment">5.1 Variable Assignment</a></li>
+  <li><a href="#r-is-case-sensitive" id="toc-r-is-case-sensitive" class="nav-link" data-scroll-target="#r-is-case-sensitive">5.2 R is case-sensitive</a></li>
+  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments">5.3 Comments</a></li>
+  <li><a href="#r-reserved-keywords" id="toc-r-reserved-keywords" class="nav-link" data-scroll-target="#r-reserved-keywords">5.4 R Reserved Keywords</a></li>
   </ul></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">7. Functions</a></li>
-  <li><a href="#conditional-statements" id="toc-conditional-statements" class="nav-link" data-scroll-target="#conditional-statements">8. Conditional Statements</a></li>
-  <li><a href="#loops" id="toc-loops" class="nav-link" data-scroll-target="#loops">9. Loops</a></li>
-  <li><a href="#regular-expressions-regex" id="toc-regular-expressions-regex" class="nav-link" data-scroll-target="#regular-expressions-regex">10. Regular Expressions (Regex)</a>
+  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types">6. Data Types</a>
   <ul class="collapse">
-  <li><a href="#regex-basic-syntax" id="toc-regex-basic-syntax" class="nav-link" data-scroll-target="#regex-basic-syntax">10.1 RegEx Basic Syntax</a></li>
-  <li><a href="#extracting-text" id="toc-extracting-text" class="nav-link" data-scroll-target="#extracting-text">10.2 Extracting Text</a></li>
-  <li><a href="#validating-text" id="toc-validating-text" class="nav-link" data-scroll-target="#validating-text">10.3 Validating Text</a></li>
-  <li><a href="#pattern-matching" id="toc-pattern-matching" class="nav-link" data-scroll-target="#pattern-matching">10.4 Pattern Matching</a></li>
+  <li><a href="#numeric-character-logical-factor" id="toc-numeric-character-logical-factor" class="nav-link" data-scroll-target="#numeric-character-logical-factor">6.1 Numeric, Character, Logical, Factor</a></li>
+  <li><a href="#dates" id="toc-dates" class="nav-link" data-scroll-target="#dates">6.2 Dates</a></li>
+  <li><a href="#lubridate-package" id="toc-lubridate-package" class="nav-link" data-scroll-target="#lubridate-package">6.3 Lubridate Package</a></li>
   </ul></li>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">11. R Packages</a>
+  <li><a href="#basic-arithmetic" id="toc-basic-arithmetic" class="nav-link" data-scroll-target="#basic-arithmetic">7. Basic Arithmetic</a></li>
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">8. Vectors</a>
   <ul class="collapse">
-  <li><a href="#installing-loading-packages" id="toc-installing-loading-packages" class="nav-link" data-scroll-target="#installing-loading-packages">11.1 Installing &amp; Loading Packages</a></li>
-  <li><a href="#lubridate-package" id="toc-lubridate-package" class="nav-link" data-scroll-target="#lubridate-package">11.2 Lubridate Package</a></li>
+  <li><a href="#creating-vectors" id="toc-creating-vectors" class="nav-link" data-scroll-target="#creating-vectors">8.1 Creating Vectors</a></li>
+  <li><a href="#vector-functions" id="toc-vector-functions" class="nav-link" data-scroll-target="#vector-functions">8.2 Vector functions</a></li>
+  <li><a href="#vector-sequences" id="toc-vector-sequences" class="nav-link" data-scroll-target="#vector-sequences">8.3 Vector Sequences</a></li>
+  <li><a href="#vector-indexing" id="toc-vector-indexing" class="nav-link" data-scroll-target="#vector-indexing">8.4 Vector Indexing</a></li>
+  <li><a href="#combining-vectors-type-coercion" id="toc-combining-vectors-type-coercion" class="nav-link" data-scroll-target="#combining-vectors-type-coercion">8.5 Combining Vectors &amp; Type Coercion</a></li>
+  <li><a href="#vector-arithmetic-recycling" id="toc-vector-arithmetic-recycling" class="nav-link" data-scroll-target="#vector-arithmetic-recycling">8.6 Vector Arithmetic &amp; Recycling</a></li>
+  </ul></li>
+  <li><a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames">9. Data Frames</a>
+  <ul class="collapse">
+  <li><a href="#create-a-dataframe" id="toc-create-a-dataframe" class="nav-link" data-scroll-target="#create-a-dataframe">9.1 Create a dataframe</a></li>
+  <li><a href="#exploringinspecting-data-frames" id="toc-exploringinspecting-data-frames" class="nav-link" data-scroll-target="#exploringinspecting-data-frames">9.2 Exploring/Inspecting Data Frames</a></li>
+  <li><a href="#accessing-data" id="toc-accessing-data" class="nav-link" data-scroll-target="#accessing-data">9.3 Accessing Data</a></li>
+  <li><a href="#adding-and-removing-data" id="toc-adding-and-removing-data" class="nav-link" data-scroll-target="#adding-and-removing-data">9.4 Adding and Removing Data</a></li>
+  <li><a href="#filtering-and-subsetting" id="toc-filtering-and-subsetting" class="nav-link" data-scroll-target="#filtering-and-subsetting">9.5 Filtering and Subsetting</a></li>
+  <li><a href="#ordering-data" id="toc-ordering-data" class="nav-link" data-scroll-target="#ordering-data">9.6 Ordering Data</a></li>
+  <li><a href="#common-data-frame-functions" id="toc-common-data-frame-functions" class="nav-link" data-scroll-target="#common-data-frame-functions">9.7 Common Data Frame Functions</a></li>
+  <li><a href="#basic-aggregations" id="toc-basic-aggregations" class="nav-link" data-scroll-target="#basic-aggregations">9.8 Basic Aggregations</a></li>
   <li><a href="#lecture-1-cheat-sheet" id="toc-lecture-1-cheat-sheet" class="nav-link" data-scroll-target="#lecture-1-cheat-sheet">Lecture 1 Cheat Sheet</a></li>
   </ul></li>
   </ul></li>
@@ -609,158 +608,147 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td>1.4</td>
-<td>Scripts</td>
+<td>Organize your project file</td>
 </tr>
 <tr class="even">
 <td>1.5</td>
-<td>R Markdown</td>
+<td>Scripts</td>
 </tr>
 <tr class="odd">
 <td>2</td>
-<td>R Basic Grammar</td>
+<td>Working directory and paths</td>
 </tr>
 <tr class="even">
 <td>2.1</td>
-<td>Variable Assignment</td>
+<td>Check your working directory</td>
 </tr>
 <tr class="odd">
-<td>2.2</td>
-<td>Case Sensitivity</td>
-</tr>
-<tr class="even">
-<td>2.3</td>
-<td>Comments</td>
-</tr>
-<tr class="odd">
-<td>2.4</td>
-<td>Reserved Keywords</td>
-</tr>
-<tr class="even">
 <td>3</td>
-<td>Data Types</td>
+<td>R Markdown</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>3.1</td>
-<td>Numeric, Character, Logical, Factor</td>
+<td>How to create a document in R Markdown</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>3.2</td>
-<td>Dates</td>
+<td>Running vs knitting</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>4</td>
-<td>Basic Arithmetic</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td>Vectors</td>
-</tr>
-<tr class="odd">
-<td>5.1</td>
-<td>Creating Vectors</td>
-</tr>
-<tr class="even">
-<td>5.2</td>
-<td>Vector Indexing</td>
-</tr>
-<tr class="odd">
-<td>5.3</td>
-<td>Vector Functions</td>
-</tr>
-<tr class="even">
-<td>5.4</td>
-<td>Sequences</td>
-</tr>
-<tr class="odd">
-<td>5.5</td>
-<td>Combining Vectors &amp; Type Coercion</td>
-</tr>
-<tr class="even">
-<td>5.6</td>
-<td>Vector Arithmetic &amp; Recycling</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td>Data Frames</td>
-</tr>
-<tr class="even">
-<td>6.1</td>
-<td>Creating Data Frames</td>
-</tr>
-<tr class="odd">
-<td>6.2</td>
-<td>Exploring/Inspecting Data Frames</td>
-</tr>
-<tr class="even">
-<td>6.3</td>
-<td>Accessing Data</td>
-</tr>
-<tr class="odd">
-<td>6.4</td>
-<td>Adding and Removing Data</td>
-</tr>
-<tr class="even">
-<td>6.5</td>
-<td>Filtering and Subsetting</td>
-</tr>
-<tr class="odd">
-<td>6.6</td>
-<td>Ordering Data</td>
-</tr>
-<tr class="even">
-<td>6.7</td>
-<td>Common Data Frame Functions</td>
-</tr>
-<tr class="odd">
-<td>6.8</td>
-<td>Basic Aggregations</td>
-</tr>
-<tr class="even">
-<td>7</td>
-<td>Functions</td>
-</tr>
-<tr class="odd">
-<td>8</td>
-<td>Conditional Statements</td>
-</tr>
-<tr class="even">
-<td>9</td>
-<td>Loops</td>
-</tr>
-<tr class="odd">
-<td>10</td>
-<td>Regular Expressions (Regex)</td>
-</tr>
-<tr class="even">
-<td>10.1</td>
-<td>Basic Syntax</td>
-</tr>
-<tr class="odd">
-<td>10.2</td>
-<td>Extracting Text</td>
-</tr>
-<tr class="even">
-<td>10.3</td>
-<td>Validating Text</td>
-</tr>
-<tr class="odd">
-<td>10.4</td>
-<td>Pattern Matching</td>
-</tr>
-<tr class="even">
-<td>11</td>
 <td>R Packages</td>
 </tr>
 <tr class="odd">
-<td>11.1</td>
+<td>4.1</td>
 <td>Installing &amp; Loading</td>
 </tr>
 <tr class="even">
-<td>11.2</td>
-<td>Lubridate</td>
+<td>5</td>
+<td>R Basic Grammar</td>
+</tr>
+<tr class="odd">
+<td>5.1</td>
+<td>Variable Assignment</td>
+</tr>
+<tr class="even">
+<td>5.2</td>
+<td>Case Sensitivity</td>
+</tr>
+<tr class="odd">
+<td>5.3</td>
+<td>Comments</td>
+</tr>
+<tr class="even">
+<td>5.4</td>
+<td>Reserved Keywords</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Data Types</td>
+</tr>
+<tr class="even">
+<td>6.1</td>
+<td>Numeric, Character, Logical, Factor</td>
+</tr>
+<tr class="odd">
+<td>6.2</td>
+<td>Dates</td>
+</tr>
+<tr class="even">
+<td>6.3</td>
+<td>Lubridate Package</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Basic Arithmetic</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Vectors</td>
+</tr>
+<tr class="odd">
+<td>8.1</td>
+<td>Creating Vectors</td>
+</tr>
+<tr class="even">
+<td>8.2</td>
+<td>Vector Indexing</td>
+</tr>
+<tr class="odd">
+<td>8.3</td>
+<td>Vector Functions</td>
+</tr>
+<tr class="even">
+<td>8.4</td>
+<td>Sequences</td>
+</tr>
+<tr class="odd">
+<td>8.5</td>
+<td>Combining Vectors &amp; Type Coercion</td>
+</tr>
+<tr class="even">
+<td>8.6</td>
+<td>Vector Arithmetic &amp; Recycling</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Data Frames</td>
+</tr>
+<tr class="even">
+<td>9.1</td>
+<td>Creating Data Frames</td>
+</tr>
+<tr class="odd">
+<td>9.2</td>
+<td>Exploring/Inspecting Data Frames</td>
+</tr>
+<tr class="even">
+<td>9.3</td>
+<td>Accessing Data</td>
+</tr>
+<tr class="odd">
+<td>9.4</td>
+<td>Adding and Removing Data</td>
+</tr>
+<tr class="even">
+<td>9.5</td>
+<td>Filtering and Subsetting</td>
+</tr>
+<tr class="odd">
+<td>9.6</td>
+<td>Ordering Data</td>
+</tr>
+<tr class="even">
+<td>9.7</td>
+<td>Common Data Frame Functions</td>
+</tr>
+<tr class="odd">
+<td>9.8</td>
+<td>Basic Aggregations</td>
 </tr>
 </tbody>
 </table>
+<hr>
 </section>
 <section id="intro-to-r-studio" class="level2">
 <h2 class="anchored" data-anchor-id="intro-to-r-studio">1. Intro to R Studio</h2>
@@ -789,19 +777,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="project">1.3 Project</h3>
 <p>An RStudio Project is a way to organize your work by grouping files, data, and scripts for a specific task or analysis.</p>
 <p>Why Use Projects? - Keeps your workspace clean and focused. - Automatically sets the working directory to the project folder. - Ensures reproducibility by keeping everything needed for a project in one place.</p>
-<p>How to Create a Project: 1. Click on <span class="inline-button"><strong>File → New Project….</strong></span>. 2. Choose whether to create a new directory, use an existing directory, or clone a Git repository. 3. Give it a name and location.</p>
+<p>How to Create a Project: 1. Click on <span class="inline-button"><strong>File → New Project….</strong></span>. 2. Choose whether to create a new directory, use an existing directory, or clone a Git repository. 3. Give it a clear name (example: EMS747_Project) 4. Choose a location you can easily find again</p>
 <p><strong><em>TRY: Create a project called “EMS747_Class_Exercises” and notice how RStudio creates a .Rproj file for managing it.</em></strong></p>
-<hr>
+<p><mark>When you create a project, RStudio makes a file ending in <code>.Rproj</code>. Always open your work by clicking that <code>.Rproj</code> file.</mark></p>
 <p><img src="https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/Rproject.jpg?raw=true" class="img-fluid"></p>
 <hr>
 </section>
+<section id="organize-your-project-file" class="level3">
+<h3 class="anchored" data-anchor-id="organize-your-project-file">1.4 Organize your project file</h3>
+<p>Inside your project folder, create these folders:</p>
+<ul>
+<li><code>data/</code> for datasets (CSV, Excel, etc.)<br>
+</li>
+<li><code>scripts/</code> for R scripts you write during the semester</li>
+</ul>
+<p>In RStudio: use the Files pane → New Folder.</p>
+<p><img src="https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/new_folder_rproject.png?raw=true" class="img-fluid"></p>
+<p>Your project should look like this:</p>
+<pre class="text"><code>EMS747_Project/
+  EMS747_Project.Rproj
+  data/
+  scripts/
+  bigdata_L1_github.Rmd</code></pre>
+<hr>
+</section>
 <section id="scripts" class="level3">
-<h3 class="anchored" data-anchor-id="scripts">1.4 Scripts</h3>
+<h3 class="anchored" data-anchor-id="scripts">1.5 Scripts</h3>
 <p>A script is a text file where you write and save R code for future use. - Scripts let you document your work, making it reproducible and shareable. - You can save time by re-running pre-written code instead of typing commands repeatedly. How to Create and Use a Script: - Click on <span class="inline-button"><strong>File → New File → R Script</strong></span>. - Write R code in the script editor. - E.g.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 15</code></pre>
 <ul>
 <li>Highlight the code you want to run and press <span class="inline-button"><strong>Ctrl+Enter</strong></span> (Windows/Linux) or <span class="inline-button"><strong>Cmd+Enter</strong></span> (Mac) to execute it in the Console.</li>
@@ -809,69 +815,135 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/R_Script_1.png?raw=true" class="img-fluid"></p>
 <hr>
 </section>
-<section id="r-markdown-in-r-studio" class="level3">
-<h3 class="anchored" data-anchor-id="r-markdown-in-r-studio">1.5 R Markdown in R Studio</h3>
+</section>
+<section id="working-directory-and-paths" class="level2">
+<h2 class="anchored" data-anchor-id="working-directory-and-paths">2. Working directory and paths</h2>
+<section id="check-your-working-directory" class="level3">
+<h3 class="anchored" data-anchor-id="check-your-working-directory">2.1 Check your working directory</h3>
+<p>When your project is open, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "/Users/alokman/Library/CloudStorage/GoogleDrive-alokman@bu.edu/My Drive/Teaching/S26_EMS747/ClassSlides"</code></pre>
+<p>You should see a path ending in your project folder name.</p>
+<section id="why-this-matters" class="level4">
+<h4 class="anchored" data-anchor-id="why-this-matters">Why this matters</h4>
+<p>In the next lecture, we will load datasets from your <code>data/</code> folder using relative paths like:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"data/my_file.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="r-markdown" class="level2">
+<h2 class="anchored" data-anchor-id="r-markdown">3. R Markdown</h2>
 <ul>
-<li><a href="https://rstudio.github.io/cheatsheets/html/rmarkdown.html">R Markdown</a> is a framework that allows you to integrate code, output, and narrative in one document.</li>
+<li><a href="https://rstudio.github.io/cheatsheets/html/rmarkdown.html">R Markdown</a> is a framework that allows you to integrate code, output, and text in one document.</li>
 <li>You can produce reports in multiple formats: HTML, PDF, Word, etc.</li>
 </ul>
+<p><strong>Instead of copying results into a separate document, you generate the document directly from the code.</strong></p>
 <p>Why do we use R Markdown? - Combine code and text for reproducible research. - Create interactive and visually appealing documents. - Easy to share analyses with others.</p>
 <p><a href="https://rmarkdown.rstudio.com/lesson-15.HTML">R Markdown Cheathseet</a></p>
 <hr>
-<section id="how-to-create-a-document-in-r-markdown" class="level4">
-<h4 class="anchored" data-anchor-id="how-to-create-a-document-in-r-markdown">How to create a document in R Markdown</h4>
+<section id="how-to-create-a-document-in-r-markdown" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-create-a-document-in-r-markdown">3.1 How to create a document in R Markdown</h3>
 <ul>
 <li>Click on <span class="inline-button"><strong>File</strong></span> &gt; <span class="inline-button"><strong>New File</strong></span> &gt; <span class="inline-button"><strong>R Markdown</strong></span>.</li>
 <li>Choose a title, author, and output format (HTML, PDF, or Word).</li>
 <li>Edit the template provided in the new .Rmd file.</li>
 <li><mark>For our class you can use the Markdown from BB and take notes on that!</mark></li>
 </ul>
+<hr>
+</section>
+<section id="running-vs-knitting" class="level3">
+<h3 class="anchored" data-anchor-id="running-vs-knitting">3.2 Running vs knitting</h3>
+<ul>
+<li>Run a chunk to execute code line by line<br>
+</li>
+<li>Knit to rebuild the entire document from top to bottom.</li>
+</ul>
+<p>In RMD empty space is for text.</p>
 <p>To run code you use code Chunks - Surround code chunks with <code>{r}</code> at the beginning and close them with three backticks at the end. - or use the Insert Code Chunk button. Add a chunk label and/or chunk options inside the curly braces after r.</p>
 <p><img src="https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/images/rcodechunk.png?raw=true" class="img-fluid"></p>
 <hr>
 </section>
 </section>
+<section id="r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="r-packages">4. R Packages</h2>
+<ul>
+<li>Packages are collections of R functions, data, and compiled code.</li>
+<li>Extend the functionality of base R.</li>
+<li>Simplifies complex tasks.</li>
+<li>Widely used for specialized analyses.</li>
+</ul>
+<p>E.g., <a href="https://tidyr.tidyverse.org/"><code>tidy</code></a>, <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>, <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a></p>
+<hr>
+<section id="installing-loading-packages" class="level3">
+<h3 class="anchored" data-anchor-id="installing-loading-packages">4.1 Installing &amp; Loading Packages</h3>
+<ul>
+<li>Installation
+<ul>
+<li>Use the <code>install.packages()</code> function to install a package from CRAN.</li>
+</ul></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyr"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"stringr"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Loading
+<ul>
+<li>Use the <code>library()</code> function to load an installed package.</li>
+</ul></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Check the package documentation with <code>?</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>?tidyr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>?dplyr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong><em>N.B. Packages only need to be installed once but must be loaded in each session <code>library()</code>. Keep packages updated with <code>update.packages()</code></em></strong></p>
+<hr>
+</section>
 </section>
 <section id="r-basic-grammar" class="level2">
-<h2 class="anchored" data-anchor-id="r-basic-grammar">2. R: Basic Grammar</h2>
+<h2 class="anchored" data-anchor-id="r-basic-grammar">5. R: Basic Grammar</h2>
 <section id="variable-assignment" class="level3">
-<h3 class="anchored" data-anchor-id="variable-assignment">2.1 Variable Assignment</h3>
+<h3 class="anchored" data-anchor-id="variable-assignment">5.1 Variable Assignment</h3>
 <p>Variables are used to store data or values.</p>
 <p><code>=</code> (Simple Assignment) <strong>Similar to python</strong></p>
 <p><mark><code>&lt;-</code> (Leftward Assignment) <strong>Most Common used by R coders and we will use this</strong></mark></p>
 <p><code>-&gt;</code> (Rightward Assignment) <strong>Rarely used</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="st">"Simple_Assignment"</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="st">"Simple_Assignment"</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Simple_Assignment"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">"Leftward Assignment"</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">"Leftward Assignment"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Leftward Assignment"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Rightward_Assignment"</span> <span class="ot">-&gt;</span> z</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Rightward_Assignment"</span> <span class="ot">-&gt;</span> z</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Rightward_Assignment"</code></pre>
 <hr>
 </section>
 <section id="r-is-case-sensitive" class="level3">
-<h3 class="anchored" data-anchor-id="r-is-case-sensitive">2.2 R is case-sensitive</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 class="anchored" data-anchor-id="r-is-case-sensitive">5.2 R is case-sensitive</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## Error: object 'X' not found</code></pre>
 <p>It gave an error, why?</p>
 <p>Cause R is <mark> case sensitive </mark></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 2</code></pre>
 <hr>
 </section>
 <section id="comments" class="level3">
-<h3 class="anchored" data-anchor-id="comments">2.3 Comments</h3>
+<h3 class="anchored" data-anchor-id="comments">5.3 Comments</h3>
 <p>To comment - Comments are notes in the code that R ignores. Use <code>#</code> to write comments. - R only has single line comments so if you want multiple lines you need to repeat the <code>#</code> for each line.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>variable_2 <span class="ot">&lt;-</span> <span class="st">"Leftward Assignment"</span> <span class="do">## this is the most common used by R coders</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Other's work as well </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>variable_2 <span class="ot">&lt;-</span> <span class="st">"Leftward Assignment"</span> <span class="do">## this is the most common used by R coders</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Other's work as well </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
 <section id="r-reserved-keywords" class="level3">
-<h3 class="anchored" data-anchor-id="r-reserved-keywords">2.4 R Reserved Keywords</h3>
+<h3 class="anchored" data-anchor-id="r-reserved-keywords">5.4 R Reserved Keywords</h3>
 <p>You cannot use these keywords as variable names. These are reserved keywords for R.</p>
 <table class="caption-top table">
 <colgroup>
@@ -963,9 +1035,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="data-types" class="level2">
-<h2 class="anchored" data-anchor-id="data-types">3. Data Types</h2>
+<h2 class="anchored" data-anchor-id="data-types">6. Data Types</h2>
 <section id="numeric-character-logical-factor" class="level3">
-<h3 class="anchored" data-anchor-id="numeric-character-logical-factor">3.1 Numeric, Character, Logical, Factor</h3>
+<h3 class="anchored" data-anchor-id="numeric-character-logical-factor">6.1 Numeric, Character, Logical, Factor</h3>
 <ul>
 <li><p>Numeric: Numbers</p>
 <ul>
@@ -986,14 +1058,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>You can use <code>typeof()</code> to see what type of data it is</p></li>
 </ul>
 <p><strong>TRY: Writing different data types</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">25</span>  <span class="co"># Numeric</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">25</span>  <span class="co"># Numeric</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "double"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">"Alice"</span>  <span class="co"># Character</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">"Alice"</span>  <span class="co"># Character</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "character"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>is_student <span class="ot">&lt;-</span> <span class="cn">TRUE</span>  <span class="co"># Logical</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(is_student)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>is_student <span class="ot">&lt;-</span> <span class="cn">TRUE</span>  <span class="co"># Logical</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(is_student)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "logical"</code></pre>
 <p>Question? What is double?</p>
 <hr>
@@ -1001,7 +1073,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 <section id="dates" class="level3">
-<h3 class="anchored" data-anchor-id="dates">3.2 Dates</h3>
+<h3 class="anchored" data-anchor-id="dates">6.2 Dates</h3>
 <ul>
 <li>Date: Represents calendar dates.
 <ul>
@@ -1016,31 +1088,89 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Use <code>Sys.Date()</code> for the current date.</li>
 <li>Use <code>Sys.time()</code> for the current date and time.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="st">"2023-01-01"</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="st">"2023-01-01"</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "character"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(a)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(a)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "double"</code></pre>
 <p><strong>TRY: Converting strings to dates</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert a string to a date</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>my_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2023-01-01"</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(my_date)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the current date</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>today <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add 7 days to a date</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>future_date <span class="ot">&lt;-</span> today <span class="sc">+</span> <span class="dv">7</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the date and class</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(future_date)</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(future_date)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert a string to a date</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>my_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2023-01-01"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(my_date)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the current date</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>today <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add 7 days to a date</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>future_date <span class="ot">&lt;-</span> today <span class="sc">+</span> <span class="dv">7</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the date and class</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(future_date)</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(future_date)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="lubridate-package" class="level3">
+<h3 class="anchored" data-anchor-id="lubridate-package">6.3 Lubridate Package</h3>
+<p><a href="https://lubridate.tidyverse.org/"><code>Lubridate</code></a> is a package that makes working with dates easier.</p>
+<ul>
+<li><a href="https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf"><code>Lubridate</code> Cheat Sheet</a> - It provides easy functions to parse, manipulate, and extract date-time components.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lubridate"</span>) <span class="co"># only once</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># everytime you start R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Key Functions:</p>
+<ul>
+<li><p>Parsing Dates and Times:</p>
+<ul>
+<li><p><code>ymd()</code>, <code>dmy()</code>, <code>mdy(</code>): Convert strings to dates.</p></li>
+<li><p><code>ymd_hms()</code>, <code>mdy_hms()</code>: Handle date-time strings with hours, minutes, seconds.</p></li>
+</ul></li>
+<li><p>Extracting Components:</p>
+<ul>
+<li><p><code>year()</code>, <code>month()</code>, <code>day()</code>: Extract parts of a date.</p></li>
+<li><p><code>hour()</code>, <code>minute()</code>, <code>second()</code>: Extract time components.</p></li>
+</ul></li>
+<li><p>Manipulating Dates:</p>
+<ul>
+<li><p><code>today()</code>, <code>now()</code>: Current date or date-time.</p></li>
+<li><p>Arithmetic: Add or subtract days, months, etc.</p></li>
+</ul></li>
+<li><p>Time Zones:</p>
+<ul>
+<li>Set or change time zones with <code>with_tz()</code> or <code>force_tz()</code>.</li>
+</ul></li>
+</ul>
+<hr>
+<p><strong>TRY: Play with dates</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse a date</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>my_date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"2023-01-01"</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse a date-time</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>my_datetime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">"2023-01-01 12:34:56"</span>)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract components</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">year</span>(my_date)    <span class="co"># 2023</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 2023</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(my_date)   <span class="co"># 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 1</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">day</span>(my_date)     <span class="co"># 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 1</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hour</span>(my_datetime) <span class="co"># 12</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 12</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add 7 days</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>future_date <span class="ot">&lt;-</span> my_date <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">7</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>my_date <span class="sc">+</span> <span class="fu">months</span>(<span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "2023-07-01"</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a time zone</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>new_timezone <span class="ot">&lt;-</span> <span class="fu">with_tz</span>(my_datetime, <span class="at">tzone =</span> <span class="st">"America/New_York"</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(new_timezone)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "2023-01-01 07:34:56 EST"</code></pre>
 <hr>
 </section>
 </section>
 <section id="basic-arithmetic" class="level2">
-<h2 class="anchored" data-anchor-id="basic-arithmetic">4. Basic Arithmetic</h2>
+<h2 class="anchored" data-anchor-id="basic-arithmetic">7. Basic Arithmetic</h2>
 <p>Operators in R:</p>
 <ul>
 <li><p>Addition: <code>+</code></p></li>
@@ -1050,47 +1180,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Exponentiation: <code>^</code></p></li>
 </ul>
 <p><strong>TRY</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> a <span class="sc">+</span> b  <span class="co"># Addition</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> a <span class="sc">+</span> b  <span class="co"># Addition</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 13</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>product <span class="ot">&lt;-</span> a <span class="sc">*</span> b  <span class="co"># Multiplication</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(product)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>product <span class="ot">&lt;-</span> a <span class="sc">*</span> b  <span class="co"># Multiplication</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(product)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 30</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> a <span class="sc">^</span> b  <span class="co"># Exponentiation</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(power)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> a <span class="sc">^</span> b  <span class="co"># Exponentiation</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(power)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 1000</code></pre>
-<hr>
 <p><strong>TRY</strong> - Create variables and use basic arithmetic, I started for you play with them more!</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="dv">20</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="dv">5</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="dv">20</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="dv">5</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 5</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="dv">10</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>x<span class="sc">*</span>y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="dv">10</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>x<span class="sc">*</span>y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 50</code></pre>
 <hr>
 </section>
 <section id="vectors" class="level2">
-<h2 class="anchored" data-anchor-id="vectors">5. Vectors</h2>
+<h2 class="anchored" data-anchor-id="vectors">8. Vectors</h2>
 <p>A vector is a sequence of data elements of the same type.</p>
 <hr>
 <section id="creating-vectors" class="level3">
-<h3 class="anchored" data-anchor-id="creating-vectors">5.1 Creating Vectors</h3>
+<h3 class="anchored" data-anchor-id="creating-vectors">8.1 Creating Vectors</h3>
 <ul>
 <li>Creating Vectors: Use the <code>c()</code> function.</li>
 </ul>
 <p><strong>TRY</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)  <span class="co"># Numeric vector</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>)  <span class="co"># Character vector</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>is_student <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)  <span class="co"># Logical vector</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)  <span class="co"># Numeric vector</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>)  <span class="co"># Character vector</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>is_student <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)  <span class="co"># Logical vector</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>TRY what types they are</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(numbers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(numbers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "double"</code></pre>
 <p>You can access an element in a vector with square brackets <code>[]</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers[<span class="dv">2</span>])  <span class="co"># Prints the second element of the vector</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers[<span class="dv">2</span>])  <span class="co"># Prints the second element of the vector</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 2</code></pre>
 <hr>
 <section id="vectors-beyond-numbers" class="level4">
@@ -1101,103 +1230,104 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Numeric: Numbers.</li>
 <li>Logical: TRUE, FALSE.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>phrase <span class="ot">&lt;-</span> <span class="st">"Vectors are fun!"</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>phrase</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>phrase <span class="ot">&lt;-</span> <span class="st">"Vectors are fun!"</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>phrase</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Vectors are fun!"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Banana"</span>, <span class="st">"Mango"</span>, <span class="st">"Strawberry"</span>, <span class="st">"Grapes"</span>)  <span class="co"># ADD YOUR FAVORITES!</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>fruits</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Banana"</span>, <span class="st">"Mango"</span>, <span class="st">"Strawberry"</span>, <span class="st">"Grapes"</span>)  <span class="co"># ADD YOUR FAVORITES!</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>fruits</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Banana"     "Mango"      "Strawberry" "Grapes"</code></pre>
 <hr>
 </section>
 </section>
 <section id="vector-functions" class="level3">
-<h3 class="anchored" data-anchor-id="vector-functions">5.2 Vector functions</h3>
+<h3 class="anchored" data-anchor-id="vector-functions">8.2 Vector functions</h3>
 <ul>
 <li>Access specific items with <code>[]</code> (we practices above)</li>
 <li><code>length()</code>: Finds the number of elements in a vector.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector properties</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(fruits)       <span class="co"># Number of elements</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector properties</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(fruits)       <span class="co"># Number of elements</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 4</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="sc">*</span> <span class="dv">2</span>           <span class="co"># Produces an ERROR</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="sc">*</span> <span class="dv">2</span>           <span class="co"># Produces an ERROR</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## Error in fruits * 2: non-numeric argument to binary operator</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fruits)     <span class="co"># Sequence from 1 to the vector length</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fruits)     <span class="co"># Sequence from 1 to the vector length</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>fruits[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]          <span class="co"># Access multiple items</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>fruits[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]          <span class="co"># Access multiple items</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Mango"      "Strawberry"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>fruits[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]     <span class="co"># Exclude items 1 and 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>fruits[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]     <span class="co"># Exclude items 1 and 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Mango"      "Strawberry"</code></pre>
 <p>Why does <code>fruits * 2</code> produce an error?</p>
 <hr>
 </section>
 <section id="vector-sequences" class="level3">
-<h3 class="anchored" data-anchor-id="vector-sequences">5.3 Vector Sequences</h3>
+<h3 class="anchored" data-anchor-id="vector-sequences">8.3 Vector Sequences</h3>
 <p>We can create sequences with vectors using <code>:</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(A)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(A)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##  [1] 11 12 13 14 15 16 17 18 19 20</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(B)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(B)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##  [1]  0  1  2  3  4  5  6  7  8  9 10</code></pre>
 <p><strong>TRY: Vector functions with your number vectors</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector properties</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(A)       <span class="co"># Number of elements</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vector properties</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(A)       <span class="co"># Number of elements</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 10</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>B <span class="sc">*</span> <span class="dv">2</span>           <span class="co"># This time no error</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>B <span class="sc">*</span> <span class="dv">2</span>           <span class="co"># This time no error</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##  [1]  0  2  4  6  8 10 12 14 16 18 20</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(A)     <span class="co"># Sequence from 1 to the vector length</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(A)     <span class="co"># Sequence from 1 to the vector length</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>B[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]          <span class="co"># Access multiple items</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>B[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]          <span class="co"># Access multiple items</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 1 2</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>A[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]     <span class="co"># Exclude items 1 and 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>A[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]     <span class="co"># Exclude items 1 and 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 12 13 15 16 17 18 19 20</code></pre>
 <hr>
 </section>
 <section id="vector-indexing" class="level3">
-<h3 class="anchored" data-anchor-id="vector-indexing">5.4 Vector Indexing</h3>
+<h3 class="anchored" data-anchor-id="vector-indexing">8.4 Vector Indexing</h3>
 <ul>
 <li>Access items with <code>[]</code></li>
 <li>Exclude an item with <code>-</code>:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>fruits[<span class="dv">3</span>]  <span class="co"># Third item</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>fruits[<span class="dv">3</span>]  <span class="co"># Third item</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Strawberry"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>fruits[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]  <span class="co"># First and fourth items</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>fruits[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]  <span class="co"># First and fourth items</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Banana" "Grapes"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>fruits[<span class="sc">-</span><span class="dv">2</span>]  <span class="co"># Exclude the second item</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>fruits[<span class="sc">-</span><span class="dv">2</span>]  <span class="co"># Exclude the second item</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Banana"     "Strawberry" "Grapes"</code></pre>
 <p>Practice: - How do you select only items 1, 3, and 5? - How do you exclude items 2 and 4?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting items:</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>fruits[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting items:</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>fruits[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Banana"     "Strawberry" NA</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Excluding items:</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>fruits[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Excluding items:</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>fruits[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Banana"     "Strawberry"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Saving a subset:</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>favorite_fruits <span class="ot">&lt;-</span> fruits[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>favorite_fruits</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Saving a subset:</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>favorite_fruits <span class="ot">&lt;-</span> fruits[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>favorite_fruits</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Banana"     "Strawberry"</code></pre>
 <hr>
 </section>
 <section id="combining-vectors-type-coercion" class="level3">
-<h3 class="anchored" data-anchor-id="combining-vectors-type-coercion">5.5 Combining Vectors &amp; Type Coercion</h3>
+<h3 class="anchored" data-anchor-id="combining-vectors-type-coercion">8.5 Combining Vectors &amp; Type Coercion</h3>
 <p>Combine vectors of different types:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">"Hello"</span></span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>combo <span class="ot">&lt;-</span> <span class="fu">c</span>(numbers, text)</span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>combo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">"Hello"</span></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>combo <span class="ot">&lt;-</span> <span class="fu">c</span>(numbers, text)</span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>combo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "1"     "2"     "3"     "4"     "5"     "Hello"</code></pre>
-<p>Type Coercion: - R converts all elements in a vector to the same type.</p>
+<p>Type Coercion:</p>
 <ul>
-<li><p>Order of precedence:</p>
+<li>R converts all elements in a vector to the same type.</li>
+<li>Order of precedence:
 <ul>
 <li><code>Character &gt; Numeric &gt; Logical</code>.</li>
 </ul></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(numbers)      <span class="co"># "integer"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(numbers)      <span class="co"># "integer"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "integer"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(text)         <span class="co"># "character"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(text)         <span class="co"># "character"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "character"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(combo)        <span class="co"># "character"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(combo)        <span class="co"># "character"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "character"</code></pre>
 <p>Practice:</p>
 <ul>
@@ -1219,22 +1349,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>What happens if you add <code>TRUE</code> to the vector?</li>
 </ul></li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"One"</span>, <span class="st">"Two"</span>, <span class="st">"Three"</span>)</span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">c</span>(numbers, strings)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>strings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"One"</span>, <span class="st">"Two"</span>, <span class="st">"Three"</span>)</span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">c</span>(numbers, strings)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
 </section>
 <section id="vector-arithmetic-recycling" class="level3">
-<h3 class="anchored" data-anchor-id="vector-arithmetic-recycling">5.6 Vector Arithmetic &amp; Recycling</h3>
+<h3 class="anchored" data-anchor-id="vector-arithmetic-recycling">8.6 Vector Arithmetic &amp; Recycling</h3>
 <p>We can also do artihmetics with vectors!</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">+</span> B</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">+</span> B</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##  [1] 11 13 15 17 19 21 23 25 27 29 21</code></pre>
 <p>What will happen if we vectors of different sizes?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">24</span></span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> <span class="dv">25</span><span class="sc">:</span><span class="dv">30</span></span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>D<span class="sc">+</span>E</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">24</span></span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> <span class="dv">25</span><span class="sc">:</span><span class="dv">30</span></span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>D<span class="sc">+</span>E</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 45 47 49 51 53 50</code></pre>
 <p>R applies <strong>recycling</strong> which means…</p>
 <ul>
@@ -1249,34 +1379,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="data-frames" class="level2">
-<h2 class="anchored" data-anchor-id="data-frames">6. Data Frames</h2>
+<h2 class="anchored" data-anchor-id="data-frames">9. Data Frames</h2>
 <p>A data frame is a table-like structure (multiple vectors combined into rows and column) in R where each column can have a different data type (numeric, character, logical, etc.). Think of it as a spreadsheet where each column is a variable, and each row is an observation.</p>
 <section id="create-a-dataframe" class="level3">
-<h3 class="anchored" data-anchor-id="create-a-dataframe">6.1 Create a dataframe</h3>
+<h3 class="anchored" data-anchor-id="create-a-dataframe">9.1 Create a dataframe</h3>
 <ul>
 <li>Use the <code>data.frame()</code> function to create a data frame.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Ayse"</span>, <span class="st">"Jessy"</span>, <span class="st">"Chris"</span>),  <span class="co"># Character column</span></span>
-<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>),  <span class="co"># Numeric column</span></span>
-<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Professor =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)  <span class="co"># Logical column</span></span>
-<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the data frame</span></span>
-<span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">"Ayse"</span>, <span class="st">"Jessy"</span>, <span class="st">"Chris"</span>),  <span class="co"># Character column</span></span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>),  <span class="co"># Numeric column</span></span>
+<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Professor =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)  <span class="co"># Logical column</span></span>
+<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb114-7"><a href="#cb114-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-8"><a href="#cb114-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the data frame</span></span>
+<span id="cb114-9"><a href="#cb114-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##    Name Age Professor
 ## 1  Ayse  25      TRUE
 ## 2 Jessy  30     FALSE
 ## 3 Chris  35      TRUE</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="do">### OR</span></span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>Name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ayse"</span>, <span class="st">"Jessy"</span>, <span class="st">"Chris"</span>)  <span class="co"># Character column</span></span>
-<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>Age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>)  <span class="co"># Numeric column</span></span>
-<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>Professor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)  <span class="co"># Logical column</span></span>
-<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Name, Age, Professor)</span>
-<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="do">### OR</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>Name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ayse"</span>, <span class="st">"Jessy"</span>, <span class="st">"Chris"</span>)  <span class="co"># Character column</span></span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>Age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>)  <span class="co"># Numeric column</span></span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>Professor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)  <span class="co"># Logical column</span></span>
+<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-7"><a href="#cb116-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Name, Age, Professor)</span>
+<span id="cb116-8"><a href="#cb116-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##    Name Age Professor
 ## 1  Ayse  25      TRUE
 ## 2 Jessy  30     FALSE
@@ -1284,15 +1414,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <section id="vectors-in-a-data-frame-must-have-the-same-length" class="level4">
 <h4 class="anchored" data-anchor-id="vectors-in-a-data-frame-must-have-the-same-length"><mark>Vectors in a data frame must have the same length!!</mark></h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mismatched lengths will fail</span></span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>)</span>
-<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="cn">NA</span>)  <span class="co"># Fewer elements</span></span>
-<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>people <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(names, ages)  <span class="co"># ERROR</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mismatched lengths will fail</span></span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>)</span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="cn">NA</span>)  <span class="co"># Fewer elements</span></span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>people <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(names, ages)  <span class="co"># ERROR</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Let’s fix the error</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix the error:</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>)</span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>people <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(names, ages)</span>
-<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>people</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix the error:</span></span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>)</span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>people <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(names, ages)</span>
+<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a>people</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##     names ages
 ## 1   Alice   25
 ## 2     Bob   30
@@ -1340,7 +1470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="exploringinspecting-data-frames" class="level3">
-<h3 class="anchored" data-anchor-id="exploringinspecting-data-frames">6.2 Exploring/Inspecting Data Frames</h3>
+<h3 class="anchored" data-anchor-id="exploringinspecting-data-frames">9.2 Exploring/Inspecting Data Frames</h3>
 <p>Basic Functions to Explore a Data Frame:</p>
 <ul>
 <li><p><code>head(df)</code>: Displays the first 6 rows of the data frame.</p></li>
@@ -1349,26 +1479,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>str(df)</code>: Shows the structure of the data frame, including data types.</p></li>
 <li><p><code>summary(df)</code>: Provides summary statistics for each column.</p></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)        <span class="co"># First 6 rows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)        <span class="co"># First 6 rows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##    Name Age Professor
 ## 1  Ayse  25      TRUE
 ## 2 Jessy  30     FALSE
 ## 3 Chris  35      TRUE</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(df)        <span class="co"># Last 6 rows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(df)        <span class="co"># Last 6 rows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##    Name Age Professor
 ## 1  Ayse  25      TRUE
 ## 2 Jessy  30     FALSE
 ## 3 Chris  35      TRUE</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)         <span class="co"># Dimensions: rows and columns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)         <span class="co"># Dimensions: rows and columns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 3 3</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mtcars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mtcars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 32 11</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## 'data.frame':    3 obs. of  3 variables:
 ##  $ Name     : chr  "Ayse" "Jessy" "Chris"
 ##  $ Age      : num  25 30 35
 ##  $ Professor: logi  TRUE FALSE TRUE</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars) <span class="co"># Structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars) <span class="co"># Structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## 'data.frame':    32 obs. of  11 variables:
 ##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
 ##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
@@ -1381,7 +1511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
 ##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
 ##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)     <span class="co"># Summary statistics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)     <span class="co"># Summary statistics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##      Name                Age       Professor      
 ##  Length:3           Min.   :25.0   Mode :logical  
 ##  Class :character   1st Qu.:27.5   FALSE:1        
@@ -1392,47 +1522,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 <section id="accessing-data" class="level3">
-<h3 class="anchored" data-anchor-id="accessing-data">6.3 Accessing Data</h3>
+<h3 class="anchored" data-anchor-id="accessing-data">9.3 Accessing Data</h3>
 <p>Accessing Columns:</p>
 <ul>
 <li><p>Use the <code>$</code> operator:<code>df$ColumnName</code>.</p></li>
 <li><p>Use bracket notation: <code>df[ , "ColumnName"]</code>.</p></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df<span class="sc">$</span>Name)  <span class="co"># Access the 'Name' column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df<span class="sc">$</span>Name)  <span class="co"># Access the 'Name' column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Ayse"  "Jessy" "Chris"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df<span class="sc">$</span>Name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df<span class="sc">$</span>Name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##    Length     Class      Mode 
 ##         3 character character</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df[, <span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df[, <span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Ayse"  "Jessy" "Chris"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df[, <span class="st">"Age"</span>])  <span class="co"># Access the 'Age' column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df[, <span class="st">"Age"</span>])  <span class="co"># Access the 'Age' column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 25 30 35</code></pre>
 <p>Accessing Rows:</p>
 <ul>
 <li>Use bracket notation with a row index: <code>df[row_number, ]</code>.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df[<span class="dv">2</span>, ])  <span class="co"># Access the first row</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df[<span class="dv">2</span>, ])  <span class="co"># Access the first row</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##    Name Age Professor
 ## 2 Jessy  30     FALSE</code></pre>
 <p>Accessing Specific Elements:</p>
 <ul>
 <li>Use <code>df[row, column]</code>.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df[<span class="dv">2</span>, <span class="dv">3</span>])  <span class="co"># Access the element in the 2nd row and 3rd column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df[<span class="dv">2</span>, <span class="dv">3</span>])  <span class="co"># Access the element in the 2nd row and 3rd column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df[<span class="dv">2</span>, <span class="st">"Professor"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df[<span class="dv">2</span>, <span class="st">"Professor"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] FALSE</code></pre>
 <hr>
 </section>
 <section id="adding-and-removing-data" class="level3">
-<h3 class="anchored" data-anchor-id="adding-and-removing-data">6.4 Adding and Removing Data</h3>
+<h3 class="anchored" data-anchor-id="adding-and-removing-data">9.4 Adding and Removing Data</h3>
 <p><mark> Don’t forget <code>[row, column]</code></mark></p>
 <p>Adding Columns:</p>
 <ul>
 <li>Use the <code>$</code> operator or bracket notation to add a new column.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Graduation <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2021"</span>, <span class="st">"2026"</span>, <span class="st">"2019"</span>)  <span class="co"># Add a new column 'Graduation'</span></span>
-<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Graduation <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2021"</span>, <span class="st">"2026"</span>, <span class="st">"2019"</span>)  <span class="co"># Add a new column 'Graduation'</span></span>
+<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##    Name Age Professor Graduation
 ## 1  Ayse  25      TRUE       2021
 ## 2 Jessy  30     FALSE       2026
@@ -1441,9 +1571,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Use the <code>rbind()</code> function.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>new_row <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="st">"Donpeng"</span>, <span class="at">Age =</span> <span class="dv">28</span>, <span class="at">Professor =</span> <span class="cn">NA</span>, <span class="at">Graduation =</span> <span class="st">"2025"</span>)</span>
-<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df, new_row)  <span class="co"># Add a new row</span></span>
-<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>new_row <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="st">"Donpeng"</span>, <span class="at">Age =</span> <span class="dv">28</span>, <span class="at">Professor =</span> <span class="cn">NA</span>, <span class="at">Graduation =</span> <span class="st">"2025"</span>)</span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df, new_row)  <span class="co"># Add a new row</span></span>
+<span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##      Name Age Professor Graduation
 ## 1    Ayse  25      TRUE       2021
 ## 2   Jessy  30     FALSE       2026
@@ -1453,23 +1583,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Use the <code>NULL</code> assignment, <code>-</code> or subset the data frame.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Graduation <span class="ot">&lt;-</span> <span class="cn">NULL</span>  <span class="co"># Remove the 'Graduation' column</span></span>
-<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Graduation <span class="ot">&lt;-</span> <span class="cn">NULL</span>  <span class="co"># Remove the 'Graduation' column</span></span>
+<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##      Name Age Professor
 ## 1    Ayse  25      TRUE
 ## 2   Jessy  30     FALSE
 ## 3   Chris  35      TRUE
 ## 4 Donpeng  28        NA</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">3</span>]</span>
-<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">3</span>]</span>
+<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##      Name Age
 ## 1    Ayse  25
 ## 2   Jessy  30
 ## 3   Chris  35
 ## 4 Donpeng  28</code></pre>
 <p>Same with rows, use <code>-</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df[<span class="sc">-</span><span class="dv">2</span>,]</span>
-<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df[<span class="sc">-</span><span class="dv">2</span>,]</span>
+<span id="cb157-2"><a href="#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##      Name Age Professor
 ## 1    Ayse  25      TRUE
 ## 3   Chris  35      TRUE
@@ -1477,7 +1607,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 <section id="filtering-and-subsetting" class="level3">
-<h3 class="anchored" data-anchor-id="filtering-and-subsetting">6.5 Filtering and Subsetting</h3>
+<h3 class="anchored" data-anchor-id="filtering-and-subsetting">9.5 Filtering and Subsetting</h3>
 <p>Manipulating data is key to preparing it for analysis.</p>
 <p>Common tasks:</p>
 <ul>
@@ -1488,40 +1618,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Filtering Rows: Use logical conditions inside square brackets.</p>
 <p><strong>TRY: Filter rows where Age &gt; 25</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter rows where Age &gt; 25</span></span>
-<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Age <span class="sc">&gt;</span> <span class="dv">25</span>, ]</span>
-<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb159"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter rows where Age &gt; 25</span></span>
+<span id="cb159-2"><a href="#cb159-2" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Age <span class="sc">&gt;</span> <span class="dv">25</span>, ]</span>
+<span id="cb159-3"><a href="#cb159-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##      Name Age Professor
 ## 2   Jessy  30     FALSE
 ## 3   Chris  35      TRUE
 ## 4 Donpeng  28        NA</code></pre>
 <p>Selecting Specific Columns: Use column indices or names.</p>
 <p><strong>TRY: Select only ‘Name’ and ‘Age’ columns</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only 'Name' and 'Age' columns</span></span>
-<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a>df_subset <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"Name"</span>, <span class="st">"Age"</span>)]</span>
-<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only 'Name' and 'Age' columns</span></span>
+<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a>df_subset <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"Name"</span>, <span class="st">"Age"</span>)]</span>
+<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##      Name Age
 ## 1    Ayse  25
 ## 2   Jessy  30
 ## 3   Chris  35
 ## 4 Donpeng  28</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a>df_subset <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>df_subset <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
 <section id="ordering-data" class="level3">
-<h3 class="anchored" data-anchor-id="ordering-data">6.6 Ordering Data</h3>
+<h3 class="anchored" data-anchor-id="ordering-data">9.6 Ordering Data</h3>
 <p>Rearrange rows based on column values.</p>
 <p><strong>TRY: Sort by Age in ascending order</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by Age in ascending order</span></span>
-<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>sorted_df <span class="ot">&lt;-</span> df[<span class="fu">order</span>(df<span class="sc">$</span>Age), ]</span>
-<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by Age in descending order</span></span>
-<span id="cb143-5"><a href="#cb143-5" aria-hidden="true" tabindex="-1"></a>sorted_df_desc <span class="ot">&lt;-</span> df[<span class="fu">order</span>(<span class="sc">-</span>df<span class="sc">$</span>Age), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb164"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by Age in ascending order</span></span>
+<span id="cb164-2"><a href="#cb164-2" aria-hidden="true" tabindex="-1"></a>sorted_df <span class="ot">&lt;-</span> df[<span class="fu">order</span>(df<span class="sc">$</span>Age), ]</span>
+<span id="cb164-3"><a href="#cb164-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb164-4"><a href="#cb164-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by Age in descending order</span></span>
+<span id="cb164-5"><a href="#cb164-5" aria-hidden="true" tabindex="-1"></a>sorted_df_desc <span class="ot">&lt;-</span> df[<span class="fu">order</span>(<span class="sc">-</span>df<span class="sc">$</span>Age), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>TRY: Sort rows by Name in alphabetical order.</strong></p>
 <hr>
 </section>
 <section id="common-data-frame-functions" class="level3">
-<h3 class="anchored" data-anchor-id="common-data-frame-functions">6.7 Common Data Frame Functions</h3>
+<h3 class="anchored" data-anchor-id="common-data-frame-functions">9.7 Common Data Frame Functions</h3>
 <ul>
 <li><code>nrow(df)</code>: Returns the number of rows.</li>
 <li><code>ncol(df)</code>: Returns the number of columns.</li>
@@ -1532,19 +1662,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 <section id="basic-aggregations" class="level3">
-<h3 class="anchored" data-anchor-id="basic-aggregations">6.8 Basic Aggregations</h3>
+<h3 class="anchored" data-anchor-id="basic-aggregations">9.8 Basic Aggregations</h3>
 <p>Compute summary statistics (e.g., mean, sum) for groups of data.</p>
 <p><strong>TRY:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Calculate mean Age </span></span>
-<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Calculate mean Age </span></span>
+<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 29.5</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(df<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(df<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 35</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(df<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(df<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 25</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb171"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 118</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(df<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(df<span class="sc">$</span>Age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] 4.203173</code></pre>
 <p><strong>TRY: Try with other functions such as <code>max()</code>, <code>min()</code>, <code>sum()</code>, and others</strong></p>
 <hr>
@@ -1558,306 +1688,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-</section>
-<section id="functions" class="level2">
-<h2 class="anchored" data-anchor-id="functions">7. Functions</h2>
-<p>Functions perform specific tasks. They take inputs (arguments) and return outputs.</p>
-<ul>
-<li>Syntax: <code>function_name(arguments)</code></li>
-</ul>
-<p><strong>TRY</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>sum_result <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))  <span class="co"># Sum of a vector</span></span>
-<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_result) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] 6</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>mean_result <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>))  <span class="co"># Mean of a vector</span></span>
-<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mean_result) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] 5</code></pre>
-<hr>
-</section>
-<section id="conditional-statements" class="level2">
-<h2 class="anchored" data-anchor-id="conditional-statements">8. Conditional Statements</h2>
-<p>Conditional statements allow you to perform different actions based on conditions.</p>
-<ul>
-<li>Keywords: <code>if</code>, <code>else if</code>, <code>else</code></li>
-</ul>
-<p><strong>TRY</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"w"</span></span>
-<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">10</span>) {</span>
-<span id="cb158-4"><a href="#cb158-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"x is greater than 10"</span>)</span>
-<span id="cb158-5"><a href="#cb158-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (x <span class="sc">==</span> <span class="dv">10</span>) {</span>
-<span id="cb158-6"><a href="#cb158-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"x is equal to 10"</span>)</span>
-<span id="cb158-7"><a href="#cb158-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb158-8"><a href="#cb158-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"x is less than 10"</span>)</span>
-<span id="cb158-9"><a href="#cb158-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] "x is greater than 10"</code></pre>
-<hr>
-</section>
-<section id="loops" class="level2">
-<h2 class="anchored" data-anchor-id="loops">9. Loops</h2>
-<p>Loops allow repetitive tasks to be automated.</p>
-<p>Common Loops:</p>
-<ul>
-<li><code>for</code>: Iterates over a sequence.</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for loop</span></span>
-<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (BreaD <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
-<span id="cb160-3"><a href="#cb160-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(BreaD)</span>
-<span id="cb160-4"><a href="#cb160-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] 1
-## [1] 2
-## [1] 3
-## [1] 4
-## [1] 5</code></pre>
-<ul>
-<li><code>while</code>: Repeats as long as a condition is TRUE.</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb162"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># while loop</span></span>
-<span id="cb162-2"><a href="#cb162-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb162-3"><a href="#cb162-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (x <span class="sc">&lt;=</span> <span class="dv">5</span>) {</span>
-<span id="cb162-4"><a href="#cb162-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(x)</span>
-<span id="cb162-5"><a href="#cb162-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb162-6"><a href="#cb162-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] 1
-## [1] 2
-## [1] 3
-## [1] 4
-## [1] 5</code></pre>
-<hr>
-</section>
-<section id="regular-expressions-regex" class="level2">
-<h2 class="anchored" data-anchor-id="regular-expressions-regex">10. Regular Expressions (Regex)</h2>
-<p>What is Regex (Regular Expression)?</p>
-<ul>
-<li>A regular expression (regex) is a sequence of characters that defines a search pattern.</li>
-<li>Used for:
-<ul>
-<li>Matching patterns in text.</li>
-<li>Extracting or replacing specific text.</li>
-<li>Validating strings (e.g., usernames, email addresses).</li>
-</ul></li>
-<li>Easily process large text datasets.</li>
-<li>Clean and analyze text data efficiently.</li>
-</ul>
-<hr>
-<section id="regex-basic-syntax" class="level3">
-<h3 class="anchored" data-anchor-id="regex-basic-syntax">10.1 RegEx Basic Syntax</h3>
-<p><a href="https://rstudio.github.io/cheatsheets/regex.pdf">Regex Cheat Sheet</a></p>
-<p>We will use the <a href="https://stringr.tidyverse.org/"><code>stringr</code> package</a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb164"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"stringr"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Regex.Pattern</th>
-<th style="text-align: left;">Matches</th>
-<th style="text-align: left;">Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">.</td>
-<td style="text-align: left;">Any single character</td>
-<td style="text-align: left;">“Mario1” matches “M.rio1”</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">^</td>
-<td style="text-align: left;">Start of a string</td>
-<td style="text-align: left;">“^Zelda” matches “Zelda…”</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">$</td>
-<td style="text-align: left;">End of a string</td>
-<td style="text-align: left;">“end$” matches “The end”</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">*</td>
-<td style="text-align: left;">Zero or more of the preceding character</td>
-<td style="text-align: left;">“A*B” matches “AAAB”</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">+</td>
-<td style="text-align: left;">One or more of the preceding character</td>
-<td style="text-align: left;">“Go+” matches “Gooo”</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">[]</td>
-<td style="text-align: left;">Match any character in the set</td>
-<td style="text-align: left;">“[PS]” matches “P”, “S”</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">|</td>
-<td style="text-align: left;">Logical OR</td>
-<td style="text-align: left;">“Mario|Zelda” matches either</td>
-</tr>
-</tbody>
-</table>
-<p>Regex Patterns and Examples</p>
-<hr>
-</section>
-<section id="extracting-text" class="level3">
-<h3 class="anchored" data-anchor-id="extracting-text">10.2 Extracting Text</h3>
-<p>Let’s create a dataset:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb166-2"><a href="#cb166-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The new Mario Kart is amazing!"</span>,</span>
-<span id="cb166-3"><a href="#cb166-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Zelda: Breath of the Wild is a masterpiece."</span>,</span>
-<span id="cb166-4"><a href="#cb166-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"I can't wait for Final Fantasy XVI."</span>,</span>
-<span id="cb166-5"><a href="#cb166-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Have you tried playing God of War: Ragnarok?"</span>,</span>
-<span id="cb166-6"><a href="#cb166-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Elden Ring redefined the RPG genre."</span></span>
-<span id="cb166-7"><a href="#cb166-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Let’s extract the titles: Maria Kart, Zelda, Final Fantasy XVI, God of War: Ragnarok</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract video game titles using regex</span></span>
-<span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a>titles <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(reviews, <span class="st">"Mario Kart|Zelda: Breath of the Wild|Final Fantasy XVI|God of War: Ragnarok|Elden Ring"</span>)</span>
-<span id="cb167-3"><a href="#cb167-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb167-4"><a href="#cb167-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(titles)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] "Mario Kart"                "Zelda: Breath of the Wild"
-## [3] "Final Fantasy XVI"         "God of War: Ragnarok"     
-## [5] "Elden Ring"</code></pre>
-<hr>
-</section>
-<section id="validating-text" class="level3">
-<h3 class="anchored" data-anchor-id="validating-text">10.3 Validating Text</h3>
-<p>You can use regex to validate if a text or pattern of text is in your data</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>game_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"GAME-1234"</span>, <span class="st">"INVALID"</span>, <span class="st">"PLAY-5678"</span>, <span class="st">"GAMEX-9999"</span>, <span class="st">"GAME-567"</span>)</span>
-<span id="cb169-2"><a href="#cb169-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb169-3"><a href="#cb169-3" aria-hidden="true" tabindex="-1"></a>valid_codes <span class="ot">&lt;-</span> <span class="fu">str_detect</span>(game_codes, <span class="st">"^(GAME|PLAY)-</span><span class="sc">\\</span><span class="st">d{4}$"</span>)</span>
-<span id="cb169-4"><a href="#cb169-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb169-5"><a href="#cb169-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(valid_codes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1]  TRUE FALSE  TRUE FALSE FALSE</code></pre>
-<hr>
-</section>
-<section id="pattern-matching" class="level3">
-<h3 class="anchored" data-anchor-id="pattern-matching">10.4 Pattern Matching</h3>
-<p>Let’s extract years — numbers of 4 digits</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb171"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a>release_info <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb171-2"><a href="#cb171-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Legend of Zelda was released in 2023."</span>,</span>
-<span id="cb171-3"><a href="#cb171-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Elden Ring: GOTY Edition, releasing in 2024."</span>,</span>
-<span id="cb171-4"><a href="#cb171-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Final Fantasy XVI came out in 2023."</span></span>
-<span id="cb171-5"><a href="#cb171-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb171-6"><a href="#cb171-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb171-7"><a href="#cb171-7" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">str_extract</span>(release_info, <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">d{4}</span><span class="sc">\\</span><span class="st">b"</span>)</span>
-<span id="cb171-8"><a href="#cb171-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb171-9"><a href="#cb171-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(years)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] "2023" "2024" "2023"</code></pre>
-<hr>
-<section id="match-words-using-patterns" class="level4">
-<h4 class="anchored" data-anchor-id="match-words-using-patterns">Match words using patterns</h4>
-<p>Identify words that start with G or R</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"God of War is great"</span>, <span class="st">"Ragnarok is a masterpiece"</span>, <span class="st">"Mario Kart rules"</span>)</span>
-<span id="cb173-2"><a href="#cb173-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb173-3"><a href="#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find words starting with G or R</span></span>
-<span id="cb173-4"><a href="#cb173-4" aria-hidden="true" tabindex="-1"></a>matches <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">b[G|R]</span><span class="sc">\\</span><span class="st">w+"</span>)</span>
-<span id="cb173-5"><a href="#cb173-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb173-6"><a href="#cb173-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matches)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [[1]]
-## [1] "God"
-## 
-## [[2]]
-## [1] "Ragnarok"
-## 
-## [[3]]
-## character(0)</code></pre>
-<hr>
-</section>
-</section>
-</section>
-<section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">11. R Packages</h2>
-<ul>
-<li>Packages are collections of R functions, data, and compiled code.</li>
-<li>Extend the functionality of base R.</li>
-<li>Simplifies complex tasks.</li>
-<li>Widely used for specialized analyses.</li>
-</ul>
-<p>E.g., <a href="https://tidyr.tidyverse.org/"><code>tidy</code></a>, <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>, <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a></p>
-<hr>
-<section id="installing-loading-packages" class="level3">
-<h3 class="anchored" data-anchor-id="installing-loading-packages">11.1 Installing &amp; Loading Packages</h3>
-<ul>
-<li>Installation
-<ul>
-<li>Use the <code>install.packages()</code> function to install a package from CRAN.</li>
-</ul></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyr"</span>)</span>
-<span id="cb175-2"><a href="#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
-<span id="cb175-3"><a href="#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lubridate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Loading
-<ul>
-<li>Use the <code>library()</code> function to load an installed package.</li>
-</ul></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb176"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb176-2"><a href="#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb176-3"><a href="#cb176-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Check the package documentation with <code>?</code></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a>?tidyr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb178"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a>?dplyr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong><em>N.B. Packages only need to be installed once but must be loaded in each session <code>library()</code>. Keep packages updated with <code>update.packages()</code></em></strong></p>
-<hr>
-</section>
-<section id="lubridate-package" class="level3">
-<h3 class="anchored" data-anchor-id="lubridate-package">11.2 Lubridate Package</h3>
-<p><a href="https://lubridate.tidyverse.org/"><code>Lubridate</code></a> is a package that makes working with dates easier.</p>
-<ul>
-<li><a href="https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf"><code>Lubridate</code> Cheat Sheet</a> - It provides easy functions to parse, manipulate, and extract date-time components.</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lubridate"</span>) <span class="co"># only once</span></span>
-<span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># everytime you start R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Key Functions:</p>
-<ul>
-<li><p>Parsing Dates and Times:</p>
-<ul>
-<li><p><code>ymd()</code>, <code>dmy()</code>, <code>mdy(</code>): Convert strings to dates.</p></li>
-<li><p><code>ymd_hms()</code>, <code>mdy_hms()</code>: Handle date-time strings with hours, minutes, seconds.</p></li>
-</ul></li>
-<li><p>Extracting Components:</p>
-<ul>
-<li><p><code>year()</code>, <code>month()</code>, <code>day()</code>: Extract parts of a date.</p></li>
-<li><p><code>hour()</code>, <code>minute()</code>, <code>second()</code>: Extract time components.</p></li>
-</ul></li>
-<li><p>Manipulating Dates:</p>
-<ul>
-<li><p><code>today()</code>, <code>now()</code>: Current date or date-time.</p></li>
-<li><p>Arithmetic: Add or subtract days, months, etc.</p></li>
-</ul></li>
-<li><p>Time Zones:</p>
-<ul>
-<li>Set or change time zones with <code>with_tz()</code> or <code>force_tz()</code>.</li>
-</ul></li>
-</ul>
-<hr>
-<p><strong>TRY: Play with dates</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb180"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb180-2"><a href="#cb180-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-3"><a href="#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse a date</span></span>
-<span id="cb180-4"><a href="#cb180-4" aria-hidden="true" tabindex="-1"></a>my_date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"2023-01-01"</span>)</span>
-<span id="cb180-5"><a href="#cb180-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-6"><a href="#cb180-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse a date-time</span></span>
-<span id="cb180-7"><a href="#cb180-7" aria-hidden="true" tabindex="-1"></a>my_datetime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">"2023-01-01 12:34:56"</span>)</span>
-<span id="cb180-8"><a href="#cb180-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-9"><a href="#cb180-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract components</span></span>
-<span id="cb180-10"><a href="#cb180-10" aria-hidden="true" tabindex="-1"></a><span class="fu">year</span>(my_date)    <span class="co"># 2023</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] 2023</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb182"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(my_date)   <span class="co"># 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] 1</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb184"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href="#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">day</span>(my_date)     <span class="co"># 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] 1</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb186"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href="#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hour</span>(my_datetime) <span class="co"># 12</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] 12</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb188"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb188-1"><a href="#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add 7 days</span></span>
-<span id="cb188-2"><a href="#cb188-2" aria-hidden="true" tabindex="-1"></a>future_date <span class="ot">&lt;-</span> my_date <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">7</span>)</span>
-<span id="cb188-3"><a href="#cb188-3" aria-hidden="true" tabindex="-1"></a>my_date <span class="sc">+</span> <span class="fu">months</span>(<span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] "2023-07-01"</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb190"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb190-1"><a href="#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a time zone</span></span>
-<span id="cb190-2"><a href="#cb190-2" aria-hidden="true" tabindex="-1"></a>new_timezone <span class="ot">&lt;-</span> <span class="fu">with_tz</span>(my_datetime, <span class="at">tzone =</span> <span class="st">"America/New_York"</span>)</span>
-<span id="cb190-3"><a href="#cb190-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(new_timezone)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] "2023-01-01 07:34:56 EST"</code></pre>
-<hr>
-</section>
 <section id="lecture-1-cheat-sheet" class="level3">
 <h3 class="anchored" data-anchor-id="lecture-1-cheat-sheet">Lecture 1 Cheat Sheet</h3>
 <table class="caption-top table">
@@ -1868,81 +1698,125 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th><strong>Topic</strong></th>
-<th><strong>Key Points</strong></th>
+<th><strong>Key Points / Commands</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Variable Assignment</strong></td>
-<td><code>=</code> (simple assignment), <code>&lt;-</code> (most common), and <code>-&gt;</code> (rare). R is case-sensitive.</td>
+<td><strong>RStudio</strong></td>
+<td>Integrated Development Environment (IDE) for R. Main panes: Console, Source, Environment, Files/Plots/Packages/Help.</td>
 </tr>
 <tr class="even">
-<td><strong>Comments</strong></td>
-<td>Use <code>#</code> for single-line comments.</td>
+<td><strong>Console</strong></td>
+<td>Runs R code line by line. Good for quick tests. Code is not saved unless written in a script or R Markdown file.</td>
 </tr>
 <tr class="odd">
-<td><strong>R Reserved Keywords</strong></td>
-<td>Reserved for R’s functionality, e.g., <code>if</code>, <code>for</code>, <code>TRUE</code>, <code>NULL</code>, <code>Inf</code>, <code>NA</code>.</td>
+<td><strong>Terminal</strong></td>
+<td>System command line (not R). Used for OS-level commands (e.g., <code>ls</code>, <code>dir</code>). We will rarely use it.</td>
 </tr>
 <tr class="even">
-<td><strong>Data Types</strong></td>
-<td>Numeric, Character, Logical, Factor, and Dates (<code>Date</code>, <code>POSIXct</code>).</td>
+<td><strong>RStudio Projects</strong></td>
+<td>Organize files for one analysis. Automatically sets working directory. Always open work via the <code>.Rproj</code> file.</td>
 </tr>
 <tr class="odd">
-<td><strong>Basic Arithmetic</strong></td>
-<td>Addition <code>+</code>, Subtraction <code>-</code>, Multiplication <code>*</code>, Division <code>/</code>, Exponentiation <code>^</code>.</td>
+<td><strong>Project Folder Structure</strong></td>
+<td>Recommended folders: <code>data/</code> (datasets), <code>scripts/</code> (R scripts), <code>.Rmd</code> files for notes/analysis.</td>
 </tr>
 <tr class="even">
-<td><strong>Vectors</strong></td>
-<td>Sequences of data elements of the same type. Created with <code>c()</code>.</td>
+<td><strong>Scripts (<code>.R</code>)</strong></td>
+<td>Plain text files for writing and saving R code. Run selected lines with <code>Cmd/Ctrl + Enter</code>.</td>
 </tr>
 <tr class="odd">
-<td><strong>Vector Functions</strong></td>
-<td><code>length()</code>, indexing with <code>[]</code>, <code>rep()</code>, sequence generation with <code>:</code>.</td>
+<td><strong>Working Directory</strong></td>
+<td>Check with <code>getwd()</code>. Should point to your project folder. Enables relative paths like <code>"data/file.csv"</code>.</td>
 </tr>
 <tr class="even">
-<td><strong>Combining Vectors</strong></td>
-<td>Use <code>c()</code>. Type coercion converts all elements to the same type (Character &gt; Numeric &gt; Logical).</td>
+<td><strong>R Markdown (<code>.Rmd</code>)</strong></td>
+<td>Combines text, code, and output in one reproducible document. Used for notes, assignments, and reports.</td>
 </tr>
 <tr class="odd">
-<td><strong>Data Frames</strong></td>
-<td>Table-like structures combining multiple vectors with the same length. Created with <code>data.frame()</code>.</td>
+<td><strong>Running vs Knitting</strong></td>
+<td>Run chunks to execute code interactively. Knit rebuilds the entire document from top to bottom in a clean session.</td>
 </tr>
 <tr class="even">
-<td><strong>Inspecting Data Frames</strong></td>
-<td><code>head()</code>, <code>tail()</code>, <code>str()</code>, <code>summary()</code>, <code>dim()</code>, <code>colnames()</code>, <code>rownames()</code>.</td>
-</tr>
-<tr class="odd">
-<td><strong>Manipulating Data Frames</strong></td>
-<td>Filter rows (<code>df[df$col &gt; value, ]</code>), select columns (<code>df[, c("col1", "col2")]</code>), sort with <code>order()</code>.</td>
-</tr>
-<tr class="even">
-<td><strong>Basic Aggregations</strong></td>
-<td>Group and summarize data using <code>aggregate()</code> and functions like <code>mean()</code>, <code>sum()</code>, <code>max()</code>.</td>
+<td><strong>Code Chunks</strong></td>
+<td>R code lives inside chunks: <code>{r} code</code> . Output appears below the chunk.</td>
 </tr>
 <tr class="odd">
 <td><strong>R Packages</strong></td>
-<td>Install with <code>install.packages()</code> and load with <code>library()</code>. E.g., <code>tidy</code>, <code>dplyr</code>, <code>lubridate</code>.</td>
+<td>Extend R functionality. Install once with <code>install.packages()</code>, load every session with <code>library()</code>.</td>
 </tr>
 <tr class="even">
-<td><strong>Dates with Lubridate</strong></td>
-<td>Parse dates (<code>ymd()</code>, <code>mdy()</code>, etc.), extract components (<code>year()</code>, <code>month()</code>), manipulate (<code>+ days</code>).</td>
+<td><strong>Variable Assignment</strong></td>
+<td><code>&lt;-</code> (preferred), <code>=</code> (allowed), <code>-&gt;</code> (rare). R is case-sensitive.</td>
 </tr>
 <tr class="odd">
-<td><strong>Functions</strong></td>
-<td>Perform tasks with inputs (arguments) and outputs. E.g., <code>sum()</code>, <code>mean()</code>, custom-defined functions.</td>
+<td><strong>Comments</strong></td>
+<td>Use <code>#</code> for comments. R only supports single-line comments.</td>
 </tr>
 <tr class="even">
-<td><strong>Conditional Statements</strong></td>
-<td>Use <code>if</code>, <code>else if</code>, <code>else</code> for logic.</td>
+<td><strong>Reserved Keywords</strong></td>
+<td>Cannot be used as variable names (e.g., <code>if</code>, <code>for</code>, <code>TRUE</code>, <code>FALSE</code>, <code>NA</code>, <code>NULL</code>, <code>Inf</code>).</td>
 </tr>
 <tr class="odd">
-<td><strong>Loops</strong></td>
-<td>Automate repetitive tasks with <code>for</code> and <code>while</code>.</td>
+<td><strong>Basic Data Types</strong></td>
+<td>Numeric, Character, Logical, Factor. Check with <code>typeof()</code>.</td>
 </tr>
 <tr class="even">
-<td><strong>Regular Expressions (Regex)</strong></td>
-<td>Match patterns in text (<code>str_extract()</code>, <code>str_detect()</code>), extract years, validate patterns.</td>
+<td><strong>Dates</strong></td>
+<td><code>Date</code>, <code>POSIXct</code>, <code>POSIXlt</code>. Use <code>as.Date()</code>, <code>Sys.Date()</code>, <code>Sys.time()</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>Lubridate</strong></td>
+<td>Easier date handling: <code>ymd()</code>, <code>mdy()</code>, <code>year()</code>, <code>month()</code>, <code>day()</code>, <code>+ days()</code>, <code>+ months()</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>Basic Arithmetic</strong></td>
+<td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>. Works on numbers and vectors.</td>
+</tr>
+<tr class="odd">
+<td><strong>Vectors</strong></td>
+<td>One-dimensional objects with same data type. Create with <code>c()</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>Vector Indexing</strong></td>
+<td>Use <code>[]</code>. Select (<code>x[1:3]</code>), exclude (<code>x[-2]</code>), multiple indices (<code>x[c(1,3)]</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>Vector Functions</strong></td>
+<td><code>length()</code>, sequences with <code>:</code>, recycling in vector arithmetic.</td>
+</tr>
+<tr class="even">
+<td><strong>Type Coercion</strong></td>
+<td>Combining types converts to one type: Character &gt; Numeric &gt; Logical.</td>
+</tr>
+<tr class="odd">
+<td><strong>Data Frames</strong></td>
+<td>Table-like structure with columns of equal length. Create with <code>data.frame()</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>Inspecting Data Frames</strong></td>
+<td><code>head()</code>, <code>tail()</code>, <code>str()</code>, <code>summary()</code>, <code>dim()</code>, <code>nrow()</code>, <code>ncol()</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>Accessing Data</strong></td>
+<td>Columns: <code>df$col</code>, <code>df[, "col"]</code>. Rows: <code>df[row, ]</code>. Elements: <code>df[row, col]</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>Adding/Removing Data</strong></td>
+<td>Add columns with <code>$</code>. Add rows with <code>rbind()</code>. Remove with <code>NULL</code> or negative indexing.</td>
+</tr>
+<tr class="odd">
+<td><strong>Filtering &amp; Subsetting</strong></td>
+<td>Use logical conditions: <code>df[df$Age &gt; 25, ]</code>. Select columns by name or index.</td>
+</tr>
+<tr class="even">
+<td><strong>Sorting Data</strong></td>
+<td><code>order(df$col)</code> for ascending, <code>order(-df$col)</code> for descending.</td>
+</tr>
+<tr class="odd">
+<td><strong>Basic Aggregations</strong></td>
+<td><code>mean()</code>, <code>max()</code>, <code>min()</code>, <code>sum()</code>, <code>sd()</code> on vectors or data frame columns.</td>
 </tr>
 </tbody>
 </table>
