@@ -1,0 +1,2336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>bigdata_l5-github – Social Data Analysis and Visualization</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-956b8a4ec41f03f761f91fad8c3a3e27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c2a6d3abc2894eadef3e844b666af903.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-956b8a4ec41f03f761f91fad8c3a3e27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Social Data Analysis and Visualization</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Masters Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule_phd.html"> 
+<span class="menu-text">PhD Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../install.html"> 
+<span class="menu-text">Install R</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aysedeniz09/IntroCSS"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Getting Started</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Social Data Analysis and Visualization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Schedule - Masters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule_phd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Schedule - PhD</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Install R Studio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Class Sessions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/01/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 1 - Why Computational Social Science?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/02/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 2 - Data Collection and Wrangling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/03/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 3 - GGPlot and Visualizations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/04/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 4 - Computational Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/05/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 5 - Descriptive Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/06/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 6 - Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/07/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 7 - Dictionary Methods &amp; Word Embeddings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/08/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 8 - Midterm Exam</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/09/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 9 - Topic Modeling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/10/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 10 - Unsupervised Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/11/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 11 - Networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/12/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 12 - Online Social Movements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/13/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 13 - From Data to Conclusions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/cheatsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Cheatsheets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#descriptive-data" id="toc-descriptive-data" class="nav-link active" data-scroll-target="#descriptive-data">Descriptive Data</a>
+  <ul class="collapse">
+  <li><a href="#lecture-5-table-of-contents" id="toc-lecture-5-table-of-contents" class="nav-link" data-scroll-target="#lecture-5-table-of-contents">Lecture 5 Table of Contents</a></li>
+  <li><a href="#introduction-to-descriptive-statistics" id="toc-introduction-to-descriptive-statistics" class="nav-link" data-scroll-target="#introduction-to-descriptive-statistics">1. Introduction to Descriptive Statistics</a>
+  <ul class="collapse">
+  <li><a href="#why-descriptive-statistics" id="toc-why-descriptive-statistics" class="nav-link" data-scroll-target="#why-descriptive-statistics">1.1 Why Descriptive Statistics?</a></li>
+  <li><a href="#types-of-variables" id="toc-types-of-variables" class="nav-link" data-scroll-target="#types-of-variables">1.2 Types of Variables</a></li>
+  </ul></li>
+  <li><a href="#measures-of-central-tendency" id="toc-measures-of-central-tendency" class="nav-link" data-scroll-target="#measures-of-central-tendency">2. Measures of Central Tendency</a>
+  <ul class="collapse">
+  <li><a href="#mean" id="toc-mean" class="nav-link" data-scroll-target="#mean">2.1 Mean</a></li>
+  <li><a href="#median" id="toc-median" class="nav-link" data-scroll-target="#median">2.2 Median</a></li>
+  <li><a href="#mode" id="toc-mode" class="nav-link" data-scroll-target="#mode">2.3 Mode</a></li>
+  <li><a href="#when-to-use-which" id="toc-when-to-use-which" class="nav-link" data-scroll-target="#when-to-use-which">2.4 When to Use Which?</a></li>
+  </ul></li>
+  <li><a href="#measures-of-spread" id="toc-measures-of-spread" class="nav-link" data-scroll-target="#measures-of-spread">3. Measures of Spread</a>
+  <ul class="collapse">
+  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range">3.1 Range</a></li>
+  <li><a href="#variance-and-standard-deviation" id="toc-variance-and-standard-deviation" class="nav-link" data-scroll-target="#variance-and-standard-deviation">3.2 Variance and Standard Deviation</a></li>
+  <li><a href="#interquartile-range-iqr" id="toc-interquartile-range-iqr" class="nav-link" data-scroll-target="#interquartile-range-iqr">3.3 Interquartile Range (IQR)</a></li>
+  </ul></li>
+  <li><a href="#visualizing-distributions" id="toc-visualizing-distributions" class="nav-link" data-scroll-target="#visualizing-distributions">4. Visualizing Distributions</a>
+  <ul class="collapse">
+  <li><a href="#histograms" id="toc-histograms" class="nav-link" data-scroll-target="#histograms">4.1 Histograms</a></li>
+  <li><a href="#density-plots" id="toc-density-plots" class="nav-link" data-scroll-target="#density-plots">4.2 Density Plots</a></li>
+  <li><a href="#boxplots" id="toc-boxplots" class="nav-link" data-scroll-target="#boxplots">4.3 Boxplots</a></li>
+  <li><a href="#combining-visualizations" id="toc-combining-visualizations" class="nav-link" data-scroll-target="#combining-visualizations">4.4 Combining Visualizations</a></li>
+  </ul></li>
+  <li><a href="#detecting-outliers" id="toc-detecting-outliers" class="nav-link" data-scroll-target="#detecting-outliers">5. Detecting Outliers</a>
+  <ul class="collapse">
+  <li><a href="#what-are-outliers" id="toc-what-are-outliers" class="nav-link" data-scroll-target="#what-are-outliers">5.1 What are Outliers?</a></li>
+  <li><a href="#iqr-method" id="toc-iqr-method" class="nav-link" data-scroll-target="#iqr-method">5.2 IQR Method</a></li>
+  <li><a href="#z-score-method" id="toc-z-score-method" class="nav-link" data-scroll-target="#z-score-method">5.3 Z-Score Method</a></li>
+  <li><a href="#visualizing-outliers" id="toc-visualizing-outliers" class="nav-link" data-scroll-target="#visualizing-outliers">5.4 Visualizing Outliers</a></li>
+  </ul></li>
+  <li><a href="#grouped-summary-statistics" id="toc-grouped-summary-statistics" class="nav-link" data-scroll-target="#grouped-summary-statistics">6. Grouped Summary Statistics</a>
+  <ul class="collapse">
+  <li><a href="#using-group_by-and-summarize" id="toc-using-group_by-and-summarize" class="nav-link" data-scroll-target="#using-group_by-and-summarize">6.1 Using group_by() and summarize()</a></li>
+  <li><a href="#multiple-summary-statistics" id="toc-multiple-summary-statistics" class="nav-link" data-scroll-target="#multiple-summary-statistics">6.2 Multiple Summary Statistics</a></li>
+  <li><a href="#visualizing-grouped-data" id="toc-visualizing-grouped-data" class="nav-link" data-scroll-target="#visualizing-grouped-data">6.3 Visualizing Grouped Data</a></li>
+  </ul></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">7. Correlation</a>
+  <ul class="collapse">
+  <li><a href="#understanding-correlation" id="toc-understanding-correlation" class="nav-link" data-scroll-target="#understanding-correlation">7.1 Understanding Correlation</a></li>
+  <li><a href="#calculating-correlation" id="toc-calculating-correlation" class="nav-link" data-scroll-target="#calculating-correlation">7.2 Calculating Correlation</a></li>
+  <li><a href="#correlation-matrices" id="toc-correlation-matrices" class="nav-link" data-scroll-target="#correlation-matrices">7.3 Correlation Matrices</a></li>
+  <li><a href="#visualizing-correlations" id="toc-visualizing-correlations" class="nav-link" data-scroll-target="#visualizing-correlations">7.4 Visualizing Correlations</a></li>
+  </ul></li>
+  <li><a href="#cross-tabulations" id="toc-cross-tabulations" class="nav-link" data-scroll-target="#cross-tabulations">8. Cross-Tabulations</a>
+  <ul class="collapse">
+  <li><a href="#creating-frequency-tables" id="toc-creating-frequency-tables" class="nav-link" data-scroll-target="#creating-frequency-tables">8.1 Creating Frequency Tables</a></li>
+  <li><a href="#proportions-and-percentages" id="toc-proportions-and-percentages" class="nav-link" data-scroll-target="#proportions-and-percentages">8.2 Proportions and Percentages</a></li>
+  <li><a href="#visualizing-cross-tabulations" id="toc-visualizing-cross-tabulations" class="nav-link" data-scroll-target="#visualizing-cross-tabulations">8.3 Visualizing Cross-Tabulations</a></li>
+  </ul></li>
+  <li><a href="#class-exercise-2" id="toc-class-exercise-2" class="nav-link" data-scroll-target="#class-exercise-2">Class Exercise 2</a></li>
+  <li><a href="#lecture-5-cheat-sheet" id="toc-lecture-5-cheat-sheet" class="nav-link" data-scroll-target="#lecture-5-cheat-sheet">Lecture 5 Cheat Sheet</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="descriptive-data" class="level1">
+<h1>Descriptive Data</h1>
+<p>Dr.&nbsp;Ayse D. Lokmanoglu Lecture 5, (B) Feb 18, (A) Feb 23</p>
+<section id="lecture-5-table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-5-table-of-contents">Lecture 5 Table of Contents</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Introduction to Descriptive Statistics</td>
+</tr>
+<tr class="even">
+<td>1.1</td>
+<td>Why Descriptive Statistics?</td>
+</tr>
+<tr class="odd">
+<td>1.2</td>
+<td>Types of Variables</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Measures of Central Tendency</td>
+</tr>
+<tr class="odd">
+<td>2.1</td>
+<td>Mean</td>
+</tr>
+<tr class="even">
+<td>2.2</td>
+<td>Median</td>
+</tr>
+<tr class="odd">
+<td>2.3</td>
+<td>Mode</td>
+</tr>
+<tr class="even">
+<td>2.4</td>
+<td>When to Use Which?</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Measures of Spread</td>
+</tr>
+<tr class="even">
+<td>3.1</td>
+<td>Range</td>
+</tr>
+<tr class="odd">
+<td>3.2</td>
+<td>Variance and Standard Deviation</td>
+</tr>
+<tr class="even">
+<td>3.3</td>
+<td>Interquartile Range (IQR)</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Visualizing Distributions</td>
+</tr>
+<tr class="even">
+<td>4.1</td>
+<td>Histograms</td>
+</tr>
+<tr class="odd">
+<td>4.2</td>
+<td>Density Plots</td>
+</tr>
+<tr class="even">
+<td>4.3</td>
+<td>Boxplots</td>
+</tr>
+<tr class="odd">
+<td>4.4</td>
+<td>Combining Visualizations</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Detecting Outliers</td>
+</tr>
+<tr class="odd">
+<td>5.1</td>
+<td>What are Outliers?</td>
+</tr>
+<tr class="even">
+<td>5.2</td>
+<td>IQR Method</td>
+</tr>
+<tr class="odd">
+<td>5.3</td>
+<td>Z-Score Method</td>
+</tr>
+<tr class="even">
+<td>5.4</td>
+<td>Visualizing Outliers</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Grouped Summary Statistics</td>
+</tr>
+<tr class="even">
+<td>6.1</td>
+<td>Using group_by() and summarize()</td>
+</tr>
+<tr class="odd">
+<td>6.2</td>
+<td>Multiple Summary Statistics</td>
+</tr>
+<tr class="even">
+<td>6.3</td>
+<td>Visualizing Grouped Data</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Correlation</td>
+</tr>
+<tr class="even">
+<td>7.1</td>
+<td>Understanding Correlation</td>
+</tr>
+<tr class="odd">
+<td>7.2</td>
+<td>Calculating Correlation</td>
+</tr>
+<tr class="even">
+<td>7.3</td>
+<td>Correlation Matrices</td>
+</tr>
+<tr class="odd">
+<td>7.4</td>
+<td>Visualizing Correlations</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Cross-Tabulations</td>
+</tr>
+<tr class="odd">
+<td>8.1</td>
+<td>Creating Frequency Tables</td>
+</tr>
+<tr class="even">
+<td>8.2</td>
+<td>Proportions and Percentages</td>
+</tr>
+<tr class="odd">
+<td>8.3</td>
+<td>Visualizing Cross-Tabulations</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>ALWAYS</strong> load our libraries first</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="introduction-to-descriptive-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-descriptive-statistics">1. Introduction to Descriptive Statistics</h2>
+<section id="why-descriptive-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="why-descriptive-statistics">1.1 Why Descriptive Statistics?</h3>
+<p>Descriptive statistics help us <strong>understand and summarize</strong> our data before diving into more complex analyses. They answer questions like:</p>
+<ul>
+<li>What is the typical value in my data?</li>
+<li>How spread out are my values?</li>
+<li>Are there any unusual observations?</li>
+<li>How are my variables related?</li>
+</ul>
+<p><strong>Descriptive vs.&nbsp;Inferential Statistics:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Descriptive</th>
+<th>Inferential</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Summarizes data</td>
+<td>Makes predictions</td>
+</tr>
+<tr class="even">
+<td>Describes what IS</td>
+<td>Estimates what MIGHT BE</td>
+</tr>
+<tr class="odd">
+<td>No uncertainty</td>
+<td>Includes uncertainty</td>
+</tr>
+<tr class="even">
+<td>e.g., “The mean age is 25”</td>
+<td>e.g., “The population mean is likely between 23-27”</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="types-of-variables" class="level3">
+<h3 class="anchored" data-anchor-id="types-of-variables">1.2 Types of Variables</h3>
+<p>Understanding variable types helps us choose the right statistics:</p>
+<p><strong>Numeric (Quantitative):</strong></p>
+<ul>
+<li><strong>Continuous</strong>: Can take any value (e.g., height, weight, temperature)</li>
+<li><strong>Discrete</strong>: Only whole numbers (e.g., count of children, number of books)</li>
+</ul>
+<p><strong>Categorical (Qualitative):</strong></p>
+<ul>
+<li><strong>Nominal</strong>: No natural order (e.g., color, gender, major)</li>
+<li><strong>Ordinal</strong>: Has natural order (e.g., education level, satisfaction rating)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create our example dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>student_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/student_lifestyle_dataset.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Identify variable types:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check each variable</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(student_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## spc_tbl_ [2,000 × 9] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Student_ID                     : num [1:2000] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ Study_Hours_Per_Day            : num [1:2000] 6.9 5.3 5.1 6.5 8.1 6 8 8.4 5.2 7.7 ...
+##  $ Extracurricular_Hours_Per_Day  : num [1:2000] 3.8 3.5 3.9 2.1 0.6 2.1 0.7 1.8 3.6 0.7 ...
+##  $ Sleep_Hours_Per_Day            : num [1:2000] 8.7 8 9.2 7.2 6.5 8 5.3 5.6 6.3 9.8 ...
+##  $ Social_Hours_Per_Day           : num [1:2000] 2.8 4.2 1.2 1.7 2.2 0.3 5.7 3 4 4.5 ...
+##  $ Physical_Activity_Hours_Per_Day: num [1:2000] 1.8 3 4.6 6.5 6.6 7.6 4.3 5.2 4.9 1.3 ...
+##  $ GPA                            : num [1:2000] 2.99 2.75 2.67 2.88 3.51 2.85 3.08 3.2 2.82 2.76 ...
+##  $ Stress_Level                   : chr [1:2000] "Moderate" "Low" "Low" "Moderate" ...
+##  $ college                        : chr [1:2000] "Education" "Humanities" "Arts &amp; Sciences" "Communication" ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   Student_ID = col_double(),
+##   ..   Study_Hours_Per_Day = col_double(),
+##   ..   Extracurricular_Hours_Per_Day = col_double(),
+##   ..   Sleep_Hours_Per_Day = col_double(),
+##   ..   Social_Hours_Per_Day = col_double(),
+##   ..   Physical_Activity_Hours_Per_Day = col_double(),
+##   ..   GPA = col_double(),
+##   ..   Stress_Level = col_character(),
+##   ..   college = col_character()
+##   .. )
+##  - attr(*, "problems")=&lt;externalptr&gt;</code></pre>
+<p>Let’s create GPA levels for some categorical data</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>student_data <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">GPA_Level =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      GPA <span class="sc">&lt;</span> <span class="fl">2.90</span> <span class="sc">~</span> <span class="st">"LowGPA"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      GPA <span class="sc">&gt;=</span> <span class="fl">2.90</span> <span class="sc">&amp;</span> GPA <span class="sc">&lt;=</span> <span class="fl">3.33</span> <span class="sc">~</span> <span class="st">"MediumGPA"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      GPA <span class="sc">&gt;</span> <span class="fl">3.33</span> <span class="sc">~</span> <span class="st">"HighGPA"</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(student_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## tibble [2,000 × 10] (S3: tbl_df/tbl/data.frame)
+##  $ Student_ID                     : num [1:2000] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ Study_Hours_Per_Day            : num [1:2000] 6.9 5.3 5.1 6.5 8.1 6 8 8.4 5.2 7.7 ...
+##  $ Extracurricular_Hours_Per_Day  : num [1:2000] 3.8 3.5 3.9 2.1 0.6 2.1 0.7 1.8 3.6 0.7 ...
+##  $ Sleep_Hours_Per_Day            : num [1:2000] 8.7 8 9.2 7.2 6.5 8 5.3 5.6 6.3 9.8 ...
+##  $ Social_Hours_Per_Day           : num [1:2000] 2.8 4.2 1.2 1.7 2.2 0.3 5.7 3 4 4.5 ...
+##  $ Physical_Activity_Hours_Per_Day: num [1:2000] 1.8 3 4.6 6.5 6.6 7.6 4.3 5.2 4.9 1.3 ...
+##  $ GPA                            : num [1:2000] 2.99 2.75 2.67 2.88 3.51 2.85 3.08 3.2 2.82 2.76 ...
+##  $ Stress_Level                   : chr [1:2000] "Moderate" "Low" "Low" "Moderate" ...
+##  $ college                        : chr [1:2000] "Education" "Humanities" "Arts &amp; Sciences" "Communication" ...
+##  $ GPA_Level                      : chr [1:2000] "MediumGPA" "LowGPA" "LowGPA" "LowGPA" ...</code></pre>
+<hr>
+</section>
+</section>
+<section id="measures-of-central-tendency" class="level2">
+<h2 class="anchored" data-anchor-id="measures-of-central-tendency">2. Measures of Central Tendency</h2>
+<p>Central tendency tells us about the <strong>typical</strong> or <strong>center</strong> value in our data.</p>
+<section id="mean" class="level3">
+<h3 class="anchored" data-anchor-id="mean">2.1 Mean</h3>
+<p>The <strong>arithmetic mean</strong> (average) is the sum of all values divided by the number of values.</p>
+<p><span class="math display">\[\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}\]</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate mean</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 7.4758</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean with missing values</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="cn">NA</span>, <span class="dv">30</span>, <span class="dv">40</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)  <span class="co"># Returns NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] NA</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove NA values</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 25</code></pre>
+<hr>
+</section>
+<section id="median" class="level3">
+<h3 class="anchored" data-anchor-id="median">2.2 Median</h3>
+<p>The <strong>median</strong> is the middle value when data is sorted. It’s more robust to outliers than the mean.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate median</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 7.4</code></pre>
+<hr>
+</section>
+<section id="mode" class="level3">
+<h3 class="anchored" data-anchor-id="mode">2.3 Mode</h3>
+<p>The <strong>mode</strong> is the most frequently occurring value. R doesn’t have a built-in mode function, so we create one:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a mode function</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>get_mode <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  unique_x <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  unique_x[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, unique_x)))]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Find mode</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">get_mode</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 6.3</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mode is most useful for categorical data</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_mode</span>(student_data<span class="sc">$</span>Stress_Level)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "High"</code></pre>
+<hr>
+</section>
+<section id="when-to-use-which" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-which">2.4 When to Use Which?</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>Best For</th>
+<th>Sensitive to Outliers?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Mean</strong></td>
+<td>Symmetric distributions, interval/ratio data</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Median</strong></td>
+<td>Skewed distributions, ordinal data</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><strong>Mode</strong></td>
+<td>Categorical data, finding most common value</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>TRY: Compare all three measures</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary function gives us multiple measures</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(student_data<span class="sc">$</span>GPA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   2.240   2.900   3.110   3.116   3.330   4.000</code></pre>
+<hr>
+<section id="class-exercise-central-tendency" class="level4">
+<h4 class="anchored" data-anchor-id="class-exercise-central-tendency">Class Exercise: Central Tendency</h4>
+<ol type="1">
+<li>Calculate the mean, median, and mode of <code>GPA</code>.</li>
+<li>Which measure would you report for wellness ratings? Why?</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Your workspace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="measures-of-spread" class="level2">
+<h2 class="anchored" data-anchor-id="measures-of-spread">3. Measures of Spread</h2>
+<p>Spread (or dispersion) tells us how <strong>varied</strong> or <strong>spread out</strong> our data is.</p>
+<section id="range" class="level3">
+<h3 class="anchored" data-anchor-id="range">3.1 Range</h3>
+<p>The simplest measure of spread - the difference between maximum and minimum values.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Range</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1]  5 10</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Difference</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day) <span class="sc">-</span> <span class="fu">min</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 5</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or use diff()</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(<span class="fu">range</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 5</code></pre>
+<p><mark><strong>Limitation:</strong> Range is very sensitive to outliers since it only uses two values.</mark></p>
+<hr>
+</section>
+<section id="variance-and-standard-deviation" class="level3">
+<h3 class="anchored" data-anchor-id="variance-and-standard-deviation">3.2 Variance and Standard Deviation</h3>
+<p><strong>Variance</strong> measures the average squared deviation from the mean:</p>
+<p><span class="math display">\[s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}\]</span></p>
+<p><strong>Standard Deviation</strong> is the square root of variance (same units as the data):</p>
+<p><span class="math display">\[s = \sqrt{s^2}\]</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 2.027458</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard deviation</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 1.423888</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify: SD is square root of variance</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">var</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 1.423888</code></pre>
+<p><strong>Interpretation:</strong> On average, study hours deviate from the mean by about 1.4 hours.</p>
+<hr>
+</section>
+<section id="interquartile-range-iqr" class="level3">
+<h3 class="anchored" data-anchor-id="interquartile-range-iqr">3.3 Interquartile Range (IQR)</h3>
+<p>The <strong>IQR</strong> is the range of the middle 50% of data (Q3 - Q1). It’s robust to outliers.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quartiles</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Quantile: "</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "Quantile: "</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##   0%  25%  50%  75% 100% 
+##  5.0  6.3  7.4  8.7 10.0</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># IQR</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"IQR: "</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "IQR: "</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 2.4</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Quantile 75% - 25%: "</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "Quantile 75% - 25%: "</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day, <span class="fl">0.75</span>) <span class="sc">-</span> <span class="fu">quantile</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day, <span class="fl">0.25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## 75% 
+## 2.4</code></pre>
+<p><strong>Understanding Quartiles:</strong></p>
+<ul>
+<li><strong>Q1 (25th percentile)</strong>: 25% of data falls below this value</li>
+<li><strong>Q2 (50th percentile)</strong>: The median</li>
+<li><strong>Q3 (75th percentile)</strong>: 75% of data falls below this value</li>
+</ul>
+<hr>
+<p><strong>Summary of Spread Measures:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All spread measures together</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Measure =</span> <span class="fu">c</span>(<span class="st">"Range"</span>, <span class="st">"Variance"</span>, <span class="st">"Std Dev"</span>, <span class="st">"IQR"</span>),</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="fu">c</span>(</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">diff</span>(<span class="fu">range</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)),</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">var</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day),</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sd</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day),</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">IQR</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day)</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 4 × 2
+##   Measure  Value
+##   &lt;chr&gt;    &lt;dbl&gt;
+## 1 Range     5   
+## 2 Variance  2.03
+## 3 Std Dev   1.42
+## 4 IQR       2.4</code></pre>
+<hr>
+</section>
+</section>
+<section id="visualizing-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-distributions">4. Visualizing Distributions</h2>
+<section id="histograms" class="level3">
+<h3 class="anchored" data-anchor-id="histograms">4.1 Histograms</h3>
+<p>Histograms show the <strong>frequency distribution</strong> of continuous data by dividing it into bins.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic histogram</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Study_Hours_Per_Day)) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Study Hours"</span>,</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Study Hours per day"</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-14-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Adjusting bin width:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Different bin widths</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Study_Hours_Per_Day)) <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">20</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Binwidth = 20"</span>) <span class="sc">+</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Study_Hours_Per_Day)) <span class="sc">+</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Binwidth = 1"</span>) <span class="sc">+</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Display side by side (requires patchwork or gridExtra)</span></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("patchwork")</span></span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-15-1.png" class="img-fluid"><!-- --></p>
+<hr>
+</section>
+<section id="density-plots" class="level3">
+<h3 class="anchored" data-anchor-id="density-plots">4.2 Density Plots</h3>
+<p>Density plots show a <strong>smoothed</strong> version of the distribution.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Density plot</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Study_Hours_Per_Day)) <span class="sc">+</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Density of Study Hours"</span>,</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Study Hours per Day"</span>,</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-16-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Comparing groups with density:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Density by major</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Study_Hours_Per_Day, <span class="at">fill =</span> Stress_Level)) <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Study Hours by Stress Level"</span>,</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Study Hours per Day"</span>,</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Major"</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-17-1.png" class="img-fluid"><!-- --></p>
+<hr>
+</section>
+<section id="boxplots" class="level3">
+<h3 class="anchored" data-anchor-id="boxplots">4.3 Boxplots</h3>
+<p>Boxplots display the <strong>five-number summary</strong> (min, Q1, median, Q3, max) and outliers.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic boxplot</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">y =</span> Physical_Activity_Hours_Per_Day)) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">width =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Boxplot of Study Hours"</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Physical Activity Hours per day"</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-18-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Reading a boxplot:</strong></p>
+<ul>
+<li><strong>Box</strong>: Contains the middle 50% of data (Q1 to Q3)</li>
+<li><strong>Line in box</strong>: The median</li>
+<li><strong>Whiskers</strong>: Extend to min/max within 1.5 × IQR</li>
+<li><strong>Points beyond whiskers</strong>: Potential outliers</li>
+</ul>
+<p><strong>Boxplots by group:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot by major</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Stress_Level, <span class="at">y =</span> Study_Hours_Per_Day, <span class="at">fill =</span> Stress_Level)) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Study Hours by Stress Level"</span>,</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Stress Level"</span>,</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Study Hours per Day"</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-19-1.png" class="img-fluid"><!-- --></p>
+<hr>
+</section>
+<section id="combining-visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="combining-visualizations">4.4 Combining Visualizations</h3>
+<p><strong>Histogram + Density:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Study_Hours_Per_Day)) <span class="sc">+</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)), </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Study Hours: Histogram with Density Overlay"</span>,</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Study Hours per Day"</span>,</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-20-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Boxplot + Points (Jitter):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Stress_Level, <span class="at">y =</span> Study_Hours_Per_Day, <span class="at">fill =</span> Stress_Level)) <span class="sc">+</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Study Hours by Stress Level with Individual Points"</span>,</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Stress Level"</span>,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Study Hours per Day"</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-21-1.png" class="img-fluid"><!-- --></p>
+<hr>
+<section id="class-exercise-visualizing-distributions" class="level4">
+<h4 class="anchored" data-anchor-id="class-exercise-visualizing-distributions">Class Exercise: Visualizing Distributions</h4>
+<ol type="1">
+<li>Create a histogram of <code>GPA</code> with an appropriate bin width.</li>
+<li>Add an overlapping density plot of <code>GPA</code>.</li>
+<li>Create a boxplot comparing <code>GPA</code> across <code>Stress_Level</code>.</li>
+<li>Which stress level has the highest median GPA? Which has the most variation?</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Your workspace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="detecting-outliers" class="level2">
+<h2 class="anchored" data-anchor-id="detecting-outliers">5. Detecting Outliers</h2>
+<section id="what-are-outliers" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-outliers">5.1 What are Outliers?</h3>
+<p><strong>Outliers</strong> are observations that are unusually far from other values. They can be:</p>
+<ul>
+<li><strong>Valid extreme values</strong>: Legitimate data points that happen to be unusual</li>
+<li><strong>Errors</strong>: Data entry mistakes, measurement errors</li>
+<li><strong>Different populations</strong>: Data from a different group mixed in</li>
+</ul>
+<p><mark><strong>Important:</strong> Don’t automatically remove outliers! First investigate why they exist.</mark></p>
+<hr>
+</section>
+<section id="iqr-method" class="level3">
+<h3 class="anchored" data-anchor-id="iqr-method">5.2 IQR Method</h3>
+<p>The <strong>IQR method</strong> defines outliers as values beyond:</p>
+<ul>
+<li><strong>Lower bound</strong>: Q1 - 1.5 × IQR</li>
+<li><strong>Upper bound</strong>: Q3 + 1.5 × IQR</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate bounds</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>Q1 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(student_data<span class="sc">$</span>Physical_Activity_Hours_Per_Day, <span class="fl">0.25</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>Q3 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(student_data<span class="sc">$</span>Physical_Activity_Hours_Per_Day, <span class="fl">0.75</span>)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>IQR_val <span class="ot">&lt;-</span> <span class="fu">IQR</span>(student_data<span class="sc">$</span>Physical_Activity_Hours_Per_Day)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="ot">&lt;-</span> Q1 <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> IQR_val</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="ot">&lt;-</span> Q3 <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> IQR_val</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Q1:"</span>, Q1, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## Q1: 2.4</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Q3:"</span>, Q3, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## Q3: 6.1</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"IQR:"</span>, IQR_val, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## IQR: 3.7</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Lower bound:"</span>, lower_bound, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## Lower bound: -3.15</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Upper bound:"</span>, upper_bound, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## Upper bound: 11.65</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find outliers</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>outliers <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> </span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Physical_Activity_Hours_Per_Day <span class="sc">&lt;</span> lower_bound <span class="sc">|</span> Physical_Activity_Hours_Per_Day <span class="sc">&gt;</span> upper_bound)</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of outliers:"</span>, <span class="fu">nrow</span>(outliers), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## Number of outliers: 5</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(outliers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 5 × 10
+##   Student_ID Study_Hours_Per_Day Extracurricular_Hours_Per…¹ Sleep_Hours_Per_Day
+##        &lt;dbl&gt;               &lt;dbl&gt;                       &lt;dbl&gt;               &lt;dbl&gt;
+## 1         63                 5.1                         0.5                 5.2
+## 2        172                 5.1                         0.3                 6  
+## 3        785                 5.1                         0.3                 6.3
+## 4       1175                 5.3                         0.3                 5.9
+## 5       1716                 5.4                         0.2                 6.3
+## # ℹ abbreviated name: ¹​Extracurricular_Hours_Per_Day
+## # ℹ 6 more variables: Social_Hours_Per_Day &lt;dbl&gt;,
+## #   Physical_Activity_Hours_Per_Day &lt;dbl&gt;, GPA &lt;dbl&gt;, Stress_Level &lt;chr&gt;,
+## #   college &lt;chr&gt;, GPA_Level &lt;chr&gt;</code></pre>
+<hr>
+</section>
+<section id="z-score-method" class="level3">
+<h3 class="anchored" data-anchor-id="z-score-method">5.3 Z-Score Method</h3>
+<p>The <strong>Z-score</strong> measures how many standard deviations a value is from the mean:</p>
+<p><span class="math display">\[z = \frac{x - \bar{x}}{s}\]</span></p>
+<p>Values with |z| &gt; 2 or |z| &gt; 3 are often considered outliers.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate z-scores</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>student_data <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> </span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Physical_Activity_Hours_Per_Day_z =</span> (Physical_Activity_Hours_Per_Day <span class="sc">-</span> <span class="fu">mean</span>(Physical_Activity_Hours_Per_Day)) <span class="sc">/</span> <span class="fu">sd</span>(Physical_Activity_Hours_Per_Day)</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View z-scores</span></span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>student_data <span class="sc">|&gt;</span> </span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Student_ID, Stress_Level, Physical_Activity_Hours_Per_Day, Physical_Activity_Hours_Per_Day_z) <span class="sc">|&gt;</span> </span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(Physical_Activity_Hours_Per_Day_z))) <span class="sc">|&gt;</span> </span>
+<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 10 × 4
+##    Student_ID Stress_Level Physical_Activity_Hours_Per_…¹ Physical_Activity_Ho…²
+##         &lt;dbl&gt; &lt;chr&gt;                                 &lt;dbl&gt;                  &lt;dbl&gt;
+##  1         63 High                                   13                     3.45
+##  2        172 Low                                    12.4                   3.21
+##  3       1175 High                                   12.3                   3.17
+##  4        785 Low                                    12.1                   3.09
+##  5       1716 Low                                    11.7                   2.93
+##  6        616 High                                   11.6                   2.89
+##  7        546 High                                   11.4                   2.81
+##  8        251 Low                                    11.2                   2.73
+##  9        383 High                                   11.1                   2.69
+## 10       1077 High                                   11.1                   2.69
+## # ℹ abbreviated names: ¹​Physical_Activity_Hours_Per_Day,
+## #   ²​Physical_Activity_Hours_Per_Day_z</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find outliers using z-score &gt; 2</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>z_outliers <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> </span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">abs</span>(Physical_Activity_Hours_Per_Day_z) <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Outliers (|z| &gt; 2):"</span>, <span class="fu">nrow</span>(z_outliers), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## Outliers (|z| &gt; 2): 60</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(z_outliers <span class="sc">|&gt;</span> <span class="fu">select</span>(Student_ID, Stress_Level, Physical_Activity_Hours_Per_Day, Physical_Activity_Hours_Per_Day_z))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 60 × 4
+##    Student_ID Stress_Level Physical_Activity_Hours_Per_…¹ Physical_Activity_Ho…²
+##         &lt;dbl&gt; &lt;chr&gt;                                 &lt;dbl&gt;                  &lt;dbl&gt;
+##  1         63 High                                   13                     3.45
+##  2        126 Low                                    10.7                   2.53
+##  3        172 Low                                    12.4                   3.21
+##  4        187 Low                                     9.5                   2.06
+##  5        251 Low                                    11.2                   2.73
+##  6        254 High                                    9.7                   2.14
+##  7        269 Moderate                               11                     2.65
+##  8        284 Moderate                                9.8                   2.18
+##  9        323 High                                   11                     2.65
+## 10        381 Low                                     9.8                   2.18
+## # ℹ 50 more rows
+## # ℹ abbreviated names: ¹​Physical_Activity_Hours_Per_Day,
+## #   ²​Physical_Activity_Hours_Per_Day_z</code></pre>
+<hr>
+</section>
+<section id="visualizing-outliers" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-outliers">5.4 Visualizing Outliers</h3>
+<p><strong>Boxplot (automatically shows outliers):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot shows outliers as points</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Stress_Level, <span class="at">y =</span> Physical_Activity_Hours_Per_Day, <span class="at">fill =</span> Stress_Level)) <span class="sc">+</span></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Boxplot Showing Outliers"</span>,</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Stress Level"</span>,</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Physical Activity Hours"</span></span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-27-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Scatter plot with outliers highlighted:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify outliers</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>student_data <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> </span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">is_outlier =</span> Physical_Activity_Hours_Per_Day <span class="sc">&lt;</span> lower_bound <span class="sc">|</span> Physical_Activity_Hours_Per_Day <span class="sc">&gt;</span> upper_bound</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Physical_Activity_Hours_Per_Day, <span class="at">y =</span> GPA, <span class="at">color =</span> is_outlier)) <span class="sc">+</span></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"red"</span>),</span>
+<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Normal"</span>, <span class="st">"Outlier"</span>)) <span class="sc">+</span></span>
+<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Scatter Plot with Outliers Highlighted"</span>,</span>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Physical Activity Hours"</span>,</span>
+<span id="cb78-14"><a href="#cb78-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"GPA"</span>,</span>
+<span id="cb78-15"><a href="#cb78-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Status"</span></span>
+<span id="cb78-16"><a href="#cb78-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb78-17"><a href="#cb78-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-28-1.png" class="img-fluid"><!-- --></p>
+<hr>
+<section id="class-exercise-outlier-detection" class="level4">
+<h4 class="anchored" data-anchor-id="class-exercise-outlier-detection">Class Exercise: Outlier Detection</h4>
+<ol type="1">
+<li>Calculate the IQR bounds for <code>GPA</code>.</li>
+<li>Identify any outliers using the IQR method.</li>
+<li>Calculate z-scores for <code>GPA</code> and find values with |z| &gt; 2.</li>
+<li>Create a visualization that highlights outliers.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Your workspace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="grouped-summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="grouped-summary-statistics">6. Grouped Summary Statistics</h2>
+<section id="using-group_by-and-summarize" class="level3">
+<h3 class="anchored" data-anchor-id="using-group_by-and-summarize">6.1 Using group_by() and summarize()</h3>
+<p>The combination of <code>group_by()</code> and <code>summarize()</code> is powerful for calculating statistics by group.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean study hours by stress level</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>student_data <span class="sc">|&gt;</span> </span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Stress_Level) <span class="sc">|&gt;</span> </span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_hours =</span> <span class="fu">mean</span>(Study_Hours_Per_Day))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 3 × 2
+##   Stress_Level mean_hours
+##   &lt;chr&gt;             &lt;dbl&gt;
+## 1 High               8.39
+## 2 Low                5.47
+## 3 Moderate           6.97</code></pre>
+<hr>
+</section>
+<section id="multiple-summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-summary-statistics">6.2 Multiple Summary Statistics</h3>
+<p>Calculate multiple statistics at once:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprehensive summary by stress level</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>summary_by_stresslevel <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> </span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Stress_Level) <span class="sc">|&gt;</span> </span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_hours =</span> <span class="fu">mean</span>(Study_Hours_Per_Day),</span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_hours =</span> <span class="fu">median</span>(Study_Hours_Per_Day),</span>
+<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_hours =</span> <span class="fu">sd</span>(Study_Hours_Per_Day),</span>
+<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_hours =</span> <span class="fu">min</span>(Study_Hours_Per_Day),</span>
+<span id="cb82-10"><a href="#cb82-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_hours =</span> <span class="fu">max</span>(Study_Hours_Per_Day),</span>
+<span id="cb82-11"><a href="#cb82-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(GPA)</span>
+<span id="cb82-12"><a href="#cb82-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-13"><a href="#cb82-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-14"><a href="#cb82-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_by_major)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## Error: object 'summary_by_major' not found</code></pre>
+<p><strong>Group by multiple variables:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary by Stress Level AND college</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>student_data <span class="sc">|&gt;</span> </span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Stress_Level, college) <span class="sc">|&gt;</span> </span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_hours =</span> <span class="fu">mean</span>(Study_Hours_Per_Day),</span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_hours =</span> <span class="fu">median</span>(Study_Hours_Per_Day),</span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 15 × 5
+##    Stress_Level college             n mean_hours median_hours
+##    &lt;chr&gt;        &lt;chr&gt;           &lt;int&gt;      &lt;dbl&gt;        &lt;dbl&gt;
+##  1 High         Arts &amp; Sciences   170       8.36          8.6
+##  2 High         Communication     148       8.46          8.6
+##  3 High         Education         217       8.38          8.7
+##  4 High         Humanities        269       8.34          8.7
+##  5 High         Medicine          225       8.41          8.7
+##  6 Low          Arts &amp; Sciences    51       5.47          5.4
+##  7 Low          Communication      35       5.42          5.4
+##  8 Low          Education          70       5.50          5.5
+##  9 Low          Humanities         84       5.47          5.4
+## 10 Low          Medicine           57       5.48          5.5
+## 11 Moderate     Arts &amp; Sciences   130       7.06          7.1
+## 12 Moderate     Communication      97       6.92          6.9
+## 13 Moderate     Education         147       6.99          7.1
+## 14 Moderate     Humanities        141       6.93          6.9
+## 15 Moderate     Medicine          159       6.94          6.9</code></pre>
+<hr>
+</section>
+<section id="visualizing-grouped-data" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-grouped-data">6.3 Visualizing Grouped Data</h3>
+<p><strong>Bar chart of means:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_by_major, <span class="fu">aes</span>(<span class="at">x =</span> Stress_Level, <span class="at">y =</span> mean_hours, <span class="at">fill =</span> Stress_Level)) <span class="sc">+</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_hours <span class="sc">-</span> sd_hours, </span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> mean_hours <span class="sc">+</span> sd_hours),</span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean Study Hours by Stress Level (±1 SD)"</span>,</span>
+<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Stress Level"</span>,</span>
+<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean Study Hours"</span></span>
+<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb86-11"><a href="#cb86-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb86-12"><a href="#cb86-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb86-13"><a href="#cb86-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## Error: object 'summary_by_major' not found</code></pre>
+<p><strong>Grouped bar chart:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary by stress level and college</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>summary_stress_college <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> </span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Stress_Level, college) <span class="sc">|&gt;</span> </span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_hours =</span> <span class="fu">mean</span>(Study_Hours_Per_Day), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_stress_college, <span class="fu">aes</span>(<span class="at">x =</span> Stress_Level, <span class="at">y =</span> mean_hours, <span class="at">fill =</span> college)) <span class="sc">+</span></span>
+<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean Study Hours by Stress Level and College"</span>,</span>
+<span id="cb88-10"><a href="#cb88-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Stress Level"</span>,</span>
+<span id="cb88-11"><a href="#cb88-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean Study Hours"</span>,</span>
+<span id="cb88-12"><a href="#cb88-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"College"</span></span>
+<span id="cb88-13"><a href="#cb88-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb88-14"><a href="#cb88-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb88-15"><a href="#cb88-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-34-1.png" class="img-fluid"><!-- --></p>
+<hr>
+</section>
+</section>
+<section id="correlation" class="level2">
+<h2 class="anchored" data-anchor-id="correlation">7. Correlation</h2>
+<section id="understanding-correlation" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-correlation">7.1 Understanding Correlation</h3>
+<p><strong>Correlation</strong> measures the strength and direction of the linear relationship between two numeric variables.</p>
+<ul>
+<li><strong>r = 1</strong>: Perfect positive correlation</li>
+<li><strong>r = 0</strong>: No linear correlation</li>
+<li><strong>r = -1</strong>: Perfect negative correlation</li>
+</ul>
+<p><strong>Interpretation guidelines:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>r</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.00 - 0.19</td>
+<td>Very weak</td>
+</tr>
+<tr class="even">
+<td>0.20 - 0.39</td>
+<td>Weak</td>
+</tr>
+<tr class="odd">
+<td>0.40 - 0.59</td>
+<td>Moderate</td>
+</tr>
+<tr class="even">
+<td>0.60 - 0.79</td>
+<td>Strong</td>
+</tr>
+<tr class="odd">
+<td>0.80 - 1.00</td>
+<td>Very strong</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="calculating-correlation" class="level3">
+<h3 class="anchored" data-anchor-id="calculating-correlation">7.2 Calculating Correlation</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson correlation (default)</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day, student_data<span class="sc">$</span>GPA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] 0.734468</code></pre>
+<p><strong>Correlation test with p-value:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation test</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>cor_test <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day, student_data<span class="sc">$</span>GPA)</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>cor_test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## 
+##  Pearson's product-moment correlation
+## 
+## data:  student_data$Study_Hours_Per_Day and student_data$GPA
+## t = 48.376, df = 1998, p-value &lt; 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.7136099 0.7540250
+## sample estimates:
+##      cor 
+## 0.734468</code></pre>
+<p><strong>Interpretation:</strong> There is a very strong positive correlation (r = 0.734) between study hours and exam scores, p &lt; 0.001.</p>
+<hr>
+</section>
+<section id="correlation-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-matrices">7.3 Correlation Matrices</h3>
+<p>When you have multiple numeric variables, create a correlation matrix:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select numeric columns</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>numeric_vars <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> </span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Study_Hours_Per_Day, GPA)</span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation matrix</span></span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(numeric_vars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                     Study_Hours_Per_Day      GPA
+## Study_Hours_Per_Day            1.000000 0.734468
+## GPA                            0.734468 1.000000</code></pre>
+<p><strong>With more variables:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation matrix</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>numeric_vars <span class="ot">&lt;-</span> student_data <span class="sc">|&gt;</span> </span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Study_Hours_Per_Day, GPA, Sleep_Hours_Per_Day, Physical_Activity_Hours_Per_Day)</span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(numeric_vars), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                                 Study_Hours_Per_Day    GPA Sleep_Hours_Per_Day
+## Study_Hours_Per_Day                           1.000  0.734               0.027
+## GPA                                           0.734  1.000              -0.004
+## Sleep_Hours_Per_Day                           0.027 -0.004               1.000
+## Physical_Activity_Hours_Per_Day              -0.488 -0.341              -0.470
+##                                 Physical_Activity_Hours_Per_Day
+## Study_Hours_Per_Day                                      -0.488
+## GPA                                                      -0.341
+## Sleep_Hours_Per_Day                                      -0.470
+## Physical_Activity_Hours_Per_Day                           1.000</code></pre>
+<hr>
+</section>
+<section id="visualizing-correlations" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-correlations">7.4 Visualizing Correlations</h3>
+<p><strong>Scatter plot with correlation:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> Study_Hours_Per_Day, <span class="at">y =</span> GPA)) <span class="sc">+</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Study Hours vs GPA (r ="</span>, </span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">round</span>(<span class="fu">cor</span>(student_data<span class="sc">$</span>Study_Hours_Per_Day, student_data<span class="sc">$</span>GPA), <span class="dv">2</span>), <span class="st">")"</span>),</span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Study Hours"</span>,</span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"GPA"</span></span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-39-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Correlation heatmap:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create correlation matrix</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(numeric_vars)</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to long format for ggplot</span></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>cor_long <span class="ot">&lt;-</span> cor_matrix <span class="sc">|&gt;</span> </span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"var1"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>var1, <span class="at">names_to =</span> <span class="st">"var2"</span>, <span class="at">values_to =</span> <span class="st">"correlation"</span>)</span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap</span></span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cor_long, <span class="fu">aes</span>(<span class="at">x =</span> var1, <span class="at">y =</span> var2, <span class="at">fill =</span> correlation)) <span class="sc">+</span></span>
+<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(correlation, <span class="dv">2</span>)), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb98-14"><a href="#cb98-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"blue"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"red"</span>, </span>
+<span id="cb98-15"><a href="#cb98-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb98-16"><a href="#cb98-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb98-17"><a href="#cb98-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Correlation Heatmap"</span>,</span>
+<span id="cb98-18"><a href="#cb98-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb98-19"><a href="#cb98-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Correlation"</span></span>
+<span id="cb98-20"><a href="#cb98-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb98-21"><a href="#cb98-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb98-22"><a href="#cb98-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-40-1.png" class="img-fluid"><!-- --></p>
+<hr>
+<section id="class-exercise-correlation" class="level4">
+<h4 class="anchored" data-anchor-id="class-exercise-correlation">Class Exercise: Correlation</h4>
+<ol type="1">
+<li>Calculate the correlation between <code>GPA</code> and <code>Sleep_Hours_Per_day</code>.</li>
+<li>Is the correlation statistically significant? (Use <code>cor.test()</code>)</li>
+<li>Create a scatter plot showing this relationship.</li>
+<li>What does this correlation tell us?</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Your workspace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="cross-tabulations" class="level2">
+<h2 class="anchored" data-anchor-id="cross-tabulations">8. Cross-Tabulations</h2>
+<p>Cross-tabulations (contingency tables) summarize the relationship between <strong>categorical variables</strong>.</p>
+<section id="creating-frequency-tables" class="level3">
+<h3 class="anchored" data-anchor-id="creating-frequency-tables">8.1 Creating Frequency Tables</h3>
+<p><strong>Single variable:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using tidyverse</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>student_data <span class="sc">|&gt;</span> </span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(college)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 5 × 2
+##   college             n
+##   &lt;chr&gt;           &lt;int&gt;
+## 1 Arts &amp; Sciences   351
+## 2 Communication     280
+## 3 Education         434
+## 4 Humanities        494
+## 5 Medicine          441</code></pre>
+<p><strong>Two variables (cross-tabulation):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using tidyverse</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>student_data <span class="sc">|&gt;</span> </span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(college, Stress_Level) <span class="sc">|&gt;</span> </span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Stress_Level, <span class="at">values_from =</span> n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 5 × 4
+##   college          High   Low Moderate
+##   &lt;chr&gt;           &lt;int&gt; &lt;int&gt;    &lt;int&gt;
+## 1 Arts &amp; Sciences   170    51      130
+## 2 Communication     148    35       97
+## 3 Education         217    70      147
+## 4 Humanities        269    84      141
+## 5 Medicine          225    57      159</code></pre>
+<hr>
+</section>
+<section id="proportions-and-percentages" class="level3">
+<h3 class="anchored" data-anchor-id="proportions-and-percentages">8.2 Proportions and Percentages</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Percentages by group</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>student_data <span class="sc">|&gt;</span> </span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(college, Stress_Level) <span class="sc">|&gt;</span> </span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(college) <span class="sc">|&gt;</span> </span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 15 × 4
+## # Groups:   college [5]
+##    college         Stress_Level     n percentage
+##    &lt;chr&gt;           &lt;chr&gt;        &lt;int&gt;      &lt;dbl&gt;
+##  1 Arts &amp; Sciences High           170       48.4
+##  2 Arts &amp; Sciences Low             51       14.5
+##  3 Arts &amp; Sciences Moderate       130       37.0
+##  4 Communication   High           148       52.9
+##  5 Communication   Low             35       12.5
+##  6 Communication   Moderate        97       34.6
+##  7 Education       High           217       50  
+##  8 Education       Low             70       16.1
+##  9 Education       Moderate       147       33.9
+## 10 Humanities      High           269       54.5
+## 11 Humanities      Low             84       17.0
+## 12 Humanities      Moderate       141       28.5
+## 13 Medicine        High           225       51.0
+## 14 Medicine        Low             57       12.9
+## 15 Medicine        Moderate       159       36.1</code></pre>
+<hr>
+</section>
+<section id="visualizing-cross-tabulations" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-cross-tabulations">8.3 Visualizing Cross-Tabulations</h3>
+<p><strong>Stacked bar chart:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> college, <span class="at">fill =</span> Stress_Level)) <span class="sc">+</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Stress Level by College"</span>,</span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"College"</span>,</span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span>,</span>
+<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Stress Level"</span></span>
+<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb106-10"><a href="#cb106-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-45-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Grouped bar chart:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> college, <span class="at">fill =</span> Stress_Level)) <span class="sc">+</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Stress Level by College"</span>,</span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"College"</span>,</span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span>,</span>
+<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Stress Level"</span></span>
+<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb107-9"><a href="#cb107-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb107-10"><a href="#cb107-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-46-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Proportional bar chart:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_data, <span class="fu">aes</span>(<span class="at">x =</span> college, <span class="at">fill =</span> Stress_Level)) <span class="sc">+</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Proportion of Stress Level by College"</span>,</span>
+<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"College"</span>,</span>
+<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb108-7"><a href="#cb108-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Stress Level"</span></span>
+<span id="cb108-8"><a href="#cb108-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb108-9"><a href="#cb108-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb108-10"><a href="#cb108-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb108-11"><a href="#cb108-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L5-github_files/figure-gfm/unnamed-chunk-47-1.png" class="img-fluid"><!-- --></p>
+<hr>
+<p><strong>Three-way cross-tabulation:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># College by Stress Level by GPA</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>student_data <span class="sc">|&gt;</span> </span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(college, Stress_Level, GPA_Level) <span class="sc">|&gt;</span> </span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> GPA_Level, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 15 × 5
+##    college         Stress_Level HighGPA LowGPA MediumGPA
+##    &lt;chr&gt;           &lt;chr&gt;          &lt;int&gt;  &lt;int&gt;     &lt;int&gt;
+##  1 Arts &amp; Sciences High              82     12        76
+##  2 Arts &amp; Sciences Low                0     33        18
+##  3 Arts &amp; Sciences Moderate          16     31        83
+##  4 Communication   High              61     15        72
+##  5 Communication   Low                0     24        11
+##  6 Communication   Moderate          12     29        56
+##  7 Education       High              89     17       111
+##  8 Education       Low                0     41        29
+##  9 Education       Moderate          12     47        88
+## 10 Humanities      High             104     31       134
+## 11 Humanities      Low                1     53        30
+## 12 Humanities      Moderate           9     45        87
+## 13 Medicine        High              86     25       114
+## 14 Medicine        Low                2     39        16
+## 15 Medicine        Moderate          14     45       100</code></pre>
+<hr>
+<section id="class-exercise-cross-tabulations" class="level4">
+<h4 class="anchored" data-anchor-id="class-exercise-cross-tabulations">Class Exercise: Cross-Tabulations</h4>
+<ol type="1">
+<li>Create a cross-tabulation of <code>College</code> and <code>GPA_Level</code>.</li>
+<li>What percentage of Medicine students have “High” GPA?</li>
+<li>Create a proportional bar chart showing GPA levels by college</li>
+<li>Which major has the highest proportion of <code>GPA_level</code> to <code>Stress_Level</code>?</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Your workspace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="class-exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="class-exercise-2">Class Exercise 2</h2>
+<p>Using the <code>mtcars</code> dataset:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<ol type="1">
+<li><p><strong>Central Tendency:</strong> Calculate mean, median for <code>mpg</code> (miles per gallon).</p></li>
+<li><p><strong>Spread:</strong> Calculate standard deviation and IQR for <code>mpg</code>.</p></li>
+<li><p><strong>Distribution:</strong> Create a histogram and density plot of <code>mpg</code>.</p></li>
+<li><p><strong>Outliers:</strong> Use the IQR method to identify any outliers in <code>hp</code> (horsepower).</p></li>
+<li><p><strong>Grouped Statistics:</strong> Calculate mean <code>mpg</code> grouped by number of cylinders (<code>cyl</code>).</p></li>
+<li><p><strong>Correlation:</strong> Calculate the correlation between <code>mpg</code> and <code>wt</code> (weight). Create a scatter plot.</p></li>
+<li><p><strong>Cross-tabulation:</strong> Create a cross-tabulation of <code>cyl</code> and <code>gear</code>. Visualize with a bar chart.</p></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Your workspace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="lecture-5-cheat-sheet" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-5-cheat-sheet">Lecture 5 Cheat Sheet</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Function/Concept</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Code Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mean()</code></td>
+<td>Calculate arithmetic mean</td>
+<td><code>mean(x, na.rm = TRUE)</code></td>
+</tr>
+<tr class="even">
+<td><code>median()</code></td>
+<td>Calculate median (middle value)</td>
+<td><code>median(x)</code></td>
+</tr>
+<tr class="odd">
+<td><code>sd()</code></td>
+<td>Calculate standard deviation</td>
+<td><code>sd(x)</code></td>
+</tr>
+<tr class="even">
+<td><code>var()</code></td>
+<td>Calculate variance</td>
+<td><code>var(x)</code></td>
+</tr>
+<tr class="odd">
+<td><code>range()</code></td>
+<td>Get minimum and maximum</td>
+<td><code>range(x)</code></td>
+</tr>
+<tr class="even">
+<td><code>IQR()</code></td>
+<td>Calculate interquartile range</td>
+<td><code>IQR(x)</code></td>
+</tr>
+<tr class="odd">
+<td><code>quantile()</code></td>
+<td>Calculate quantiles/percentiles</td>
+<td><code>quantile(x, 0.25)</code></td>
+</tr>
+<tr class="even">
+<td><code>summary()</code></td>
+<td>Get 5-number summary + mean</td>
+<td><code>summary(x)</code></td>
+</tr>
+<tr class="odd">
+<td><code>table()</code></td>
+<td>Create frequency table</td>
+<td><code>table(df$category)</code></td>
+</tr>
+<tr class="even">
+<td><code>prop.table()</code></td>
+<td>Convert counts to proportions</td>
+<td><code>prop.table(table(x))</code></td>
+</tr>
+<tr class="odd">
+<td><code>cor()</code></td>
+<td>Calculate correlation</td>
+<td><code>cor(x, y)</code></td>
+</tr>
+<tr class="even">
+<td><code>cor.test()</code></td>
+<td>Correlation test with p-value</td>
+<td><code>cor.test(x, y)</code></td>
+</tr>
+<tr class="odd">
+<td><code>geom_histogram()</code></td>
+<td>Create histogram</td>
+<td><code>geom_histogram(binwidth = 5)</code></td>
+</tr>
+<tr class="even">
+<td><code>geom_density()</code></td>
+<td>Create density plot</td>
+<td><code>geom_density(fill = "blue")</code></td>
+</tr>
+<tr class="odd">
+<td><code>geom_boxplot()</code></td>
+<td>Create boxplot</td>
+<td><code>geom_boxplot()</code></td>
+</tr>
+<tr class="even">
+<td><code>geom_tile()</code></td>
+<td>Create heatmap tiles</td>
+<td><code>geom_tile(aes(fill = value))</code></td>
+</tr>
+<tr class="odd">
+<td><code>group_by() + summarize()</code></td>
+<td>Grouped statistics</td>
+<td><code>group_by(var) |&gt; summarize(mean = mean(x))</code></td>
+</tr>
+<tr class="even">
+<td><code>count()</code></td>
+<td>Count observations</td>
+<td><code>count(var1, var2)</code></td>
+</tr>
+<tr class="odd">
+<td><code>pivot_wider()</code></td>
+<td>Reshape long to wide</td>
+<td><code>pivot_wider(names_from, values_from)</code></td>
+</tr>
+<tr class="even">
+<td>Z-score</td>
+<td>Standardize values</td>
+<td><code>(x - mean(x)) / sd(x)</code></td>
+</tr>
+<tr class="odd">
+<td>IQR outliers</td>
+<td>Values beyond 1.5×IQR</td>
+<td><code>Q1 - 1.5*IQR</code> or <code>Q3 + 1.5*IQR</code></td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Ayse D. Lokmanoglu, Boston University</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alokman@bu.edu">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aysedeniz09">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
