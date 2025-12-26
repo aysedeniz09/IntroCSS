@@ -1,0 +1,2156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>bigdata_l7-github – Social Data Analysis and Visualization</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-956b8a4ec41f03f761f91fad8c3a3e27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c2a6d3abc2894eadef3e844b666af903.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-956b8a4ec41f03f761f91fad8c3a3e27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Social Data Analysis and Visualization</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Masters Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule_phd.html"> 
+<span class="menu-text">PhD Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../install.html"> 
+<span class="menu-text">Install R</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aysedeniz09/IntroCSS"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Getting Started</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Social Data Analysis and Visualization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Schedule - Masters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule_phd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Schedule - PhD</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Install R Studio</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Class Sessions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/01/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 1 - Why Computational Social Science?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/02/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 2 - Data Collection and Wrangling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/03/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 3 - GGPlot and Visualizations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/04/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 4 - Computational Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/05/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 5 - Descriptive Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/06/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 6 - Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/07/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 7 - Dictionary Methods &amp; Word Embeddings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/08/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 8 - Midterm Exam</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/09/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 9 - Topic Modeling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/10/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 10 - Unsupervised Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/11/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 11 - Networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/12/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 12 - Online Social Movements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sessions/13/session.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 13 - From Data to Conclusions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/cheatsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Cheatsheets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datasets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#text-as-data-dictionary-methods-and-word-embeddings" id="toc-text-as-data-dictionary-methods-and-word-embeddings" class="nav-link active" data-scroll-target="#text-as-data-dictionary-methods-and-word-embeddings">Text as Data: Dictionary Methods and Word Embeddings</a></li>
+  <li><a href="#r-exercises" id="toc-r-exercises" class="nav-link" data-scroll-target="#r-exercises">R Exercises</a>
+  <ul class="collapse">
+  <li><a href="#lecture-7-table-of-contents" id="toc-lecture-7-table-of-contents" class="nav-link" data-scroll-target="#lecture-7-table-of-contents">Lecture 7 Table of Contents</a></li>
+  <li><a href="#introduction-to-text-as-data" id="toc-introduction-to-text-as-data" class="nav-link" data-scroll-target="#introduction-to-text-as-data">1. Introduction to Text as Data</a></li>
+  <li><a href="#dictionary-methods" id="toc-dictionary-methods" class="nav-link" data-scroll-target="#dictionary-methods">2. Dictionary Methods</a>
+  <ul class="collapse">
+  <li><a href="#online-dataset-amazon-sales-data" id="toc-online-dataset-amazon-sales-data" class="nav-link" data-scroll-target="#online-dataset-amazon-sales-data">2.1 Online Dataset: Amazon Sales Data</a></li>
+  <li><a href="#text-preprocessing" id="toc-text-preprocessing" class="nav-link" data-scroll-target="#text-preprocessing">2.2 Text Preprocessing</a></li>
+  <li><a href="#sentiment-analysis-with-dictionary-methods" id="toc-sentiment-analysis-with-dictionary-methods" class="nav-link" data-scroll-target="#sentiment-analysis-with-dictionary-methods">2.3 Sentiment Analysis with Dictionary Methods</a></li>
+  <li><a href="#visualizing-and-comparing-sentiment-analysis-results" id="toc-visualizing-and-comparing-sentiment-analysis-results" class="nav-link" data-scroll-target="#visualizing-and-comparing-sentiment-analysis-results">2.4 Visualizing and Comparing Sentiment Analysis Results</a></li>
+  <li><a href="#most-common-positive-and-negative-words" id="toc-most-common-positive-and-negative-words" class="nav-link" data-scroll-target="#most-common-positive-and-negative-words">2.5 Most common positive and negative words</a></li>
+  <li><a href="#normalize-sentiment-scores" id="toc-normalize-sentiment-scores" class="nav-link" data-scroll-target="#normalize-sentiment-scores">2.6 Normalize sentiment scores</a></li>
+  </ul></li>
+  <li><a href="#word-embeddings" id="toc-word-embeddings" class="nav-link" data-scroll-target="#word-embeddings">3. Word Embeddings</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-word-embeddings" id="toc-introduction-to-word-embeddings" class="nav-link" data-scroll-target="#introduction-to-word-embeddings">3.1 Introduction to Word Embeddings</a></li>
+  <li><a href="#applying-word-embeddings-in-r" id="toc-applying-word-embeddings-in-r" class="nav-link" data-scroll-target="#applying-word-embeddings-in-r">3.2 Applying Word Embeddings in R</a></li>
+  </ul></li>
+  <li><a href="#class-exercises-sentiment-analysis-and-word-embeddings" id="toc-class-exercises-sentiment-analysis-and-word-embeddings" class="nav-link" data-scroll-target="#class-exercises-sentiment-analysis-and-word-embeddings">4. Class Exercises: Sentiment Analysis and Word Embeddings</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1-sentiment-analysis-on-airline-data" id="toc-exercise-1-sentiment-analysis-on-airline-data" class="nav-link" data-scroll-target="#exercise-1-sentiment-analysis-on-airline-data">Exercise 1: Sentiment Analysis on Airline Data</a></li>
+  <li><a href="#exercise-2-exploring-word-embeddings" id="toc-exercise-2-exploring-word-embeddings" class="nav-link" data-scroll-target="#exercise-2-exploring-word-embeddings">Exercise 2: Exploring Word Embeddings</a></li>
+  <li><a href="#optional-exercise-3-combining-sentiment-analysis-and-word-embeddings-this-is-an-advanced-exercise-for-those-that-want-to-try" id="toc-optional-exercise-3-combining-sentiment-analysis-and-word-embeddings-this-is-an-advanced-exercise-for-those-that-want-to-try" class="nav-link" data-scroll-target="#optional-exercise-3-combining-sentiment-analysis-and-word-embeddings-this-is-an-advanced-exercise-for-those-that-want-to-try">Optional Exercise 3: Combining Sentiment Analysis and Word Embeddings (This is an advanced exercise for those that want to try)</a></li>
+  </ul></li>
+  <li><a href="#lecture-7-cheat-sheet" id="toc-lecture-7-cheat-sheet" class="nav-link" data-scroll-target="#lecture-7-cheat-sheet">Lecture 7 Cheat Sheet</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="text-as-data-dictionary-methods-and-word-embeddings" class="level1">
+<h1>Text as Data: Dictionary Methods and Word Embeddings</h1>
+<p>Dr.&nbsp;Ayse D. Lokmanoglu Lecture 7, (B) March 16, (A) March 4</p>
+</section>
+<section id="r-exercises" class="level1">
+<h1>R Exercises</h1>
+<hr>
+<section id="lecture-7-table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-7-table-of-contents">Lecture 7 Table of Contents</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Introduction to Text as Data</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Dictionary Methods</td>
+</tr>
+<tr class="odd">
+<td>2.1</td>
+<td>Online Dataset: Twitter Data</td>
+</tr>
+<tr class="even">
+<td>2.2</td>
+<td>Text Preprocessing</td>
+</tr>
+<tr class="odd">
+<td>2.3</td>
+<td>Sentiment Analysis with Dictionary Methods</td>
+</tr>
+<tr class="even">
+<td>2.4</td>
+<td>Visualizing and Comparing Sentiment Analysis Results</td>
+</tr>
+<tr class="odd">
+<td>2.5</td>
+<td>Most common positive and negative words</td>
+</tr>
+<tr class="even">
+<td>2.6</td>
+<td>Normalize sentiment scores</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Word Embeddings</td>
+</tr>
+<tr class="even">
+<td>3.1</td>
+<td>Introduction to Word Embeddings</td>
+</tr>
+<tr class="odd">
+<td>3.1.1</td>
+<td>Continuous Bag of Words (CBOW)</td>
+</tr>
+<tr class="even">
+<td>3.1.2</td>
+<td>Skip-Gram Model</td>
+</tr>
+<tr class="odd">
+<td>3.2</td>
+<td>Applying Word Embeddings in R</td>
+</tr>
+<tr class="even">
+<td>3.2.1</td>
+<td>Training Word2Vec with CBOW</td>
+</tr>
+<tr class="odd">
+<td>3.2.2</td>
+<td>Visualize CBOW</td>
+</tr>
+<tr class="even">
+<td>3.2.3</td>
+<td>Training Word2Vec with Skip Gram</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Class Exercises: Sentiment Analysis and Word Embeddings</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>ALWAYS</strong> Let’s load our libraries</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)   <span class="co"># Data manipulation and visualization (includes dplyr, ggplot2, tidyr, stringr)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)    <span class="co"># Text mining using tidy data principles</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)     <span class="co"># Creating visualizations and plots</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stopwords)   <span class="co"># Access to stopword lists in multiple languages</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(word2vec)    <span class="co"># Training word embedding models (CBOW and Skip-Gram)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(umap)        <span class="co"># Dimensionality reduction for visualizing high-dimensional data</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)  <span class="co"># Creating interactive word clouds</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)      <span class="co"># Creating interactive plots and visualizations</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(htmlwidgets)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="introduction-to-text-as-data" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-text-as-data">1. Introduction to Text as Data</h2>
+<p>Text data:</p>
+<ul>
+<li><p>is unstructured,</p></li>
+<li><p>requires preprocessing to be analyzed.</p></li>
+</ul>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20210526142713/BlockDigramofTextMining.png" class="img-fluid"> <em>source: <a href="https://media.geeksforgeeks.org/wp-content/uploads/20210526142713/BlockDigramofTextMining.png" class="uri">https://media.geeksforgeeks.org/wp-content/uploads/20210526142713/BlockDigramofTextMining.png</a></em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Phase</strong></th>
+<th><strong>Technique</strong></th>
+<th><strong>Core Question</strong></th>
+<th><strong>Purpose</strong></th>
+<th><strong>Methods &amp; R Packages</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Text Preprocessing</strong></td>
+<td>Tokenization</td>
+<td>How can we segment text into meaningful units?</td>
+<td>Convert text into individual words or phrases.</td>
+<td><code>tidytext</code> (<code>unnest_tokens()</code>), <code>stringr</code> (<code>str_split()</code>)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Stopword Removal</td>
+<td>How can we remove redundant words?</td>
+<td>Eliminate common words that add little meaning.</td>
+<td><code>tidytext</code> (<code>stop_words</code>), <code>stopwords</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Lemmatization &amp; Stemming</td>
+<td>How can we reduce word variations?</td>
+<td>Standardize words to their root forms.</td>
+<td><code>textstem</code> (<code>lemmatize_words()</code>), <code>SnowballC</code> (<code>wordStem()</code>)</td>
+</tr>
+<tr class="even">
+<td><strong>Feature Engineering</strong></td>
+<td>N-grams</td>
+<td>How can we capture word sequences?</td>
+<td>Identify multi-word expressions and patterns.</td>
+<td><code>tidytext</code> (<code>unnest_tokens(ngrams = 2)</code>), <code>text2vec</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Part-of-Speech Tagging</td>
+<td>How can we recognize word functions?</td>
+<td>Assign grammatical categories to words.</td>
+<td><code>udpipe</code> (<code>udpipe_annotate()</code>), <code>spacyr</code></td>
+</tr>
+<tr class="even">
+<td><strong>Content Analysis</strong></td>
+<td>Dictionary-Based Analysis</td>
+<td>How can we quantify meaning in text?</td>
+<td>Detect linguistic, psychological, or topical patterns.</td>
+<td><code>tidytext</code> (<code>get_sentiments()</code>), <code>quanteda</code> (<code>dfm_lookup()</code>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Machine Learning</strong></td>
+<td>Supervised Classification</td>
+<td>How can we predict categories from text?</td>
+<td>Assign labels based on prior training examples.</td>
+<td><code>caret</code>, <code>textrecipes</code>, <code>tidymodels</code></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Unsupervised Clustering</td>
+<td>How can we discover hidden patterns?</td>
+<td>Group similar documents or topics automatically.</td>
+<td><code>topicmodels</code> (LDA), <code>quanteda</code> (k-means clustering), <code>text2vec</code> (word embeddings)</td>
+</tr>
+</tbody>
+</table>
+<p>We will learn 2 methods today:</p>
+<ol type="1">
+<li><p><strong>Dictionary Methods</strong> - Using predefined word lists to categorize text (e.g., sentiment analysis with lexicons).</p></li>
+<li><p><strong>Word Embeddings</strong> - Representing words as numerical vectors to capture semantic relationships and similarities.</p></li>
+</ol>
+<hr>
+</section>
+<section id="dictionary-methods" class="level2">
+<h2 class="anchored" data-anchor-id="dictionary-methods">2. Dictionary Methods</h2>
+<p>Dictionary-based methods assign predefined categories to words.</p>
+<section id="online-dataset-amazon-sales-data" class="level3">
+<h3 class="anchored" data-anchor-id="online-dataset-amazon-sales-data">2.1 Online Dataset: Amazon Sales Data</h3>
+<p>Dataset Citation: Karkavel Raja, J. (2023). Amazon sales dataset [Data set]. Kaggle. <a href="https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset" class="uri">https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset</a></p>
+<p><strong>Note:</strong> <strong>This dataset is raw and unfiltered, meaning it may contain explicit language, including swear words. Please proceed with awareness and discretion.</strong></p>
+<p>We will use a publicly available Amazon Sales Review Dataset, which contains tweets labeled as positive, neutral, or negative.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>amazon_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/amazon.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(amazon_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##  [1] "product_id"          "product_name"        "category"           
+##  [4] "discounted_price"    "actual_price"        "discount_percentage"
+##  [7] "rating"              "rating_count"        "about_product"      
+## [10] "user_id"             "user_name"           "review_id"          
+## [13] "review_title"        "review_content"      "img_link"           
+## [16] "product_link"</code></pre>
+<hr>
+</section>
+<section id="text-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="text-preprocessing">2.2 Text Preprocessing</h3>
+<p>Since we are working with the <strong>review_content column</strong> from the Amazon sales dataset, we need to ensure proper formatting before tokenization. We will create a new <code>text</code> column, remove unnecessary whitespace, convert text to lowercase, remove URLs and numbers, and maintain consistency across all reviews. We’ll also add an index column to help with merging data later in our analysis.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure text is properly formatted</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>amazon_data <span class="ot">&lt;-</span> amazon_data <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">textBU =</span> review_content,   <span class="do">### created a backup column so we always have the OG review</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">str_squish</span>(review_content)) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(text)) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_to_lower</span>(text)) <span class="sc">|&gt;</span> <span class="co"># Convert to lowercase</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_remove_all</span>(text, <span class="st">"https?://</span><span class="sc">\\</span><span class="st">S+"</span>)) <span class="sc">|&gt;</span> <span class="co"># Remove URLs</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_remove_all</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>)) <span class="sc">|&gt;</span>  <span class="co"># Remove numbers</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review_index =</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(amazon_data))) <span class="sc">|&gt;</span> <span class="do">### creating an index</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nwords =</span> <span class="fu">str_count</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">w+"</span>)) <span class="do">### counting number of words</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(amazon_data<span class="sc">$</span>text)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "looks durable charging is fine toono complains,charging is really fast, good product.,till now satisfied with the quality.,this is a good product . the charging speed is slower than the original iphone cable,good quality, would recommend, had worked well till date and was having no issue.cable is also sturdy enough...have asked for replacement and company is doing the same...,value for money"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+## [2] "i ordered this cable to connect my phone to android auto of car. the cable is really strong and the connection ports are really well made. i already has a micro usb cable from ambrane and it's still in good shape. i connected my phone to the car using the cable and it got connected well and no issues. i also connected it to the charging port and yes it has fast charging support.,it quality is good at this price and the main thing is that i didn't ever thought that this cable will be so long it's good one and charging power is too good and also supports fast charging,value for money, with extra length👍,good, working fine,product quality is good,good,very good,bought for my daughter's old phone.brand new cable it was not charging, i already repacked and requested for replacement.i checked again, and there was some green colour paste/fungus inside the micro usb connector. i cleaned with an alcoholic and starts working again.checked the ampere of charging speed got around ma-ma - not bad, came with braided .m long cable, pretty impressive for the price.can't blame the manufacturer.but quality issues by the distributor, they might have stored in very humid place."                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## [3] "not quite durable and sturdy, good, nice product,working well,it's a really nice product"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+## [4] "good product,long wire,charges good,nice,i bought this cable for rs. worthy product for this price, i tested it in various charger adapters w and w it supports fast charging as well.,good,ok,i had got this at good price on sale on amazon and product is useful with warranty but for warranty you need to go very far not practical for such a cost and mine micro to type c connector stopped working after few days only.,i like this product"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+## [5] "bought this instead of original apple, does the work for rs, not as fast as apple charger but its a good option if you want cheap and good product, bought it for ipad pro . and it's working flawlessly, build quality is ok, its not like i am gonna hang my clothes on it and i want a very strong cable, even a braided cable stop working after a year, i have used both anker and apple store strong braided cable they all stop working after a year so please don't buy high end cables just for that instead choose a this one and even if it's stops working withing a year you only loose rs compares to rs.update------------------------------------pin has stopped charging from one side, now i have to slip the pin to charge from other side, but i will update and let know for how long does it work,,it’s good. not sure about durability as the pin area feels a bit fragile,does not support apple carplayso was little disappointed about thatother than that cable is made up of very good quality,best to buy,% not fathful,writing this review post  months and  orders of the same product.honestly portronics konnect l lightning cable works like magic with the original apple charging brick.seeing the price of the cable i initially hesitated buying as it was as low as ₹/- with the offers and so i wasn’t sure if it would work well with my iphone  or whether it would impact my iphone’s battery health because all the other lightning cable brands were costing over ₹/- like wayona, amazon basics, etc.earlier i was using wayona brand lightning cable with eventually frayed and stopped working.charging speed:charges my iphone fast enough almost similar compared to the original cable level when used with w original apple power adapter.quality and durability:great quality braided cable and doesn’t tangle easily and can withstand day-to-day usage.l-shaped pin:this is very innovative by portronics and it makes sure the cable doesn’t get damaged even if used while charging.carplay and data sync:works smoothly with carplay and syncs data effortlessly.ps: i have used this cable only with the original apple charging brick and extremely satisfied with its performance.,better than i expect the product i like that quality and i plan to buy same type cable come with usb c to lighting cable for emergency purpose that much i love this cable. buy for this cable only emergency uses only since good one,good product and value for money"
+## [6] "it's a good product.,like,very good item strong and useful usb cablevalue for moneythanks to amazon and producer, product and useful product,-,sturdy but does not support w charging"</code></pre>
+<p>Before applying dictionary methods, we need to clean the text by:</p>
+<ul>
+<li><p>Tokenizing the reviews into individual words</p></li>
+<li><p>Removing stop words (common words like “the”, “and”, “is” that don’t carry much sentiment)</p></li>
+<li><p>Removing unnecessary characters</p></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize text</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>amazon_tokens <span class="ot">&lt;-</span> amazon_data <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">"word"</span>) <span class="do">## removing stopwords</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># View tokenized words</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(amazon_tokens<span class="sc">$</span>word)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "durable"   "charging"  "fine"      "toono"     "complains" "charging"</code></pre>
+<hr>
+</section>
+<section id="sentiment-analysis-with-dictionary-methods" class="level3">
+<h3 class="anchored" data-anchor-id="sentiment-analysis-with-dictionary-methods">2.3 Sentiment Analysis with Dictionary Methods</h3>
+<p>To understand how different sentiment analysis lexicons classify text, we will compare results from multiple dictionaries, including <strong>Bing</strong>, <strong>AFINN</strong>, and <strong>NRC</strong>. Each lexicon provides different insights:</p>
+<ul>
+<li><strong>Bing</strong>: Binary classification (positive/negative sentiment).</li>
+<li><strong>AFINN</strong>: Numeric scores for sentiment intensity.</li>
+<li><strong>NRC</strong>: Categorizes words into emotional dimensions (anger, joy, fear, etc.).</li>
+</ul>
+<p><strong>Note: For AFINN and NRC you need to select 1 in your console when prompted</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 2,477 × 2
+##    word       value
+##    &lt;chr&gt;      &lt;dbl&gt;
+##  1 abandon       -2
+##  2 abandoned     -2
+##  3 abandons      -2
+##  4 abducted      -2
+##  5 abduction     -2
+##  6 abductions    -2
+##  7 abhor         -3
+##  8 abhorred      -3
+##  9 abhorrent     -3
+## 10 abhors        -3
+## # ℹ 2,467 more rows</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_sentiments</span>(<span class="st">"bing"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 6,786 × 2
+##    word        sentiment
+##    &lt;chr&gt;       &lt;chr&gt;    
+##  1 2-faces     negative 
+##  2 abnormal    negative 
+##  3 abolish     negative 
+##  4 abominable  negative 
+##  5 abominably  negative 
+##  6 abominate   negative 
+##  7 abomination negative 
+##  8 abort       negative 
+##  9 aborted     negative 
+## 10 aborts      negative 
+## # ℹ 6,776 more rows</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_sentiments</span>(<span class="st">"nrc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 13,872 × 2
+##    word        sentiment
+##    &lt;chr&gt;       &lt;chr&gt;    
+##  1 abacus      trust    
+##  2 abandon     fear     
+##  3 abandon     negative 
+##  4 abandon     sadness  
+##  5 abandoned   anger    
+##  6 abandoned   fear     
+##  7 abandoned   negative 
+##  8 abandoned   sadness  
+##  9 abandonment anger    
+## 10 abandonment fear     
+## # ℹ 13,862 more rows</code></pre>
+<p>Let’s now see how is it in our dataset</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Bing sentiment lexicon</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Step 1:</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>bing_sentiments_S1 <span class="ot">&lt;-</span> amazon_tokens <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>), <span class="at">by =</span> <span class="st">"word"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bing_sentiments_S1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 6 × 21
+##   product_id product_name                 category discounted_price actual_price
+##   &lt;chr&gt;      &lt;chr&gt;                        &lt;chr&gt;    &lt;chr&gt;            &lt;chr&gt;       
+## 1 B07JW9H4J1 Wayona Nylon Braided USB to… Compute… ₹399             ₹1,099      
+## 2 B07JW9H4J1 Wayona Nylon Braided USB to… Compute… ₹399             ₹1,099      
+## 3 B07JW9H4J1 Wayona Nylon Braided USB to… Compute… ₹399             ₹1,099      
+## 4 B07JW9H4J1 Wayona Nylon Braided USB to… Compute… ₹399             ₹1,099      
+## 5 B07JW9H4J1 Wayona Nylon Braided USB to… Compute… ₹399             ₹1,099      
+## 6 B07JW9H4J1 Wayona Nylon Braided USB to… Compute… ₹399             ₹1,099      
+## # ℹ 16 more variables: discount_percentage &lt;chr&gt;, rating &lt;dbl&gt;,
+## #   rating_count &lt;dbl&gt;, about_product &lt;chr&gt;, user_id &lt;chr&gt;, user_name &lt;chr&gt;,
+## #   review_id &lt;chr&gt;, review_title &lt;chr&gt;, review_content &lt;chr&gt;, img_link &lt;chr&gt;,
+## #   product_link &lt;chr&gt;, textBU &lt;chr&gt;, review_index &lt;int&gt;, nwords &lt;int&gt;,
+## #   word &lt;chr&gt;, sentiment &lt;chr&gt;</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bing_sentiments_S2 <span class="ot">&lt;-</span> bing_sentiments_S1 <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(review_index, sentiment)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bing_sentiments_S2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 6 × 3
+##   review_index sentiment     n
+##          &lt;int&gt; &lt;chr&gt;     &lt;int&gt;
+## 1            1 negative      2
+## 2            1 positive      6
+## 3            2 negative      5
+## 4            2 positive      8
+## 5            3 positive      4
+## 6            4 positive      4</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bing_sentiments_S3 <span class="ot">&lt;-</span> bing_sentiments_S2 <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bing_sentiments_S3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 6 × 3
+##   review_index negative positive
+##          &lt;int&gt;    &lt;int&gt;    &lt;int&gt;
+## 1            1        2        6
+## 2            2        5        8
+## 3            3        0        4
+## 4            4        0        4
+## 5            5        9       11
+## 6            6        0        3</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bing_sentiments_S4 <span class="ot">&lt;-</span> bing_sentiments_S3 <span class="sc">|&gt;</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bing_sentiments_S4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 6 × 4
+##   review_index negative positive sentiment
+##          &lt;int&gt;    &lt;int&gt;    &lt;int&gt;     &lt;int&gt;
+## 1            1        2        6         4
+## 2            2        5        8         3
+## 3            3        0        4         4
+## 4            4        0        4         4
+## 5            5        9       11         2
+## 6            6        0        3         3</code></pre>
+<p>Full Pipe:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bing_sentiments <span class="ot">&lt;-</span> amazon_tokens <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>), <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(review_index, sentiment) <span class="sc">|&gt;</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">|&gt;</span> </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="st">"Bing"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now let’s repeat it with AFINN, from now on I am going to give you the full pipeline, if you want you can see step by step</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>afinn_sentiments <span class="ot">&lt;-</span> amazon_tokens <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(review_index) <span class="sc">|&gt;</span>  </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sentiment =</span> <span class="fu">sum</span>(value)) <span class="sc">|&gt;</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="st">"AFINN"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now w/ NRC:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>nrc_sentiments <span class="ot">&lt;-</span>  amazon_tokens <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"nrc"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">filter</span>(sentiment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"positive"</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"negative"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(review_index, sentiment) <span class="sc">|&gt;</span> </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sentiment, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> positive <span class="sc">-</span> negative) <span class="sc">|&gt;</span> </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> <span class="st">"NRC"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="visualizing-and-comparing-sentiment-analysis-results" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-and-comparing-sentiment-analysis-results">2.4 Visualizing and Comparing Sentiment Analysis Results</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>all_sentiments <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(afinn_sentiments,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>          bing_sentiments,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>          nrc_sentiments) <span class="sc">|&gt;</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>positive, <span class="sc">-</span>negative)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(all_sentiments,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(review_index, sentiment, <span class="at">fill =</span> method)) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>method, <span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L7-github_files/figure-gfm/unnamed-chunk-12-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Interpreting the Sentiment Analysis Results</strong></p>
+<p>The visualization above shows sentiment scores across approximately 1,500 Amazon product reviews using three different lexicons:</p>
+<p><strong>AFINN (Top Panel - Red):</strong></p>
+<ul>
+<li><p>Shows sentiment scores ranging from approximately -20 to +70</p></li>
+<li><p>Most reviews cluster around neutral to slightly positive (0-20 range)</p></li>
+<li><p>Several spikes indicate strongly positive reviews (scores above 50)</p></li>
+<li><p>The high positive scores suggest customers who leave reviews tend to express strong satisfaction</p></li>
+<li><p>Negative sentiment appears less frequent and less extreme</p></li>
+</ul>
+<p><strong>Bing (Middle Panel - Green):</strong></p>
+<ul>
+<li><p>Displays scores from approximately -30 to +30</p></li>
+<li><p>More balanced distribution between positive and negative sentiment</p></li>
+<li><p>The zero line represents neutral sentiment (equal positive and negative words)</p></li>
+<li><p>Green bars above zero indicate positive sentiment; bars below indicate negative</p></li>
+<li><p>Shows more variability and captures both satisfied and dissatisfied customers</p></li>
+</ul>
+<p><strong>NRC (Bottom Panel - Blue):</strong></p>
+<ul>
+<li><p>Generally lower scores, mostly ranging from 0 to 40</p></li>
+<li><p>Few negative values, indicating this lexicon captures more positive than negative emotions</p></li>
+<li><p>Several notable spikes (around review index 1000) suggest reviews with strong emotional content</p></li>
+<li><p>The lower overall scores reflect that NRC filters for specific emotions (anger, joy, fear, trust) rather than general sentiment</p></li>
+</ul>
+<p><strong>Key Observations:</strong></p>
+<ul>
+<li><p>All three methods show predominantly positive sentiment, which is typical for product reviews (satisfied customers are more likely to leave reviews)</p></li>
+<li><p>AFINN produces the highest magnitude scores, making it useful for detecting strong sentiment</p></li>
+<li><p>Bing provides the most balanced view of positive vs.&nbsp;negative sentiment</p></li>
+<li><p>Different lexicons can produce different results for the same text, highlighting the importance of comparing multiple methods</p></li>
+</ul>
+<hr>
+</section>
+<section id="most-common-positive-and-negative-words" class="level3">
+<h3 class="anchored" data-anchor-id="most-common-positive-and-negative-words">2.5 Most common positive and negative words</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bing_word_counts <span class="ot">&lt;-</span> amazon_tokens <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bing_word_counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 6 × 3
+##   word  sentiment     n
+##   &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;
+## 1 nice  positive    947
+## 2 easy  positive    917
+## 3 fast  positive    580
+## 4 fine  positive    522
+## 5 worth positive    431
+## 6 issue negative    335</code></pre>
+<p>Visualize it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bing_word_counts <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment) <span class="sc">|&gt;</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">|&gt;</span> </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(n, word, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sentiment, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sentiment Count"</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L7-github_files/figure-gfm/unnamed-chunk-14-1.png" class="img-fluid"><!-- --></p>
+<p>We can also do wordclouds using <code>wordcloud2</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get word frequencies for disgust and trust emotions</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>sentiment_words <span class="ot">&lt;-</span> amazon_tokens <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"nrc"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sentiment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"disgust"</span>, <span class="st">"trust"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># # Check the data structure</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># head(sentiment_words, 20)</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create separate wordclouds for each sentiment</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>disgust_words <span class="ot">&lt;-</span> sentiment_words <span class="sc">|&gt;</span> </span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sentiment <span class="sc">==</span> <span class="st">"disgust"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(word, n) <span class="sc">|&gt;</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">freq =</span> n)  <span class="co"># wordcloud2 likes 'freq' as column name</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>trust_words <span class="ot">&lt;-</span> sentiment_words <span class="sc">|&gt;</span> </span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sentiment <span class="sc">==</span> <span class="st">"trust"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(word, n) <span class="sc">|&gt;</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">freq =</span> n)</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co"># # Check the structure before creating wordcloud</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="co"># str(disgust_words)</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="co"># head(disgust_words)</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud2</span>(disgust_words, </span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"random-dark"</span>, </span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">backgroundColor =</span> <span class="st">"white"</span>,</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">minSize =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="htmlwidget-5d4da96f8dd4e5eea18e" class="wordcloud2 html-widget html-fill-item" style="width:672px;height:480px;">
+
+</div>
+<script type="application/json" data-for="htmlwidget-5d4da96f8dd4e5eea18e">{"x":{"word":["bad","weight","disappointed","damage","defective","waste","powerful","finally","boil","feeling","lagging","larger","lesser","overpriced","default","dislike","smell","honest","irritating","pollution","remains","cutting","gray","hanging","weird","delay","disappoint","fat","lose","dirt","dirty","hate","misleading","ugly","wasted","bug","awful","blame","burnt","mess","pathetic","fungus","horrible","inconvenient","painful","sentence","sticky","trash","damn","fool","owing","treat","annoyance","bang","bloody","bummer","crap","debris","drunken","hell","humble","irritation","lying","saturated","speck","unbearable","unpleasant","abnormal","abuse","criticize","dire","disappointment","disaster","fleece","garbage","ill","messy","mosquito","unfair","backwards","bleeding","bloated","censor","clumsy","collapse","depressing","deteriorated","entangled","filthy","goo","idiot","infamous","intense","interior","intrusive","lie","muddy","poaching","questionable","scrub","shame","soiled","spider","stain","stomach","unsatisfied","wasting","worthless","adverse","angry","atrocious","cancer","cheat","cholera","corruption","cough","crude","crushed","cur","cursing","death","degrade","deplorable","desert","destructive","discoloration","discolored","disgusting","dismal","distorted","dying","enemy","excellence","failure","greasy","gross","harmful","hood","horrific","horror","idiotic","illegal","impure","inappropriate","incase","incompatible","insanity","instability","lawyer","lemon","lick","lord","mishap","murky","nasty","nose","offense","pollute","rat","rejection","repellent","ridiculous","rogue","rubbish","sick","snake","spoil","suffering","suffocating","suppression","surly","terrible","thief","threatening","toad","toxic","tree","uneasy","unhappy","unsatisfactory","unsettled","whine","winning"],"freq":[252,219,70,63,62,60,55,54,29,29,29,27,25,25,24,23,18,17,16,16,16,14,14,14,14,13,12,12,12,11,11,11,11,10,10,9,8,8,8,8,8,7,6,6,6,6,6,6,5,5,5,5,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":5,"weightFactor":0.3571428571428572,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud2</span>(trust_words, </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"random-light"</span>, </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">backgroundColor =</span> <span class="st">"white"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">minSize =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="htmlwidget-b5aa6ad75a0541d846f5" class="wordcloud2 html-widget html-fill-item" style="width:672px;height:480px;">
+
+</div>
+<script type="application/json" data-for="htmlwidget-b5aa6ad75a0541d846f5">{"x":{"word":["money","recommend","budget","excellent","happy","weight","warranty","found","clean","perfect","durable","pretty","top","cover","level","expect","machine","accurate","star","bank","durability","calls","iron","deal","provide","hope","system","friendly","manual","compact","wear","content","team","stable","helpful","improve","center","base","powerful","effective","finally","trust","fixed","pay","improvement","green","reliable","suggest","save","crisp","prefer","efficient","real","genuine","personal","comfort","doubt","guard","protector","true","planning","fairly","feeling","safe","exchange","larger","share","wonderful","fitting","food","proof","providing","seal","count","responsive","enjoy","fill","operation","professional","automatic","strength","worthy","cap","guide","lover","rod","related","word","honest","intact","series","instructions","measure","remains","depend","usual","advice","friend","mother","offering","official","prestige","depth","flagship","prepared","supporting","brother","experienced","ground","intend","lovely","policy","reliability","respect","school","serve","constantly","honor","income","signature","brilliant","constant","continue","enjoying","shopping","sweet","title","assured","crucial","enable","favorite","loving","peace","pilot","evident","expert","glow","god","instruction","manage","promise","relevant","steady","sun","understanding","account","confirmation","elders","laser","management","patience","successful","calculator","cautious","confidence","guarantee","insulation","label","magnet","maintenance","majority","measured","pleasant","praise","relative","smith","visionary","achieve","cabinet","cash","confirmed","credit","explain","father","justice","owing","purification","routine","sceptical","straightforward","treat","weigh","advise","advised","appreciation","authentic","commerce","communication","companion","convincing","dance","entertainment","faith","fidelity","forecast","friendliness","protected","purify","structure","toughness","uplift","verified","architecture","assembly","assurance","authenticity","clearance","courier","elite","encourage","excel","excited","familiar","fellow","freedom","freely","hero","leading","liking","messenger","mislead","obvious","president","proven","reliance","retain","seals","secret","statement","upright","advisable","agreed","alive","authentication","authority","blessing","buddy","censor","coax","committed","compass","compensate","consistency","convinced","dependent","deserve","digit","elevation","engaging","evergreen","favorable","fortitude","fuse","generous","goodness","grin","harmony","heritage","inclusion","indestructible","inform","inspired","intense","interior","lesson","mathematical","medical","moral","neutral","nursery","opera","protecting","proud","rule","salary","theory","truth","assist","attest","bloom","champion","chocolate","civilization","communicate","compliance","compliment","confident","consult","cooperative","cradle","credibility","credible","deceiving","defended","deliverance","diagnosis","diary","dignity","economy","emphasize","endless","endow","enlighten","excellence","exhaustive","expertise","fabrication","footing","fortune","fundamental","gentleman","glory","grow","guidebook","heavenly","illumination","immerse","impeccable","incline","infinity","inspire","instruct","intelligence","intelligent","justifiable","law","lord","magnificent","majestic","merchant","merit","mighty","miracle","nest","objective","organization","passion","picnic","pill","purely","radar","ranger","reimbursement","remedy","rescue","respects","responsible","safekeeping","shoulder","sing","sir","strengthening","substantiate","temperate","thoughtful","trade","transaction","tree","unreliable","unwavering","virtue","winning"],"freq":[689,263,259,237,220,219,210,203,198,191,183,179,177,155,148,132,126,119,104,103,102,99,94,93,92,90,89,84,80,79,71,64,64,63,62,60,58,56,55,54,54,53,51,51,50,49,46,45,39,38,38,37,36,35,35,34,32,32,32,32,30,29,29,29,27,27,27,27,26,26,26,26,25,24,24,23,23,23,23,22,22,22,21,20,19,19,18,18,17,17,17,16,16,16,15,15,14,14,14,14,14,14,13,13,13,13,12,12,12,12,12,12,12,12,12,12,11,11,11,11,10,10,10,10,10,10,10,9,9,9,9,9,9,9,8,8,8,8,8,8,8,8,8,8,8,7,7,7,7,7,7,7,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-light","minSize":5,"weightFactor":0.1306240928882438,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+<hr>
+</section>
+<section id="normalize-sentiment-scores" class="level3">
+<h3 class="anchored" data-anchor-id="normalize-sentiment-scores">2.6 Normalize sentiment scores</h3>
+<ul>
+<li>What are some ways I can normalize sentiment scores?
+<ul>
+<li>Divide by number of words in the review!</li>
+<li>This accounts for review length - longer reviews naturally have more sentiment words</li>
+</ul></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>afinn_sentiments2 <span class="ot">&lt;-</span> afinn_sentiments <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(amazon_data, <span class="at">by =</span> <span class="st">"review_index"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(review_index) <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normalized_score =</span> sentiment <span class="sc">/</span> nwords)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(afinn_sentiments2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## # A tibble: 6 × 23
+## # Groups:   review_index [6]
+##   review_index sentiment method product_id product_name                 category
+##          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;                        &lt;chr&gt;   
+## 1            1         4 AFINN  B07JW9H4J1 Wayona Nylon Braided USB to… Compute…
+## 2            2         7 AFINN  B098NS6PVG Ambrane Unbreakable 60W / 3… Compute…
+## 3            3         6 AFINN  B096MSW6CT Sounce Fast Phone Charging … Compute…
+## 4            4         4 AFINN  B08HDJ86NZ boAt Deuce USB 300 2 in 1 T… Compute…
+## 5            5        -1 AFINN  B08CF3B7N1 Portronics Konnect L 1.2M F… Compute…
+## 6            6         4 AFINN  B08Y1TFSP6 pTron Solero TB301 3A Type-… Compute…
+## # ℹ 17 more variables: discounted_price &lt;chr&gt;, actual_price &lt;chr&gt;,
+## #   discount_percentage &lt;chr&gt;, rating &lt;dbl&gt;, rating_count &lt;dbl&gt;,
+## #   about_product &lt;chr&gt;, user_id &lt;chr&gt;, user_name &lt;chr&gt;, review_id &lt;chr&gt;,
+## #   review_title &lt;chr&gt;, review_content &lt;chr&gt;, img_link &lt;chr&gt;,
+## #   product_link &lt;chr&gt;, textBU &lt;chr&gt;, text &lt;chr&gt;, nwords &lt;int&gt;,
+## #   normalized_score &lt;dbl&gt;</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(afinn_sentiments2, <span class="fu">aes</span>(<span class="at">x =</span> normalized_score)) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Histogram of AFINN Normalized Sentiment Scores"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"AFINN Normalized Scores (Sentiment per Word)"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L7-github_files/figure-gfm/unnamed-chunk-16-1.png" class="img-fluid"><!-- --></p>
+<p>To compare the non-normalized scores:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(afinn_sentiments2, <span class="fu">aes</span>(<span class="at">x =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Histogram of AFINN  Sentiment Scores"</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"AFINN  Scores"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><img src="bigdata_L7-github_files/figure-gfm/unnamed-chunk-17-1.png" class="img-fluid"><!-- --></p>
+<p><strong>Why normalize?</strong></p>
+<ul>
+<li><p>Longer reviews will naturally have higher absolute sentiment scores</p></li>
+<li><p>Normalization helps us compare sentiment intensity across reviews of different lengths</p></li>
+<li><p>A short review with score 10 might be more positive than a long review with score 10</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="word-embeddings" class="level2">
+<h2 class="anchored" data-anchor-id="word-embeddings">3. Word Embeddings</h2>
+<p>Traditional approaches treat words as discrete symbols with no inherent relationship - “good” and “great” are just different words. Word embeddings change this by representing words as <strong>vectors of numbers</strong> where similar words have similar vector representations.</p>
+<p><strong>Key Concept:</strong> Words that appear in similar contexts tend to have similar meanings.</p>
+<p>For example, in product reviews:</p>
+<ul>
+<li><p>“This cable is <strong>durable</strong>”</p></li>
+<li><p>“This cable is <strong>sturdy</strong>”</p></li>
+<li><p>“This cable is <strong>reliable</strong>”</p></li>
+</ul>
+<p>The words “durable,” “sturdy,” and “reliable” appear in similar contexts, so their word embeddings will be close to each other in vector space.</p>
+<p><strong>Vector Arithmetic Magic:</strong> Once words are vectors, we can perform mathematical operations:</p>
+<ul>
+<li><p><code>vector("good") - vector("bad")</code> captures the concept of quality</p></li>
+<li><p><code>vector("phone") - vector("cable") + vector("charger")</code> might land near words related to charging accessories</p></li>
+</ul>
+<p><strong>Why use word embeddings for product reviews?</strong></p>
+<ul>
+<li><p>Capture subtle differences in how customers describe products</p></li>
+<li><p>Identify similar product features across different reviews</p></li>
+<li><p>Understand relationships between descriptive words (e.g., “fast charging” vs “quick charging”)</p></li>
+<li><p>Go beyond simple positive/negative to understand what customers actually care about</p></li>
+</ul>
+<hr>
+<section id="introduction-to-word-embeddings" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-to-word-embeddings">3.1 Introduction to Word Embeddings</h3>
+<p>There are several popular word embedding methods:</p>
+<ul>
+<li><strong>Word2Vec</strong>: Uses a neural network model to generate word embeddings based on context. We’ll use this method today.</li>
+<li><strong>GloVe</strong> (Global Vectors): Constructs word vectors based on word co-occurrence statistics across the entire corpus.</li>
+<li><strong>FastText</strong>: Extends Word2Vec by representing words as subword n-grams, improving performance for rare words and handling typos better.</li>
+</ul>
+<p><strong>For this lecture, we’ll focus on Word2Vec with two training algorithms:</strong></p>
+<ol type="1">
+<li><strong>CBOW (Continuous Bag of Words)</strong>
+<ul>
+<li>Predicts a word based on its surrounding context words</li>
+</ul></li>
+<li><strong>Skip-Gram</strong>
+<ul>
+<li>Predicts surrounding context words based on a target word</li>
+</ul></li>
+</ol>
+<hr>
+<section id="continuous-bag-of-words-cbow" class="level4">
+<h4 class="anchored" data-anchor-id="continuous-bag-of-words-cbow">3.1.1 Continuous Bag of Words (CBOW)</h4>
+<p>The <strong>CBOW model</strong> predicts a target word based on the surrounding context words. It works as follows:</p>
+<ol type="1">
+<li><strong>Input Context</strong>: The model takes a window of words surrounding a target word.</li>
+<li><strong>Word Representation</strong>: Each word is mapped to a vector embedding that captures its semantic and syntactic properties.</li>
+<li><strong>Aggregation</strong>: The individual word vectors in the context window are combined into a single vector.</li>
+<li><strong>Prediction</strong>: The model uses this aggregated vector to predict the most probable target word.</li>
+<li><strong>Optimization</strong>: The model is trained to minimize the difference between predicted and actual words, refining the vector representations over time.</li>
+</ol>
+<p><strong>Example from a product review:</strong></p>
+<p>Given the review: <em>“This cable has <strong>excellent</strong> charging speed”</em></p>
+<p>With a window size of 2, to predict the word <strong>“excellent”</strong>, the model uses:</p>
+<ul>
+<li><p>Context words: [“cable”, “has”, “charging”, “speed”]</p></li>
+<li><p>The model learns that words appearing near “excellent” in reviews are often product features</p></li>
+<li><p>Over many reviews, “excellent” becomes closely associated with positive quality descriptors</p></li>
+</ul>
+<p><strong>Why CBOW is useful for reviews:</strong></p>
+<ul>
+<li><p>Fast to train, efficient for large datasets (like thousands of product reviews)</p></li>
+<li><p>Good at learning common patterns in customer language</p></li>
+<li><p>Works well when you have many examples of similar contexts (e.g., “great quality”, “excellent quality”, “amazing quality”)</p></li>
+</ul>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20231220164157/Screenshot-2023-12-20-164143.png" class="img-fluid"> <em>image from: <a href="https://media.geeksforgeeks.org/wp-content/uploads/20231220164157/Screenshot-2023-12-20-164143.png" class="uri">https://media.geeksforgeeks.org/wp-content/uploads/20231220164157/Screenshot-2023-12-20-164143.png</a></em></p>
+<ul>
+<li><strong>Input layer</strong>: Context words [w(t-2), w(t-1), w(t+1), w(t+2)] - the words surrounding our target</li>
+<li><strong>Hidden layer (Sum)</strong>: These context word vectors are averaged/summed together</li>
+<li><strong>Output layer</strong>: Predicts the target word w(t)</li>
+</ul>
+<p>CBOW is efficient for handling large datasets and is useful for tasks requiring general word representations.</p>
+<hr>
+</section>
+<section id="skip-gram-model" class="level4">
+<h4 class="anchored" data-anchor-id="skip-gram-model">3.1.2 Skip-Gram Model</h4>
+<p>Unlike CBOW, the <strong>Skip-Gram model</strong> works in reverse: it predicts <strong>context words</strong> given a target word. It works as follows:</p>
+<ol type="1">
+<li><strong>Input Target Word</strong>: The model takes a single word as input.</li>
+<li><strong>Word Representation</strong>: The target word is mapped to a high-dimensional vector embedding.</li>
+<li><strong>Probability Distribution</strong>: The model generates probabilities for words likely to appear in the surrounding context.</li>
+<li><strong>Context Word Prediction</strong>: Words with the highest probability are selected as context words.</li>
+<li><strong>Training Optimization</strong>: The model fine-tunes word embeddings by maximizing the probability of correctly predicting surrounding words.</li>
+</ol>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20231220164505/Screenshot-2023-12-20-164451.png" class="img-fluid"></p>
+<p><em>image from: <a href="https://media.geeksforgeeks.org/wp-content/uploads/20231220164505/Screenshot-2023-12-20-164451.png" class="uri">https://media.geeksforgeeks.org/wp-content/uploads/20231220164505/Screenshot-2023-12-20-164451.png</a></em></p>
+<ul>
+<li><strong>Input layer</strong>: Single target word w(t)</li>
+<li><strong>Projection layer</strong>: The word is converted to its vector representation</li>
+<li><strong>Output layer</strong>: Predicts multiple context words [w(t-2), w(t-1), w(t+1), w(t+2)]</li>
+</ul>
+<p><strong>Example from a product review:</strong></p>
+<p>Given the target word <strong>“durable”</strong> in the review: <em>“This cable is very <strong>durable</strong> and sturdy”</em></p>
+<p>With a window size of 2, the model tries to predict context words:</p>
+<ul>
+<li><p>Expected context: [“cable”, “very”, “and”, “sturdy”]</p></li>
+<li><p>The model learns what words typically appear near “durable” in product reviews</p></li>
+<li><p>Over time, it understands that “durable” is associated with product quality descriptors</p></li>
+</ul>
+<p>Skip-Gram performs better on small datasets and captures relationships between rare words more effectively, making it ideal for identifying specific product features that might not appear frequently.</p>
+<p><strong>CBOW vs Skip-Gram - Which to use?</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>CBOW</th>
+<th>Skip-Gram</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Speed</strong></td>
+<td>Faster to train</td>
+<td>Slower to train</td>
+</tr>
+<tr class="even">
+<td><strong>Best for</strong></td>
+<td>Frequent words, large datasets</td>
+<td>Rare words, smaller datasets</td>
+</tr>
+<tr class="odd">
+<td><strong>Accuracy</strong></td>
+<td>Good for common patterns</td>
+<td>Better for capturing nuanced relationships</td>
+</tr>
+<tr class="even">
+<td><strong>Our Amazon data</strong></td>
+<td>Good choice (1,465 reviews)</td>
+<td>Also viable, better for specific product terms</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="applying-word-embeddings-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="applying-word-embeddings-in-r">3.2 Applying Word Embeddings in R</h3>
+<p>We will train a <strong>Word2Vec model</strong> on the Amazon product reviews using both <strong>Continuous Bag of Words (CBOW)</strong> and <strong>Skip-Gram</strong> algorithms to analyze relationships between words customers use to describe products.</p>
+<p>For more on word embeddings: <a href="https://s-ai-f.github.io/Natural-Language-Processing/Word-embeddings.html" class="uri">https://s-ai-f.github.io/Natural-Language-Processing/Word-embeddings.html</a></p>
+<section id="training-word2vec-with-cbow" class="level4">
+<h4 class="anchored" data-anchor-id="training-word2vec-with-cbow">3.2.1 Training Word2Vec with CBOW</h4>
+<p><strong>Step 1: Select the text column</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="ot">&lt;-</span> amazon_data<span class="sc">$</span>text</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Step 2: Train a Word2Vec model using the CBOW algorithm</strong></p>
+<p><strong>What do the parameters mean?</strong></p>
+<ul>
+<li><p><code>dim = 15</code>: Each word will be represented as a vector with 15 dimensions</p></li>
+<li><p><code>iter = 20</code>: The model will iterate through the data 20 times to learn patterns</p></li>
+<li><p><code>type = "cbow"</code>: Using Continuous Bag of Words algorithm</p></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>cbow_model <span class="ot">&lt;-</span> <span class="fu">word2vec</span>(<span class="at">x =</span> reviews, <span class="at">type =</span> <span class="st">"cbow"</span>, <span class="at">dim =</span> <span class="dv">15</span>, <span class="at">iter =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Step 3: Create embeddings using the trained CBOW model and print</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checking embeddings</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>cbow_embedding <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(cbow_model)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>cbow_embedding <span class="ot">&lt;-</span> <span class="fu">predict</span>(cbow_model, <span class="fu">c</span>(<span class="st">"quality"</span>, <span class="st">"durable"</span>), <span class="at">type =</span> <span class="st">"embedding"</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The CBOW embedding for 'quality' and 'durable' is as follows:"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "The CBOW embedding for 'quality' and 'durable' is as follows:"</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cbow_embedding)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##               [,1]      [,2]       [,3]     [,4]       [,5]        [,6]
+## quality  1.2025050 0.6638257 -0.1812494 1.059464 0.02755646 -2.46302342
+## durable -0.8650298 1.1314095 -2.3551283 1.536014 0.04510239 -0.08961504
+##               [,7]        [,8]      [,9]      [,10]     [,11]      [,12]
+## quality  0.5330371  0.03221637 -1.114101 -0.5676234 0.2730089 -0.4610037
+## durable -0.2005682 -0.39719358 -1.536827  0.1245560 0.5725173 -0.4151438
+##              [,13]     [,14]      [,15]
+## quality -0.3463746 -1.841939  0.4923424
+## durable  0.1623335 -1.281561 -0.5580249</code></pre>
+<p><strong>Step 4: Find similar words (look-alikes)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>cbow_lookslike <span class="ot">&lt;-</span> <span class="fu">predict</span>(cbow_model, <span class="fu">c</span>(<span class="st">"quality"</span>, <span class="st">"durable"</span>), </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">type =</span> <span class="st">"nearest"</span>, <span class="at">top_n =</span> <span class="dv">5</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The nearest words for 'quality' and 'durable' in CBOW model prediction:"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "The nearest words for 'quality' and 'durable' in CBOW model prediction:"</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cbow_lookslike)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## $quality
+##     term1             term2 similarity rank
+## 1 quality       performance  0.9098881    1
+## 2 quality      beautycamera  0.8908731    2
+## 3 quality decentperformance  0.8823302    3
+## 4 quality       lookinggood  0.8814546    4
+## 5 quality        impressive  0.8701320    5
+## 
+## $durable
+##     term1    term2 similarity rank
+## 1 durable   sturdy  0.9551952    1
+## 2 durable reliable  0.9236155    2
+## 3 durable     hell  0.8916085    3
+## 4 durable  braided  0.8714685    4
+## 5 durable    thick  0.8687557    5</code></pre>
+<p><strong>Interpreting the results:</strong></p>
+<p>The output shows the most similar words based on the CBOW model:</p>
+<p>For <strong>“quality”</strong>:</p>
+<ul>
+<li><p>Top similar words: “build”, “ok”, “appealing”, “built”</p></li>
+<li><p>Similarity scores range from ~0.87 to 0.89 (closer to 1 = more similar)</p></li>
+<li><p>These words often appear in similar contexts when customers discuss product quality</p></li>
+</ul>
+<p>For <strong>“durable”</strong>:</p>
+<ul>
+<li><p>Top similar words: “sturdy”, “reliable”, “thick”, “wire”</p></li>
+<li><p>Similarity scores are very high (~0.88 to 0.95)</p></li>
+<li><p>Notice how “sturdy” and “reliable” are nearly synonymous with “durable”</p></li>
+<li><p>“thick” and “wire” appear because customers often discuss cable thickness when describing durability</p></li>
+</ul>
+<p><strong>Why this matters:</strong></p>
+<ul>
+<li><p>The model learned these relationships just from how words appear together in reviews</p></li>
+<li><p>No manual labeling or dictionary was needed</p></li>
+<li><p>You could use these word groups to:</p>
+<ul>
+<li><p>Identify product features customers care about</p></li>
+<li><p>Find alternative ways customers express the same sentiment</p></li>
+<li><p>Group similar customer feedback together</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="visualize-cbow" class="level4">
+<h4 class="anchored" data-anchor-id="visualize-cbow">3.2.2 Visualize CBOW</h4>
+<p><strong>Step 1: Prepare word list using tidy approach</strong></p>
+<p>We’ll extract the top 100 most frequent words from our reviews (excluding stopwords) to visualize.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get top 100 words using tidytext</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>word_freq <span class="ot">&lt;-</span> amazon_data <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">|&gt;</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">100</span>, n) <span class="sc">|&gt;</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(word)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of words to visualize:"</span>, <span class="fu">length</span>(word_freq), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## Number of words to visualize: 100</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_freq, <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##  [1] "product"  "quality"  "cable"    "price"    "phone"    "charging"
+##  [7] "nice"     "easy"     "battery"  "time"     "buy"      "sound"   
+## [13] "watch"    "tv"       "money"    "fast"     "fine"     "amazon"  
+## [19] "water"    "camera"</code></pre>
+<p><strong>Step 2: Match the embeddings</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checking embeddings</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Get embeddings for our top 100 words</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>cbow_embedding <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(cbow_model)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>cbow_embedding <span class="ot">&lt;-</span> <span class="fu">predict</span>(cbow_model, word_freq, <span class="at">type =</span> <span class="st">"embedding"</span>)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>cbow_embedding <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(cbow_embedding)  <span class="co"># Remove any words not found in the model</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check how many words we successfully embedded</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Successfully embedded"</span>, <span class="fu">nrow</span>(cbow_embedding), <span class="st">"words</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## Successfully embedded 100 words</code></pre>
+<p><strong>Step 3: Reduce dimensions with UMAP for visualization</strong> Since our embeddings have 15 dimensions, we need to reduce them to 2D for plotting. UMAP (Uniform Manifold Approximation and Projection) preserves the local structure of the high-dimensional data.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce to 2D using UMAP</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>visualization <span class="ot">&lt;-</span> <span class="fu">umap</span>(cbow_embedding, <span class="at">n_neighbors =</span> <span class="dv">15</span>, <span class="at">n_threads =</span> <span class="dv">2</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame for plotting</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">word =</span> <span class="fu">rownames</span>(cbow_embedding), </span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> visualization<span class="sc">$</span>layout[, <span class="dv">1</span>], </span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> visualization<span class="sc">$</span>layout[, <span class="dv">2</span>], </span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview the data</span></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##              word           x           y
+## product   product -0.28426891  1.33326785
+## quality   quality  0.76065832  1.87926290
+## cable       cable -0.09329616 -0.08191678
+## price       price -0.80635330  1.46285291
+## phone       phone  0.73710298 -1.62912150
+## charging charging -1.00224282 -0.16201743</code></pre>
+<p><strong>Step 4: Create interactive visualization</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create interactive plot</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(df, <span class="at">x =</span> <span class="sc">~</span>x, <span class="at">y =</span> <span class="sc">~</span>y, <span class="at">type =</span> <span class="st">"scatter"</span>, <span class="at">mode =</span> <span class="st">'text'</span>, <span class="at">text =</span> <span class="sc">~</span>word) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"CBOW Word Embeddings: Amazon Product Reviews"</span>,</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"UMAP Dimension 1"</span>),</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"UMAP Dimension 2"</span>),</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">hovermode =</span> <span class="st">"closest"</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="htmlwidget-f66c0ff0731e265a3a4a" class="plotly html-widget html-fill-item" style="width:672px;height:480px;">
+
+</div>
+<script type="application/json" data-for="htmlwidget-f66c0ff0731e265a3a4a">{"x":{"visdat":{"750261577ba":["function () ","plotlyVisDat"]},"cur_data":"750261577ba","attrs":{"750261577ba":{"x":{},"y":{},"mode":"text","text":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"CBOW Word Embeddings: Amazon Product Reviews","xaxis":{"domain":[0,1],"automargin":true,"title":"UMAP Dimension 1"},"yaxis":{"domain":[0,1],"automargin":true,"title":"UMAP Dimension 2"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-0.28426891227699835,0.76065832112053089,-0.09329615882186193,-0.80635330304902819,0.7371029797088644,-1.0022428231314509,0.23049022487694648,0.30944973379093099,-1.815859218688729,-1.6297800505954225,-1.4903549126515716,1.9575131910481307,1.9061718310523084,1.3981706510697869,-1.5333161308245515,-2.1423653913845522,0.74500426750181781,-0.60990020809996315,-1.5151385372581503,1.5370954036565179,-2.1356102465222198,1.2021578889863989,-0.35874128119654847,1.4424317374011055,-1.8253103886430673,-1.8835332915110883,-0.6822430227835663,-1.3282119087105904,-0.071258445419752903,-1.5000645213997101,-1.1379510317402453,0.86973509698521756,-1.3237537131763877,1.9073543334506056,-0.54967998735621304,0.1494382593129866,0.39092150992528962,-1.4193901002698444,-1.9010422533685241,-0.75668460988564146,0.61182837479255348,-0.46540029038606034,-0.65219739500433249,-1.6915086643720121,0.97914004821609435,-0.88787252367540015,0.65653006421288884,0.22977771589476781,0.24408698294515085,0.70783626720534576,1.5637694652988667,1.0349646482380042,-0.82568903121739901,-1.5556808168978911,1.5295389487127968,0.039743652082707914,0.34647136210945551,-1.3559918989059743,1.1461727230076075,1.6516650012332477,0.49114068571410918,-0.99891793638199022,1.3186733545988005,0.49672051915648696,1.9318691225570603,-0.54769643485309061,0.53143906208001379,2.1699942509164982,-0.402107340566634,0.61401683544345387,-0.92501179227550079,-1.291774861014817,1.7146790523863009,0.34461773455874312,1.4418894494672596,-0.66182495578897926,0.96293682421330473,-1.7143698254161073,0.39833275402679558,-0.033412259473317274,0.90340911829671278,-0.66262869593505203,0.20177256821266099,0.10213159452006693,-0.27521031537701912,-1.3968690089515698,0.38393134578678145,-1.0467709661524065,1.6990985926280233,1.6576174914141379,0.91085255625993433,-0.7965469508384202,1.0981729522178165,0.31581585349092034,2.1962344236606697,2.1212257901188787,0.21374484142728178,-0.95401298232851994,0.3632565212081218,-1.9309485836195723],"y":[1.3332678465701169,1.8792628953328068,-0.081916780430024261,1.4628529141397948,-1.6291214950237154,-0.16201742779852157,2.4169471081290688,0.92042523060157899,-0.59772519996312545,-0.78207710101410499,1.3392602560477784,0.35920798790929265,-0.70309282103368131,-1.5235651399715002,1.0735619275155637,-0.17578421299389513,2.4728322150213149,-2.6138532256523375,-0.4052422500911026,-0.051188146637152432,-0.29850859594342971,-0.52723888692366905,1.2448360267973588,0.69545468111503661,1.1236870207221585,-0.28415967810344944,1.8750247869502772,-1.4200692323832755,-0.84373858412150948,-1.2982799195386874,-0.28391666325439502,-1.5505663659208055,-1.6701138404189593,-0.7725137811577969,-1.5872007428428698,1.2480697177315663,-1.5343333192657906,-1.0663576609228773,-1.2179930574732785,-0.26795977302933949,-1.25817148641781,-1.4534383875772505,0.073373219542281376,0.21046430271947303,-1.1071420979828817,-2.6759407442012471,1.2469516471851061,2.3133598283740158,-1.4293162424377024,-0.81822628096166317,-0.84696803226393369,1.3418238623629923,-2.7416191888915025,1.3876945976433883,-0.25312283022975302,1.8160276826053297,2.3650534851923295,0.95641969843769914,1.4984541416926889,0.97527914737218158,-1.6806271272316946,1.6114786472734837,0.47446882745790786,0.81730575264352678,0.21595058333364037,-2.6964739601501435,2.169727878462421,0.57884358872088093,-0.59507301904973464,0.0011680205368831409,1.0062262820662871,-1.9372778261072159,-1.3728038688110549,2.6887890081222219,-1.6564614903804347,-0.20354258081601895,-0.26399253216092511,-1.529384595265145,2.7348654019570731,1.2768048121941673,2.4884259522164642,2.2053645328460556,1.3055957531493583,-0.79612787353923187,0.77918159346608551,-0.27239818756829215,1.0315308005937474,-2.8573843294781032,-1.1362070620839559,-1.26120549497173,0.33303724162042059,-1.8046406435303797,0.86621018291609841,2.6785933201216086,-0.49958802861206042,-0.22907697218824397,0.27291103323017607,-2.1720921345367414,-1.3044456183939894,1.0352110971084612],"mode":"text","text":["product","quality","cable","price","phone","charging","nice","easy","battery","time","buy","sound","watch","tv","money","fast","fine","amazon","water","camera","power","screen","worth","bit","bought","speed","range","months","usb","days","charge","device","review","features","issue","light","mobile","day","usage","charger","laptop","issues","original","life","remote","installation","sturdy","low","mouse","box","experience","build","service","purchase","display","performance","decent","recommend","design","picture","bluetooth","budget","feel","size","noise","support","bad","bass","samsung","easily","rs","update","call","excellent","app","gb","button","month","average","it’s","expected","happy","weight","type","length","heating","normal","warranty","feature","video","job","found","plastic","amazing","boat","option","clean","received","connect","buying"],"type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><strong>What to look for in the visualization:</strong></p>
+<ul>
+<li><p><strong>Clusters of similar words</strong>: Words close together have similar meanings or appear in similar contexts</p></li>
+<li><p>Look for these typical clusters:</p>
+<ul>
+<li><p><strong>Quality descriptors</strong>: “good”, “excellent”, “quality”, “durable”, “sturdy”</p></li>
+<li><p><strong>Price-related</strong>: “price”, “worth”, “value”, “money”, “cheap”</p></li>
+<li><p><strong>Product features</strong>: “cable”, “charging”, “fast”, “long”, “wire”</p></li>
+<li><p><strong>Negative feedback</strong>: “waste”, “poor”, “bad”, “worst”, “disappointed”</p></li>
+<li><p><strong>Positive emotions</strong>: “love”, “perfect”, “happy”, “satisfied”</p></li>
+</ul></li>
+</ul>
+<p><strong>Tips for interpretation:</strong></p>
+<ul>
+<li><p>The exact positions are not meaningful, but relative distances are</p></li>
+<li><p>Words that appear in similar review contexts will cluster together</p></li>
+<li><p>You can hover over words to see their exact labels (in the interactive plot)</p></li>
+<li><p>If two product-related words are close, customers likely use them interchangeably</p></li>
+</ul>
+<hr>
+</section>
+<section id="training-word2vec-with-skip-gram" class="level4">
+<h4 class="anchored" data-anchor-id="training-word2vec-with-skip-gram">3.2.3 Training Word2Vec with Skip Gram</h4>
+<p>Now let’s train a Skip-Gram model and compare it with CBOW.</p>
+<p>Remember: Skip-Gram predicts context words from a target word, making it better at capturing relationships for rare words.</p>
+<p><strong>Step 1: Select the text column:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="ot">&lt;-</span> amazon_data<span class="sc">$</span>text</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Step 2: Train the Skip-Gram model</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using skip-gram algorithm</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>skip_gram_model <span class="ot">&lt;-</span> <span class="fu">word2vec</span>(<span class="at">x =</span> reviews, <span class="at">type =</span> <span class="st">"skip-gram"</span>, <span class="at">dim =</span> <span class="dv">15</span>, <span class="at">iter =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What’s different from CBOW?</strong></p>
+<ul>
+<li><p><code>type = "skip-gram"</code>: Uses Skip-Gram algorithm instead of CBOW</p></li>
+<li><p>Same dimensions (15) and iterations (20) for fair comparison</p></li>
+<li><p>Generally slower to train but better for rare/specific product terms</p></li>
+</ul>
+<p><strong>Step 3: Create embeddings and examine specific words</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking embeddings</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>skip_embedding <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(skip_gram_model)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>skip_embedding <span class="ot">&lt;-</span> <span class="fu">predict</span>(skip_gram_model, <span class="fu">c</span>(<span class="st">"quality"</span>, <span class="st">"durable"</span>), <span class="at">type =</span> <span class="st">"embedding"</span>)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The Skip-Gram embedding for 'quality' and 'durable' is as follows:"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "The Skip-Gram embedding for 'quality' and 'durable' is as follows:"</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(skip_embedding)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>##              [,1]     [,2]     [,3]       [,4]        [,5]       [,6]
+## quality 2.3674839 1.237583 1.120280 -0.4259838 0.007147176 -0.6298435
+## durable 0.8535268 0.726113 1.293574  0.9131581 0.537023365 -1.0645292
+##               [,7]        [,8]       [,9]     [,10]      [,11]     [,12]
+## quality -0.1963775  0.87424290 -0.5931958 0.3389825 -0.4168760 0.5876618
+## durable -0.4880621 -0.02917298  0.3693385 1.3844260 -0.2563458 1.7919627
+##               [,13]      [,14]    [,15]
+## quality -0.05699976 -1.2636389 1.625222
+## durable  0.16518299 -0.6538487 1.947228</code></pre>
+<p><strong>Step 4: Find similar words using Skip-Gram</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding similar words</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>skip_lookslike <span class="ot">&lt;-</span> <span class="fu">predict</span>(skip_gram_model, <span class="fu">c</span>(<span class="st">"price"</span>, <span class="st">"quality"</span>), <span class="at">type =</span> <span class="st">"nearest"</span>, </span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">top_n =</span> <span class="dv">5</span>)</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The nearest words for 'price' and 'quality' in Skip-Gram model:"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## [1] "The nearest words for 'price' and 'quality' in Skip-Gram model:"</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(skip_lookslike)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## $price
+##   term1      term2 similarity rank
+## 1 price      range  0.9737731    1
+## 2 price       best  0.9604432    2
+## 3 price  visionary  0.9554536    3
+## 4 price reasonable  0.9530410    4
+## 5 price affordable  0.9372116    5
+## 
+## $quality
+##     term1       term2 similarity rank
+## 1 quality       build  0.9651373    1
+## 2 quality        good  0.9467291    2
+## 3 quality       great  0.9420540    3
+## 4 quality        nice  0.9389253    4
+## 5 quality undoubtedly  0.9370061    5</code></pre>
+<p><strong>Compare with CBOW results:</strong></p>
+<ul>
+<li><p>Do you see different similar words than CBOW found?</p></li>
+<li><p>Skip-Gram might capture more nuanced relationships</p></li>
+<li><p>Especially useful for less common product-specific terms</p></li>
+</ul>
+<p><strong>Step 5: Create new embeddings for the words_list. And then draw the visualization.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get top 100 words using tidytext</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>word_freq <span class="ot">&lt;-</span> amazon_data <span class="sc">|&gt;</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">|&gt;</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">100</span>, n) <span class="sc">|&gt;</span></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(word)</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="co"># checking embeddings</span></span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>skip_embedding <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(skip_gram_model)</span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>skip_embedding <span class="ot">&lt;-</span> <span class="fu">predict</span>(skip_gram_model, word_freq, <span class="at">type =</span> <span class="st">"embedding"</span>)</span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>skip_embedding <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(skip_embedding)</span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a>vizualization <span class="ot">&lt;-</span> <span class="fu">umap</span>(skip_embedding, <span class="at">n_neighbors =</span> <span class="dv">15</span>, <span class="at">n_threads =</span> <span class="dv">2</span>)</span>
+<span id="cb64-16"><a href="#cb64-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-17"><a href="#cb64-17" aria-hidden="true" tabindex="-1"></a>df  <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">word =</span> <span class="fu">rownames</span>(skip_embedding), </span>
+<span id="cb64-18"><a href="#cb64-18" aria-hidden="true" tabindex="-1"></a>                  <span class="at">xpos =</span> <span class="fu">gsub</span>(<span class="st">".+//"</span>, <span class="st">""</span>, <span class="fu">rownames</span>(skip_embedding)), </span>
+<span id="cb64-19"><a href="#cb64-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> vizualization<span class="sc">$</span>layout[, <span class="dv">1</span>], <span class="at">y =</span> vizualization<span class="sc">$</span>layout[, <span class="dv">2</span>], </span>
+<span id="cb64-20"><a href="#cb64-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb64-21"><a href="#cb64-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-22"><a href="#cb64-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(df, <span class="at">x =</span> <span class="sc">~</span>x, <span class="at">y =</span> <span class="sc">~</span>y, <span class="at">type =</span> <span class="st">"scatter"</span>, <span class="at">mode =</span> <span class="st">'text'</span>, <span class="at">text =</span> <span class="sc">~</span>word) <span class="sc">|&gt;</span> </span>
+<span id="cb64-23"><a href="#cb64-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layout</span>(</span>
+<span id="cb64-24"><a href="#cb64-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Skip-Gram Word Embeddings: Amazon Product Reviews"</span>,</span>
+<span id="cb64-25"><a href="#cb64-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"UMAP Dimension 1"</span>),</span>
+<span id="cb64-26"><a href="#cb64-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"UMAP Dimension 2"</span>),</span>
+<span id="cb64-27"><a href="#cb64-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">hovermode =</span> <span class="st">"closest"</span></span>
+<span id="cb64-28"><a href="#cb64-28" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="htmlwidget-3872bd70b61461a5cbae" class="plotly html-widget html-fill-item" style="width:672px;height:480px;">
+
+</div>
+<script type="application/json" data-for="htmlwidget-3872bd70b61461a5cbae">{"x":{"visdat":{"75025dc8c158":["function () ","plotlyVisDat"]},"cur_data":"75025dc8c158","attrs":{"75025dc8c158":{"x":{},"y":{},"mode":"text","text":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Skip-Gram Word Embeddings: Amazon Product Reviews","xaxis":{"domain":[0,1],"automargin":true,"title":"UMAP Dimension 1"},"yaxis":{"domain":[0,1],"automargin":true,"title":"UMAP Dimension 2"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[-1.9215934236733068,-1.8561161351335302,2.8377344208903592,-2.477083427506404,1.690871521210068,2.680208851841122,-1.4536786183164185,0.22679319700116263,0.30090681533156366,0.86142687661041017,-2.8854394168848683,-1.8907831287178065,-0.24526835696999494,1.1664994246002591,-1.7048333881130509,2.7746686096456701,-0.64758777140158619,2.3977486443187361,1.2170409007786567,-1.4443697439041481,2.781739250724069,0.045161593906550335,-2.4097610340079356,-0.60898721174277959,1.9520499955987813,1.5488342115599147,-2.7599168471863318,1.330269359359999,2.395335668337478,1.023047091733158,2.7609592213388132,1.2816001748160326,0.88144864169482884,-0.17621397410845152,1.7555811112910322,-0.10941202043900899,1.7552107704317832,0.99710601938079457,0.65151636888495035,2.5595621933891128,1.3934150617874466,1.6037233294860997,3.0415617606356795,-0.27269035545078102,0.82599785665379222,2.2591278319781152,-0.76798174843165035,-2.1966275423612549,-0.53496456178799467,1.3883904014362627,-2.244239483083271,-1.1201258450161955,2.3332697328819583,-3.311121887037229,-1.8257023273043242,-2.5782272569035589,-2.4930909665070189,-3.0674260726835532,-0.83360876432977637,-1.9722076913088529,0.97831350577477283,-2.851451874226925,-0.91068711873778752,-0.29256786913963406,-1.8941181146478958,2.3133484658211065,-1.7995389013279128,-1.7771044566512453,2.1912545764136349,0.41305378826257683,-2.4809927298418208,1.2428659073170278,0.61080284210803648,-1.6324708951789697,0.60531991853362555,-0.93001926296699911,0.22911327364957101,1.0755120226405555,-2.5810831488875485,-1.5224174683998832,-0.88979874777028456,-3.2296565662242807,-0.023058462394002888,2.4930028352227707,-0.1391901351353767,1.5922447387391792,0.087845031426560083,2.073557000431915,0.27560286099688269,0.53811844808445231,-1.1728562952215813,1.8485655556507745,-0.76155332215218741,-1.3106685986598454,-1.3702681963163736,0.75216784266657211,0.3751490934866018,2.2817540385751762,1.49618619239912,-2.8140236835439385],"y":[1.4680957619141872,0.4381881288339935,0.3391055721219991,0.8013886687659233,0.059322582319498718,-0.034500721322302086,1.1292391571399194,1.4720425399537587,-1.4411730263296287,-2.1140914282217467,1.6053281373592436,0.093064643409177084,-0.20192620686562313,-0.11137767239100516,1.402033011390972,-0.29765129985968763,0.66711704350462675,-1.3740473468511458,-1.559356624082967,-0.65155743634459973,0.46829241390792609,0.19601338581626893,1.4595055580743503,1.9529167348981908,-0.51633734691273081,-1.1018116914280083,0.36250576477455132,-2.359471191451306,0.43285486628397418,-2.4298159975795266,-0.42571910458924589,0.34729853814892131,-2.5727155909281656,-0.1704916095140383,-2.2948534111439738,0.77519905986520543,0.28674549543080197,-2.0673253317741875,-2.3759874821146112,0.12301345904718808,0.5137253281319718,-2.1930951411476478,0.098423671466512097,-1.5147104574788965,0.30802703274969501,-1.5531387835242261,1.7376845078181957,0.012028913996822599,0.50554620714878507,-0.32452367849467656,-0.47206399064544002,1.2232417667481275,-1.7643364906111025,1.9655862536097768,-0.73052703177106748,-0.35303695853290051,0.21353976584460321,1.6943106659039744,1.6402204118005725,-0.46837188071952474,0.075254246512681533,0.74414993645507765,2.0370992254263007,1.8093633060196224,-0.096855127426844989,-1.0317360730684171,-0.33418741389846085,-0.039423118378298039,-0.36492113121313108,1.2576973038155934,1.3024486471510905,-2.581994789774158,-0.19391697028215127,0.63907571689337583,0.018509961556466115,-0.92260436286311043,0.80963532304451302,-2.6426531293936693,0.17269204021297258,1.7026556654077059,0.87180385644042246,1.6664845614729282,1.1511081567854244,0.55254640482129558,1.9721036677234465,-1.3928909720108873,-1.4313473043511613,-2.1191184597221255,-0.17426741429663495,-0.35964945687635375,2.0063944896093298,-2.4019034141491886,2.2394849272592343,0.71593165912402634,0.029846914118013546,0.38458936668895527,1.394292939484667,-2.2677329915525313,0.64760474343860919,1.836838954245696],"mode":"text","text":["product","quality","cable","price","phone","charging","nice","easy","battery","time","buy","sound","watch","tv","money","fast","fine","amazon","water","camera","power","screen","worth","bit","bought","speed","range","months","usb","days","charge","device","review","features","issue","light","mobile","day","usage","charger","laptop","issues","original","life","remote","installation","sturdy","low","mouse","box","experience","build","service","purchase","display","performance","decent","recommend","design","picture","bluetooth","budget","feel","size","noise","support","bad","bass","samsung","easily","rs","update","call","excellent","app","gb","button","month","average","it’s","expected","happy","weight","type","length","heating","normal","warranty","feature","video","job","found","plastic","amazing","boat","option","clean","received","connect","buying"],"type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><strong>Comparing CBOW vs Skip-Gram visualizations:</strong></p>
+<p>After creating both visualizations, compare them side-by-side:</p>
+<ol type="1">
+<li><strong>Word clusters</strong>: Are the same words clustered together in both models?</li>
+<li><strong>Cluster tightness</strong>: Which model creates tighter, more distinct clusters?</li>
+<li><strong>Rare words</strong>: Does Skip-Gram better separate specific product terms?</li>
+<li><strong>Overall structure</strong>: Which gives you more useful insights about customer language?</li>
+</ol>
+<p><strong>Key differences you might observe:</strong></p>
+<ul>
+<li><p>Skip-Gram often creates clearer separation between different product aspects</p></li>
+<li><p>CBOW might group more general descriptive words together</p></li>
+<li><p>Skip-Gram may better distinguish between specific features (e.g., “fast charging” vs “long cable”)</p></li>
+<li><p>Look for how quality-related words (“durable”, “sturdy”, “reliable”) cluster together</p></li>
+</ul>
+<p><strong>Which model to use?</strong></p>
+<ul>
+<li><p><strong>CBOW</strong>: Faster, good for frequent words, general patterns</p></li>
+<li><p><strong>Skip-Gram</strong>: Better for rare words, specific product terms, nuanced relationships</p></li>
+<li><p><strong>For Amazon reviews</strong>: Both work well! Try both and see which gives better insights for your specific analysis</p></li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="class-exercises-sentiment-analysis-and-word-embeddings" class="level2">
+<h2 class="anchored" data-anchor-id="class-exercises-sentiment-analysis-and-word-embeddings">4. Class Exercises: Sentiment Analysis and Word Embeddings</h2>
+<section id="exercise-1-sentiment-analysis-on-airline-data" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1-sentiment-analysis-on-airline-data">Exercise 1: Sentiment Analysis on Airline Data</h3>
+<ul>
+<li>Load the Airline Sentiment dataset.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/tweets.csv"</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>airline_user_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(airline_user_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>## spc_tbl_ [14,640 × 15] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ tweet_id                    : num [1:14640] 5.7e+17 5.7e+17 5.7e+17 5.7e+17 5.7e+17 ...
+##  $ airline_sentiment           : chr [1:14640] "neutral" "positive" "neutral" "negative" ...
+##  $ airline_sentiment_confidence: num [1:14640] 1 0.349 0.684 1 1 ...
+##  $ negativereason              : chr [1:14640] NA NA NA "Bad Flight" ...
+##  $ negativereason_confidence   : num [1:14640] NA 0 NA 0.703 1 ...
+##  $ airline                     : chr [1:14640] "Virgin America" "Virgin America" "Virgin America" "Virgin America" ...
+##  $ airline_sentiment_gold      : chr [1:14640] NA NA NA NA ...
+##  $ name                        : chr [1:14640] "cairdin" "jnardino" "yvonnalynn" "jnardino" ...
+##  $ negativereason_gold         : chr [1:14640] NA NA NA NA ...
+##  $ retweet_count               : num [1:14640] 0 0 0 0 0 0 0 0 0 0 ...
+##  $ text                        : chr [1:14640] "@VirginAmerica What @dhepburn said." "@VirginAmerica plus you've added commercials to the experience... tacky." "@VirginAmerica I didn't today... Must mean I need to take another trip!" "@VirginAmerica it's really aggressive to blast obnoxious \"entertainment\" in your guests' faces &amp;amp; they hav"| __truncated__ ...
+##  $ tweet_coord                 : chr [1:14640] NA NA NA NA ...
+##  $ tweet_created               : chr [1:14640] "2015-02-24 11:35:52 -0800" "2015-02-24 11:15:59 -0800" "2015-02-24 11:15:48 -0800" "2015-02-24 11:15:36 -0800" ...
+##  $ tweet_location              : chr [1:14640] NA NA "Lets Play" NA ...
+##  $ user_timezone               : chr [1:14640] "Eastern Time (US &amp; Canada)" "Pacific Time (US &amp; Canada)" "Central Time (US &amp; Canada)" "Pacific Time (US &amp; Canada)" ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   tweet_id = col_double(),
+##   ..   airline_sentiment = col_character(),
+##   ..   airline_sentiment_confidence = col_double(),
+##   ..   negativereason = col_character(),
+##   ..   negativereason_confidence = col_double(),
+##   ..   airline = col_character(),
+##   ..   airline_sentiment_gold = col_character(),
+##   ..   name = col_character(),
+##   ..   negativereason_gold = col_character(),
+##   ..   retweet_count = col_double(),
+##   ..   text = col_character(),
+##   ..   tweet_coord = col_character(),
+##   ..   tweet_created = col_character(),
+##   ..   tweet_location = col_character(),
+##   ..   user_timezone = col_character()
+##   .. )
+##  - attr(*, "problems")=&lt;externalptr&gt;</code></pre>
+<ul>
+<li>Apply dictionary-based sentiment analysis using <strong>Bing</strong>, <strong>AFINN</strong>, and <strong>NRC</strong>.</li>
+<li>Compare the results and interpret the findings.</li>
+<li>Create a <strong>visualization</strong> (bar chart or word cloud) of sentiment scores.</li>
+</ul>
+</section>
+<section id="exercise-2-exploring-word-embeddings" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2-exploring-word-embeddings">Exercise 2: Exploring Word Embeddings</h3>
+<ul>
+<li>Find a <strong>pre-trained word embedding model</strong> (GloVe, Word2Vec, or FastText).</li>
+<li>Identify <strong>the top 10 most similar words</strong> for “positive” and “negative”.</li>
+<li>Visualize word relationships.</li>
+</ul>
+</section>
+<section id="optional-exercise-3-combining-sentiment-analysis-and-word-embeddings-this-is-an-advanced-exercise-for-those-that-want-to-try" class="level3">
+<h3 class="anchored" data-anchor-id="optional-exercise-3-combining-sentiment-analysis-and-word-embeddings-this-is-an-advanced-exercise-for-those-that-want-to-try">Optional Exercise 3: Combining Sentiment Analysis and Word Embeddings (This is an advanced exercise for those that want to try)</h3>
+<ul>
+<li>Select a subset of the Airline dataset.</li>
+<li>Compute sentiment scores using dictionary-based methods.</li>
+<li>Extract word embeddings for the most frequent words in positive and negative tweets.</li>
+<li>Compare sentiment-based results with word embedding similarities.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="lecture-7-cheat-sheet" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-7-cheat-sheet">Lecture 7 Cheat Sheet</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Function/Concept</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Code Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tokenization (<code>unnest_tokens()</code>)</td>
+<td>Breaks text into individual words or phrases for processing.</td>
+<td><code>twitter_tokens |&gt; unnest_tokens(word, text)</code></td>
+</tr>
+<tr class="even">
+<td>Removing Stopwords (<code>anti_join(stop_words)</code>)</td>
+<td>Removes common stopwords to focus on meaningful content.</td>
+<td><code>twitter_tokens |&gt; anti_join(stop_words)</code></td>
+</tr>
+<tr class="odd">
+<td>Sentiment Analysis (<code>get_sentiments()</code>)</td>
+<td>Applies sentiment lexicons (Bing, AFINN, NRC) to categorize words.</td>
+<td><code>twitter_tokens |&gt; inner_join(get_sentiments('bing'))</code></td>
+</tr>
+<tr class="even">
+<td>Bing Sentiment Analysis (<code>inner_join(get_sentiments('bing'))</code>)</td>
+<td>Classifies words as positive or negative using the Bing lexicon.</td>
+<td><code>bing_sentiments |&gt; count(post_index, sentiment)</code></td>
+</tr>
+<tr class="odd">
+<td>AFINN Sentiment Analysis (<code>inner_join(get_sentiments('afinn'))</code>)</td>
+<td>Assigns sentiment scores based on word intensity using AFINN.</td>
+<td><code>afinn_sentiments |&gt; group_by(text) |&gt; summarize(score = sum(value))</code></td>
+</tr>
+<tr class="even">
+<td>NRC Sentiment Analysis (<code>inner_join(get_sentiments('nrc'))</code>)</td>
+<td>Categorizes words by emotions such as anger, joy, and fear.</td>
+<td><code>nrc_sentiments |&gt; count(sentiment)</code></td>
+</tr>
+<tr class="odd">
+<td>Word Embeddings - CBOW (<code>word2vec(type = 'cbow')</code>)</td>
+<td>Trains a Continuous Bag of Words (CBOW) model for word embeddings.</td>
+<td><code>cbow_model &lt;- word2vec(x = tweets, type = 'cbow', dim = 15, iter = 20)</code></td>
+</tr>
+<tr class="even">
+<td>Word Embeddings - Skip-Gram (<code>word2vec(type = 'skip-gram')</code>)</td>
+<td>Trains a Skip-Gram model to predict context words from target words.</td>
+<td><code>skip_gram_model &lt;- word2vec(x = tweets, type = 'skip-gram', dim = 15, iter = 20)</code></td>
+</tr>
+<tr class="odd">
+<td>Finding Similar Words (<code>predict(model, type = 'nearest')</code>)</td>
+<td>Finds words with similar meanings based on trained word embeddings.</td>
+<td><code>predict(cbow_model, c('election', 'vote'), type = 'nearest')</code></td>
+</tr>
+<tr class="even">
+<td>Extracting Word Embeddings (<code>predict(model, type = 'embedding')</code>)</td>
+<td>Extracts vector representations of words for further analysis.</td>
+<td><code>predict(skip_gram_model, c('election', 'vote'), type = 'embedding')</code></td>
+</tr>
+<tr class="odd">
+<td>Visualizing Sentiments (<code>ggplot() + geom_col()</code>)</td>
+<td>Generates bar plots to visualize sentiment distribution in text.</td>
+<td><code>ggplot(bing_summary, aes(x = sentiment, y = n, fill = sentiment)) + geom_col()</code></td>
+</tr>
+<tr class="even">
+<td>UMAP for Dimensionality Reduction (<code>umap()</code>)</td>
+<td>Reduces high-dimensional word embeddings for visualization.</td>
+<td><code>umap_result &lt;- umap(word_embeddings, n_neighbors = 15, n_threads = 2)</code></td>
+</tr>
+<tr class="odd">
+<td>Normalize Sentiment Scores (<code>mutate(normalized_score = score / word_count)</code>)</td>
+<td>Normalizes sentiment scores by dividing by word count.</td>
+<td><code>afinn_scores |&gt; mutate(normalized_score = score / word_count)</code></td>
+</tr>
+<tr class="even">
+<td>Creating a Sentiment Pipeline (<code>pivot_wider() + mutate()</code>)</td>
+<td>Combines multiple sentiment analysis steps into a single pipeline.</td>
+<td><code>bing_sentiments |&gt; pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) |&gt; mutate(sentiment = positive - negative)</code></td>
+</tr>
+<tr class="odd">
+<td>Word Frequency with Tidy (<code>count()</code>)</td>
+<td>Counts word frequencies using tidy approach</td>
+<td><code>twitter_tokens |&gt; count(word, sort = TRUE)</code></td>
+</tr>
+<tr class="even">
+<td>Top N Words (<code>top_n()</code>)</td>
+<td>Selects top n rows based on a variable</td>
+<td><code>word_freq |&gt; top_n(100, n)</code></td>
+</tr>
+<tr class="odd">
+<td>Word Cloud (<code>wordcloud2()</code>)</td>
+<td>Creates interactive word clouds</td>
+<td><code>wordcloud2(word_freq, color = "gray20")</code></td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Ayse D. Lokmanoglu, Boston University</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:alokman@bu.edu">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aysedeniz09">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

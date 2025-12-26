@@ -1,0 +1,1017 @@
+---
+title: "Text as Data: Dictionary Methods and Word Embeddings"
+subtitle: "COM EM757"
+author: "Dr. Ayse D. Lokmanoglu"
+date: 'Lecture 7, (B) March 16, (A) March 4'
+output: github_document
+always_allow_html: true
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE
+)
+```
+
+# R Exercises
+
+------------------------------------------------------------------------
+
+## Lecture 7 Table of Contents
+
+| Section | Topic                                                   |
+|---------|---------------------------------------------------------|
+| 1       | Introduction to Text as Data                            |
+| 2       | Dictionary Methods                                      |
+| 2.1     | Online Dataset: Twitter Data                            |
+| 2.2     | Text Preprocessing                                      |
+| 2.3     | Sentiment Analysis with Dictionary Methods              |
+| 2.4     | Visualizing and Comparing Sentiment Analysis Results    |
+| 2.5     | Most common positive and negative words                 |
+| 2.6     | Normalize sentiment scores                              |
+| 3       | Word Embeddings                                         |
+| 3.1     | Introduction to Word Embeddings                         |
+| 3.1.1   | Continuous Bag of Words (CBOW)                          |
+| 3.1.2   | Skip-Gram Model                                         |
+| 3.2     | Applying Word Embeddings in R                           |
+| 3.2.1   | Training Word2Vec with CBOW                             |
+| 3.2.2   | Visualize CBOW                                          |
+| 3.2.3   | Training Word2Vec with Skip Gram                        |
+| 4       | Class Exercises: Sentiment Analysis and Word Embeddings |
+
+------------------------------------------------------------------------
+
+**ALWAYS** Let's load our libraries
+
+```{r}
+library(tidyverse)   # Data manipulation and visualization (includes dplyr, ggplot2, tidyr, stringr)
+library(tidytext)    # Text mining using tidy data principles
+library(ggplot2)     # Creating visualizations and plots
+library(stopwords)   # Access to stopword lists in multiple languages
+library(word2vec)    # Training word embedding models (CBOW and Skip-Gram)
+library(umap)        # Dimensionality reduction for visualizing high-dimensional data
+library(wordcloud2)  # Creating interactive word clouds
+library(plotly)      # Creating interactive plots and visualizations
+library(htmlwidgets)
+
+```
+
+## 1. Introduction to Text as Data
+
+Text data:
+
+-   is unstructured,
+
+-   requires preprocessing to be analyzed.
+
+![](https://media.geeksforgeeks.org/wp-content/uploads/20210526142713/BlockDigramofTextMining.png)
+*source:
+<https://media.geeksforgeeks.org/wp-content/uploads/20210526142713/BlockDigramofTextMining.png>*
+
+| **Phase** | **Technique** | **Core Question** | **Purpose** | **Methods & R Packages** |
+|---------------|---------------|---------------|---------------|---------------|
+| **Text Preprocessing** | Tokenization | How can we segment text into meaningful units? | Convert text into individual words or phrases. | `tidytext` (`unnest_tokens()`), `stringr` (`str_split()`) |
+|  | Stopword Removal | How can we remove redundant words? | Eliminate common words that add little meaning. | `tidytext` (`stop_words`), `stopwords` |
+|  | Lemmatization & Stemming | How can we reduce word variations? | Standardize words to their root forms. | `textstem` (`lemmatize_words()`), `SnowballC` (`wordStem()`) |
+| **Feature Engineering** | N-grams | How can we capture word sequences? | Identify multi-word expressions and patterns. | `tidytext` (`unnest_tokens(ngrams = 2)`), `text2vec` |
+|  | Part-of-Speech Tagging | How can we recognize word functions? | Assign grammatical categories to words. | `udpipe` (`udpipe_annotate()`), `spacyr` |
+| **Content Analysis** | Dictionary-Based Analysis | How can we quantify meaning in text? | Detect linguistic, psychological, or topical patterns. | `tidytext` (`get_sentiments()`), `quanteda` (`dfm_lookup()`) |
+| **Machine Learning** | Supervised Classification | How can we predict categories from text? | Assign labels based on prior training examples. | `caret`, `textrecipes`, `tidymodels` |
+|  | Unsupervised Clustering | How can we discover hidden patterns? | Group similar documents or topics automatically. | `topicmodels` (LDA), `quanteda` (k-means clustering), `text2vec` (word embeddings) |
+
+We will learn 2 methods today:
+
+1.  **Dictionary Methods** - Using predefined word lists to categorize
+    text (e.g., sentiment analysis with lexicons).
+
+2.  **Word Embeddings** - Representing words as numerical vectors to
+    capture semantic relationships and similarities.
+
+------------------------------------------------------------------------
+
+## 2. Dictionary Methods
+
+Dictionary-based methods assign predefined categories to words.
+
+### 2.1 Online Dataset: Amazon Sales Data
+
+Dataset Citation: Karkavel Raja, J. (2023). Amazon sales dataset [Data
+set]. Kaggle.
+<https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset>
+
+**Note:** **This dataset is raw and unfiltered, meaning it may contain
+explicit language, including swear words. Please proceed with awareness
+and discretion.**
+
+We will use a publicly available Amazon Sales Review Dataset, which
+contains tweets labeled as positive, neutral, or negative.
+
+```{r}
+amazon_data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/amazon.csv")
+
+colnames(amazon_data)
+
+```
+
+------------------------------------------------------------------------
+
+### 2.2 Text Preprocessing
+
+Since we are working with the **review_content column** from the Amazon
+sales dataset, we need to ensure proper formatting before tokenization.
+We will create a new `text` column, remove unnecessary whitespace,
+convert text to lowercase, remove URLs and numbers, and maintain
+consistency across all reviews. We'll also add an index column to help
+with merging data later in our analysis.
+
+```{r}
+# Ensure text is properly formatted
+amazon_data <- amazon_data |>
+  mutate(textBU = review_content,   ### created a backup column so we always have the OG review
+    text = str_squish(review_content)) |>
+  filter(!is.na(text)) |>
+  mutate(text = str_to_lower(text)) |> # Convert to lowercase
+  mutate(text = str_remove_all(text, "https?://\\S+")) |> # Remove URLs
+  mutate(text = str_remove_all(text, "\\d+")) |>  # Remove numbers
+  mutate(review_index = seq_len(nrow(amazon_data))) |> ### creating an index
+  mutate(nwords = str_count(text, "\\w+")) ### counting number of words
+
+head(amazon_data$text)
+```
+
+Before applying dictionary methods, we need to clean the text by:
+
+-   Tokenizing the reviews into individual words
+
+-   Removing stop words (common words like "the", "and", "is" that don't
+    carry much sentiment)
+
+-   Removing unnecessary characters
+
+```{r}
+# Tokenize text
+amazon_tokens <- amazon_data |> 
+  unnest_tokens(word, text) |>
+  anti_join(stop_words, by = "word") ## removing stopwords
+
+# View tokenized words
+head(amazon_tokens$word)
+```
+
+------------------------------------------------------------------------
+
+### 2.3 Sentiment Analysis with Dictionary Methods
+
+To understand how different sentiment analysis lexicons classify text,
+we will compare results from multiple dictionaries, including **Bing**,
+**AFINN**, and **NRC**. Each lexicon provides different insights:
+
+-   **Bing**: Binary classification (positive/negative sentiment).
+-   **AFINN**: Numeric scores for sentiment intensity.
+-   **NRC**: Categorizes words into emotional dimensions (anger, joy,
+    fear, etc.).
+
+**Note: For AFINN and NRC you need to select 1 in your console when
+prompted**
+
+```{r}
+get_sentiments("afinn")
+```
+
+```{r}
+get_sentiments("bing")
+```
+
+```{r}
+get_sentiments("nrc")
+```
+
+Let's now see how is it in our dataset
+
+```{r}
+# Apply Bing sentiment lexicon
+## Step 1:
+bing_sentiments_S1 <- amazon_tokens |>
+  inner_join(get_sentiments("bing"), by = "word")
+head(bing_sentiments_S1)
+
+bing_sentiments_S2 <- bing_sentiments_S1 |> 
+  count(review_index, sentiment)
+head(bing_sentiments_S2)
+
+bing_sentiments_S3 <- bing_sentiments_S2 |> 
+  pivot_wider(names_from = sentiment, values_from = n, values_fill = 0)
+
+head(bing_sentiments_S3)
+
+bing_sentiments_S4 <- bing_sentiments_S3 |> 
+  mutate(sentiment = positive - negative)
+head(bing_sentiments_S4)
+
+```
+
+Full Pipe:
+
+```{r}
+bing_sentiments <- amazon_tokens |>
+  inner_join(get_sentiments("bing"), by = "word") |> 
+  count(review_index, sentiment) |> 
+  pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) |> 
+  mutate(sentiment = positive - negative) |> 
+  mutate(method = "Bing")
+
+```
+
+Now let's repeat it with AFINN, from now on I am going to give you the
+full pipeline, if you want you can see step by step
+
+```{r}
+
+afinn_sentiments <- amazon_tokens |>
+  inner_join(get_sentiments("afinn")) |> 
+  group_by(review_index) |>  
+  summarise(sentiment = sum(value)) |> 
+  mutate(method = "AFINN")
+```
+
+Now w/ NRC:
+
+```{r}
+
+nrc_sentiments <-  amazon_tokens |> 
+    inner_join(get_sentiments("nrc") |> 
+                 filter(sentiment %in% c("positive", 
+                                         "negative"))) |> 
+  count(review_index, sentiment) |> 
+  pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) |> 
+  mutate(sentiment = positive - negative) |> 
+  mutate(method = "NRC")
+
+```
+
+------------------------------------------------------------------------
+
+### 2.4 Visualizing and Comparing Sentiment Analysis Results
+
+```{r}
+all_sentiments <- bind_rows(afinn_sentiments,
+          bing_sentiments,
+          nrc_sentiments) |> 
+  dplyr::select(-positive, -negative)
+
+
+ggplot(all_sentiments,
+       aes(review_index, sentiment, fill = method)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~method, ncol = 1, scales = "free_y")
+
+```
+
+**Interpreting the Sentiment Analysis Results**
+
+The visualization above shows sentiment scores across approximately
+1,500 Amazon product reviews using three different lexicons:
+
+**AFINN (Top Panel - Red):**
+
+-   Shows sentiment scores ranging from approximately -20 to +70
+
+-   Most reviews cluster around neutral to slightly positive (0-20
+    range)
+
+-   Several spikes indicate strongly positive reviews (scores above 50)
+
+-   The high positive scores suggest customers who leave reviews tend to
+    express strong satisfaction
+
+-   Negative sentiment appears less frequent and less extreme
+
+**Bing (Middle Panel - Green):**
+
+-   Displays scores from approximately -30 to +30
+
+-   More balanced distribution between positive and negative sentiment
+
+-   The zero line represents neutral sentiment (equal positive and
+    negative words)
+
+-   Green bars above zero indicate positive sentiment; bars below
+    indicate negative
+
+-   Shows more variability and captures both satisfied and dissatisfied
+    customers
+
+**NRC (Bottom Panel - Blue):**
+
+-   Generally lower scores, mostly ranging from 0 to 40
+
+-   Few negative values, indicating this lexicon captures more positive
+    than negative emotions
+
+-   Several notable spikes (around review index 1000) suggest reviews
+    with strong emotional content
+
+-   The lower overall scores reflect that NRC filters for specific
+    emotions (anger, joy, fear, trust) rather than general sentiment
+
+**Key Observations:**
+
+-   All three methods show predominantly positive sentiment, which is
+    typical for product reviews (satisfied customers are more likely to
+    leave reviews)
+
+-   AFINN produces the highest magnitude scores, making it useful for
+    detecting strong sentiment
+
+-   Bing provides the most balanced view of positive vs. negative
+    sentiment
+
+-   Different lexicons can produce different results for the same text,
+    highlighting the importance of comparing multiple methods
+
+------------------------------------------------------------------------
+
+### 2.5 Most common positive and negative words
+
+```{r}
+bing_word_counts <- amazon_tokens |> 
+  inner_join(get_sentiments("bing")) |> 
+  count(word, sentiment, sort = TRUE) |> 
+  ungroup()
+
+head(bing_word_counts)
+```
+
+Visualize it:
+
+```{r}
+bing_word_counts |> 
+  group_by(sentiment) |> 
+  slice_max(n, n = 10) |> 
+  ungroup() |> 
+  mutate(word = reorder(word, n)) |> 
+  ggplot(aes(n, word, fill = sentiment)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~sentiment, scales = "free_y") +
+  labs(x = "Sentiment Count",
+       y = NULL)
+```
+
+We can also do wordclouds using `wordcloud2`
+
+```{r}
+# Get word frequencies for disgust and trust emotions
+sentiment_words <- amazon_tokens |> 
+  inner_join(get_sentiments("nrc")) |> 
+  filter(sentiment %in% c("disgust", "trust")) |> 
+  count(word, sentiment, sort = TRUE)
+
+# # Check the data structure
+# head(sentiment_words, 20)
+
+# Create separate wordclouds for each sentiment
+disgust_words <- sentiment_words |> 
+  filter(sentiment == "disgust") |> 
+  select(word, n) |>
+  rename(freq = n)  # wordcloud2 likes 'freq' as column name
+
+trust_words <- sentiment_words |> 
+  filter(sentiment == "trust") |> 
+  select(word, n) |>
+  rename(freq = n)
+
+# # Check the structure before creating wordcloud
+# str(disgust_words)
+# head(disgust_words)
+
+wordcloud2(disgust_words, 
+           size = 0.5,
+           color = "random-dark", 
+           backgroundColor = "white",
+           minSize = 5)
+
+wordcloud2(trust_words, 
+           size = 0.5,
+           color = "random-light", 
+           backgroundColor = "white",
+           minSize = 5)
+```
+
+------------------------------------------------------------------------
+
+### 2.6 Normalize sentiment scores
+
+-   What are some ways I can normalize sentiment scores?
+    -   Divide by number of words in the review!
+    -   This accounts for review length - longer reviews naturally have
+        more sentiment words
+
+```{r}
+afinn_sentiments2 <- afinn_sentiments |> 
+  left_join(amazon_data, by = "review_index") |> 
+  group_by(review_index) |>
+  mutate(normalized_score = sentiment / nwords)
+
+head(afinn_sentiments2)
+
+ggplot(afinn_sentiments2, aes(x = normalized_score)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "black") +
+  labs(
+    title = "Histogram of AFINN Normalized Sentiment Scores",
+    x = "AFINN Normalized Scores (Sentiment per Word)",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+To compare the non-normalized scores:
+
+```{r}
+ggplot(afinn_sentiments2, aes(x = sentiment)) +
+  geom_histogram() +
+  labs(
+    title = "Histogram of AFINN  Sentiment Scores",
+    x = "AFINN  Scores",
+    y = "Count"
+  ) +
+  theme_minimal()
+
+```
+
+**Why normalize?**
+
+-   Longer reviews will naturally have higher absolute sentiment scores
+
+-   Normalization helps us compare sentiment intensity across reviews of
+    different lengths
+
+-   A short review with score 10 might be more positive than a long
+    review with score 10
+
+------------------------------------------------------------------------
+
+## 3. Word Embeddings
+
+Traditional approaches treat words as discrete symbols with no inherent
+relationship - "good" and "great" are just different words. Word
+embeddings change this by representing words as **vectors of numbers**
+where similar words have similar vector representations.
+
+**Key Concept:** Words that appear in similar contexts tend to have
+similar meanings.
+
+For example, in product reviews:
+
+-   "This cable is **durable**"
+
+-   "This cable is **sturdy**"
+
+-   "This cable is **reliable**"
+
+The words "durable," "sturdy," and "reliable" appear in similar
+contexts, so their word embeddings will be close to each other in vector
+space.
+
+**Vector Arithmetic Magic:** Once words are vectors, we can perform
+mathematical operations:
+
+-   `vector("good") - vector("bad")` captures the concept of quality
+
+-   `vector("phone") - vector("cable") + vector("charger")` might land
+    near words related to charging accessories
+
+**Why use word embeddings for product reviews?**
+
+-   Capture subtle differences in how customers describe products
+
+-   Identify similar product features across different reviews
+
+-   Understand relationships between descriptive words (e.g., "fast
+    charging" vs "quick charging")
+
+-   Go beyond simple positive/negative to understand what customers
+    actually care about
+
+------------------------------------------------------------------------
+
+### 3.1 Introduction to Word Embeddings
+
+There are several popular word embedding methods:
+
+-   **Word2Vec**: Uses a neural network model to generate word
+    embeddings based on context. We'll use this method today.
+-   **GloVe** (Global Vectors): Constructs word vectors based on word
+    co-occurrence statistics across the entire corpus.
+-   **FastText**: Extends Word2Vec by representing words as subword
+    n-grams, improving performance for rare words and handling typos
+    better.
+
+**For this lecture, we'll focus on Word2Vec with two training
+algorithms:**
+
+1.  **CBOW (Continuous Bag of Words)**
+    -   Predicts a word based on its surrounding context words
+2.  **Skip-Gram**
+    -   Predicts surrounding context words based on a target word
+
+------------------------------------------------------------------------
+
+#### 3.1.1 Continuous Bag of Words (CBOW)
+
+The **CBOW model** predicts a target word based on the surrounding
+context words. It works as follows:
+
+1.  **Input Context**: The model takes a window of words surrounding a
+    target word.
+2.  **Word Representation**: Each word is mapped to a vector embedding
+    that captures its semantic and syntactic properties.
+3.  **Aggregation**: The individual word vectors in the context window
+    are combined into a single vector.
+4.  **Prediction**: The model uses this aggregated vector to predict the
+    most probable target word.
+5.  **Optimization**: The model is trained to minimize the difference
+    between predicted and actual words, refining the vector
+    representations over time.
+
+**Example from a product review:**
+
+Given the review: *"This cable has **excellent** charging speed"*
+
+With a window size of 2, to predict the word **"excellent"**, the model
+uses:
+
+-   Context words: ["cable", "has", "charging", "speed"]
+
+-   The model learns that words appearing near "excellent" in reviews
+    are often product features
+
+-   Over many reviews, "excellent" becomes closely associated with
+    positive quality descriptors
+
+**Why CBOW is useful for reviews:**
+
+-   Fast to train, efficient for large datasets (like thousands of
+    product reviews)
+
+-   Good at learning common patterns in customer language
+
+-   Works well when you have many examples of similar contexts (e.g.,
+    "great quality", "excellent quality", "amazing quality")
+
+![](https://media.geeksforgeeks.org/wp-content/uploads/20231220164157/Screenshot-2023-12-20-164143.png)
+*image from:
+<https://media.geeksforgeeks.org/wp-content/uploads/20231220164157/Screenshot-2023-12-20-164143.png>*
+
+-   **Input layer**: Context words [w(t-2), w(t-1), w(t+1), w(t+2)] -
+    the words surrounding our target
+-   **Hidden layer (Sum)**: These context word vectors are
+    averaged/summed together
+-   **Output layer**: Predicts the target word w(t)
+
+CBOW is efficient for handling large datasets and is useful for tasks
+requiring general word representations.
+
+------------------------------------------------------------------------
+
+#### 3.1.2 Skip-Gram Model
+
+Unlike CBOW, the **Skip-Gram model** works in reverse: it predicts
+**context words** given a target word. It works as follows:
+
+1.  **Input Target Word**: The model takes a single word as input.
+2.  **Word Representation**: The target word is mapped to a
+    high-dimensional vector embedding.
+3.  **Probability Distribution**: The model generates probabilities for
+    words likely to appear in the surrounding context.
+4.  **Context Word Prediction**: Words with the highest probability are
+    selected as context words.
+5.  **Training Optimization**: The model fine-tunes word embeddings by
+    maximizing the probability of correctly predicting surrounding
+    words.
+
+![](https://media.geeksforgeeks.org/wp-content/uploads/20231220164505/Screenshot-2023-12-20-164451.png)
+
+*image from:
+<https://media.geeksforgeeks.org/wp-content/uploads/20231220164505/Screenshot-2023-12-20-164451.png>*
+
+-   **Input layer**: Single target word w(t)
+-   **Projection layer**: The word is converted to its vector
+    representation
+-   **Output layer**: Predicts multiple context words [w(t-2), w(t-1),
+    w(t+1), w(t+2)]
+
+**Example from a product review:**
+
+Given the target word **"durable"** in the review: *"This cable is very
+**durable** and sturdy"*
+
+With a window size of 2, the model tries to predict context words:
+
+-   Expected context: ["cable", "very", "and", "sturdy"]
+
+-   The model learns what words typically appear near "durable" in
+    product reviews
+
+-   Over time, it understands that "durable" is associated with product
+    quality descriptors
+
+Skip-Gram performs better on small datasets and captures relationships
+between rare words more effectively, making it ideal for identifying
+specific product features that might not appear frequently.
+
+**CBOW vs Skip-Gram - Which to use?**
+
+| Feature | CBOW | Skip-Gram |
+|-------------------------|------------------|------------------------------|
+| **Speed** | Faster to train | Slower to train |
+| **Best for** | Frequent words, large datasets | Rare words, smaller datasets |
+| **Accuracy** | Good for common patterns | Better for capturing nuanced relationships |
+| **Our Amazon data** | Good choice (1,465 reviews) | Also viable, better for specific product terms |
+
+------------------------------------------------------------------------
+
+### 3.2 Applying Word Embeddings in R
+
+We will train a **Word2Vec model** on the Amazon product reviews using
+both **Continuous Bag of Words (CBOW)** and **Skip-Gram** algorithms to
+analyze relationships between words customers use to describe products.
+
+For more on word embeddings:
+<https://s-ai-f.github.io/Natural-Language-Processing/Word-embeddings.html>
+
+#### 3.2.1 Training Word2Vec with CBOW
+
+**Step 1: Select the text column**
+
+```{r}
+reviews <- amazon_data$text
+```
+
+**Step 2: Train a Word2Vec model using the CBOW algorithm**
+
+**What do the parameters mean?**
+
+-   `dim = 15`: Each word will be represented as a vector with 15
+    dimensions
+
+-   `iter = 20`: The model will iterate through the data 20 times to
+    learn patterns
+
+-   `type = "cbow"`: Using Continuous Bag of Words algorithm
+
+```{r}
+cbow_model <- word2vec(x = reviews, type = "cbow", dim = 15, iter = 20)
+```
+
+**Step 3: Create embeddings using the trained CBOW model and print**
+
+```{r}
+# checking embeddings
+cbow_embedding <- as.matrix(cbow_model)
+cbow_embedding <- predict(cbow_model, c("quality", "durable"), type = "embedding")
+print("The CBOW embedding for 'quality' and 'durable' is as follows:")
+print(cbow_embedding)
+```
+
+**Step 4: Find similar words (look-alikes)**
+
+```{r}
+cbow_lookslike <- predict(cbow_model, c("quality", "durable"), 
+                          type = "nearest", top_n = 5)
+print("The nearest words for 'quality' and 'durable' in CBOW model prediction:")
+print(cbow_lookslike)
+```
+
+**Interpreting the results:**
+
+The output shows the most similar words based on the CBOW model:
+
+For **"quality"**:
+
+-   Top similar words: "build", "ok", "appealing", "built"
+
+-   Similarity scores range from \~0.87 to 0.89 (closer to 1 = more
+    similar)
+
+-   These words often appear in similar contexts when customers discuss
+    product quality
+
+For **"durable"**:
+
+-   Top similar words: "sturdy", "reliable", "thick", "wire"
+
+-   Similarity scores are very high (\~0.88 to 0.95)
+
+-   Notice how "sturdy" and "reliable" are nearly synonymous with
+    "durable"
+
+-   "thick" and "wire" appear because customers often discuss cable
+    thickness when describing durability
+
+**Why this matters:**
+
+-   The model learned these relationships just from how words appear
+    together in reviews
+
+-   No manual labeling or dictionary was needed
+
+-   You could use these word groups to:
+
+    -   Identify product features customers care about
+
+    -   Find alternative ways customers express the same sentiment
+
+    -   Group similar customer feedback together
+
+#### 3.2.2 Visualize CBOW
+
+**Step 1: Prepare word list using tidy approach**
+
+We'll extract the top 100 most frequent words from our reviews
+(excluding stopwords) to visualize.
+
+```{r}
+# Get top 100 words using tidytext
+word_freq <- amazon_data |>
+  unnest_tokens(word, text) |>
+  anti_join(stop_words, by = "word") |>
+  count(word, sort = TRUE) |>
+  top_n(100, n) |>
+  pull(word)
+
+cat("Number of words to visualize:", length(word_freq), "\n")
+head(word_freq, 20)
+```
+
+**Step 2: Match the embeddings**
+
+```{r}
+# checking embeddings
+# Get embeddings for our top 100 words
+cbow_embedding <- as.matrix(cbow_model)
+cbow_embedding <- predict(cbow_model, word_freq, type = "embedding")
+cbow_embedding <- na.omit(cbow_embedding)  # Remove any words not found in the model
+
+# Check how many words we successfully embedded
+cat("Successfully embedded", nrow(cbow_embedding), "words\n")
+```
+
+**Step 3: Reduce dimensions with UMAP for visualization** Since our
+embeddings have 15 dimensions, we need to reduce them to 2D for
+plotting. UMAP (Uniform Manifold Approximation and Projection) preserves
+the local structure of the high-dimensional data.
+
+```{r}
+# Reduce to 2D using UMAP
+visualization <- umap(cbow_embedding, n_neighbors = 15, n_threads = 2)
+
+# Create data frame for plotting
+df <- data.frame(
+  word = rownames(cbow_embedding), 
+  x = visualization$layout[, 1], 
+  y = visualization$layout[, 2], 
+  stringsAsFactors = FALSE
+)
+
+# Preview the data
+head(df)
+```
+
+**Step 4: Create interactive visualization**
+
+```{r}
+# Create interactive plot
+plot_ly(df, x = ~x, y = ~y, type = "scatter", mode = 'text', text = ~word) %>%
+  layout(
+    title = "CBOW Word Embeddings: Amazon Product Reviews",
+    xaxis = list(title = "UMAP Dimension 1"),
+    yaxis = list(title = "UMAP Dimension 2"),
+    hovermode = "closest"
+  )
+```
+
+**What to look for in the visualization:**
+
+-   **Clusters of similar words**: Words close together have similar
+    meanings or appear in similar contexts
+
+-   Look for these typical clusters:
+
+    -   **Quality descriptors**: "good", "excellent", "quality",
+        "durable", "sturdy"
+
+    -   **Price-related**: "price", "worth", "value", "money", "cheap"
+
+    -   **Product features**: "cable", "charging", "fast", "long",
+        "wire"
+
+    -   **Negative feedback**: "waste", "poor", "bad", "worst",
+        "disappointed"
+
+    -   **Positive emotions**: "love", "perfect", "happy", "satisfied"
+
+**Tips for interpretation:**
+
+-   The exact positions are not meaningful, but relative distances are
+
+-   Words that appear in similar review contexts will cluster together
+
+-   You can hover over words to see their exact labels (in the
+    interactive plot)
+
+-   If two product-related words are close, customers likely use them
+    interchangeably
+
+------------------------------------------------------------------------
+
+#### 3.2.3 Training Word2Vec with Skip Gram
+
+Now let's train a Skip-Gram model and compare it with CBOW.
+
+Remember: Skip-Gram predicts context words from a target word, making it
+better at capturing relationships for rare words.
+
+**Step 1: Select the text column:**
+
+```{r}
+reviews <- amazon_data$text
+```
+
+**Step 2: Train the Skip-Gram model**
+
+```{r}
+# Using skip-gram algorithm
+skip_gram_model <- word2vec(x = reviews, type = "skip-gram", dim = 15, iter = 20)
+```
+
+**What's different from CBOW?**
+
+-   `type = "skip-gram"`: Uses Skip-Gram algorithm instead of CBOW
+
+-   Same dimensions (15) and iterations (20) for fair comparison
+
+-   Generally slower to train but better for rare/specific product terms
+
+**Step 3: Create embeddings and examine specific words**
+
+```{r}
+# Checking embeddings
+skip_embedding <- as.matrix(skip_gram_model)
+skip_embedding <- predict(skip_gram_model, c("quality", "durable"), type = "embedding")
+print("The Skip-Gram embedding for 'quality' and 'durable' is as follows:")
+print(skip_embedding)
+```
+
+**Step 4: Find similar words using Skip-Gram**
+
+```{r}
+# Finding similar words
+skip_lookslike <- predict(skip_gram_model, c("price", "quality"), type = "nearest", 
+                          top_n = 5)
+print("The nearest words for 'price' and 'quality' in Skip-Gram model:")
+print(skip_lookslike)
+```
+
+**Compare with CBOW results:**
+
+-   Do you see different similar words than CBOW found?
+
+-   Skip-Gram might capture more nuanced relationships
+
+-   Especially useful for less common product-specific terms
+
+**Step 5: Create new embeddings for the words_list. And then draw the
+visualization.**
+
+```{r}
+
+# Get top 100 words using tidytext
+word_freq <- amazon_data |>
+  unnest_tokens(word, text) |>
+  anti_join(stop_words, by = "word") |>
+  count(word, sort = TRUE) |>
+  top_n(100, n) |>
+  pull(word)
+
+# checking embeddings
+skip_embedding <- as.matrix(skip_gram_model)
+skip_embedding <- predict(skip_gram_model, word_freq, type = "embedding")
+skip_embedding <- na.omit(skip_embedding)
+
+
+vizualization <- umap(skip_embedding, n_neighbors = 15, n_threads = 2)
+
+df  <- data.frame(word = rownames(skip_embedding), 
+                  xpos = gsub(".+//", "", rownames(skip_embedding)), 
+                  x = vizualization$layout[, 1], y = vizualization$layout[, 2], 
+                  stringsAsFactors = FALSE)
+
+plot_ly(df, x = ~x, y = ~y, type = "scatter", mode = 'text', text = ~word) |> 
+    layout(
+    title = "Skip-Gram Word Embeddings: Amazon Product Reviews",
+    xaxis = list(title = "UMAP Dimension 1"),
+    yaxis = list(title = "UMAP Dimension 2"),
+    hovermode = "closest"
+  )
+```
+
+**Comparing CBOW vs Skip-Gram visualizations:**
+
+After creating both visualizations, compare them side-by-side:
+
+1.  **Word clusters**: Are the same words clustered together in both
+    models?
+2.  **Cluster tightness**: Which model creates tighter, more distinct
+    clusters?
+3.  **Rare words**: Does Skip-Gram better separate specific product
+    terms?
+4.  **Overall structure**: Which gives you more useful insights about
+    customer language?
+
+**Key differences you might observe:**
+
+-   Skip-Gram often creates clearer separation between different product
+    aspects
+
+-   CBOW might group more general descriptive words together
+
+-   Skip-Gram may better distinguish between specific features (e.g.,
+    "fast charging" vs "long cable")
+
+-   Look for how quality-related words ("durable", "sturdy", "reliable")
+    cluster together
+
+**Which model to use?**
+
+-   **CBOW**: Faster, good for frequent words, general patterns
+
+-   **Skip-Gram**: Better for rare words, specific product terms,
+    nuanced relationships
+
+-   **For Amazon reviews**: Both work well! Try both and see which gives
+    better insights for your specific analysis
+
+------------------------------------------------------------------------
+
+## 4. Class Exercises: Sentiment Analysis and Word Embeddings
+
+### Exercise 1: Sentiment Analysis on Airline Data
+
+-   Load the Airline Sentiment dataset.
+
+```{r}
+url <- "https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/tweets.csv"
+airline_user_data <- read_csv(url)
+str(airline_user_data)
+```
+
+-   Apply dictionary-based sentiment analysis using **Bing**, **AFINN**,
+    and **NRC**.
+-   Compare the results and interpret the findings.
+-   Create a **visualization** (bar chart or word cloud) of sentiment
+    scores.
+
+### Exercise 2: Exploring Word Embeddings
+
+-   Find a **pre-trained word embedding model** (GloVe, Word2Vec, or
+    FastText).
+-   Identify **the top 10 most similar words** for "positive" and
+    "negative".
+-   Visualize word relationships.
+
+### Optional Exercise 3: Combining Sentiment Analysis and Word Embeddings (This is an advanced exercise for those that want to try)
+
+-   Select a subset of the Airline dataset.
+-   Compute sentiment scores using dictionary-based methods.
+-   Extract word embeddings for the most frequent words in positive and
+    negative tweets.
+-   Compare sentiment-based results with word embedding similarities.
+
+------------------------------------------------------------------------
+
+## Lecture 7 Cheat Sheet
+
+| **Function/Concept** | **Description** | **Code Example** |
+|------------------|---------------------------|---------------------------|
+| Tokenization (`unnest_tokens()`) | Breaks text into individual words or phrases for processing. | `twitter_tokens |> unnest_tokens(word, text)` |
+| Removing Stopwords (`anti_join(stop_words)`) | Removes common stopwords to focus on meaningful content. | `twitter_tokens |> anti_join(stop_words)` |
+| Sentiment Analysis (`get_sentiments()`) | Applies sentiment lexicons (Bing, AFINN, NRC) to categorize words. | `twitter_tokens |> inner_join(get_sentiments('bing'))` |
+| Bing Sentiment Analysis (`inner_join(get_sentiments('bing'))`) | Classifies words as positive or negative using the Bing lexicon. | `bing_sentiments |> count(post_index, sentiment)` |
+| AFINN Sentiment Analysis (`inner_join(get_sentiments('afinn'))`) | Assigns sentiment scores based on word intensity using AFINN. | `afinn_sentiments |> group_by(text) |> summarize(score = sum(value))` |
+| NRC Sentiment Analysis (`inner_join(get_sentiments('nrc'))`) | Categorizes words by emotions such as anger, joy, and fear. | `nrc_sentiments |> count(sentiment)` |
+| Word Embeddings - CBOW (`word2vec(type = 'cbow')`) | Trains a Continuous Bag of Words (CBOW) model for word embeddings. | `cbow_model <- word2vec(x = tweets, type = 'cbow', dim = 15, iter = 20)` |
+| Word Embeddings - Skip-Gram (`word2vec(type = 'skip-gram')`) | Trains a Skip-Gram model to predict context words from target words. | `skip_gram_model <- word2vec(x = tweets, type = 'skip-gram', dim = 15, iter = 20)` |
+| Finding Similar Words (`predict(model, type = 'nearest')`) | Finds words with similar meanings based on trained word embeddings. | `predict(cbow_model, c('election', 'vote'), type = 'nearest')` |
+| Extracting Word Embeddings (`predict(model, type = 'embedding')`) | Extracts vector representations of words for further analysis. | `predict(skip_gram_model, c('election', 'vote'), type = 'embedding')` |
+| Visualizing Sentiments (`ggplot() + geom_col()`) | Generates bar plots to visualize sentiment distribution in text. | `ggplot(bing_summary, aes(x = sentiment, y = n, fill = sentiment)) + geom_col()` |
+| UMAP for Dimensionality Reduction (`umap()`) | Reduces high-dimensional word embeddings for visualization. | `umap_result <- umap(word_embeddings, n_neighbors = 15, n_threads = 2)` |
+| Normalize Sentiment Scores (`mutate(normalized_score = score / word_count)`) | Normalizes sentiment scores by dividing by word count. | `afinn_scores |> mutate(normalized_score = score / word_count)` |
+| Creating a Sentiment Pipeline (`pivot_wider() + mutate()`) | Combines multiple sentiment analysis steps into a single pipeline. | `bing_sentiments |> pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) |> mutate(sentiment = positive - negative)` |
+| Word Frequency with Tidy (`count()`) | Counts word frequencies using tidy approach | `twitter_tokens |> count(word, sort = TRUE)` |
+| Top N Words (`top_n()`) | Selects top n rows based on a variable | `word_freq |> top_n(100, n)` |
+| Word Cloud (`wordcloud2()`) | Creates interactive word clouds | `wordcloud2(word_freq, color = "gray20")` |
