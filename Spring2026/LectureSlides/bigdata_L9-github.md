@@ -908,35 +908,57 @@ coherence_scores |>
     ## 5 25        -192.21            19.8
     ## 6 50        -201.11            25.3
 
-**Key Insights from Visualizations:**
+What did we find?
 
 1.  **K = 5 has the best coherence** (-160.46)
+
     - Marked with green triangle in first plot
+
     - 0% decline baseline (green dashed line in second plot)
+
     - Topics are most internally coherent
+
 2.  **Steep initial decline from K=5 to K=10** (11.1% decline)
+
     - Largest single drop visible in both plots
+
     - Significant quality loss when adding just 5 more topics
+
     - Red shaded area shows this is the steepest part of the curve
+
 3.  **Near-plateau between K=15 and K=20**
+
     - K=15: 17.5% decline
+
     - K=20: 17.4% decline (only 0.1% difference)
+
     - Nearly flat line in both plots between these points
+
     - Suggests a natural topic boundary for this dataset
+
     - Adding 5 more topics provides minimal change in quality
+
 4.  **Gradual increase in decline continues**
+
     - K=25: 19.8% decline (2.4% worse than K=20)
+
     - K=50: 25.3% decline (total of 25% quality loss)
+
     - Red shaded area grows steadily, showing accumulating cost
 
-**What the visualizations tell us:**
+So….
 
 - **First plot (line graph)**: Shows absolute coherence scores getting
   worse (more negative)
+
 - **Second plot (area chart)**: Emphasizes the **cost** of adding topics
+
   - Red shaded area = quality loss
+
   - Steepest growth at beginning (K=5 to K=10)
+
   - Plateau visible at K=15-20
+
   - Continuous growth toward K=50
 
 By K=50, we’ve lost about 1/4 of our coherence quality compared to the
@@ -949,7 +971,7 @@ start_time <- Sys.time()
 cat("Starting at:", format(start_time, "%H:%M:%S"), "\n")
 ```
 
-    ## Starting at: 10:17:07
+    ## Starting at: 15:29:56
 
 ``` r
 result <- ldatuning::FindTopicsNumber(
@@ -972,13 +994,13 @@ end_time <- Sys.time()
 cat("Finished at:", format(end_time, "%H:%M:%S"), "\n")
 ```
 
-    ## Finished at: 10:18:20
+    ## Finished at: 15:31:17
 
 ``` r
 cat("Total time:", round(difftime(end_time, start_time, units = "mins"), 2), "minutes\n")
 ```
 
-    ## Total time: 1.22 minutes
+    ## Total time: 1.35 minutes
 
 ``` r
 ldatuning::FindTopicsNumber_plot(result)
@@ -1023,18 +1045,30 @@ This plot shows two different metrics for evaluating topic models:
 **What do we notice?**
 
 1.  **The two metrics disagree!**
+
     - CaoJuan suggests K=14-15
+
     - Deveaud suggests K=5 or K=9
+
     - This is common - different metrics optimize for different
       properties
+
 2.  **Deveaud2014 is much noisier**
+
     - Large swings between consecutive K values
+
     - Makes it harder to identify stable patterns
+
     - This is why we also calculated UMass coherence separately
+
 3.  **Compare with our UMass coherence results:**
+
     - Our manual calculation showed K=5 was optimal
+
     - Deveaud2014 also peaks at K=5 (agreement!)
+
     - CaoJuan suggests higher K (disagreement)
+
     - The plateau we saw at K=15-20 in UMass coherence partially aligns
       with CaoJuan’s minimum
 
@@ -1065,23 +1099,35 @@ following reasons:
 **Why K=5?**
 
 1.  **Best coherence score** (-160.46)
+
     - Highest quality topics by UMass metric
+
     - Words within topics co-occur most frequently
+
 2.  **Interpretability**
+
     - 5 broad themes are easier to understand and explain
+
     - Avoids over-fragmentation of the discourse
+
     - Each topic should capture a distinct aspect of K-pop discussions
+
 3.  **Practical considerations**
+
     - Good balance between granularity and coherence
+
     - Manageable number of topics for analysis
+
     - The 11% coherence loss at K=10 suggests splitting into 10 topics
       fragments core themes
 
 **What about K=10, K=15, or K=20?**
 
 - **K=10**: Could work if you need more granularity (11% coherence loss)
+
 - **K=15-20**: The plateau suggests these are natural boundaries, but
   with 17-17.5% coherence loss
+
 - **For this tutorial**: We’ll use K=5 to demonstrate clear, coherent
   topics
 
@@ -1096,6 +1142,7 @@ two other matrices:
 
 1.  **Topic-Word matrix (Beta (β))** - The probability of each word
     belonging to each topic
+
 2.  **Document-Topic matrix (Gamma (γ))** - The probability of each
     document belonging to each topic
 
@@ -1109,7 +1156,9 @@ two other matrices:
 - **Input**: Document-Term Matrix (DTM)
 
   - Rows = documents (Reddit comments)
+
   - Columns = words (vocabulary)
+
   - Values = word counts
 
 - **LDA Processing**: Discovers latent topics by finding patterns in
@@ -1118,6 +1167,7 @@ two other matrices:
 - **Output**: Two probability matrices
 
   - **Beta (β)**: For each topic, what words are most probable?
+
   - **Gamma (γ)**: For each document, what topics are most probable?
 
 ------------------------------------------------------------------------
@@ -1148,8 +1198,8 @@ gc()
 ```
 
     ##           used  (Mb) gc trigger   (Mb) limit (Mb)  max used   (Mb)
-    ## Ncells 3272408 174.8    5418458  289.4         NA   5418458  289.4
-    ## Vcells 8794120  67.1  138693032 1058.2      36864 173366174 1322.7
+    ## Ncells 3272505 174.8    5418557  289.4         NA   5418557  289.4
+    ## Vcells 8794955  67.2  138693834 1058.2      36864 173367009 1322.7
 
 ``` r
 # Check what we have left
@@ -1182,7 +1232,7 @@ print(paste("Training LDA model with K=5..."))
 print(paste("Start time:", format(start_time, "%H:%M:%S")))
 ```
 
-    ## [1] "Start time: 10:18:20"
+    ## [1] "Start time: 15:31:17"
 
 ``` r
 lda_model_k5 <- LDA(
@@ -1212,7 +1262,7 @@ end_time <- Sys.time()
 print(paste("Finished at:", format(end_time, "%H:%M:%S")))
 ```
 
-    ## [1] "Finished at: 10:18:40"
+    ## [1] "Finished at: 15:31:37"
 
 ``` r
 print(paste("Total time:", round(difftime(end_time, start_time, units = "mins"), 2), "minutes"))
@@ -1289,7 +1339,7 @@ str(lda_model_k5)
     ##   .. .. ..@ alpha        : num 10
     ##   .. .. ..@ seed         : int 42
     ##   .. .. ..@ verbose      : int 500
-    ##   .. .. ..@ prefix       : chr "/var/folders/1n/8wbl6_f51tz27s0119qcsfyh0000gq/T//RtmpqP1E8x/file7e8c1aae38e6"
+    ##   .. .. ..@ prefix       : chr "/var/folders/1n/8wbl6_f51tz27s0119qcsfyh0000gq/T//RtmppZvgB1/file8f5032157950"
     ##   .. .. ..@ save         : int 0
     ##   .. .. ..@ nstart       : int 1
     ##   .. .. ..@ best         : logi TRUE
@@ -1345,8 +1395,6 @@ str(lda_model_k5)
   = worse fit)
 
 We are primarily interested in `@beta` and `@gamma` for interpretation!
-
-------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 
@@ -1493,14 +1541,23 @@ Look at the top words for each topic. Do they form coherent themes?
 **Questions to ask yourself:**
 
 1.  **Do the words in each topic relate to each other?**
+
     - Topic 1 might have: album, release, comeback, music
-    - This suggests a “music release” theme
+
+    - This suggests a “music” theme
+
 2.  **Are the topics distinct from each other?**
+
     - Compare Topic 1 vs Topic 2
+
     - Do they have different top words?
+
     - Or do they share many words? (if so, might need different K)
+
 3.  **Can you give each topic a meaningful label?**
+
     - Based on the top 10 words, what would you call this topic?
+
     - Examples: “Fan Discussions”, “Artist News”, “Music Reviews”, etc.
 
 **What makes a good topic?**
@@ -1536,14 +1593,19 @@ lda_top_terms |>
 **Interpreting the visualization:**
 
 - **Each panel** shows one topic (1-5)
+
 - **Longer bars** = higher probability in that topic
+
 - **Y-axis** shows the top 10 words for that topic
+
 - **X-axis** shows the beta value (word probability)
 
 **What to look for:**
 
 1.  **Clear themes**: Do the words in each panel make sense together?
+
 2.  **Distinct topics**: Are the words different across panels?
+
 3.  **Probability distribution**: Are the beta values concentrated (few
     dominant words) or spread out (many equally important words)?
 
@@ -1715,8 +1777,6 @@ ggplot(beta_wide_top, aes(x = log_ratio, y = reorder(term, log_ratio))) +
 
 ![](bigdata_L9-github_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
-**Interpretation:**
-
 **Left side (Topic 1 - Music Appreciation):**
 
 - **Music content**: “song”, “album”, “songs”, “track”
@@ -1729,7 +1789,7 @@ ggplot(beta_wide_top, aes(x = log_ratio, y = reorder(term, log_ratio))) +
 
 - **Performance**: “live”, “bit”
 
-Pattern: Words about **consuming and responding to K-pop content**
+  - Pattern: Words about **consuming and responding to K-pop content**
 
 **Right side (Topic 2 - Fan Discussions):**
 
@@ -1741,8 +1801,8 @@ Pattern: Words about **consuming and responding to K-pop content**
 
 - **Evaluation**: “bad”, “sense”, “literally”, “things”
 
-Pattern: Words about **reasoning, explaining, and discussing events in
-the community**
+  - Pattern: Words about **reasoning, explaining, and discussing events
+    in the community**
 
 **What Research Questions Does This Answer?**
 
@@ -1778,7 +1838,7 @@ the community**
     - **Analytical dimension** (Topic 2): Reasoning about community
       events and behaviors
 
-**Key Insight:**
+For example:
 
 Topic 1 is about **“what I’m experiencing”** (sensory, emotional,
 immediate)
@@ -1912,60 +1972,51 @@ lda_documents |>
 
 - Y-axis goes up to 0.5 (50% probability)
 
-**Key Observations:**
+**What do we see?**
 
-**Documents with clear dominant topics:**
+- **Documents with clear dominant topics:**
 
-- **Document 2**: Topic 3 (Rules) ~44% - likely a moderator removal
-  message
+  - **Document 2**: Topic 3 (Rules) ~44% - likely a moderator removal
+    message
 
-- **Document 3**: Topic 3 (Rules) ~39% - another rule-related post
+  - **Document 3**: Topic 3 (Rules) ~39% - another rule-related post
 
-- **Document 5**: Topic 3 (Rules) ~40% - rule discussion or removal
+  - **Document 5**: Topic 3 (Rules) ~40% - rule discussion or removal
 
-- **Document 9**: Topic 3 (Rules) ~48% - strongest single-topic focus!
+  - **Document 9**: Topic 3 (Rules) ~48% - strongest single-topic focus!
 
-**Documents with balanced/mixed topics:**
+- **Documents with balanced/mixed topics:**
 
-- **Documents 1, 4, 6, 7, 8, 10**: All show relatively even distribution
-  across 5 topics (~20% each)
+  - **Documents 1, 4, 6, 7, 8, 10**: All show relatively even
+    distribution across 5 topics (~20% each)
 
-- This represents comments that touch on multiple themes
+  - This represents comments that touch on multiple themes
 
-**Why is Topic 3 so dominant in some documents?**
+- **Why is Topic 3 so dominant in some documents?**
 
-Remember, Topic 3 is about **subreddit rules and moderation**. Documents
-2, 3, 5, and 9 likely contain:
+  - Remember, Topic 3 is about **subreddit rules and moderation**.
+    Documents 2, 3, 5, and 9 likely contain:
 
-- Moderator removal messages (“Your post has been removed…”)
+    - Moderator removal messages (“Your post has been removed…”)
 
-- Rule clarification discussions
+    - Rule clarification discussions
 
-- Meta-discussions about subreddit guidelines
+    - Meta-discussions about subreddit guidelines
 
-These are formulaic, repetitive texts that cluster tightly together.
+  - These are formulaic, repetitive texts that cluster tightly together.
 
-**Why are most other documents balanced?**
+- **Why are most other documents balanced?**
 
-Real K-pop discussions often blend themes: - Discussing a **group’s
-comeback** (Topic 4) while praising the **music** (Topic 1)
+  - Real K-pop discussions often blend themes:
 
-- Talking about **fans’ reactions** (Topic 2) to the **HYBE
-  controversy** (Topic 5)
+    - Discussing a **group’s comeback** (Topic 4) while praising the
+      **music** (Topic 1)
 
-- Sharing **personal opinions** about **groups and songs** (Topics 1, 2,
-  4 mixed)
+    - Talking about **fans’ reactions** (Topic 2) to the **HYBE
+      controversy** (Topic 5)
 
-**Research implications:**
-
-1.  **Automated content filtering**: Documents with \>40% Topic 3 are
-    likely mod messages, could be filtered out for analysis
-
-2.  **Discourse complexity**: Most organic fan discussions are
-    multi-topical
-
-3.  **Topic purity varies**: Administrative content (rules) is more
-    “pure,” while fan discussions blend themes
+    - Sharing **personal opinions** about **groups and songs** (Topics
+      1, 2, 4 mixed)
 
 ------------------------------------------------------------------------
 
@@ -2044,16 +2095,14 @@ top_docs_with_text |>
 
 **Topic 1 (Music Appreciation) - Top Documents:**
 
-**What we see:** All three documents are **detailed album reviews** with
-track-by-track analysis:
+- **What we see:** All three documents are **detailed album reviews**
+  with track-by-track analysis:
 
-- Document 8509 (γ=0.768): TWICE album review covering all 14 tracks
+  - Document 8509 (γ=0.768): TWICE album review covering all 14 tracks
 
-- Document 8633 (γ=0.677): Another TWICE album review, track-by-track
+  - Document 8633 (γ=0.677): Another TWICE album review, track-by-track
 
-- Document 16256 (γ=0.656): TXT album review analyzing 8 tracks
-
-**Validation of Topic 1:**
+  - Document 16256 (γ=0.656): TXT album review analyzing 8 tracks
 
 - Heavy focus on musical elements: “instrumental,” “synths,” “chorus,”
   “bridge,” “vocals”
@@ -2066,12 +2115,12 @@ track-by-track analysis:
 - Minimal mention of: industry drama, fans, groups as entities (focus is
   on the music itself)
 
-**Example quote:** *“love the synths at the start, already giving a nice
-retro vibe and then the percussion comes in and really sells the whole
-vibe”*
+  - **Example quote:** *“love the synths at the start, already giving a
+    nice retro vibe and then the percussion comes in and really sells
+    the whole vibe”*
 
-This is **exactly** what Topic 1 should capture: individual listeners
-describing their sensory and emotional experience with music.
+- This is **exactly** what Topic 1 should capture: individual listeners
+  describing their sensory and emotional experience with music.
 
 Let’s examine what a “pure” music appreciation comment looks like.
 
@@ -2093,19 +2142,17 @@ top_docs_with_text |>
 
 **Topic 2 (Fan Discussions) - Top Documents:**
 
-**What we see:** All three are **analytical discussions about fan
-behavior and K-pop culture:**
+- **What we see:** All three are **analytical discussions about fan
+  behavior and K-pop culture:**
 
-- Document 19526 (γ=0.449): ILLIT/LSF hate, JungKook’s involvement, fan
-  reactions to controversy
+  - Document 19526 (γ=0.449): ILLIT/LSF hate, JungKook’s involvement,
+    fan reactions to controversy
 
-- Document 2102 (γ=0.447): Patterns of idol hate/bullying, Haknyeon
-  case, international vs Korean fans
+  - Document 2102 (γ=0.447): Patterns of idol hate/bullying, Haknyeon
+    case, international vs Korean fans
 
-- Document 899 (γ=0.432): Fan policing vs. checking behavior, multiple
-  idol examples (NewJeans, Suga, Irene)
-
-**Validation of Topic 2:**
+  - Document 899 (γ=0.432): Fan policing vs. checking behavior, multiple
+    idol examples (NewJeans, Suga, Irene)
 
 - Focus on **people and fans**: “fans feel like,” “people get so
   excited,” “fans police”
@@ -2119,24 +2166,13 @@ behavior and K-pop culture:**
 
 - Meta-commentary: analyzing K-pop fandom dynamics itself
 
-**Example quotes:**
+  - **Example quotes:**
 
-- *“ppl just get so excited any time there’s a new idol that it becomes
-  acceptable to hate and bully”*
+    - *“ppl just get so excited any time there’s a new idol that it
+      becomes acceptable to hate and bully”*
 
-- *“I just hope Illit gets the justice they deserve because I still
-  can’t believe what they’ve had to gone through”*
-
-**Contrast with Topic 1:**
-
-- **Topic 1**: “I love this song” (personal sensory/emotional response)
-
-- **Topic 2**: “fans think this happened because…” (collective
-  analysis/reasoning)
-
-This is **exactly** what Topic 2 should capture: fans discussing and
-analyzing the community, behaviors, and cultural dynamics rather than
-the music content itself.
+    - *“I just hope Illit gets the justice they deserve because I still
+      can’t believe what they’ve had to gone through”*
 
 ``` r
 # View Topic 3 (Rules/Moderation) examples
@@ -2156,16 +2192,14 @@ top_docs_with_text |>
 
 **Topic 3 (Rules/Moderation) - Top Documents:**
 
-**What we see:** All three are **identical automated moderator removal
-messages:**
+- **What we see:** All three are **identical automated moderator removal
+  messages:**
 
-- Document 3842 (γ=0.732): Removal message to user Fun-Home-605
+  - Document 3842 (γ=0.732): Removal message to user Fun-Home-605
 
-- Document 2888 (γ=0.728): Removal message to user DaGayEnby
+  - Document 2888 (γ=0.728): Removal message to user DaGayEnby
 
-- Document 3856 (γ=0.728): Removal message to user calikim_mo
-
-**Validation of Topic 3:**
+  - Document 3856 (γ=0.728): Removal message to user calikim_mo
 
 - **Formulaic structure**: “Hey u/\[username\], thank you for submitting
   to r/kpop! Unfortunately…”
@@ -2182,7 +2216,9 @@ messages:**
 - **Zero musical/fan discussion content**: These are pure meta-subreddit
   administration
 
-**Example structure:**
+- **Example structure:**
+
+<!-- -->
 
     1. Greeting + removal notice
     2. Reason for removal ("Casual or Fan-Made content")
@@ -2196,7 +2232,7 @@ These documents are **nearly identical copies** of each other, using the
 exact same template. They form a tight cluster of purely administrative
 text with minimal vocabulary overlap with organic discussions.
 
-**Research implications:**
+*What can we do?*
 
 - Documents with high Topic 3 gamma should be **filtered out** for
   analyses of fan discourse
@@ -2225,19 +2261,17 @@ top_docs_with_text |>
 
 **Topic 4 (Groups/Industry) - Top Documents:**
 
-**What we see:** All three focus on **groups’ industry achievements,
-requirements, and metrics:**
+- **What we see:** All three focus on **groups’ industry achievements,
+  requirements, and metrics:**
 
-- Document 13877 (γ=0.728): KATSEYE Grammy Academy membership
-  requirements (detailed criteria)
+  - Document 13877 (γ=0.728): KATSEYE Grammy Academy membership
+    requirements (detailed criteria)
 
-- Document 10133 (γ=0.622): Korean girl band’s chart performance,
-  awards, concerts (MMA, MAMA, KCON)
+  - Document 10133 (γ=0.622): Korean girl band’s chart performance,
+    awards, concerts (MMA, MAMA, KCON)
 
-- Document 7389 (γ=0.612): HYBE groups’ Grammy membership eligibility
-  (BTS, Bang PD)
-
-**Validation of Topic 4:**
+  - Document 7389 (γ=0.612): HYBE groups’ Grammy membership eligibility
+    (BTS, Bang PD)
 
 - \*Groups as entities\*\*: KATSEYE, BTS, (G)I-DLE, IZ\*ONE, band groups
 
@@ -2253,16 +2287,16 @@ requirements, and metrics:**
 - **Temporal framing**: “debuted in 2023,” “4th generation,” “less than
   two years after debut”
 
-**Example quotes:**
+  - **Example quotes:**
 
-- *“Twelve commercially distributed, verifiable credits in a single
-  creative profession”*
+  - *“Twelve commercially distributed, verifiable credits in a single
+    creative profession”*
 
-- *“no 4th or 5th generation girl group has ever held a 3-day concert at
-  the Handball Gymnasium”*
+  - *“no 4th or 5th generation girl group has ever held a 3-day concert
+    at the Handball Gymnasium”*
 
-- *“They even topped music shows three times without ever appearing on
-  them”*
+  - *“They even topped music shows three times without ever appearing on
+    them”*
 
 **Contrast with other topics:**
 
@@ -2271,24 +2305,6 @@ requirements, and metrics:**
 - **Topic 2**: “fans think this because…” (community analysis)
 
 - **Topic 4**: “This group achieved X metric” (industry performance)
-
-**Why this vocabulary appears:**
-
-Top words for Topic 4 were: **group, music, groups, year, years, time,
-show, bts, big, debut**
-
-All three documents heavily use these terms to discuss groups’ careers,
-timelines, and achievements.
-
-**Research implications:**
-
-- Topic 4 captures **structural/factual** discussions about K-pop
-  industry
-
-- Focus on measurable success indicators
-
-- Groups discussed as **professional entities** rather than artistic
-  creators or fan objects
 
 ``` r
 # View Topic 5 (HYBE-ADOR) examples
@@ -2308,19 +2324,17 @@ top_docs_with_text |>
 
 **Topic 5 (HYBE-ADOR) - Top Documents:**
 
-**What we see:** All three are **detailed legal updates about the
-HYBE-ADOR-NewJeans court case:**
+- **What we see:** All three are **detailed legal updates about the
+  HYBE-ADOR-NewJeans court case:**
 
-- Document 6237 (γ=0.612): ADOR’s court arguments claiming Min Heejin
-  orchestrated contract termination
+  - Document 6237 (γ=0.612): ADOR’s court arguments claiming Min Heejin
+    orchestrated contract termination
 
-- Document 6259 (γ=0.610): Full hearing summary of both sides’
-  arguments, court mediation
+  - Document 6259 (γ=0.610): Full hearing summary of both sides’
+    arguments, court mediation
 
-- Document 5935 (γ=0.604): HYBE’s official statement about appealing Min
-  Heejin’s non-prosecution
-
-**Validation of Topic 5:**
+  - Document 5935 (γ=0.604): HYBE’s official statement about appealing
+    Min Heejin’s non-prosecution
 
 - **Key entities**: HYBE, ADOR, Min Hee-jin (MHJ), NewJeans, ILLIT
   mentioned repeatedly
@@ -2337,57 +2351,15 @@ HYBE-ADOR-NewJeans court case:**
 - **Multiple parties’ perspectives**: ADOR’s claims vs. NewJeans’ claims
   vs. HYBE’s statements
 
-**Example quotes:**
+- **Example quotes:**
 
-- *“Min Hee-jin was behind NewJeans’ termination of the exclusive
-  contract from start to finish”*
+  - *“Min Hee-jin was behind NewJeans’ termination of the exclusive
+    contract from start to finish”*
 
-- *“The ADOR we trusted and signed contracts with no longer exists”*
+  - *“The ADOR we trusted and signed contracts with no longer exists”*
 
-- *“the appellate court ruled that former CEO Min is ‘intentionally
-  undermining the integrated structure’”*
-
-**Why this is Topic 5:**
-
-Top words were: **hybe, mhj, newjeans, ador, case, illit, contract,
-side, court, members**
-
-All three documents are saturated with these exact terms in
-legal/business contexts.
-
-**Contrast with other topics:**
-
-- **Topic 1**: Music appreciation (“I love the song”)
-
-- **Topic 2**: Fan community analysis (“fans think…”)
-
-- **Topic 4**: General industry achievements (“group won awards”)
-
-- **Topic 5**: Specific ongoing legal controversy (proper nouns, legal
-  terms, court proceedings)
-
-**Research implications:**
-
-- Topic 5 is **time-specific** to July 2024 controversy
-
-- May not generalize to other time periods
-
-- Captures how major industry conflicts dominate discourse
-
-- Shows LDA can identify **event-driven topics** alongside structural
-  ones
-
-**Document characteristics:**
-
-- Extremely long (1000+ words typical)
-
-- Translation disclaimers (Korean legal documents)
-
-- Formal news article structure
-
-- Heavy quotation of official statements
-
-------------------------------------------------------------------------
+  - *“the appellate court ruled that former CEO Min is ‘intentionally
+    undermining the integrated structure’”*
 
 ------------------------------------------------------------------------
 
@@ -2473,27 +2445,19 @@ A high gamma value (close to 1.0) means:
 
 - Perfect alignment means K=5 captures meaningful structure
 
-**2. Enables filtering:**
-
-- Can remove Topic 3 documents (gamma \> 0.7) for analysis of organic
-  discourse
-
-- Can identify event-specific content (Topic 5) vs. structural patterns
-  (Topics 1, 2, 4)
-
-**3. Supports coding/annotation:**
+**2. Supports coding/annotation:**
 
 - High-gamma documents are perfect training examples
 
 - Can use for manual content analysis or supervised learning
 
-**4. Reveals discourse patterns:**
+**3. Reveals discourse patterns:**
 
 - Topic 1 and 3: Highly focused (album reviews, admin messages)
 
 - Topic 2: Naturally multifaceted (fan discussions blend themes)
 
-- Topic 5: Event-driven (July 2024 specific)
+- Topic 5: Event-driven
 
 **Limitations to note:**
 
@@ -2505,7 +2469,7 @@ A high gamma value (close to 1.0) means:
 
 **2. Time specificity:** Topic 5 (HYBE) is July 2025-specific
 
-- Wouldn’t appear in data from other months/years
+- Maybe wouldn’t appear in data from other months/years
 
 - Shows how LDA captures temporal events alongside structural patterns
 

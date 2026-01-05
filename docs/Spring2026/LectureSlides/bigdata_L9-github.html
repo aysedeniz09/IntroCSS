@@ -1488,44 +1488,44 @@ Weighting          : term frequency (tf)
 ## 4 20        -188.32            17.4
 ## 5 25        -192.21            19.8
 ## 6 50        -201.11            25.3</code></pre>
-<p><strong>Key Insights from Visualizations:</strong></p>
+<p>What did we find?</p>
 <ol type="1">
-<li><strong>K = 5 has the best coherence</strong> (-160.46)
+<li><p><strong>K = 5 has the best coherence</strong> (-160.46)</p>
 <ul>
-<li>Marked with green triangle in first plot</li>
-<li>0% decline baseline (green dashed line in second plot)</li>
-<li>Topics are most internally coherent</li>
+<li><p>Marked with green triangle in first plot</p></li>
+<li><p>0% decline baseline (green dashed line in second plot)</p></li>
+<li><p>Topics are most internally coherent</p></li>
 </ul></li>
-<li><strong>Steep initial decline from K=5 to K=10</strong> (11.1% decline)
+<li><p><strong>Steep initial decline from K=5 to K=10</strong> (11.1% decline)</p>
 <ul>
-<li>Largest single drop visible in both plots</li>
-<li>Significant quality loss when adding just 5 more topics</li>
-<li>Red shaded area shows this is the steepest part of the curve</li>
+<li><p>Largest single drop visible in both plots</p></li>
+<li><p>Significant quality loss when adding just 5 more topics</p></li>
+<li><p>Red shaded area shows this is the steepest part of the curve</p></li>
 </ul></li>
-<li><strong>Near-plateau between K=15 and K=20</strong>
+<li><p><strong>Near-plateau between K=15 and K=20</strong></p>
 <ul>
-<li>K=15: 17.5% decline</li>
-<li>K=20: 17.4% decline (only 0.1% difference)</li>
-<li>Nearly flat line in both plots between these points</li>
-<li>Suggests a natural topic boundary for this dataset</li>
-<li>Adding 5 more topics provides minimal change in quality</li>
+<li><p>K=15: 17.5% decline</p></li>
+<li><p>K=20: 17.4% decline (only 0.1% difference)</p></li>
+<li><p>Nearly flat line in both plots between these points</p></li>
+<li><p>Suggests a natural topic boundary for this dataset</p></li>
+<li><p>Adding 5 more topics provides minimal change in quality</p></li>
 </ul></li>
-<li><strong>Gradual increase in decline continues</strong>
+<li><p><strong>Gradual increase in decline continues</strong></p>
 <ul>
-<li>K=25: 19.8% decline (2.4% worse than K=20)</li>
-<li>K=50: 25.3% decline (total of 25% quality loss)</li>
-<li>Red shaded area grows steadily, showing accumulating cost</li>
+<li><p>K=25: 19.8% decline (2.4% worse than K=20)</p></li>
+<li><p>K=50: 25.3% decline (total of 25% quality loss)</p></li>
+<li><p>Red shaded area grows steadily, showing accumulating cost</p></li>
 </ul></li>
 </ol>
-<p><strong>What the visualizations tell us:</strong></p>
+<p>So….</p>
 <ul>
-<li><strong>First plot (line graph)</strong>: Shows absolute coherence scores getting worse (more negative)</li>
-<li><strong>Second plot (area chart)</strong>: Emphasizes the <strong>cost</strong> of adding topics
+<li><p><strong>First plot (line graph)</strong>: Shows absolute coherence scores getting worse (more negative)</p></li>
+<li><p><strong>Second plot (area chart)</strong>: Emphasizes the <strong>cost</strong> of adding topics</p>
 <ul>
-<li>Red shaded area = quality loss</li>
-<li>Steepest growth at beginning (K=5 to K=10)</li>
-<li>Plateau visible at K=15-20</li>
-<li>Continuous growth toward K=50</li>
+<li><p>Red shaded area = quality loss</p></li>
+<li><p>Steepest growth at beginning (K=5 to K=10)</p></li>
+<li><p>Plateau visible at K=15-20</p></li>
+<li><p>Continuous growth toward K=50</p></li>
 </ul></li>
 </ul>
 <p>By K=50, we’ve lost about 1/4 of our coherence quality compared to the optimal K=5, suggesting severe topic fragmentation.</p>
@@ -1533,7 +1533,7 @@ Weighting          : term frequency (tf)
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: This takes several minutes to run!</span></span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Starting at:"</span>, <span class="fu">format</span>(start_time, <span class="st">"%H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## Starting at: 10:17:07</code></pre>
+<pre><code>## Starting at: 15:29:56</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> ldatuning<span class="sc">::</span><span class="fu">FindTopicsNumber</span>(</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  tidy_dfm,</span>
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">topics =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">20</span>, <span class="at">by =</span> <span class="dv">1</span>),</span>
@@ -1548,9 +1548,9 @@ Weighting          : term frequency (tf)
 ##   Deveaud2014... done.</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Finished at:"</span>, <span class="fu">format</span>(end_time, <span class="st">"%H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## Finished at: 10:18:20</code></pre>
+<pre><code>## Finished at: 15:31:17</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total time:"</span>, <span class="fu">round</span>(<span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"mins"</span>), <span class="dv">2</span>), <span class="st">"minutes</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## Total time: 1.22 minutes</code></pre>
+<pre><code>## Total time: 1.35 minutes</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>ldatuning<span class="sc">::</span><span class="fu">FindTopicsNumber_plot</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><img src="bigdata_L9-github_files/figure-gfm/unnamed-chunk-16-1.png" class="img-fluid"><!-- --></p>
 </section>
@@ -1583,24 +1583,24 @@ Weighting          : term frequency (tf)
 </ul>
 <p><strong>What do we notice?</strong></p>
 <ol type="1">
-<li><strong>The two metrics disagree!</strong>
+<li><p><strong>The two metrics disagree!</strong></p>
 <ul>
-<li>CaoJuan suggests K=14-15</li>
-<li>Deveaud suggests K=5 or K=9</li>
-<li>This is common - different metrics optimize for different properties</li>
+<li><p>CaoJuan suggests K=14-15</p></li>
+<li><p>Deveaud suggests K=5 or K=9</p></li>
+<li><p>This is common - different metrics optimize for different properties</p></li>
 </ul></li>
-<li><strong>Deveaud2014 is much noisier</strong>
+<li><p><strong>Deveaud2014 is much noisier</strong></p>
 <ul>
-<li>Large swings between consecutive K values</li>
-<li>Makes it harder to identify stable patterns</li>
-<li>This is why we also calculated UMass coherence separately</li>
+<li><p>Large swings between consecutive K values</p></li>
+<li><p>Makes it harder to identify stable patterns</p></li>
+<li><p>This is why we also calculated UMass coherence separately</p></li>
 </ul></li>
-<li><strong>Compare with our UMass coherence results:</strong>
+<li><p><strong>Compare with our UMass coherence results:</strong></p>
 <ul>
-<li>Our manual calculation showed K=5 was optimal</li>
-<li>Deveaud2014 also peaks at K=5 (agreement!)</li>
-<li>CaoJuan suggests higher K (disagreement)</li>
-<li>The plateau we saw at K=15-20 in UMass coherence partially aligns with CaoJuan’s minimum</li>
+<li><p>Our manual calculation showed K=5 was optimal</p></li>
+<li><p>Deveaud2014 also peaks at K=5 (agreement!)</p></li>
+<li><p>CaoJuan suggests higher K (disagreement)</p></li>
+<li><p>The plateau we saw at K=15-20 in UMass coherence partially aligns with CaoJuan’s minimum</p></li>
 </ul></li>
 </ol>
 <p><strong>Which metric should we trust?</strong></p>
@@ -1618,29 +1618,29 @@ Weighting          : term frequency (tf)
 <p>Based on our coherence analysis, we’ll proceed with <strong>K = 5</strong> for the following reasons:</p>
 <p><strong>Why K=5?</strong></p>
 <ol type="1">
-<li><strong>Best coherence score</strong> (-160.46)
+<li><p><strong>Best coherence score</strong> (-160.46)</p>
 <ul>
-<li>Highest quality topics by UMass metric</li>
-<li>Words within topics co-occur most frequently</li>
+<li><p>Highest quality topics by UMass metric</p></li>
+<li><p>Words within topics co-occur most frequently</p></li>
 </ul></li>
-<li><strong>Interpretability</strong>
+<li><p><strong>Interpretability</strong></p>
 <ul>
-<li>5 broad themes are easier to understand and explain</li>
-<li>Avoids over-fragmentation of the discourse</li>
-<li>Each topic should capture a distinct aspect of K-pop discussions</li>
+<li><p>5 broad themes are easier to understand and explain</p></li>
+<li><p>Avoids over-fragmentation of the discourse</p></li>
+<li><p>Each topic should capture a distinct aspect of K-pop discussions</p></li>
 </ul></li>
-<li><strong>Practical considerations</strong>
+<li><p><strong>Practical considerations</strong></p>
 <ul>
-<li>Good balance between granularity and coherence</li>
-<li>Manageable number of topics for analysis</li>
-<li>The 11% coherence loss at K=10 suggests splitting into 10 topics fragments core themes</li>
+<li><p>Good balance between granularity and coherence</p></li>
+<li><p>Manageable number of topics for analysis</p></li>
+<li><p>The 11% coherence loss at K=10 suggests splitting into 10 topics fragments core themes</p></li>
 </ul></li>
 </ol>
 <p><strong>What about K=10, K=15, or K=20?</strong></p>
 <ul>
-<li><strong>K=10</strong>: Could work if you need more granularity (11% coherence loss)</li>
-<li><strong>K=15-20</strong>: The plateau suggests these are natural boundaries, but with 17-17.5% coherence loss</li>
-<li><strong>For this tutorial</strong>: We’ll use K=5 to demonstrate clear, coherent topics</li>
+<li><p><strong>K=10</strong>: Could work if you need more granularity (11% coherence loss)</p></li>
+<li><p><strong>K=15-20</strong>: The plateau suggests these are natural boundaries, but with 17-17.5% coherence loss</p></li>
+<li><p><strong>For this tutorial</strong>: We’ll use K=5 to demonstrate clear, coherent topics</p></li>
 </ul>
 <p>Let’s now fit our LDA model with K=5 topics!</p>
 <hr>
@@ -1650,8 +1650,8 @@ Weighting          : term frequency (tf)
 <h2 class="anchored" data-anchor-id="lda-model">4. LDA Model</h2>
 <p>LDA converts the document-word matrix (we had above as <code>tidy_dfm</code>) into two other matrices:</p>
 <ol type="1">
-<li><strong>Topic-Word matrix (Beta (β))</strong> - The probability of each word belonging to each topic</li>
-<li><strong>Document-Topic matrix (Gamma (γ))</strong> - The probability of each document belonging to each topic</li>
+<li><p><strong>Topic-Word matrix (Beta (β))</strong> - The probability of each word belonging to each topic</p></li>
+<li><p><strong>Document-Topic matrix (Gamma (γ))</strong> - The probability of each document belonging to each topic</p></li>
 </ol>
 <p><img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2021/06/26864dtm.webp" class="img-fluid"></p>
 <p><em>image from: <a href="https://cdn.analyticsvidhya.com/wp-content/uploads/2021/06/26864dtm.webp" class="uri">https://cdn.analyticsvidhya.com/wp-content/uploads/2021/06/26864dtm.webp</a></em></p>
@@ -1659,15 +1659,15 @@ Weighting          : term frequency (tf)
 <ul>
 <li><p><strong>Input</strong>: Document-Term Matrix (DTM)</p>
 <ul>
-<li>Rows = documents (Reddit comments)</li>
-<li>Columns = words (vocabulary)</li>
-<li>Values = word counts</li>
+<li><p>Rows = documents (Reddit comments)</p></li>
+<li><p>Columns = words (vocabulary)</p></li>
+<li><p>Values = word counts</p></li>
 </ul></li>
 <li><p><strong>LDA Processing</strong>: Discovers latent topics by finding patterns in word co-occurrence</p></li>
 <li><p><strong>Output</strong>: Two probability matrices</p>
 <ul>
-<li><strong>Beta (β)</strong>: For each topic, what words are most probable?</li>
-<li><strong>Gamma (γ)</strong>: For each document, what topics are most probable?</li>
+<li><p><strong>Beta (β)</strong>: For each topic, what words are most probable?</p></li>
+<li><p><strong>Gamma (γ)</strong>: For each document, what topics are most probable?</p></li>
 </ul></li>
 </ul>
 <hr>
@@ -1692,8 +1692,8 @@ Weighting          : term frequency (tf)
 <span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Run garbage collection to free up memory</span></span>
 <span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##           used  (Mb) gc trigger   (Mb) limit (Mb)  max used   (Mb)
-## Ncells 3272408 174.8    5418458  289.4         NA   5418458  289.4
-## Vcells 8794120  67.1  138693032 1058.2      36864 173366174 1322.7</code></pre>
+## Ncells 3272505 174.8    5418557  289.4         NA   5418557  289.4
+## Vcells 8794955  67.2  138693834 1058.2      36864 173367009 1322.7</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check what we have left</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Remaining objects in workspace:"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Remaining objects in workspace:"</code></pre>
@@ -1709,7 +1709,7 @@ Weighting          : term frequency (tf)
 <span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Training LDA model with K=5..."</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Training LDA model with K=5..."</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Start time:"</span>, <span class="fu">format</span>(start_time, <span class="st">"%H:%M:%S"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] "Start time: 10:18:20"</code></pre>
+<pre><code>## [1] "Start time: 15:31:17"</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>lda_model_k5 <span class="ot">&lt;-</span> <span class="fu">LDA</span>(</span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  tidy_dfm, </span>
 <span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>, </span>
@@ -1731,7 +1731,7 @@ Weighting          : term frequency (tf)
 ## Gibbs sampling completed!</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Finished at:"</span>, <span class="fu">format</span>(end_time, <span class="st">"%H:%M:%S"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] "Finished at: 10:18:40"</code></pre>
+<pre><code>## [1] "Finished at: 15:31:37"</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Total time:"</span>, <span class="fu">round</span>(<span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"mins"</span>), <span class="dv">2</span>), <span class="st">"minutes"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Total time: 0.32 minutes"</code></pre>
 <p><strong>What do these parameters mean?</strong></p>
@@ -1784,7 +1784,7 @@ Weighting          : term frequency (tf)
 ##   .. .. ..@ alpha        : num 10
 ##   .. .. ..@ seed         : int 42
 ##   .. .. ..@ verbose      : int 500
-##   .. .. ..@ prefix       : chr "/var/folders/1n/8wbl6_f51tz27s0119qcsfyh0000gq/T//RtmpqP1E8x/file7e8c1aae38e6"
+##   .. .. ..@ prefix       : chr "/var/folders/1n/8wbl6_f51tz27s0119qcsfyh0000gq/T//RtmppZvgB1/file8f5032157950"
 ##   .. .. ..@ save         : int 0
 ##   .. .. ..@ nstart       : int 1
 ##   .. .. ..@ best         : logi TRUE
@@ -1827,7 +1827,6 @@ Weighting          : term frequency (tf)
 <li><p><strong><code>@loglikelihood</code></strong>: How well the model fits the data (more negative = worse fit)</p></li>
 </ul>
 <p>We are primarily interested in <code>@beta</code> and <code>@gamma</code> for interpretation!</p>
-<hr>
 <hr>
 </section>
 </section>
@@ -1988,21 +1987,21 @@ Weighting          : term frequency (tf)
 <p>Look at the top words for each topic. Do they form coherent themes?</p>
 <p><strong>Questions to ask yourself:</strong></p>
 <ol type="1">
-<li><strong>Do the words in each topic relate to each other?</strong>
+<li><p><strong>Do the words in each topic relate to each other?</strong></p>
 <ul>
-<li>Topic 1 might have: album, release, comeback, music</li>
-<li>This suggests a “music release” theme</li>
+<li><p>Topic 1 might have: album, release, comeback, music</p></li>
+<li><p>This suggests a “music” theme</p></li>
 </ul></li>
-<li><strong>Are the topics distinct from each other?</strong>
+<li><p><strong>Are the topics distinct from each other?</strong></p>
 <ul>
-<li>Compare Topic 1 vs Topic 2</li>
-<li>Do they have different top words?</li>
-<li>Or do they share many words? (if so, might need different K)</li>
+<li><p>Compare Topic 1 vs Topic 2</p></li>
+<li><p>Do they have different top words?</p></li>
+<li><p>Or do they share many words? (if so, might need different K)</p></li>
 </ul></li>
-<li><strong>Can you give each topic a meaningful label?</strong>
+<li><p><strong>Can you give each topic a meaningful label?</strong></p>
 <ul>
-<li>Based on the top 10 words, what would you call this topic?</li>
-<li>Examples: “Fan Discussions”, “Artist News”, “Music Reviews”, etc.</li>
+<li><p>Based on the top 10 words, what would you call this topic?</p></li>
+<li><p>Examples: “Fan Discussions”, “Artist News”, “Music Reviews”, etc.</p></li>
 </ul></li>
 </ol>
 <p><strong>What makes a good topic?</strong></p>
@@ -2031,16 +2030,16 @@ Weighting          : term frequency (tf)
 <p><img src="bigdata_L9-github_files/figure-gfm/unnamed-chunk-23-1.png" class="img-fluid"><!-- --></p>
 <p><strong>Interpreting the visualization:</strong></p>
 <ul>
-<li><strong>Each panel</strong> shows one topic (1-5)</li>
-<li><strong>Longer bars</strong> = higher probability in that topic</li>
-<li><strong>Y-axis</strong> shows the top 10 words for that topic</li>
-<li><strong>X-axis</strong> shows the beta value (word probability)</li>
+<li><p><strong>Each panel</strong> shows one topic (1-5)</p></li>
+<li><p><strong>Longer bars</strong> = higher probability in that topic</p></li>
+<li><p><strong>Y-axis</strong> shows the top 10 words for that topic</p></li>
+<li><p><strong>X-axis</strong> shows the beta value (word probability)</p></li>
 </ul>
 <p><strong>What to look for:</strong></p>
 <ol type="1">
-<li><strong>Clear themes</strong>: Do the words in each panel make sense together?</li>
-<li><strong>Distinct topics</strong>: Are the words different across panels?</li>
-<li><strong>Probability distribution</strong>: Are the beta values concentrated (few dominant words) or spread out (many equally important words)?</li>
+<li><p><strong>Clear themes</strong>: Do the words in each panel make sense together?</p></li>
+<li><p><strong>Distinct topics</strong>: Are the words different across panels?</p></li>
+<li><p><strong>Probability distribution</strong>: Are the beta values concentrated (few dominant words) or spread out (many equally important words)?</p></li>
 </ol>
 <p>Let’s examine what each topic represents based on its top words:</p>
 <p><strong>Topic 1 (Red)</strong>: <em>Music Appreciation &amp; Emotional Responses</em></p>
@@ -2163,24 +2162,27 @@ Weighting          : term frequency (tf)
 <span id="cb96-14"><a href="#cb96-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb96-15"><a href="#cb96-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><img src="bigdata_L9-github_files/figure-gfm/unnamed-chunk-25-1.png" class="img-fluid"><!-- --></p>
-<p><strong>Interpretation:</strong></p>
 <p><strong>Left side (Topic 1 - Music Appreciation):</strong></p>
 <ul>
 <li><p><strong>Music content</strong>: “song”, “album”, “songs”, “track”</p></li>
 <li><p><strong>Audio/visual media</strong>: “sound”, “sounds”, “video”, “movie”</p></li>
 <li><p><strong>Consumption verbs</strong>: “watch”, “wait”, “full”</p></li>
 <li><p><strong>Positive reactions</strong>: “happy”, “great”</p></li>
-<li><p><strong>Performance</strong>: “live”, “bit”</p></li>
+<li><p><strong>Performance</strong>: “live”, “bit”</p>
+<ul>
+<li>Pattern: Words about <strong>consuming and responding to K-pop content</strong></li>
+</ul></li>
 </ul>
-<p>Pattern: Words about <strong>consuming and responding to K-pop content</strong></p>
 <p><strong>Right side (Topic 2 - Fan Discussions):</strong></p>
 <ul>
 <li><p><strong>Community references</strong>: “people”, “fans”</p></li>
 <li><p><strong>Action/causation</strong>: “make”, “makes”, “making”, “give”, “work”</p></li>
 <li><p><strong>Temporal references</strong>: “time”, “happened”, “remember”, “wanted”</p></li>
-<li><p><strong>Evaluation</strong>: “bad”, “sense”, “literally”, “things”</p></li>
+<li><p><strong>Evaluation</strong>: “bad”, “sense”, “literally”, “things”</p>
+<ul>
+<li>Pattern: Words about <strong>reasoning, explaining, and discussing events in the community</strong></li>
+</ul></li>
 </ul>
-<p>Pattern: Words about <strong>reasoning, explaining, and discussing events in the community</strong></p>
 <p><strong>What Research Questions Does This Answer?</strong></p>
 <ol type="1">
 <li><p><strong>How do K-pop fans discuss different aspects of the fandom?</strong></p>
@@ -2204,7 +2206,7 @@ Weighting          : term frequency (tf)
 <li><p><strong>Analytical dimension</strong> (Topic 2): Reasoning about community events and behaviors</p></li>
 </ul></li>
 </ol>
-<p><strong>Key Insight:</strong></p>
+<p>For example:</p>
 <p>Topic 1 is about <strong>“what I’m experiencing”</strong> (sensory, emotional, immediate)</p>
 <p>Topic 2 is about <strong>“what’s happening/why”</strong> (analytical, causal, reflective)</p>
 <p>This distinction reveals two modes of K-pop fan engagement: consumption and critical discussion.</p>
@@ -2296,39 +2298,40 @@ Weighting          : term frequency (tf)
 <li><p>Taller bars = topic is more dominant in that comment</p></li>
 <li><p>Y-axis goes up to 0.5 (50% probability)</p></li>
 </ul>
-<p><strong>Key Observations:</strong></p>
-<p><strong>Documents with clear dominant topics:</strong></p>
+<p><strong>What do we see?</strong></p>
+<ul>
+<li><p><strong>Documents with clear dominant topics:</strong></p>
 <ul>
 <li><p><strong>Document 2</strong>: Topic 3 (Rules) ~44% - likely a moderator removal message</p></li>
 <li><p><strong>Document 3</strong>: Topic 3 (Rules) ~39% - another rule-related post</p></li>
 <li><p><strong>Document 5</strong>: Topic 3 (Rules) ~40% - rule discussion or removal</p></li>
 <li><p><strong>Document 9</strong>: Topic 3 (Rules) ~48% - strongest single-topic focus!</p></li>
-</ul>
-<p><strong>Documents with balanced/mixed topics:</strong></p>
+</ul></li>
+<li><p><strong>Documents with balanced/mixed topics:</strong></p>
 <ul>
 <li><p><strong>Documents 1, 4, 6, 7, 8, 10</strong>: All show relatively even distribution across 5 topics (~20% each)</p></li>
 <li><p>This represents comments that touch on multiple themes</p></li>
-</ul>
-<p><strong>Why is Topic 3 so dominant in some documents?</strong></p>
-<p>Remember, Topic 3 is about <strong>subreddit rules and moderation</strong>. Documents 2, 3, 5, and 9 likely contain:</p>
+</ul></li>
+<li><p><strong>Why is Topic 3 so dominant in some documents?</strong></p>
+<ul>
+<li><p>Remember, Topic 3 is about <strong>subreddit rules and moderation</strong>. Documents 2, 3, 5, and 9 likely contain:</p>
 <ul>
 <li><p>Moderator removal messages (“Your post has been removed…”)</p></li>
 <li><p>Rule clarification discussions</p></li>
 <li><p>Meta-discussions about subreddit guidelines</p></li>
-</ul>
-<p>These are formulaic, repetitive texts that cluster tightly together.</p>
-<p><strong>Why are most other documents balanced?</strong></p>
-<p>Real K-pop discussions often blend themes: - Discussing a <strong>group’s comeback</strong> (Topic 4) while praising the <strong>music</strong> (Topic 1)</p>
+</ul></li>
+<li><p>These are formulaic, repetitive texts that cluster tightly together.</p></li>
+</ul></li>
+<li><p><strong>Why are most other documents balanced?</strong></p>
 <ul>
+<li><p>Real K-pop discussions often blend themes:</p>
+<ul>
+<li><p>Discussing a <strong>group’s comeback</strong> (Topic 4) while praising the <strong>music</strong> (Topic 1)</p></li>
 <li><p>Talking about <strong>fans’ reactions</strong> (Topic 2) to the <strong>HYBE controversy</strong> (Topic 5)</p></li>
 <li><p>Sharing <strong>personal opinions</strong> about <strong>groups and songs</strong> (Topics 1, 2, 4 mixed)</p></li>
+</ul></li>
+</ul></li>
 </ul>
-<p><strong>Research implications:</strong></p>
-<ol type="1">
-<li><p><strong>Automated content filtering</strong>: Documents with &gt;40% Topic 3 are likely mod messages, could be filtered out for analysis</p></li>
-<li><p><strong>Discourse complexity</strong>: Most organic fan discussions are multi-topical</p></li>
-<li><p><strong>Topic purity varies</strong>: Administrative content (rules) is more “pure,” while fan discussions blend themes</p></li>
-</ol>
 <hr>
 </section>
 <section id="finding-representative-documents-for-each-topic" class="level3">
@@ -2391,21 +2394,22 @@ Weighting          : term frequency (tf)
 ## 2     1     8633 0.677 "3 tracks in WHAT IS OPTIONS?? Sorry for overlooking you…
 ## 3     1    16256 0.656 "i've listened to the album a few times now and have gat…</code></pre>
 <p><strong>Topic 1 (Music Appreciation) - Top Documents:</strong></p>
-<p><strong>What we see:</strong> All three documents are <strong>detailed album reviews</strong> with track-by-track analysis:</p>
+<ul>
+<li><p><strong>What we see:</strong> All three documents are <strong>detailed album reviews</strong> with track-by-track analysis:</p>
 <ul>
 <li><p>Document 8509 (γ=0.768): TWICE album review covering all 14 tracks</p></li>
 <li><p>Document 8633 (γ=0.677): Another TWICE album review, track-by-track</p></li>
 <li><p>Document 16256 (γ=0.656): TXT album review analyzing 8 tracks</p></li>
-</ul>
-<p><strong>Validation of Topic 1:</strong></p>
-<ul>
+</ul></li>
 <li><p>Heavy focus on musical elements: “instrumental,” “synths,” “chorus,” “bridge,” “vocals”</p></li>
 <li><p>Emotional/evaluative language: “love,” “great,” “pretty,” “beautiful,” “amazing”</p></li>
 <li><p>Personal reactions: “I love,” “I like,” “this stood out to me”</p></li>
-<li><p>Minimal mention of: industry drama, fans, groups as entities (focus is on the music itself)</p></li>
+<li><p>Minimal mention of: industry drama, fans, groups as entities (focus is on the music itself)</p>
+<ul>
+<li><strong>Example quote:</strong> <em>“love the synths at the start, already giving a nice retro vibe and then the percussion comes in and really sells the whole vibe”</em></li>
+</ul></li>
+<li><p>This is <strong>exactly</strong> what Topic 1 should capture: individual listeners describing their sensory and emotional experience with music.</p></li>
 </ul>
-<p><strong>Example quote:</strong> <em>“love the synths at the start, already giving a nice retro vibe and then the percussion comes in and really sells the whole vibe”</em></p>
-<p>This is <strong>exactly</strong> what Topic 1 should capture: individual listeners describing their sensory and emotional experience with music.</p>
 <p>Let’s examine what a “pure” music appreciation comment looks like.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View Topic 2 (Fan Discussions) examples</span></span>
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>top_docs_with_text <span class="sc">|&gt;</span> </span>
@@ -2420,31 +2424,26 @@ Weighting          : term frequency (tf)
 ## 2     2     2102 0.447 "exactly, ppl just get so excited any time there's a new…
 ## 3     2      899 0.432 "When I said coerced I meant hiding their dating life or…</code></pre>
 <p><strong>Topic 2 (Fan Discussions) - Top Documents:</strong></p>
-<p><strong>What we see:</strong> All three are <strong>analytical discussions about fan behavior and K-pop culture:</strong></p>
+<ul>
+<li><p><strong>What we see:</strong> All three are <strong>analytical discussions about fan behavior and K-pop culture:</strong></p>
 <ul>
 <li><p>Document 19526 (γ=0.449): ILLIT/LSF hate, JungKook’s involvement, fan reactions to controversy</p></li>
 <li><p>Document 2102 (γ=0.447): Patterns of idol hate/bullying, Haknyeon case, international vs Korean fans</p></li>
 <li><p>Document 899 (γ=0.432): Fan policing vs.&nbsp;checking behavior, multiple idol examples (NewJeans, Suga, Irene)</p></li>
-</ul>
-<p><strong>Validation of Topic 2:</strong></p>
-<ul>
+</ul></li>
 <li><p>Focus on <strong>people and fans</strong>: “fans feel like,” “people get so excited,” “fans police”</p></li>
 <li><p>Causal reasoning: “because,” “that’s why,” “made me upset that”</p></li>
 <li><p>Community analysis: discussing <strong>how</strong> and <strong>why</strong> fans behave</p></li>
 <li><p>Multiple examples: references to many different idols/groups as evidence</p></li>
-<li><p>Meta-commentary: analyzing K-pop fandom dynamics itself</p></li>
-</ul>
-<p><strong>Example quotes:</strong></p>
+<li><p>Meta-commentary: analyzing K-pop fandom dynamics itself</p>
+<ul>
+<li><p><strong>Example quotes:</strong></p>
 <ul>
 <li><p><em>“ppl just get so excited any time there’s a new idol that it becomes acceptable to hate and bully”</em></p></li>
 <li><p><em>“I just hope Illit gets the justice they deserve because I still can’t believe what they’ve had to gone through”</em></p></li>
+</ul></li>
+</ul></li>
 </ul>
-<p><strong>Contrast with Topic 1:</strong></p>
-<ul>
-<li><p><strong>Topic 1</strong>: “I love this song” (personal sensory/emotional response)</p></li>
-<li><p><strong>Topic 2</strong>: “fans think this happened because…” (collective analysis/reasoning)</p></li>
-</ul>
-<p>This is <strong>exactly</strong> what Topic 2 should capture: fans discussing and analyzing the community, behaviors, and cultural dynamics rather than the music content itself.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View Topic 3 (Rules/Moderation) examples</span></span>
 <span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>top_docs_with_text <span class="sc">|&gt;</span> </span>
 <span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
@@ -2458,21 +2457,21 @@ Weighting          : term frequency (tf)
 ## 2     3     2888 0.728 "Hey u/DaGayEnby, thank you for submitting to r/kpop! Un…
 ## 3     3     3856 0.728 "Hey u/calikim_mo, thank you for submitting to r/kpop! U…</code></pre>
 <p><strong>Topic 3 (Rules/Moderation) - Top Documents:</strong></p>
-<p><strong>What we see:</strong> All three are <strong>identical automated moderator removal messages:</strong></p>
+<ul>
+<li><p><strong>What we see:</strong> All three are <strong>identical automated moderator removal messages:</strong></p>
 <ul>
 <li><p>Document 3842 (γ=0.732): Removal message to user Fun-Home-605</p></li>
 <li><p>Document 2888 (γ=0.728): Removal message to user DaGayEnby</p></li>
 <li><p>Document 3856 (γ=0.728): Removal message to user calikim_mo</p></li>
-</ul>
-<p><strong>Validation of Topic 3:</strong></p>
-<ul>
+</ul></li>
 <li><p><strong>Formulaic structure</strong>: “Hey u/[username], thank you for submitting to r/kpop! Unfortunately…”</p></li>
 <li><p><strong>Rule vocabulary</strong>: “submission has been removed,” “rules,” “modmail,” “refer to the rules”</p></li>
 <li><p><strong>Repetitive content</strong>: Exact same bullet-pointed list of r/kpoppers content types</p></li>
 <li><p><strong>Administrative language</strong>: “locked,” “send a modmail,” “please refer to”</p></li>
 <li><p><strong>Zero musical/fan discussion content</strong>: These are pure meta-subreddit administration</p></li>
+<li><p><strong>Example structure:</strong></p></li>
 </ul>
-<p><strong>Example structure:</strong></p>
+<!-- -->
 <pre><code>1. Greeting + removal notice
 2. Reason for removal ("Casual or Fan-Made content")
 3. Alternative subreddit suggestion (r/kpoppers)
@@ -2480,7 +2479,7 @@ Weighting          : term frequency (tf)
 5. Closing instructions (modmail, rules link)</code></pre>
 <p><strong>Why gamma is so high (&gt;0.72):</strong></p>
 <p>These documents are <strong>nearly identical copies</strong> of each other, using the exact same template. They form a tight cluster of purely administrative text with minimal vocabulary overlap with organic discussions.</p>
-<p><strong>Research implications:</strong></p>
+<p><em>What can we do?</em></p>
 <ul>
 <li><p>Documents with high Topic 3 gamma should be <strong>filtered out</strong> for analyses of fan discourse</p></li>
 <li><p>Easy to identify: Look for “Thank you for submitting” or author=“kpop-ModTeam”</p></li>
@@ -2499,40 +2498,30 @@ Weighting          : term frequency (tf)
 ## 2     4    17376 0.563 "This is a girl band group that debuted in 2023, surpass…
 ## 3     4     6860 0.547 "You need two recommendations from academy members to ap…</code></pre>
 <p><strong>Topic 4 (Groups/Industry) - Top Documents:</strong></p>
-<p><strong>What we see:</strong> All three focus on <strong>groups’ industry achievements, requirements, and metrics:</strong></p>
+<ul>
+<li><p><strong>What we see:</strong> All three focus on <strong>groups’ industry achievements, requirements, and metrics:</strong></p>
 <ul>
 <li><p>Document 13877 (γ=0.728): KATSEYE Grammy Academy membership requirements (detailed criteria)</p></li>
 <li><p>Document 10133 (γ=0.622): Korean girl band’s chart performance, awards, concerts (MMA, MAMA, KCON)</p></li>
 <li><p>Document 7389 (γ=0.612): HYBE groups’ Grammy membership eligibility (BTS, Bang PD)</p></li>
-</ul>
-<p><strong>Validation of Topic 4:</strong></p>
-<ul>
+</ul></li>
 <li><p>*Groups as entities**: KATSEYE, BTS, (G)I-DLE, IZ*ONE, band groups</p></li>
 <li><p>*Industry metrics**: “chart,” “awards,” “debut,” “streaming stats,” “touring dates”</p></li>
 <li><p><strong>Business language</strong>: “requirements,” “commercially distributed,” “academy membership,” “credits”</p></li>
 <li><p><strong>Achievement focus</strong>: “won awards,” “topped music shows,” “3-day concert,” “#1 spot”</p></li>
-<li><p><strong>Temporal framing</strong>: “debuted in 2023,” “4th generation,” “less than two years after debut”</p></li>
-</ul>
-<p><strong>Example quotes:</strong></p>
+<li><p><strong>Temporal framing</strong>: “debuted in 2023,” “4th generation,” “less than two years after debut”</p>
 <ul>
+<li><p><strong>Example quotes:</strong></p></li>
 <li><p><em>“Twelve commercially distributed, verifiable credits in a single creative profession”</em></p></li>
 <li><p><em>“no 4th or 5th generation girl group has ever held a 3-day concert at the Handball Gymnasium”</em></p></li>
 <li><p><em>“They even topped music shows three times without ever appearing on them”</em></p></li>
+</ul></li>
 </ul>
 <p><strong>Contrast with other topics:</strong></p>
 <ul>
 <li><p><strong>Topic 1</strong>: “I love the instrumental” (music appreciation)</p></li>
 <li><p><strong>Topic 2</strong>: “fans think this because…” (community analysis)</p></li>
 <li><p><strong>Topic 4</strong>: “This group achieved X metric” (industry performance)</p></li>
-</ul>
-<p><strong>Why this vocabulary appears:</strong></p>
-<p>Top words for Topic 4 were: <strong>group, music, groups, year, years, time, show, bts, big, debut</strong></p>
-<p>All three documents heavily use these terms to discuss groups’ careers, timelines, and achievements.</p>
-<p><strong>Research implications:</strong></p>
-<ul>
-<li><p>Topic 4 captures <strong>structural/factual</strong> discussions about K-pop industry</p></li>
-<li><p>Focus on measurable success indicators</p></li>
-<li><p>Groups discussed as <strong>professional entities</strong> rather than artistic creators or fan objects</p></li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View Topic 5 (HYBE-ADOR) examples</span></span>
 <span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>top_docs_with_text <span class="sc">|&gt;</span> </span>
@@ -2547,51 +2536,25 @@ Weighting          : term frequency (tf)
 ## 2     5    17958 0.827 "This is the summary of the hearing today by Daily Sport…
 ## 3     5    11269 0.824 "This is by Newsen.\n\n[**[Official] HYBE Responds to De…</code></pre>
 <p><strong>Topic 5 (HYBE-ADOR) - Top Documents:</strong></p>
-<p><strong>What we see:</strong> All three are <strong>detailed legal updates about the HYBE-ADOR-NewJeans court case:</strong></p>
+<ul>
+<li><p><strong>What we see:</strong> All three are <strong>detailed legal updates about the HYBE-ADOR-NewJeans court case:</strong></p>
 <ul>
 <li><p>Document 6237 (γ=0.612): ADOR’s court arguments claiming Min Heejin orchestrated contract termination</p></li>
 <li><p>Document 6259 (γ=0.610): Full hearing summary of both sides’ arguments, court mediation</p></li>
 <li><p>Document 5935 (γ=0.604): HYBE’s official statement about appealing Min Heejin’s non-prosecution</p></li>
-</ul>
-<p><strong>Validation of Topic 5:</strong></p>
-<ul>
+</ul></li>
 <li><p><strong>Key entities</strong>: HYBE, ADOR, Min Hee-jin (MHJ), NewJeans, ILLIT mentioned repeatedly</p></li>
 <li><p><strong>Legal terminology</strong>: “exclusive contract,” “breach of trust,” “provisional injunction,” “court,” “lawsuit”</p></li>
 <li><p><strong>Specific case details</strong>: “KakaoTalk messages,” “contract termination,” “corrective response,” “30-day retention period”</p></li>
 <li><p><strong>Timeline references</strong>: “April last year,” “last March,” “July 15,” “NewJeans’ termination”</p></li>
 <li><p><strong>Multiple parties’ perspectives</strong>: ADOR’s claims vs.&nbsp;NewJeans’ claims vs.&nbsp;HYBE’s statements</p></li>
-</ul>
-<p><strong>Example quotes:</strong></p>
+<li><p><strong>Example quotes:</strong></p>
 <ul>
 <li><p><em>“Min Hee-jin was behind NewJeans’ termination of the exclusive contract from start to finish”</em></p></li>
 <li><p><em>“The ADOR we trusted and signed contracts with no longer exists”</em></p></li>
 <li><p><em>“the appellate court ruled that former CEO Min is ‘intentionally undermining the integrated structure’”</em></p></li>
+</ul></li>
 </ul>
-<p><strong>Why this is Topic 5:</strong></p>
-<p>Top words were: <strong>hybe, mhj, newjeans, ador, case, illit, contract, side, court, members</strong></p>
-<p>All three documents are saturated with these exact terms in legal/business contexts.</p>
-<p><strong>Contrast with other topics:</strong></p>
-<ul>
-<li><p><strong>Topic 1</strong>: Music appreciation (“I love the song”)</p></li>
-<li><p><strong>Topic 2</strong>: Fan community analysis (“fans think…”)</p></li>
-<li><p><strong>Topic 4</strong>: General industry achievements (“group won awards”)</p></li>
-<li><p><strong>Topic 5</strong>: Specific ongoing legal controversy (proper nouns, legal terms, court proceedings)</p></li>
-</ul>
-<p><strong>Research implications:</strong></p>
-<ul>
-<li><p>Topic 5 is <strong>time-specific</strong> to July 2024 controversy</p></li>
-<li><p>May not generalize to other time periods</p></li>
-<li><p>Captures how major industry conflicts dominate discourse</p></li>
-<li><p>Shows LDA can identify <strong>event-driven topics</strong> alongside structural ones</p></li>
-</ul>
-<p><strong>Document characteristics:</strong></p>
-<ul>
-<li><p>Extremely long (1000+ words typical)</p></li>
-<li><p>Translation disclaimers (Korean legal documents)</p></li>
-<li><p>Formal news article structure</p></li>
-<li><p>Heavy quotation of official statements</p></li>
-</ul>
-<hr>
 <hr>
 </section>
 <section id="summary-of-representative-documents" class="level3">
@@ -2726,21 +2689,16 @@ Weighting          : term frequency (tf)
 <li><p>If top documents didn’t match topic interpretations, we’d need to retrain</p></li>
 <li><p>Perfect alignment means K=5 captures meaningful structure</p></li>
 </ul>
-<p><strong>2. Enables filtering:</strong></p>
-<ul>
-<li><p>Can remove Topic 3 documents (gamma &gt; 0.7) for analysis of organic discourse</p></li>
-<li><p>Can identify event-specific content (Topic 5) vs.&nbsp;structural patterns (Topics 1, 2, 4)</p></li>
-</ul>
-<p><strong>3. Supports coding/annotation:</strong></p>
+<p><strong>2. Supports coding/annotation:</strong></p>
 <ul>
 <li><p>High-gamma documents are perfect training examples</p></li>
 <li><p>Can use for manual content analysis or supervised learning</p></li>
 </ul>
-<p><strong>4. Reveals discourse patterns:</strong></p>
+<p><strong>3. Reveals discourse patterns:</strong></p>
 <ul>
 <li><p>Topic 1 and 3: Highly focused (album reviews, admin messages)</p></li>
 <li><p>Topic 2: Naturally multifaceted (fan discussions blend themes)</p></li>
-<li><p>Topic 5: Event-driven (July 2024 specific)</p></li>
+<li><p>Topic 5: Event-driven</p></li>
 </ul>
 <p><strong>Limitations to note:</strong></p>
 <p><strong>1. Sample bias:</strong> We only looked at top 3 documents per topic</p>
@@ -2750,7 +2708,7 @@ Weighting          : term frequency (tf)
 </ul>
 <p><strong>2. Time specificity:</strong> Topic 5 (HYBE) is July 2025-specific</p>
 <ul>
-<li><p>Wouldn’t appear in data from other months/years</p></li>
+<li><p>Maybe wouldn’t appear in data from other months/years</p></li>
 <li><p>Shows how LDA captures temporal events alongside structural patterns</p></li>
 </ul>
 <p><strong>3. Template text dominates:</strong> Topic 3 has artificially high gamma</p>
