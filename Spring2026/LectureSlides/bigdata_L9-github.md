@@ -131,7 +131,7 @@ show.
 
 ``` r
 # Load the data
-data <- read_csv("kpop_comments_forclass.csv")
+data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/kpop_comments_forclass.csv")
 
 # Check structure
 str(data)
@@ -949,7 +949,7 @@ start_time <- Sys.time()
 cat("Starting at:", format(start_time, "%H:%M:%S"), "\n")
 ```
 
-    ## Starting at: 16:52:31
+    ## Starting at: 10:17:07
 
 ``` r
 result <- ldatuning::FindTopicsNumber(
@@ -972,13 +972,13 @@ end_time <- Sys.time()
 cat("Finished at:", format(end_time, "%H:%M:%S"), "\n")
 ```
 
-    ## Finished at: 16:53:51
+    ## Finished at: 10:18:20
 
 ``` r
 cat("Total time:", round(difftime(end_time, start_time, units = "mins"), 2), "minutes\n")
 ```
 
-    ## Total time: 1.34 minutes
+    ## Total time: 1.22 minutes
 
 ``` r
 ldatuning::FindTopicsNumber_plot(result)
@@ -1148,8 +1148,8 @@ gc()
 ```
 
     ##           used  (Mb) gc trigger   (Mb) limit (Mb)  max used   (Mb)
-    ## Ncells 3269735 174.7    5410774  289.0         NA   5410774  289.0
-    ## Vcells 8790307  67.1  138689369 1058.2      36864 173357661 1322.7
+    ## Ncells 3272408 174.8    5418458  289.4         NA   5418458  289.4
+    ## Vcells 8794120  67.1  138693032 1058.2      36864 173366174 1322.7
 
 ``` r
 # Check what we have left
@@ -1182,7 +1182,7 @@ print(paste("Training LDA model with K=5..."))
 print(paste("Start time:", format(start_time, "%H:%M:%S")))
 ```
 
-    ## [1] "Start time: 16:53:51"
+    ## [1] "Start time: 10:18:20"
 
 ``` r
 lda_model_k5 <- LDA(
@@ -1212,13 +1212,13 @@ end_time <- Sys.time()
 print(paste("Finished at:", format(end_time, "%H:%M:%S")))
 ```
 
-    ## [1] "Finished at: 16:54:11"
+    ## [1] "Finished at: 10:18:40"
 
 ``` r
 print(paste("Total time:", round(difftime(end_time, start_time, units = "mins"), 2), "minutes"))
 ```
 
-    ## [1] "Total time: 0.33 minutes"
+    ## [1] "Total time: 0.32 minutes"
 
 **What do these parameters mean?**
 
@@ -1289,7 +1289,7 @@ str(lda_model_k5)
     ##   .. .. ..@ alpha        : num 10
     ##   .. .. ..@ seed         : int 42
     ##   .. .. ..@ verbose      : int 500
-    ##   .. .. ..@ prefix       : chr "/var/folders/1n/8wbl6_f51tz27s0119qcsfyh0000gq/T//Rtmpv4Jlwh/filec1c356174180"
+    ##   .. .. ..@ prefix       : chr "/var/folders/1n/8wbl6_f51tz27s0119qcsfyh0000gq/T//RtmpqP1E8x/file7e8c1aae38e6"
     ##   .. .. ..@ save         : int 0
     ##   .. .. ..@ nstart       : int 1
     ##   .. .. ..@ best         : logi TRUE

@@ -842,7 +842,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="load-the-data">2.1 Load the Data</h3>
 <p>We’ll use Reddit comments about K-pop Demon Hunters. This dataset contains community discussions, reactions, and conversations about the show.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"kpop_comments_forclass.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/kpop_comments_forclass.csv"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check structure</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1533,7 +1533,7 @@ Weighting          : term frequency (tf)
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: This takes several minutes to run!</span></span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Starting at:"</span>, <span class="fu">format</span>(start_time, <span class="st">"%H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## Starting at: 16:52:31</code></pre>
+<pre><code>## Starting at: 10:17:07</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> ldatuning<span class="sc">::</span><span class="fu">FindTopicsNumber</span>(</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  tidy_dfm,</span>
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">topics =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">20</span>, <span class="at">by =</span> <span class="dv">1</span>),</span>
@@ -1548,9 +1548,9 @@ Weighting          : term frequency (tf)
 ##   Deveaud2014... done.</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Finished at:"</span>, <span class="fu">format</span>(end_time, <span class="st">"%H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## Finished at: 16:53:51</code></pre>
+<pre><code>## Finished at: 10:18:20</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total time:"</span>, <span class="fu">round</span>(<span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"mins"</span>), <span class="dv">2</span>), <span class="st">"minutes</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## Total time: 1.34 minutes</code></pre>
+<pre><code>## Total time: 1.22 minutes</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>ldatuning<span class="sc">::</span><span class="fu">FindTopicsNumber_plot</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><img src="bigdata_L9-github_files/figure-gfm/unnamed-chunk-16-1.png" class="img-fluid"><!-- --></p>
 </section>
@@ -1692,8 +1692,8 @@ Weighting          : term frequency (tf)
 <span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Run garbage collection to free up memory</span></span>
 <span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>##           used  (Mb) gc trigger   (Mb) limit (Mb)  max used   (Mb)
-## Ncells 3269735 174.7    5410774  289.0         NA   5410774  289.0
-## Vcells 8790307  67.1  138689369 1058.2      36864 173357661 1322.7</code></pre>
+## Ncells 3272408 174.8    5418458  289.4         NA   5418458  289.4
+## Vcells 8794120  67.1  138693032 1058.2      36864 173366174 1322.7</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check what we have left</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Remaining objects in workspace:"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Remaining objects in workspace:"</code></pre>
@@ -1709,7 +1709,7 @@ Weighting          : term frequency (tf)
 <span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Training LDA model with K=5..."</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>## [1] "Training LDA model with K=5..."</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Start time:"</span>, <span class="fu">format</span>(start_time, <span class="st">"%H:%M:%S"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] "Start time: 16:53:51"</code></pre>
+<pre><code>## [1] "Start time: 10:18:20"</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>lda_model_k5 <span class="ot">&lt;-</span> <span class="fu">LDA</span>(</span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  tidy_dfm, </span>
 <span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">5</span>, </span>
@@ -1731,9 +1731,9 @@ Weighting          : term frequency (tf)
 ## Gibbs sampling completed!</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Finished at:"</span>, <span class="fu">format</span>(end_time, <span class="st">"%H:%M:%S"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] "Finished at: 16:54:11"</code></pre>
+<pre><code>## [1] "Finished at: 10:18:40"</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Total time:"</span>, <span class="fu">round</span>(<span class="fu">difftime</span>(end_time, start_time, <span class="at">units =</span> <span class="st">"mins"</span>), <span class="dv">2</span>), <span class="st">"minutes"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>## [1] "Total time: 0.33 minutes"</code></pre>
+<pre><code>## [1] "Total time: 0.32 minutes"</code></pre>
 <p><strong>What do these parameters mean?</strong></p>
 <ul>
 <li><p><code>k = 5</code>: Number of topics (based on our coherence analysis)</p></li>
@@ -1784,7 +1784,7 @@ Weighting          : term frequency (tf)
 ##   .. .. ..@ alpha        : num 10
 ##   .. .. ..@ seed         : int 42
 ##   .. .. ..@ verbose      : int 500
-##   .. .. ..@ prefix       : chr "/var/folders/1n/8wbl6_f51tz27s0119qcsfyh0000gq/T//Rtmpv4Jlwh/filec1c356174180"
+##   .. .. ..@ prefix       : chr "/var/folders/1n/8wbl6_f51tz27s0119qcsfyh0000gq/T//RtmpqP1E8x/file7e8c1aae38e6"
 ##   .. .. ..@ save         : int 0
 ##   .. .. ..@ nstart       : int 1
 ##   .. .. ..@ best         : logi TRUE

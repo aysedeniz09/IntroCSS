@@ -146,7 +146,7 @@ show.
 
 ```{r}
 # Load the data
-data <- read_csv("kpop_comments_forclass.csv")
+data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/kpop_comments_forclass.csv")
 
 # Check structure
 str(data)
@@ -972,7 +972,7 @@ print(paste("Total time:", round(difftime(end_time, start_time, units = "mins"),
 Before continuing, it's a good idea to save your workspace. LDA models
 take time to train, so you don't want to lose your work!
 
-```{r}
+```{r, eval=FALSE}
 # Save the entire workspace
 save.image("../data/Lecture9_LDA_k5.RData")
 
