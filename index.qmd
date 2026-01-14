@@ -14,7 +14,6 @@ As researchers, we now have various big data and tools to learn about human beha
 **Instructor:** Dr. Ayse D. Lokmanoglu  
 **Email:** [alokman@bu.edu](mailto:alokman@bu.edu)  
 **Office Hours:** Wednesdays 10:00 am - 1:30 pm  
-**[Office Hours Sign-up Link](https://github.com/aysedeniz09/IntroCSS)**
 
 **Teaching Assistant:** Max Wong, [maxwong@bu.edu](mailto:maxwong@bu.edu)
 

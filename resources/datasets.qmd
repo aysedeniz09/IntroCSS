@@ -4,8 +4,232 @@ title: "Datasets"
 
 ## Course Datasets
 
-List of datasets used in this course.
+This page lists all datasets used in the Introduction to Computational Social Science course, organized by lecture and purpose.
 
-## Where to Find Data
+### Core Course Datasets (Required)
 
-Resources for finding data for your projects.
+These datasets are stored in the course's `/data` folder and are essential for completing course exercises.
+
+#### 1. K-pop Reddit Comments (`kpop_comments_forclass.csv`)
+**Used in:** Lecture 9 (Topic Modeling with LDA)
+
+**Description:** A collection of Reddit comments from K-pop related subreddits, used for unsupervised machine learning and topic modeling exercises.
+
+**Variables:**
+- `comment_id`: Unique identifier for each comment
+- `text`: Comment content
+- `date`: Date the comment was posted
+- `score`: Reddit upvote/downvote score
+- `author`: Reddit username
+- `text_length`: Character count of comment
+
+**Source:** https://arctic-shift.photon-reddit.com/
+
+**Loading the data:**
+
+```r
+# From GitHub repository
+kpop_data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/kpop_comments_forclass.csv")
+
+# From local data folder
+kpop_data <- read_csv("data/kpop_comments_forclass.csv")
+```
+
+---
+
+#### 2. LDA Model Workspace (`Lecture9_LDA_k5.RData`)
+**Used in:** Lecture 10 (Sentiment Analysis on Topic Models)
+
+**Description:** A saved R workspace containing the trained Latent Dirichlet Allocation (LDA) topic model with K=5 topics from Lecture 9, along with preprocessed data and document-term matrices.
+
+**Contents:**
+- `lda_model_k5`: Trained LDA model (5 topics)
+- `data`: Original Reddit comment data
+- `data2`: Cleaned comment data
+- `data3`: Final processed data
+- `tidy_dfm`: Document-term matrix
+- `mystopwords`: Custom stopwords list
+
+**Loading the workspace:**
+
+```r
+# From GitHub repository
+load(url("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/Lecture9_LDA_k5.RData"))
+
+# From local data folder
+load("data/Lecture9_LDA_k5.RData")
+```
+
+---
+
+#### 3. Music Lyrics Dataset (`lyricsDror.csv`)
+
+**Used in:** Lecture 11 (Predictive Modeling & Machine Learning)
+
+**Description:** Song lyrics from Country and Hip Hop genres, used for text classification and predictive modeling. This dataset became famous in the debate over Lil Nas X's "Old Town Road" genre classification.
+
+**Variables:**
+- `index`: Unique song identifier
+- `song`: Song title
+- `year`: Year of release
+- `artist`: Artist name
+- `genre`: Music genre (Country or HipHop)
+- `text`: Full song lyrics
+
+**Size:** 51,251 songs
+
+**Source:** Dror Walter, Intro CSS Class GSU
+
+**Loading the data:**
+
+```r
+# From GitHub repository
+lyrics <- read_csv("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/lyricsDror.csv")
+
+# From local data folder
+lyrics <- read_csv("data/lyricsDror.csv")
+```
+
+---
+
+#### 4. College Communication Network (`CollegeMsg.txt`)
+
+**Used in:** Lecture 12 (Network Analysis)
+
+**Description:** Private messages sent on an online platform between UC Irvine students over 193 days in 2004. Used for network analysis and visualization exercises.
+
+**Format:** Tab-separated text file
+
+**Variables:**
+- Column 1: `sender` - User ID of message sender
+- Column 2: `receiver` - User ID of message receiver  
+- Column 3: `timestamp` - Unix timestamp of message
+
+**Network Statistics:**
+- Nodes: 1,899 students
+- Edges: 20,296 messages
+- Time period: 193 days (April-October 2004)
+
+**Source:** [Stanford SNAP Dataset](https://snap.stanford.edu/data/CollegeMsg.html)
+
+**Citation:** Panzarasa, P., Opsahl, T., & Carley, K. M. (2009). Patterns and dynamics of users' behavior and interaction: Network analysis of an online community. *Journal of the American Society for Information Science and Technology*, 60(5), 911-932.
+
+**Loading the data:**
+
+```r
+# From GitHub repository
+college_msg <- read.table(
+  "https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/CollegeMsg.txt",
+  header = FALSE,
+  col.names = c("sender", "receiver", "timestamp")
+)
+
+# From local data folder
+college_msg <- read.table("data/CollegeMsg.txt", header = FALSE,
+                          col.names = c("sender", "receiver", "timestamp"))
+```
+
+---
+
+#### 5. Student Lifestyle Dataset (`student_lifestyle_dataset.csv`)
+
+**Used in:** Lectures 5 & 6 (Descriptive Statistics & Regression)
+
+**Description:** Synthetic dataset containing information about student lifestyles, academic performance, and wellbeing metrics. Used for teaching descriptive statistics, hypothesis testing, and regression modeling.
+
+**Variables:**
+- `Student_ID`: Unique identifier
+- `Study_Hours_Per_Day`: Daily study hours
+- `Extracurricular_Hours_Per_Week`: Weekly hours in extracurricular activities
+- `Sleep_Hours_Per_Day`: Average daily sleep
+- `Social_Hours_Per_Day`: Daily social activity hours
+- `Physical_Activity_Hours_Per_Day`: Daily exercise hours
+- `GPA`: Grade point average (0-4 scale)
+- `Stress_Level`: Self-reported stress (Low/Moderate/High)
+- `college`: Academic college/school
+
+**Source**: https://www.kaggle.com/datasets/steve1215rogg/student-lifestyle-dataset
+
+**Loading the data:**
+
+```r
+# From GitHub repository
+student_data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/student_lifestyle_dataset.csv")
+
+# From local data folder
+student_data <- read_csv("data/student_lifestyle_dataset.csv")
+```
+
+---
+
+#### 6. Starbucks Twitter Data (`Starbucks_User_Data.csv`)
+**Used in:** Lectures 2 & 4 (Data Wrangling & Text Mining)
+
+**Description:** Twitter/X data about Starbucks, used for demonstrating data manipulation, regex patterns, and text analysis techniques.
+
+**Always load from:**
+```r
+url <- "https://raw.githubusercontent.com/aysedeniz09/Social_Media_Listening/refs/heads/main/MSC_social_media_list_data/Starbucks_User_Data.csv"
+starbucks_data <- read_csv(url)
+```
+
+---
+
+#### 7. Amazon Product Reviews (`amazon.csv`)
+**Used in:** Lecture 7 (Sentiment Analysis & Word Embeddings)
+
+**Description:** Amazon product reviews with customer ratings and review text. Used for dictionary-based sentiment analysis and comparing sentiment lexicons (AFINN, Bing, NRC).
+
+**Note:** This dataset contains unfiltered user-generated content and may include explicit language.
+
+**Variables:**
+- `product_id`: Product identifier
+- `product_name`: Product name
+- `category`: Product category
+- `discounted_price`: Sale price
+- `actual_price`: Original price
+- `discount_percentage`: Discount %
+- `rating`: Customer rating
+- `rating_count`: Number of ratings
+- `review_content`: Full review text
+
+**Source:** [Kaggle - Amazon Sales Dataset](https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset)
+
+**Citation:** Karkavel Raja, J. (2023). Amazon sales dataset [Data set]. Kaggle.
+
+**Download from Kaggle:** https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset
+
+**Load in R:**
+```r
+# From course GitHub (recommended for class)
+amazon_data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/amazon.csv")
+
+# Or from local file if downloaded from Kaggle
+amazon_data <- read_csv("data/amazon.csv")
+```
+
+---
+
+#### 8. Airline Sentiment Tweets (`tweets.csv`)
+**Used in:** Lecture 7 (Sentiment Analysis Exercises)
+
+**Description:** Twitter/X data about airline customer experiences, pre-labeled with sentiment for training and validation of sentiment analysis methods.
+
+**Source:** [Kaggle - Twitter US Airline Sentiment](https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment)
+
+**Original source:** Crowdflower's Data for Everyone Library
+
+**Download from Kaggle:** https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment
+
+**Load in R:**
+```r
+# From course GitHub (recommended for class)
+url <- "https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/tweets.csv"
+airline_data <- read_csv(url)
+
+# Or from local file if downloaded from Kaggle
+airline_data <- read_csv("data/tweets.csv")
+```
+---
+
+*Last updated: January 2026*

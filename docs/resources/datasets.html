@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -468,8 +503,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#course-datasets" id="toc-course-datasets" class="nav-link active" data-scroll-target="#course-datasets">Course Datasets</a></li>
-  <li><a href="#where-to-find-data" id="toc-where-to-find-data" class="nav-link" data-scroll-target="#where-to-find-data">Where to Find Data</a></li>
+  <li><a href="#course-datasets" id="toc-course-datasets" class="nav-link active" data-scroll-target="#course-datasets">Course Datasets</a>
+  <ul class="collapse">
+  <li><a href="#core-course-datasets-required" id="toc-core-course-datasets-required" class="nav-link" data-scroll-target="#core-course-datasets-required">Core Course Datasets (Required)</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -498,13 +535,135 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="course-datasets" class="level2">
 <h2 class="anchored" data-anchor-id="course-datasets">Course Datasets</h2>
-<p>List of datasets used in this course.</p>
+<p>This page lists all datasets used in the Introduction to Computational Social Science course, organized by lecture and purpose.</p>
+<section id="core-course-datasets-required" class="level3">
+<h3 class="anchored" data-anchor-id="core-course-datasets-required">Core Course Datasets (Required)</h3>
+<p>These datasets are stored in the course’s <code>/data</code> folder and are essential for completing course exercises.</p>
+<section id="k-pop-reddit-comments-kpop_comments_forclass.csv" class="level4">
+<h4 class="anchored" data-anchor-id="k-pop-reddit-comments-kpop_comments_forclass.csv">1. K-pop Reddit Comments (<code>kpop_comments_forclass.csv</code>)</h4>
+<p><strong>Used in:</strong> Lecture 9 (Topic Modeling with LDA)</p>
+<p><strong>Description:</strong> A collection of Reddit comments from K-pop related subreddits, used for unsupervised machine learning and topic modeling exercises.</p>
+<p><strong>Variables:</strong> - <code>comment_id</code>: Unique identifier for each comment - <code>text</code>: Comment content - <code>date</code>: Date the comment was posted - <code>score</code>: Reddit upvote/downvote score - <code>author</code>: Reddit username - <code>text_length</code>: Character count of comment</p>
+<p><strong>Source:</strong> https://arctic-shift.photon-reddit.com/</p>
+<p><strong>Loading the data:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From GitHub repository</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>kpop_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/kpop_comments_forclass.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># From local data folder</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>kpop_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/kpop_comments_forclass.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
 </section>
-<section id="where-to-find-data" class="level2">
-<h2 class="anchored" data-anchor-id="where-to-find-data">Where to Find Data</h2>
-<p>Resources for finding data for your projects.</p>
+<section id="lda-model-workspace-lecture9_lda_k5.rdata" class="level4">
+<h4 class="anchored" data-anchor-id="lda-model-workspace-lecture9_lda_k5.rdata">2. LDA Model Workspace (<code>Lecture9_LDA_k5.RData</code>)</h4>
+<p><strong>Used in:</strong> Lecture 10 (Sentiment Analysis on Topic Models)</p>
+<p><strong>Description:</strong> A saved R workspace containing the trained Latent Dirichlet Allocation (LDA) topic model with K=5 topics from Lecture 9, along with preprocessed data and document-term matrices.</p>
+<p><strong>Contents:</strong> - <code>lda_model_k5</code>: Trained LDA model (5 topics) - <code>data</code>: Original Reddit comment data - <code>data2</code>: Cleaned comment data - <code>data3</code>: Final processed data - <code>tidy_dfm</code>: Document-term matrix - <code>mystopwords</code>: Custom stopwords list</p>
+<p><strong>Loading the workspace:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From GitHub repository</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/Lecture9_LDA_k5.RData"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># From local data folder</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/Lecture9_LDA_k5.RData"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="music-lyrics-dataset-lyricsdror.csv" class="level4">
+<h4 class="anchored" data-anchor-id="music-lyrics-dataset-lyricsdror.csv">3. Music Lyrics Dataset (<code>lyricsDror.csv</code>)</h4>
+<p><strong>Used in:</strong> Lecture 11 (Predictive Modeling &amp; Machine Learning)</p>
+<p><strong>Description:</strong> Song lyrics from Country and Hip Hop genres, used for text classification and predictive modeling. This dataset became famous in the debate over Lil Nas X’s “Old Town Road” genre classification.</p>
+<p><strong>Variables:</strong> - <code>index</code>: Unique song identifier - <code>song</code>: Song title - <code>year</code>: Year of release - <code>artist</code>: Artist name - <code>genre</code>: Music genre (Country or HipHop) - <code>text</code>: Full song lyrics</p>
+<p><strong>Size:</strong> 51,251 songs</p>
+<p><strong>Source:</strong> Dror Walter, Intro CSS Class GSU</p>
+<p><strong>Loading the data:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From GitHub repository</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lyrics <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/lyricsDror.csv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># From local data folder</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>lyrics <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/lyricsDror.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="college-communication-network-collegemsg.txt" class="level4">
+<h4 class="anchored" data-anchor-id="college-communication-network-collegemsg.txt">4. College Communication Network (<code>CollegeMsg.txt</code>)</h4>
+<p><strong>Used in:</strong> Lecture 12 (Network Analysis)</p>
+<p><strong>Description:</strong> Private messages sent on an online platform between UC Irvine students over 193 days in 2004. Used for network analysis and visualization exercises.</p>
+<p><strong>Format:</strong> Tab-separated text file</p>
+<p><strong>Variables:</strong> - Column 1: <code>sender</code> - User ID of message sender - Column 2: <code>receiver</code> - User ID of message receiver<br>
+- Column 3: <code>timestamp</code> - Unix timestamp of message</p>
+<p><strong>Network Statistics:</strong> - Nodes: 1,899 students - Edges: 20,296 messages - Time period: 193 days (April-October 2004)</p>
+<p><strong>Source:</strong> <a href="https://snap.stanford.edu/data/CollegeMsg.html">Stanford SNAP Dataset</a></p>
+<p><strong>Citation:</strong> Panzarasa, P., Opsahl, T., &amp; Carley, K. M. (2009). Patterns and dynamics of users’ behavior and interaction: Network analysis of an online community. <em>Journal of the American Society for Information Science and Technology</em>, 60(5), 911-932.</p>
+<p><strong>Loading the data:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From GitHub repository</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>college_msg <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/CollegeMsg.txt"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"sender"</span>, <span class="st">"receiver"</span>, <span class="st">"timestamp"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># From local data folder</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>college_msg <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data/CollegeMsg.txt"</span>, <span class="at">header =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"sender"</span>, <span class="st">"receiver"</span>, <span class="st">"timestamp"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="student-lifestyle-dataset-student_lifestyle_dataset.csv" class="level4">
+<h4 class="anchored" data-anchor-id="student-lifestyle-dataset-student_lifestyle_dataset.csv">5. Student Lifestyle Dataset (<code>student_lifestyle_dataset.csv</code>)</h4>
+<p><strong>Used in:</strong> Lectures 5 &amp; 6 (Descriptive Statistics &amp; Regression)</p>
+<p><strong>Description:</strong> Synthetic dataset containing information about student lifestyles, academic performance, and wellbeing metrics. Used for teaching descriptive statistics, hypothesis testing, and regression modeling.</p>
+<p><strong>Variables:</strong> - <code>Student_ID</code>: Unique identifier - <code>Study_Hours_Per_Day</code>: Daily study hours - <code>Extracurricular_Hours_Per_Week</code>: Weekly hours in extracurricular activities - <code>Sleep_Hours_Per_Day</code>: Average daily sleep - <code>Social_Hours_Per_Day</code>: Daily social activity hours - <code>Physical_Activity_Hours_Per_Day</code>: Daily exercise hours - <code>GPA</code>: Grade point average (0-4 scale) - <code>Stress_Level</code>: Self-reported stress (Low/Moderate/High) - <code>college</code>: Academic college/school</p>
+<p><strong>Source</strong>: https://www.kaggle.com/datasets/steve1215rogg/student-lifestyle-dataset</p>
+<p><strong>Loading the data:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From GitHub repository</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>student_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/student_lifestyle_dataset.csv"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># From local data folder</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>student_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/student_lifestyle_dataset.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="starbucks-twitter-data-starbucks_user_data.csv" class="level4">
+<h4 class="anchored" data-anchor-id="starbucks-twitter-data-starbucks_user_data.csv">6. Starbucks Twitter Data (<code>Starbucks_User_Data.csv</code>)</h4>
+<p><strong>Used in:</strong> Lectures 2 &amp; 4 (Data Wrangling &amp; Text Mining)</p>
+<p><strong>Description:</strong> Twitter/X data about Starbucks, used for demonstrating data manipulation, regex patterns, and text analysis techniques.</p>
+<p><strong>Always load from:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aysedeniz09/Social_Media_Listening/refs/heads/main/MSC_social_media_list_data/Starbucks_User_Data.csv"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>starbucks_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="amazon-product-reviews-amazon.csv" class="level4">
+<h4 class="anchored" data-anchor-id="amazon-product-reviews-amazon.csv">7. Amazon Product Reviews (<code>amazon.csv</code>)</h4>
+<p><strong>Used in:</strong> Lecture 7 (Sentiment Analysis &amp; Word Embeddings)</p>
+<p><strong>Description:</strong> Amazon product reviews with customer ratings and review text. Used for dictionary-based sentiment analysis and comparing sentiment lexicons (AFINN, Bing, NRC).</p>
+<p><strong>Note:</strong> This dataset contains unfiltered user-generated content and may include explicit language.</p>
+<p><strong>Variables:</strong> - <code>product_id</code>: Product identifier - <code>product_name</code>: Product name - <code>category</code>: Product category - <code>discounted_price</code>: Sale price - <code>actual_price</code>: Original price - <code>discount_percentage</code>: Discount % - <code>rating</code>: Customer rating - <code>rating_count</code>: Number of ratings - <code>review_content</code>: Full review text</p>
+<p><strong>Source:</strong> <a href="https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset">Kaggle - Amazon Sales Dataset</a></p>
+<p><strong>Citation:</strong> Karkavel Raja, J. (2023). Amazon sales dataset [Data set]. Kaggle.</p>
+<p><strong>Download from Kaggle:</strong> https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset</p>
+<p><strong>Load in R:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From course GitHub (recommended for class)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>amazon_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/amazon.csv"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Or from local file if downloaded from Kaggle</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>amazon_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/amazon.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="airline-sentiment-tweets-tweets.csv" class="level4">
+<h4 class="anchored" data-anchor-id="airline-sentiment-tweets-tweets.csv">8. Airline Sentiment Tweets (<code>tweets.csv</code>)</h4>
+<p><strong>Used in:</strong> Lecture 7 (Sentiment Analysis Exercises)</p>
+<p><strong>Description:</strong> Twitter/X data about airline customer experiences, pre-labeled with sentiment for training and validation of sentiment analysis methods.</p>
+<p><strong>Source:</strong> <a href="https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment">Kaggle - Twitter US Airline Sentiment</a></p>
+<p><strong>Original source:</strong> Crowdflower’s Data for Everyone Library</p>
+<p><strong>Download from Kaggle:</strong> https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment</p>
+<p><strong>Load in R:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From course GitHub (recommended for class)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/tweets.csv"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>airline_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Or from local file if downloaded from Kaggle</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>airline_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/tweets.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+<p><em>Last updated: January 2026</em></p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
