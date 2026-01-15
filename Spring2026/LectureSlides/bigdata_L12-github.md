@@ -1,9 +1,7 @@
-Predictive Modeling
+Networks
 ================
 Dr. Ayse D. Lokmanoglu
 Lecture 12, (B) April 15, (A) April 22
-
-# Networks
 
 ## Lecture 12 Table of Contents
 
