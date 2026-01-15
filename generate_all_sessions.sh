@@ -14,17 +14,17 @@ echo ""
 declare -a sessions=(
   "01|Why Computational Social Science?"
   "02|Big Data: Data Collection and Wrangling"
-  "03|Big Data: GGPlot and Visualizations"
+  "03|Big Data: Data Collection and Wrangling"
   "04|Computational Research"
   "05|Descriptive Data"
   "06|Statistics"
   "07|Text as Data: Dictionary Methods and Word Embeddings"
-  "08|MIDTERM EXAM"
+  "08|Midterm Exam"
   "09|Text as Data: Topic Modeling"
-  "10|Unsupervised Machine Learning"
-  "11|Networks"
-  "12|Online Social Movements"
-  "13|From Data to Conclusions"
+  "10|Text as Data: Unsupervised Machine Learning Continued"
+  "11|Predictive Modelling"
+  "12|Networks"
+  "13|From Data to Conclusions: Issues of Big Data, Data Statements"
 )
 
 # Create sessions directory if needed

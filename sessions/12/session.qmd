@@ -1,5 +1,5 @@
 ---
-title: "Session 12 - Online Social Movements"
+title: "Session 12 - Networks"
 ---
 
 ::: {.panel-tabset}

@@ -1,5 +1,5 @@
 ---
-title: "Session 10 - Unsupervised Machine Learning"
+title: "Session 10 - Text as Data: Unsupervised Machine Learning Continued"
 ---
 
 ::: {.panel-tabset}

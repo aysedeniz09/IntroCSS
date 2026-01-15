@@ -1,5 +1,5 @@
 ---
-title: "Session 03 - Big Data: GGPlot and Visualizations"
+title: "Session 03 - Big Data: Data Collection and Wrangling"
 ---
 
 ::: {.panel-tabset}

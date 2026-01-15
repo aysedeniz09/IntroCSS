@@ -1,5 +1,5 @@
 ---
-title: "Session 08 - MIDTERM EXAM"
+title: "Session 08 - Midterm Exam"
 ---
 
 ::: {.panel-tabset}

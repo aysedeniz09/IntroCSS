@@ -42,7 +42,7 @@ website:
             file: sessions/01/session.qmd
           - text: "Session 2 - Data Collection and Wrangling"
             file: sessions/02/session.qmd
-          - text: "Session 3 - GGPlot and Visualizations"
+          - text: "Session 3 - Data Collection and Wrangling"
             file: sessions/03/session.qmd
           - text: "Session 4 - Computational Research"
             file: sessions/04/session.qmd
@@ -58,9 +58,9 @@ website:
             file: sessions/09/session.qmd
           - text: "Session 10 - Unsupervised Machine Learning"
             file: sessions/10/session.qmd
-          - text: "Session 11 - Networks"
+          - text: "Session 11 - Predictive Modelling"
             file: sessions/11/session.qmd
-          - text: "Session 12 - Online Social Movements"
+          - text: "Session 12 - Networks"
             file: sessions/12/session.qmd
           - text: "Session 13 - From Data to Conclusions"
             file: sessions/13/session.qmd

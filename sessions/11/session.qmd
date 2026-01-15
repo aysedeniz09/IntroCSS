@@ -1,5 +1,5 @@
 ---
-title: "Session 11 - Networks"
+title: "Session 11 - Predictive Modelling"
 ---
 
 ::: {.panel-tabset}

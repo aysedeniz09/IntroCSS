@@ -2,7 +2,7 @@
   {
     "objectID": "sessions/13/session.html",
     "href": "sessions/13/session.html",
-    "title": "Session 13 - From Data to Conclusions",
+    "title": "Session 13 - From Data to Conclusions: Issues of Big Data, Data Statements",
     "section": "",
     "text": "LectureExercise\n\n\n\nLecture Materials\n\nView Lecture Notes\nView Source on GitHub\n\n\n\n\n\n\nExercise Materials\n\nDownload Exercise (.Rmd file)\nView on GitHub\n\nInstructions:\n\nRight-click the download link above and select “Save Link As”\nSave the .Rmd file to your computer\nOpen the file in RStudio\nComplete the exercises\n\n\n\n\n\n\n\n\n← Session 12\n\n\nSchedule\n\n\n[End of Course] →",
     "crumbs": [
@@ -14,13 +14,13 @@
   {
     "objectID": "sessions/11/session.html",
     "href": "sessions/11/session.html",
-    "title": "Session 11 - Networks",
+    "title": "Session 11 - Predictive Modelling",
     "section": "",
     "text": "LectureExercise\n\n\n\nLecture Materials\n\nView Lecture Notes\nView Source on GitHub\n\n\n\n\n\n\nExercise Materials\n\nDownload Exercise (.Rmd file)\nView on GitHub\n\nInstructions:\n\nRight-click the download link above and select “Save Link As”\nSave the .Rmd file to your computer\nOpen the file in RStudio\nComplete the exercises\n\n\n\n\n\n\n\n\n← Session 10\n\n\nSchedule\n\n\nSession 12 →",
     "crumbs": [
       "Home",
       "Class Sessions",
-      "Session 11 - Networks"
+      "Session 11 - Predictive Modelling"
     ]
   },
   {
@@ -62,13 +62,13 @@
   {
     "objectID": "sessions/03/session.html",
     "href": "sessions/03/session.html",
-    "title": "Session 03 - Big Data: GGPlot and Visualizations",
+    "title": "Session 03 - Big Data: Data Collection and Wrangling",
     "section": "",
     "text": "LectureExercise\n\n\n\nLecture Materials\n\nView Lecture Notes\nView Source on GitHub\n\n\n\n\n\n\nExercise Materials\n\nDownload Exercise (.Rmd file)\nView on GitHub\n\nInstructions:\n\nRight-click the download link above and select “Save Link As”\nSave the .Rmd file to your computer\nOpen the file in RStudio\nComplete the exercises\n\n\n\n\n\n\n\n\n← Session 02\n\n\nSchedule\n\n\nSession 04 →",
     "crumbs": [
       "Home",
       "Class Sessions",
-      "Session 3 - GGPlot and Visualizations"
+      "Session 3 - Data Collection and Wrangling"
     ]
   },
   {
@@ -1226,7 +1226,7 @@
   {
     "objectID": "sessions/08/session.html",
     "href": "sessions/08/session.html",
-    "title": "Session 08 - MIDTERM EXAM",
+    "title": "Session 08 - Midterm Exam",
     "section": "",
     "text": "LectureExercise\n\n\n\nLecture Materials\n\nView Lecture Notes\nView Source on GitHub\n\n\n\n\n\n\nExercise Materials\n\nDownload Exercise (.Rmd file)\nView on GitHub\n\nInstructions:\n\nRight-click the download link above and select “Save Link As”\nSave the .Rmd file to your computer\nOpen the file in RStudio\nComplete the exercises\n\n\n\n\n\n\n\n\n← Session 07\n\n\nSchedule\n\n\nSession 09 →",
     "crumbs": [
@@ -1238,7 +1238,7 @@
   {
     "objectID": "sessions/10/session.html",
     "href": "sessions/10/session.html",
-    "title": "Session 10 - Unsupervised Machine Learning",
+    "title": "Session 10 - Text as Data: Unsupervised Machine Learning Continued",
     "section": "",
     "text": "LectureExercise\n\n\n\nLecture Materials\n\nView Lecture Notes\nView Source on GitHub\n\n\n\n\n\n\nExercise Materials\n\nDownload Exercise (.Rmd file)\nView on GitHub\n\nInstructions:\n\nRight-click the download link above and select “Save Link As”\nSave the .Rmd file to your computer\nOpen the file in RStudio\nComplete the exercises\n\n\n\n\n\n\n\n\n← Session 09\n\n\nSchedule\n\n\nSession 11 →",
     "crumbs": [
@@ -1250,13 +1250,13 @@
   {
     "objectID": "sessions/12/session.html",
     "href": "sessions/12/session.html",
-    "title": "Session 12 - Online Social Movements",
+    "title": "Session 12 - Networks",
     "section": "",
     "text": "LectureExercise\n\n\n\nLecture Materials\n\nView Lecture Notes\nView Source on GitHub\n\n\n\n\n\n\nExercise Materials\n\nDownload Exercise (.Rmd file)\nView on GitHub\n\nInstructions:\n\nRight-click the download link above and select “Save Link As”\nSave the .Rmd file to your computer\nOpen the file in RStudio\nComplete the exercises\n\n\n\n\n\n\n\n\n← Session 11\n\n\nSchedule\n\n\nSession 13 →",
     "crumbs": [
       "Home",
       "Class Sessions",
-      "Session 12 - Online Social Movements"
+      "Session 12 - Networks"
     ]
   }
 ]

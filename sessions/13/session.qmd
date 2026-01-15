@@ -1,5 +1,5 @@
 ---
-title: "Session 13 - From Data to Conclusions"
+title: "Session 13 - From Data to Conclusions: Issues of Big Data, Data Statements"
 ---
 
 ::: {.panel-tabset}
