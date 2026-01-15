@@ -16,7 +16,7 @@ title: "Course Schedule - Masters"
 | 8 | Mar 23 | **Midterm Exam** | **Midterm** | |
 | 9 | Mar 30 | Text as Data: Topic Modeling | | [View](#readings-9) |
 | 10 | Apr 6 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-10) |
-| 11 | Apr 13 | Online Social Movements | | [View](#readings-11) |
+| 11 | Apr 13 | Predictive modelling | | [View](#readings-11) |
 | 12 | Apr 22* | Networks | | [View](#readings-12) |
 | 13 | Apr 27 | From Data to Conclusions | | [View](#readings-13) |
 | | **May 4** | | **Final Papers Due** | |
@@ -39,7 +39,7 @@ title: "Course Schedule - Masters"
 | 8 | Mar 18 | **Midterm Exam** | **Midterm** | |
 | 9 | Mar 25 | Text as Data: Topic Modeling | | [View](#readings-9) |
 | 10 | Apr 1 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-10) |
-| 11 | Apr 8 | Online Social Movements | | [View](#readings-11) |
+| 11 | Apr 8 | Predictive modelling | | [View](#readings-11) |
 | 12 | Apr 15 | Networks | | [View](#readings-12) |
 | 13 | Apr 29 | From Data to Conclusions | | [View](#readings-13) |
 | | **May 4** | | **Final Papers Due** | |
@@ -156,7 +156,7 @@ No assigned readings for this session.
 
 ---
 
-### Session 11: Online Social Movements {#readings-11}
+### Session 11: Predictive modelling {#readings-11}
 
 - Thulin, M. (2024). *Modern Statistics with R* - Chapter 11: Predictive modelling and machine learning. Available at: https://www.modernstatisticswithr.com/
 

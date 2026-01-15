@@ -1,5 +1,4 @@
-Text as Data: Unsupervised machine learning continuedText as Data:
-Unsupervised machine learning continued
+Text as Data: Unsupervised machine learning continued
 ================
 Dr. Ayse D. Lokmanoglu
 Lecture 10, (B) April 6, (A) April 1
