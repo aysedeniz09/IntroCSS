@@ -17,7 +17,7 @@ title: "Course Schedule - PhD"
 | 9 | Mar 25 | Text as Data: Topic Modeling | | [View](#readings-9) |
 | 10 | Apr 1 | Unsupervised Machine Learning | | [View](#readings-10) |
 | 11 | Apr 8 | Networks | | [View](#readings-11) |
-| 12 | Apr 15 | Online Social Movements | | [View](#readings-12) |
+| 12 | Apr 15 | Predictive modelling | | [View](#readings-12) |
 | 13 | Apr 29 | From Data to Conclusions | | [View](#readings-13) |
 | | **May 4** | | **Final Paper Due** | |
 
@@ -139,7 +139,7 @@ No assigned readings for this session.
 
 ---
 
-### Session 12: Online Social Movements {#readings-12}
+### Session 12: Predictive modelling {#readings-12}
 
 - Kraidy, M. (2017). Burning Man. In *Naked Blogger of Cairo: Creative Insurgency in the Arab World* (pp. 23-52). Harvard University Press.
 
