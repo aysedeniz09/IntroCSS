@@ -36,8 +36,8 @@ title: "Course Schedule - Masters"
 | 3 | Feb 4 | Big Data: Data Collection and Wrangling | | [View](#readings-3) |
 | 4 | Feb 11 | Computational Research | | [View](#readings-4) |
 | 5 | Feb 18 | Descriptive Data | | [View](#readings-5) |
-| 6 | Feb 25 | Statistics | **Benchmark 1 Due** | [View](#readings-6) |
-| 7 | Mar 4 | Text as Data: Dictionary Methods and Word Embeddings | | [View](#readings-7) |
+| 6 | Feb 25 | Statistics |  | [View](#readings-6) |
+| 7 | Mar 4 | Text as Data: Dictionary Methods and Word Embeddings | **Benchmark 1 Due** | [View](#readings-7) |
 | 8 | Mar 18 | **Midterm Exam** | **Midterm** | |
 | 9 | Mar 25 | Text as Data: Topic Modeling | | [View](#readings-9) |
 | 10 | Apr 1 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-10) |
