@@ -36,9 +36,9 @@ title: "Course Schedule - PhD"
 
 - Lazer, D. M. J., Pentland, A., Watts, D. J., Aral, S., Athey, S., Contractor, N., Freelon, D., Gonzalez-Bailon, S., King, G., Margetts, H., Nelson, A., Salganik, M. J., Strohmaier, M., Vespignani, A., & Wagner, C. (2020). Computational social science: Obstacles and opportunities. *Science*, 369(6507), 1060-1062. https://doi.org/10.1126/science.aaz8170
 
-- Peng, Y., Jemmott, J. B., III, Fleisher, L., & Liang, W. (2023). Using social big data to study scientific research: A research review and tutorial. *Psychology, Health & Medicine*, 28(1), 250-267.
+- Peng, Y., Lu, Y., & Shen, C. (2023). An Agenda for Studying Credibility Perceptions of Visual Misinformation. *Political Communication*, 40(2), 225–237. https://doi.org/10.1080/10584609.2023.2175398
 
-- Petchler, R., & González-Bailon, S. (2015). *The Sage Handbook of Social Media Research Methods*.
+- Petchler, R., & González-Bailon, S. (2015). Automated content analysis of online political communication. In S. Coleman & D. Freelon (Eds.), *Handbook of Digital Politics* (pp. 433–450). Edward Elgar Publishing. https://doi.org/10.4337/9781782548768
 
 - Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Whole Section. Available at: https://r4ds.hadley.nz/
 
@@ -118,13 +118,13 @@ No assigned readings for this session.
 
 - Carley, K. (1994). Extracting culture through textual analysis. *Poetics*, 22(4), 291-312. https://doi.org/10.1016/0304-422X(94)90011-6
 
-- Fraser, T. G., Aldrich, D. P., & Small, A. (2019). Connecting social capital and vulnerability: The importance of bridging and linking social capital for adaptive resilience. In *Adaptive Governance of Disaster* (pp. 109-126). Springer.
+- Fraser, K. C., Zeller, F., Smith, D. H., Mohammad, S., & Rudzicz, F. (2019). How do we feel when a robot dies? Emotions expressed on Twitter before and after hitch. *Proceedings of the Tenth Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis*, 62–71. https://doi.org/10.18653/v1/W19-1308
 
-- Hart, P. S. (2013). The Role of Consideration of Future Consequences and Locus of Control in Climate Change Risk Perceptions. *Risk Analysis*, 33(8), 1530-1541. https://doi.org/10.1111/risa.12030
+- Hart, R. P. (2013). The Rhetoric of Political Comedy: A Tragedy? 33.
 
-- Mora, N., Cabrera, M., & Luzuriaga, M. (2020). A Computational Social Science Approach to the Analysis of Political Discourse on Twitter. In *Data Science and Digital Business* (pp. 89-110). Springer.
+- Mora, M., Dupas de Matos, A., Fernández-Ruiz, V., Briz, T., & Chaya, C. (2020). Comparison of methods to develop an emotional lexicon of wine: Conventional vs rapid-method approach. *Food Quality and Preference*, 83, 103920. https://doi.org/10.1016/j.foodqual.2020.103920
 
-- Ophir, Y., & Walter, D. (2023). Measuring media coverage of disease outbreaks: A computational approach. *Journalism & Mass Communication Quarterly*, 100(1), 40-64. https://doi.org/10.1177/10776990221143226
+- Ophir, Y., & Walter, D. (2023). Computational Sentiment Analysis. In R. L. Nabi & J. G. Myrick, *Emotions in the Digital World: Exploring Affective Experience and Expression in Online Interactions* (pp. 114–133). Oxford University Press.
 
 - Pang, B., Lee, L., & Vaithyanathan, S. (2002). Thumbs up? Sentiment Classification using Machine Learning Techniques. arXiv. http://arxiv.org/abs/cs/0205070
 
@@ -180,11 +180,11 @@ No assigned readings for this session.
 
 - Bower, B. (2018, July 27). 'Replication crisis' spurs reforms in how science studies are done. *Science News*. https://www.sciencenews.org/blog/science-the-public/replication-crisis-psychology-science-studies-statistics
 
-- Brown, A. W., Kaiser, K. A., & Allison, D. B. (2024). Issues with data and analyses: Errors, underlying themes, and potential solutions. *PNAS*, 121(8), e2217909118. https://doi.org/10.1073/pnas.2217909118
+- Brown, M. A., Gruen, A., Maldoff, G., Messing, S., Sanderson, Z., & Zimmer, M. (2024). Web Scraping for Research: Legal, Ethical, Institutional, and Scientific Considerations (arXiv:2410.23432). arXiv. https://doi.org/10.48550/arXiv.2410.23432
 
 - Grimmer, J., & Stewart, B. M. (2013). Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts. *Political Analysis*, 21(3), 267-297. https://doi.org/10.1093/pan/mps028
 
-- Kasy, M. (2019). *Identification of and Correction for Publication Bias*. Working Paper.
+- Kasy, M. (2019). No Data in the Void: Values and Distributional Conflicts in Empirical Policy Research and Artificial Intelligence. Economics for Inclusive Prosperity. https://econfip.org/policy-briefs/no-data-in-the-void-values-and-distributional-conflicts-in-empirical-policy-research-and-artificial-intelligence/
 
 - Lazer, D., Kennedy, R., King, G., & Vespignani, A. (2014). The Parable of Google Flu: Traps in Big Data Analysis. *Science*, 343(6176), 1203-1205. https://doi.org/10.1126/science.1248506
 
