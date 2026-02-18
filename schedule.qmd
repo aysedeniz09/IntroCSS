@@ -6,19 +6,19 @@ title: "Course Schedule - Masters"
 
 | Session | Date | Topic | Assignment | Readings |
 |---------|------|-------|------------|----------|
-| 1 | Jan 26 | **SNOW DAY - No Class** | | |
-| 2 | Feb 2 | Why Computational Social Science? | | [View](#readings-1) |
-| 3 | Feb 9 | Big Data: Data Collection and Wrangling | | [View](#readings-2) |
-| 4 | Feb 17* | Big Data: Data Collection and Wrangling | | [View](#readings-3) |
-| 5 | Feb 23 | Computational Research | | [View](#readings-4) |
-| 6 | Mar 2 | Descriptive Data | **Benchmark 1 Due** | [View](#readings-5) |
+|  | Jan 26 | **SNOW DAY - No Class** | | |
+| 1 | Feb 2 | Why Computational Social Science? | | [View](#readings-1) |
+| 2 | Feb 9 | Big Data: Data Collection and Wrangling | | [View](#readings-2) |
+| 3 | Feb 17* | Big Data: Data Collection and Wrangling | | [View](#readings-3) |
+| 4 | Feb 23 | Computational Research | | [View](#readings-4) |
+| 5 | Mar 2 | Descriptive Data | **Benchmark 1 Due** | [View](#readings-5) |
 | | Mar 9 | **SPRING BREAK - No Class** | | |
-| 7 | Mar 16 | Statistics | | [View](#readings-6) |
-| 8 | Mar 23 | Text as Data: Dictionary Methods and Word Embeddings | | [View](#readings-7) |
-| 9 | Mar 30 | **Midterm Exam** | **Midterm** | |
-| 10 | Apr 6 | Text as Data: Topic Modeling | | [View](#readings-9) |
-| 11 | Apr 13 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-10) |
-| 12 | Apr 22* | Predictive modelling | | [View](#readings-11) |
+| 6 | Mar 16 | Statistics | | [View](#readings-6) |
+| 7 | Mar 23 | Text as Data: Dictionary Methods and Word Embeddings | | [View](#readings-7) |
+| 8 | Mar 30 | **Midterm Exam** | **Midterm** | |
+| 9 | Apr 6 | Text as Data: Topic Modeling | | [View](#readings-9) |
+| 10 | Apr 13 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-10) |
+| 11 | Apr 22* | Predictive modelling | | [View](#readings-11) |
 | | Apr 23 | **Yotam Ophir CRC DeFleur Lecture at 3:00 pm** | | |
 | 13 | Apr 27 | From Data to Conclusions | | [View](#readings-13) |
 | | **May 1** | | **Final Papers Due** | |
