@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   echo = TRUE,
   message = FALSE, 
   warning = FALSE,
-  error = TRUE
+  error = FALSE
 )
 ```
 
@@ -109,7 +109,7 @@ Understanding variable types helps us choose the right statistics:
 
 ```{r, eval=TRUE}
 # Create our example dataset
-student_data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/student_lifestyle_dataset.csv")
+student_data <- read_csv("https://media.githubusercontent.com/media/aysedeniz09/IntroCSS/refs/heads/main/data/student_lifestyle_dataset.csv")
 
 ```
 
@@ -643,7 +643,7 @@ summary_by_stresslevel <- student_data |>
     mean_score = mean(GPA)
   )
 
-print(summary_by_major)
+print(summary_by_stresslevel)
 ```
 
 **Group by multiple variables:**
@@ -667,7 +667,7 @@ student_data |>
 **Bar chart of means:**
 
 ```{r, eval=summary_by_stresslevel}
-ggplot(summary_by_major, aes(x = Stress_Level, y = mean_hours, fill = Stress_Level)) +
+ggplot(summary_by_stresslevel, aes(x = Stress_Level, y = mean_hours, fill = Stress_Level)) +
   geom_col() +
   geom_errorbar(aes(ymin = mean_hours - sd_hours, 
                     ymax = mean_hours + sd_hours),

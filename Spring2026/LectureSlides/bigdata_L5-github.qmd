@@ -96,7 +96,7 @@ Understanding variable types helps us choose the right statistics:
 
 ``` r
 # Create our example dataset
-student_data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/student_lifestyle_dataset.csv")
+student_data <- read_csv("https://media.githubusercontent.com/media/aysedeniz09/IntroCSS/refs/heads/main/data/student_lifestyle_dataset.csv")
 ```
 
 **Identify variable types:**
@@ -106,7 +106,7 @@ student_data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS
 str(student_data)
 ```
 
-    ## spc_tbl_ [2,000 × 9] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+    ## spc_tbl_ [2,000 × 12] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
     ##  $ Student_ID                     : num [1:2000] 1 2 3 4 5 6 7 8 9 10 ...
     ##  $ Study_Hours_Per_Day            : num [1:2000] 6.9 5.3 5.1 6.5 8.1 6 8 8.4 5.2 7.7 ...
     ##  $ Extracurricular_Hours_Per_Day  : num [1:2000] 3.8 3.5 3.9 2.1 0.6 2.1 0.7 1.8 3.6 0.7 ...
@@ -116,6 +116,9 @@ str(student_data)
     ##  $ GPA                            : num [1:2000] 2.99 2.75 2.67 2.88 3.51 2.85 3.08 3.2 2.82 2.76 ...
     ##  $ Stress_Level                   : chr [1:2000] "Moderate" "Low" "Low" "Moderate" ...
     ##  $ college                        : chr [1:2000] "Education" "Humanities" "Arts & Sciences" "Communication" ...
+    ##  $ GPA_Level                      : chr [1:2000] "MediumGPA" "LowGPA" "LowGPA" "LowGPA" ...
+    ##  $ Stress_Level2                  : chr [1:2000] "LowModerate" "LowModerate" "LowModerate" "LowModerate" ...
+    ##  $ books_read                     : num [1:2000] 4 7 4 8 9 2 5 8 5 5 ...
     ##  - attr(*, "spec")=
     ##   .. cols(
     ##   ..   Student_ID = col_double(),
@@ -126,7 +129,10 @@ str(student_data)
     ##   ..   Physical_Activity_Hours_Per_Day = col_double(),
     ##   ..   GPA = col_double(),
     ##   ..   Stress_Level = col_character(),
-    ##   ..   college = col_character()
+    ##   ..   college = col_character(),
+    ##   ..   GPA_Level = col_character(),
+    ##   ..   Stress_Level2 = col_character(),
+    ##   ..   books_read = col_double()
     ##   .. )
     ##  - attr(*, "problems")=<externalptr>
 
@@ -144,7 +150,7 @@ student_data <- student_data |>
 str(student_data)
 ```
 
-    ## tibble [2,000 × 10] (S3: tbl_df/tbl/data.frame)
+    ## tibble [2,000 × 12] (S3: tbl_df/tbl/data.frame)
     ##  $ Student_ID                     : num [1:2000] 1 2 3 4 5 6 7 8 9 10 ...
     ##  $ Study_Hours_Per_Day            : num [1:2000] 6.9 5.3 5.1 6.5 8.1 6 8 8.4 5.2 7.7 ...
     ##  $ Extracurricular_Hours_Per_Day  : num [1:2000] 3.8 3.5 3.9 2.1 0.6 2.1 0.7 1.8 3.6 0.7 ...
@@ -155,6 +161,8 @@ str(student_data)
     ##  $ Stress_Level                   : chr [1:2000] "Moderate" "Low" "Low" "Moderate" ...
     ##  $ college                        : chr [1:2000] "Education" "Humanities" "Arts & Sciences" "Communication" ...
     ##  $ GPA_Level                      : chr [1:2000] "MediumGPA" "LowGPA" "LowGPA" "LowGPA" ...
+    ##  $ Stress_Level2                  : chr [1:2000] "LowModerate" "LowModerate" "LowModerate" "LowModerate" ...
+    ##  $ books_read                     : num [1:2000] 4 7 4 8 9 2 5 8 5 5 ...
 
 ------------------------------------------------------------------------
 
@@ -674,7 +682,7 @@ cat("Number of outliers:", nrow(outliers), "\n")
 print(outliers)
 ```
 
-    ## # A tibble: 5 × 10
+    ## # A tibble: 5 × 12
     ##   Student_ID Study_Hours_Per_Day Extracurricular_Hours_Per…¹ Sleep_Hours_Per_Day
     ##        <dbl>               <dbl>                       <dbl>               <dbl>
     ## 1         63                 5.1                         0.5                 5.2
@@ -683,9 +691,9 @@ print(outliers)
     ## 4       1175                 5.3                         0.3                 5.9
     ## 5       1716                 5.4                         0.2                 6.3
     ## # ℹ abbreviated name: ¹​Extracurricular_Hours_Per_Day
-    ## # ℹ 6 more variables: Social_Hours_Per_Day <dbl>,
+    ## # ℹ 8 more variables: Social_Hours_Per_Day <dbl>,
     ## #   Physical_Activity_Hours_Per_Day <dbl>, GPA <dbl>, Stress_Level <chr>,
-    ## #   college <chr>, GPA_Level <chr>
+    ## #   college <chr>, GPA_Level <chr>, Stress_Level2 <chr>, books_read <dbl>
 
 ------------------------------------------------------------------------
 
@@ -861,10 +869,16 @@ summary_by_stresslevel <- student_data |>
     mean_score = mean(GPA)
   )
 
-print(summary_by_major)
+print(summary_by_stresslevel)
 ```
 
-    ## Error: object 'summary_by_major' not found
+    ## # A tibble: 3 × 8
+    ##   Stress_Level     n mean_hours median_hours sd_hours min_hours max_hours
+    ##   <chr>        <int>      <dbl>        <dbl>    <dbl>     <dbl>     <dbl>
+    ## 1 High          1029       8.39          8.7    1.24          5      10  
+    ## 2 Low            297       5.47          5.5    0.280         5       5.9
+    ## 3 Moderate       674       6.97          7      0.598         6       8  
+    ## # ℹ 1 more variable: mean_score <dbl>
 
 **Group by multiple variables:**
 
@@ -906,7 +920,7 @@ student_data |>
 **Bar chart of means:**
 
 ``` r
-ggplot(summary_by_major, aes(x = Stress_Level, y = mean_hours, fill = Stress_Level)) +
+ggplot(summary_by_stresslevel, aes(x = Stress_Level, y = mean_hours, fill = Stress_Level)) +
   geom_col() +
   geom_errorbar(aes(ymin = mean_hours - sd_hours, 
                     ymax = mean_hours + sd_hours),
@@ -921,7 +935,7 @@ ggplot(summary_by_major, aes(x = Stress_Level, y = mean_hours, fill = Stress_Lev
   theme(legend.position = "none")
 ```
 
-    ## Error: object 'summary_by_major' not found
+![](bigdata_L5-github_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
 
 **Grouped bar chart:**
 
