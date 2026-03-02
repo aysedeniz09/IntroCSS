@@ -52,7 +52,7 @@ We’ll use the same student dataset throughout this lecture:
 
 ``` r
 # Create dataset
-student_data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/student_lifestyle_dataset.csv")
+student_data <- read_csv("https://media.githubusercontent.com/media/aysedeniz09/IntroCSS/refs/heads/main/data/student_lifestyle_dataset.csv")
 
 head(student_data)
 ```
