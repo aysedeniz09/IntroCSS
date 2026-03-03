@@ -131,7 +131,7 @@ show.
 
 ``` r
 # Load the data
-data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/kpop_comments_forclass.csv")
+data <- read_csv("https://media.githubusercontent.com/media/aysedeniz09/IntroCSS/refs/heads/main/data/kpop_comments_forclass.csv")
 
 # Check structure
 str(data)

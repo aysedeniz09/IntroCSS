@@ -112,7 +112,7 @@ We will use a publicly available Amazon Sales Review Dataset, which
 contains tweets labeled as positive, neutral, or negative.
 
 ```{r}
-amazon_data <- read_csv("https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/amazon.csv")
+amazon_data <- read_csv("https://media.githubusercontent.com/media/aysedeniz09/IntroCSS/refs/heads/main/data/amazon.csv")
 
 colnames(amazon_data)
 
@@ -965,7 +965,7 @@ After creating both visualizations, compare them side-by-side:
 -   Load the Airline Sentiment dataset.
 
 ```{r}
-url <- "https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/tweets.csv"
+url <- "https://media.githubusercontent.com/media/aysedeniz09/IntroCSS/refs/heads/main/data/tweets.csv"
 airline_user_data <- read_csv(url)
 str(airline_user_data)
 ```
