@@ -38,8 +38,8 @@ title: "Course Schedule - Masters"
 | 5 | Feb 18 | Descriptive Data | | [View](#readings-5) |
 | 6 | Feb 25 | Statistics |  | [View](#readings-6) |
 | 7 | Mar 4 | Text as Data: Dictionary Methods and Word Embeddings | **Benchmark 1 Due** | [View](#readings-7) |
-| 8 | Mar 18 | **Midterm Exam** | **Midterm** | |
-| 9 | Mar 25 | Text as Data: Topic Modeling | | [View](#readings-9) |
+| 8 | Mar 18 | Text as Data: Topic Modeling | | [View](#readings-9) |
+| 9 | Mar 25 | **Midterm Exam** | **Midterm** | |
 | 10 | Apr 1 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-10) |
 | 11 | Apr 8 | Predictive modelling | | [View](#readings-11) |
 | 12 | Apr 15 | Networks | | [View](#readings-12) |
