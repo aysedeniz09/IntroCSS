@@ -7,21 +7,21 @@ title: "Course Schedule - PhD"
 
 | Module | Date | Topic | Assignment | Readings |
 |---------|------|-------|------------|----------|
-| 1 | Jan 26 | **SNOW DAY - No Class** | | |
-| 2 | Feb 2 | Why Computational Social Science? | | [View](#module-2) |
-| 3 | Feb 9 | Big Data: Data Collection and Wrangling | | [View](#module-3) |
-| 4 | Feb 17* | Big Data: Data Collection and Wrangling | **Benchmark 1 Due** | [View](#module-4) |
-| 5 | Feb 23 | Computational Research | | [View](#module-5) |
-| 6 | Mar 2 | Descriptive Data | | [View](#module-6) |
+|  | Jan 26 | **SNOW DAY - No Class** | | |
+| 1 | Feb 2 | Why Computational Social Science? | | [View](#module-1) |
+| 2 | Feb 9 | Big Data: Data Collection and Wrangling | | [View](#module-2) |
+| 3 | Feb 17* | Big Data: Data Collection and Wrangling | **Benchmark 1 Due** | [View](#module-3) |
+| 4 | Feb 23 | Computational Research | | [View](#module-4) |
+| 5 | Mar 2 | Descriptive Data | | [View](#module-5) |
 | | Mar 9 | **SPRING BREAK - No Class** | | |
-| 7 | Mar 16 | Statistics | | [View](#module-7) |
-| 8 | Mar 23 | Text as Data: Dictionary Methods and Word Embeddings | **Benchmark 2 Due** | [View](#module-8) |
-| 9 | Mar 30 | TBA | | |
-| 10 | Apr 6 | Text as Data: Topic Modeling | | [View](#module-10) |
-| 11 | Apr 13 | Text as Data: Unsupervised Machine Learning Continued | | [View](#module-11) |
-| 12 | Apr 22* | Predictive modelling | | [View](#module-12) |
+| 6 | Mar 16 | Statistics | | [View](#module-6) |
+| 7 | Mar 23 | Text as Data: Dictionary Methods and Word Embeddings | **Benchmark 2 Due** | [View](#module-7) |
+|  | Mar 30 | TBA | | |
+| 8 | Apr 6 | Text as Data: Topic Modeling | | [View](#module-8) |
+| 9 | Apr 13 | Text as Data: Unsupervised Machine Learning Continued | | [View](#module-9) |
+| 10 | Apr 22* | Predictive modelling | | [View](#module-10) |
 | | Apr 23 | **Yotam Ophir CRC DeFleur Lecture at 3:00 pm** | | |
-| 13 | Apr 27 | From Data to Conclusions: Issues of Big Data, Data Statements | | [View](#module-13) |
+| 11 | Apr 27 | From Data to Conclusions: Issues of Big Data, Data Statements | | [View](#module-11) |
 | | **May 1** | | **Final Paper Due** | |
 
 *Monday schedule (university holiday adjustment)
@@ -30,7 +30,7 @@ title: "Course Schedule - PhD"
 
 ## Required Readings
 
-### Module 2: Why Computational Social Science? {#module-2}
+### Module 1: Why Computational Social Science? {#module-1}
 
 - Hofman, J. M., Watts, D. J., Athey, S., Garip, F., Griffiths, T. L., Kleinberg, J., Margetts, H., Mullainathan, S., Salganik, M. J., Vazire, S., Vespignani, A., & Yarkoni, T. (2021). Integrating explanation and prediction in computational social science. *Nature*, 595(7866), 181-188. https://doi.org/10.1038/s41586-021-03659-0
 
@@ -48,7 +48,7 @@ title: "Course Schedule - PhD"
 
 ---
 
-### Module 3: Big Data - Data Collection and Wrangling {#module-3}
+### Module 2: Big Data - Data Collection and Wrangling {#module-2}
 
 - Cappella, J. N. (2017). Vectors into the Future of Mass and Interpersonal Communication Research: Big Data, Social Media, and Computational Social Science. *Human Communication Research*, 43(4), 545-558. https://doi.org/10.1111/hcre.12114
 
@@ -66,7 +66,7 @@ title: "Course Schedule - PhD"
 
 ---
 
-### Module 4: Big Data - Data Collection and Wrangling {#module-4}
+### Module 3: Big Data - Data Collection and Wrangling {#module-3}
 
 - Peng, R. D. (2022). *R Programming for Data Science* - Chapters 13 & 14. Available at: https://bookdown.org/rdpeng/rprogdatascience/
 
@@ -80,7 +80,7 @@ title: "Course Schedule - PhD"
 
 ---
 
-### Module 5: Computational Research {#module-5}
+### Module 4: Computational Research {#module-4}
 
 - Thulin, M. (2024). *Modern Statistics with R* - Chapter 5: Dealing with messy data. Available at: https://www.modernstatisticswithr.com/
 
@@ -90,7 +90,7 @@ title: "Course Schedule - PhD"
 
 ---
 
-### Module 6: Descriptive Data {#module-6}
+### Module 5: Descriptive Data {#module-5}
 
 - Cernat, A. (2014). Introduction to Regression Models. In *Longitudinal Data Analysis Using R*.
 
@@ -104,7 +104,7 @@ title: "Course Schedule - PhD"
 
 ---
 
-### Module 7: Statistics {#module-7}
+### Module 6: Statistics {#module-6}
 
 No assigned readings for this session.
 
@@ -114,7 +114,7 @@ No assigned readings for this session.
 
 ---
 
-### Module 8: Text as Data - Dictionary Methods and Word Embeddings {#module-8}
+### Module 7: Text as Data - Dictionary Methods and Word Embeddings {#module-7}
 
 - Carley, K. (1994). Extracting culture through textual analysis. *Poetics*, 22(4), 291-312. https://doi.org/10.1016/0304-422X(94)90011-6
 
@@ -136,7 +136,7 @@ No assigned readings for this session.
 
 ---
 
-### Module 10: Text as Data - Topic Modeling {#module-10}
+### Module 8: Text as Data - Topic Modeling {#module-8}
 
 - DiMaggio, P., Nag, M., & Blei, D. (2013). Exploiting affinities between topic modeling and the sociological perspective on culture: Application to newspaper coverage of U.S. government arts funding. *Poetics*, 41(6), 570-606. https://doi.org/10.1016/j.poetic.2013.08.004
 
@@ -152,7 +152,7 @@ No assigned readings for this session.
 
 ---
 
-### Module 11: Text as Data - Unsupervised Machine Learning Continued {#module-11}
+### Module 9: Text as Data - Unsupervised Machine Learning Continued {#module-9}
 
 No assigned readings for this session.
 
@@ -162,7 +162,7 @@ No assigned readings for this session.
 
 ---
 
-### Module 12: Predictive modelling {#module-12}
+### Module 10: Predictive modelling {#module-10}
 
 - Breiger, R. L. (1974). The Duality of Persons and Groups. *Social Forces*, 53(2), 181. https://doi.org/10.2307/2576011
 
@@ -176,7 +176,7 @@ No assigned readings for this session.
 
 ---
 
-### Module 13: From Data to Conclusions {#module-13}
+### Module 11: From Data to Conclusions {#module-11}
 
 - Bower, B. (2018, July 27). 'Replication crisis' spurs reforms in how science studies are done. *Science News*. https://www.sciencenews.org/blog/science-the-public/replication-crisis-psychology-science-studies-statistics
 

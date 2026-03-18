@@ -1,0 +1,1897 @@
+---
+title: "Text as Data: Topic Modeling"
+subtitle: "COM EM757"
+author: "Dr. Ayse D. Lokmanoglu"
+date: 'Lecture 9, (B) March 25, (A) March 30'
+output: github_document
+always_allow_html: true
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE
+)
+```
+
+# R Exercises
+
+## Table of Contents
+
+| Section | Topic                                                     |
+|---------|-----------------------------------------------------------|
+| 1       | Intro to Topic Modeling                                   |
+| 1.1     | Why Use Topic Modeling?                                   |
+| 1.2     | Understanding LDA                                         |
+| 2       | Preprocessing Text Data                                   |
+| 2.1     | Load the Data                                             |
+| 2.2     | Initial Data Exploration                                  |
+| 2.3     | Text Preprocessing                                        |
+| 2.3.1   | Create Index, Backup Text, and Language Filtering         |
+| 2.3.2   | Create Custom Stopwords                                   |
+| 2.4     | Tokenization                                              |
+| 2.5     | Term Frequency Filtering with TF-IDF                      |
+| 2.6     | Visualize Top Words                                       |
+| 2.7     | Create Document-Term Matrix                               |
+| 3       | Choosing the Number of Topics (K)                         |
+| 3.1     | What is Topic Coherence?                                  |
+| 3.2     | Types of Coherence Metrics                                |
+| 3.3     | What Makes a "Good" Topic?                                |
+| 3.4     | Computing Topic Coherence for Different K Values          |
+| 3.5     | Interpreting the Results for Optimal K                    |
+| 3.6     | Choosing Optimal K                                        |
+| 4       | LDA Model                                                 |
+| 4.1     | Train the LDA Model with the Optimal Topics               |
+| 4.2     | Save Your Work                                            |
+| 4.3     | Look Inside the LDA Model                                 |
+| 5       | The Beta & Gamma Matrices                                 |
+| 5.1     | Beta (β): Topic-Word Probabilities                        |
+| 5.2     | Top Words per Topic - The Beta (β) Matrix using Tidy      |
+| 5.3     | Top 10 Words per Topic                                    |
+| 5.4     | Visualize Top Words                                       |
+| 5.5     | Top Documents per Topic - The Gamma (γ) Matrix using Tidy |
+| 5.6     | Visualizing Document-Topic Distributions                  |
+| 5.7     | Finding Representative Documents for Each Topic           |
+| 5.8    | Examining Representative Document Content                 |
+| 5.9    | Summary of Representative Documents                       |
+| 5.10    | Distribution of Dominant Topics                           |
+| 5.11    | Topics Over Time                                          |
+
+------------------------------------------------------------------------
+
+**ALWAYS** Let's load our libraries
+
+```{r}
+library(tidyverse)    # Data manipulation and visualization
+library(tidytext)     # Text mining using tidy data principles
+library(ggplot2)      # Data visualization (part of tidyverse)
+library(stopwords)    # Stopword lists in multiple languages
+library(dplyr)        # Data manipulation (part of tidyverse)
+library(quanteda)     # Quantitative text analysis
+library(topicmodels)  # Topic modeling (LDA, CTM)
+library(topicdoc)     # Topic coherence metrics
+
+# Install devtools if needed by uncommenting this
+# install.packages("devtools")
+
+# Install ldaOptim
+# devtools::install_github("aysedeniz09/ldaOptim")
+
+library(ldaOptim)
+
+
+
+```
+
+## 1. Intro to Topic Modeling
+
+Topic modeling is an unsupervised machine learning technique that
+identifies latent themes in a collection of text documents. The most
+widely used approach is Latent Dirichlet Allocation (LDA), which assumes
+each document is a mixture of topics, and each topic is a mixture of
+words.
+
+### 1.1 Why Use Topic Modeling?
+
+-   Helps uncover hidden structure in large text corpora
+-   Organizes vast amounts of text into interpretable themes
+-   Useful for content analysis, social media monitoring, and
+    recommendation systems
+-   Allows exploration of what people are discussing without pre-defined
+    categories
+
+![](https://www.tidytextmining.com/images/tmwr_0601.png)
+
+*image from: <https://www.tidytextmining.com/topicmodeling>*
+
+### 1.2 Understanding LDA
+
+**Latent Dirichlet Allocation (LDA)** is one of the most widely used
+algorithms for topic modeling. Without delving into the complex
+mathematics behind it, we can conceptualize LDA through two key
+principles:
+
+1.  **Every document is a mixture of topics.**
+    -   Each document contains words from multiple topics in different
+        proportions.
+    -   For instance, in a model with two topics, we could say:
+        -   "Document 1 is 80% Topic A and 20% Topic B."
+        -   "Document 2 is 40% Topic A and 60% Topic B."
+2.  **Every topic is a mixture of words.**
+    -   Each topic consists of words that commonly appear together.
+    -   For example, in a two-topic model focused on K-pop:
+        -   The "idol performance" topic might include words like
+            *dance*, *stage*, *music*, and *concert*.
+        -   The "fandom culture" topic might contain words like *fans*,
+            *streaming*, *voting*, and *billboard*.
+        -   Some words, like *debut*, may appear in both topics but with
+            different frequencies.
+
+LDA uses a probabilistic approach to simultaneously determine:
+
+-   The composition of topics within each document
+
+-   The key words that define each topic
+
+This method enables us to uncover hidden themes in large text datasets
+without prior labeling.
+
+------------------------------------------------------------------------
+
+## 2. Preprocessing Text Data
+
+### 2.1 Load the Data
+
+We'll use Reddit comments about K-pop Demon Hunters. This dataset
+contains community discussions, reactions, and conversations about the
+show.
+
+```{r}
+# Load the data
+data_OG <- read_csv("https://media.githubusercontent.com/media/aysedeniz09/IntroCSS/refs/heads/main/data/kpop_comments_forclass.csv")
+
+# Check structure
+str(data_OG)
+head(data_OG)
+```
+
+### 2.2 Initial Data Exploration
+
+Let's understand what we're working with:
+
+```{r}
+# How many comments?
+nrow(data_OG)
+
+# Date range
+range(data_OG$date)
+
+# Score distribution
+summary(data_OG$score)
+
+# Text length distribution
+summary(data_OG$text_length)
+
+# Look at a few comments
+head(data_OG$text, 5)
+```
+
+
+For the purpose of this class we will sample our data, using tidy `sample_frac()`.
+
+```{r}
+data <- data_OG |> 
+  sample_frac(0.2)
+
+
+# How many comments?
+nrow(data)
+
+# Date range
+range(data$date)
+
+# Score distribution
+summary(data$score)
+
+# Text length distribution
+summary(data$text_length)
+
+# Look at a few comments
+head(data$text, 5)
+
+```
+
+------------------------------------------------------------------------
+
+### 2.3 Text Preprocessing
+
+Before we can run topic models, we need to clean and prepare our text
+data.
+
+#### 2.3.1 Create Index, Backup Text, and Language Filtering
+
+**Important:** We'll create new objects at each step so we don't lose
+our original data.
+
+**Why these steps matter:**
+
+1.  **Language filtering:** Reddit has international users, so we remove
+    non-English comments
+2.  **Duplicate removal:** Same comment posted multiple times (e.g.,
+    copypasta, bots)
+3.  **Creating new objects:** We keep `data`, `data2`, `data3` so we can
+    backtrack if needed
+
+```{r}
+data <- data |>
+  mutate(
+    comment_index = row_number(), ## create a document index
+    textBU = text,                ## backup the text column
+    CLD2 = cld2::detect_language(text)  ## check the language
+  )
+
+# Check language distribution
+data |> count(CLD2, sort = TRUE)
+
+# Filter to English only
+data2 <- data |> filter(CLD2 == "en")
+
+# Remove duplicate texts
+data3 <- data2 |> distinct(text, .keep_all = TRUE)
+```
+
+#### 2.3.2 Create Custom Stopwords
+
+We'll remove common words that don't add meaning to our topics. For
+K-pop discussions, we might want to remove very generic terms.
+
+```{r}
+# Create custom stopword list
+mystopwords <- c(
+  stopwords("en"),
+  stopwords::stopwords(source = "smart"),
+  # Add domain-specific stopwords
+  "https", "http", "t.co", "amp",  # URLs and HTML
+  "reddit", "comment", "post", "thread",  # Reddit-specific
+  "edit", "edited", "update",  # Reddit conventions
+  "kpop"  # Remove your own search words as they will be in every document
+)
+
+mystopwords <- unique(mystopwords)
+mystopwords <- tolower(mystopwords)
+
+# Check how many stopwords we have
+length(mystopwords)
+```
+
+------------------------------------------------------------------------
+
+### 2.4 Tokenization
+
+Now we'll break our text into individual words (tokens) and remove
+stopwords. We will sample!!! 
+
+```{r}
+# Tokenize the text
+tidy_data <- data3 |> 
+  unnest_tokens(word, text) |>  # Break into words
+  anti_join(data.frame(word = mystopwords)) |>  # Remove stopwords
+  mutate(nchar = nchar(word)) |>  # Count characters per word
+  filter(nchar > 2) |>  # Keep words with more than 2 characters
+  filter(!grepl("[0-9]{1}", word)) |>  # Remove words with numbers
+  filter(!grepl("\\W", word))  # Remove words with special characters
+
+# Check results
+head(tidy_data)
+nrow(tidy_data)  # How many tokens do we have?
+```
+
+------------------------------------------------------------------------
+
+### 2.5 Term Frequency Filtering with TF-IDF
+
+Not all words are equally useful for topic modeling. We want to remove:
+
+-   **Very common words** that appear in almost every document (too
+    general)
+
+-   **Very rare words** that appear in only 1-2 documents (too specific)
+
+We use **TF-IDF** principles to filter our vocabulary:
+
+```{r}
+# Set thresholds
+maxndoc <- 0.75   # Remove words in more than 75% of documents
+minndoc <- 0.001 # Remove words in less than 0.1% of documents
+
+# Calculate document frequency for each word
+templength <- length(unique(tidy_data$comment_index))
+
+good_common_words <- tidy_data |> 
+  count(comment_index, word, sort = TRUE) |> 
+  group_by(word) |> 
+  summarize(doc_freq = n() / templength) |> 
+  filter(doc_freq < maxndoc) |>   # Not too common
+  filter(doc_freq > minndoc)      # Not too rare
+
+# How many words passed our filter?
+nrow(good_common_words)
+
+# Clean our tidy data to only include these words
+tidy_data_pruned <- tidy_data |> 
+  inner_join(good_common_words)
+
+# NOTE: This is where you might lose some documents that had no remaining words
+```
+
+------------------------------------------------------------------------
+
+### 2.6 Visualize Top Words
+
+Before modeling, let's see what words are most common in our corpus:
+
+```{r}
+# Plot top 50 words
+tidy_data_pruned |> 
+  group_by(word) |> 
+  summarise(n = n()) |> 
+  arrange(desc(n)) |> 
+  mutate(word = reorder(word, n)) |> 
+  top_n(50) |>     
+  ggplot(aes(n, word)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Top 50 Words in K-pop Demon Hunters Comments",
+    y = NULL,
+    x = "Frequency"
+  ) +
+  theme_minimal()
+```
+
+**Questions to ask:** - Do these words make sense for K-pop discussions?
+
+-   Are there any words we should add to our stopword list?
+
+-   Do we see evidence of different themes already?
+
+------------------------------------------------------------------------
+
+### 2.7 Create Document-Term Matrix
+
+For topic modeling, we need to convert our tidy data into a
+**Document-Term Matrix (DTM)**:
+
+-   Rows = documents (comments)
+
+-   Columns = words (terms)
+
+-   Values = word counts
+
+```{r}
+# Create DTM using tidytext
+tidy_dfm <- tidy_data_pruned |> 
+  count(comment_index, word) |> 
+  cast_dtm(comment_index, word, n)
+
+# Check dimensions
+tidy_dfm
+dim(tidy_dfm)
+```
+
+**Understanding the Document-Term Matrix Output**
+
+When you print the DTM, you'll see output like this:
+
+**Line 1: Dimensions**
+
+-   `documents: `r dim(tidy_dfm)[1]`` = We have `r dim(tidy_dfm)[1]` comments in our dataset
+
+-   `terms: `r dim(tidy_dfm)[2]`` = We have `r dim(tidy_dfm)[2]` unique words in our vocabulary
+
+-   This creates a matrix with `r dim(tidy_dfm)[1]` rows × `r dim(tidy_dfm)[2]` columns = `r format(dim(tidy_dfm)[1] * dim(tidy_dfm)[2], big.mark=",")` total cells
+
+**Line 2: Entries**
+
+-   `Non-sparse entries: `r format(sum(tidy_dfm > 0), big.mark=",")`  ` = Only `r format(sum(tidy_dfm > 0), big.mark=",")` cells contain actual word counts
+
+-   `Sparse entries: `r format(sum(tidy_dfm == 0), big.mark=",")`  ` = Most cells are empty (zeros)
+
+**Line 3: Sparsity**
+
+-   `Sparsity: 100%` = Essentially 100% of the matrix is empty (zeros)
+
+**Line 4: Term Length**
+
+-   `Maximal term length: `r max(nchar(colnames(tidy_dfm)))`  ` = The longest word has `r max(nchar(colnames(tidy_dfm)))` characters
+
+**Why does this matter?**
+
+Text data is **naturally sparse** because:
+
+```{r}
+dtm_matrix <- as.matrix(tidy_dfm)
+words_per_doc <- rowSums(dtm_matrix > 0)
+
+mean(words_per_doc)      # Average unique words per comment
+median(words_per_doc)    # Median unique words per comment
+quantile(words_per_doc, c(0.25, 0.75))  # 25th and 75th percentiles
+
+mean(words_per_doc) / ncol(tidy_dfm) * 100   # Average % of vocabulary used
+median(words_per_doc) / ncol(tidy_dfm) * 100 # Median % of vocabulary used
+rm(dtm_matrix)
+```
+
+Our data shows:
+
+-   **Average comment uses only `r round(mean(words_per_doc), 1)` unique
+    words** (median: `r median(words_per_doc)` words) - **Vocabulary has
+    `r ncol(tidy_dfm)` words total**
+
+-   **Each comment uses only
+    `r round(mean(words_per_doc) / ncol(tidy_dfm) * 100, 2)`% of the
+    available vocabulary** (median:
+    `r round(median(words_per_doc) / ncol(tidy_dfm) * 100, 2)`%)
+
+-   **Range:** Comments use between `r min(words_per_doc)` to
+    `r max(words_per_doc)` unique words
+
+-   **Most comments (50%)** use between
+    `r quantile(words_per_doc, 0.25)`-`r quantile(words_per_doc, 0.75)`
+    unique words (interquartile range)
+
+This extreme sparsity is why topic modeling is powerful - it finds
+patterns in this sparse, high-dimensional data by identifying which
+words tend to co-occur across documents, revealing hidden thematic
+structure!
+
+**Visualization:**
+
+```{r}
+# Visualize distribution of words per comment
+data.frame(words = words_per_doc) |> 
+  ggplot(aes(x = words)) +
+  geom_histogram(bins = 50, fill = "steelblue", alpha = 0.7) +
+  geom_vline(xintercept = mean(words_per_doc), 
+             color = "red", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = median(words_per_doc), 
+             color = "darkgreen", linetype = "dashed", size = 1) +
+  annotate("text", x = mean(words_per_doc) + 15, y = 2000, 
+           label = paste("Mean:", round(mean(words_per_doc), 1)), 
+           color = "red") +
+  annotate("text", x = median(words_per_doc) + 15, y = 1800, 
+           label = paste("Median:", median(words_per_doc)), 
+           color = "darkgreen") +
+  labs(
+    title = "Distribution of Unique Words per Comment",
+    subtitle = "Most comments use very few unique words after preprocessing",
+    x = "Number of Unique Words",
+    y = "Number of Comments"
+  ) +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+**Important:** Notice if we lost any documents during preprocessing.
+This happens when comments had no words left after stopword removal and
+filtering.
+
+```{r}
+# How many documents did we start with?
+nrow(data3)
+
+# How many documents in our DTM?
+nrow(tidy_dfm)
+
+# How many did we lose?
+nrow(data3) - nrow(tidy_dfm)
+```
+
+**Summary of data filtering:**
+
+| Step | \# Comments | Comments Lost | Reason |
+|------|-----------|---------------|--------|
+| Original data | `r format(nrow(data_OG), big.mark=",")` | - | Raw r/kpop comments |
+| Sample | `r format(nrow(data), big.mark=",")` | `r format(nrow(data_OG) - nrow(data), big.mark=",")` | Random sample taken |
+| Language filter | `r format(nrow(data2), big.mark=",")` | `r format(nrow(data) - nrow(data2), big.mark=",")` | Removed non-English comments |
+| Duplicate removal | `r format(nrow(data3), big.mark=",")` | `r format(nrow(data2) - nrow(data3), big.mark=",")` | Removed duplicate/repeated comments |
+| Preprocessing filter | `r format(nrow(tidy_dfm), big.mark=",")` | `r format(nrow(data3) - nrow(tidy_dfm), big.mark=",")` | Removed comments with no words after stopword removal and TF-IDF filtering |
+| **Final dataset** | **`r format(nrow(tidy_dfm), big.mark=",")`** | **`r format(nrow(data_OG) - nrow(tidy_dfm), big.mark=",")`  total** | **Ready for topic modeling** |
+
+------------------------------------------------------------------------
+
+## 3. Choosing the Number of Topics (K)
+
+One of the most important decisions in topic modeling is choosing **how
+many topics (K)** to extract. There's no perfect answer, but we can use
+**topic coherence metrics** to guide our decision.
+
+### 3.1 What is Topic Coherence?
+
+**Topic coherence** measures how interpretable and meaningful a topic is
+by calculating how often the top words in a topic appear together in
+documents.
+
+**High coherence** = words in a topic frequently co-occur (topic makes
+sense) **Low coherence** = words in a topic rarely appear together
+(topic is random/unclear)
+
+Think of it like this:
+
+-   A topic with words *{dance, performance, stage, choreography}* has
+    HIGH coherence (these words naturally go together)
+
+-   A topic with words *{dance, breakfast, politics, ocean}* has LOW
+    coherence (these words don't relate)
+
+### 3.2 Types of Coherence Metrics
+
+There are several ways to measure topic coherence:
+
+| Metric | Description | What It Measures |
+|-------------------|-----------------------|------------------------------|
+| **C_V** | Based on sliding window word co-occurrence | Most commonly used; balances accuracy and interpretability |
+| **C_UMass** | Based on document co-occurrence | How often topic words appear in same documents |
+| **C_UCI** | Based on pointwise mutual information | Statistical association between words |
+| **C_NPMI** | Normalized pointwise mutual information | Normalized version of UCI |
+
+For this class, we'll focus on **C_V** (most popular) and **C_UMass**
+(fastest to compute).
+
+### 3.3 What Makes a "Good" Topic?
+
+A good topic should have:
+
+1.  **High coherence** - Words make sense together
+2.  **High exclusivity** - Words are specific to this topic (not shared
+    across all topics)
+3.  **Interpretability** - Humans can understand what the topic is about
+4.  **Coverage** - Topics cover the main themes in your corpus
+
+**Trade-off Alert:** Sometimes increasing K gives you more specific
+topics (higher exclusivity) but lower coherence. We need to find the
+sweet spot!
+
+------------------------------------------------------------------------
+
+### 3.4 Find Topic Numbers
+
+```{r}
+# Create models with different number of topics
+# Note: This takes several minutes to run!
+start_time <- Sys.time()
+cat("Starting at:", format(start_time, "%H:%M:%S"), "\n")
+
+result <- lda_find_topics(
+  dtm = tidy_dfm,
+  topics = seq(5, 100, by = 20),
+  metrics = c("Griffiths2004", "CaoJuan2009", "Arun2010", "Deveaud2014"),
+  control = list(alpha = 5/50),  # Use optimal alpha 
+)
+
+# Visualize all four metrics
+end_time <- Sys.time()
+cat("Finished at:", format(end_time, "%H:%M:%S"), "\n")
+cat("Total time:", round(difftime(end_time, start_time, units = "mins"), 2), "minutes\n")
+
+plot_topics_metrics(result)
+
+```
+------------------------------------------------------------------------------
+
+### 3.5 Interpreting the Results for Optimal K
+
+This plot shows four different metrics for evaluating topic models:
+
+**Top Panel (minimize — lower is better)**
+
+-   **CaoJuan2009:** Steadily decreases from K=5 to K=85, suggesting more topics improve distinctiveness — though gains flatten after K=45
+
+-   **Arun2010:** Follows almost the same trajectory as CaoJuan2009, both approaching zero by K=85
+
+**Bottom Panel (maximize — higher is better)**
+
+-   **Griffiths2004:** Starts near 0 at K=5, rises steeply to ~0.8 by K=25, then plateaus around 1.0 from K=45 onwards — suggesting diminishing returns after K=45
+
+-   **Deveaud2014:** Starts at 1.0 at K=5 and decreases almost linearly to near 0 at K=85 — not very informative as it offers no clear optimal point
+
+**What do we notice?**
+
+1.  **The metrics tell different stories:**
+
+    -   CaoJuan2009 and Arun2010 keep improving with more topics (no clear elbow)
+    
+    -   Griffiths2004 plateaus around **K=45**, suggesting that's where additional topics stop adding meaningful information
+    
+    -   Deveaud2014 is essentially linear — not useful for selecting K here
+
+2.  **Griffiths2004 gives the clearest signal:**
+
+    -   The steep rise from K=5 to K=25 suggests those early topics are capturing real structure
+    
+    -   The plateau from K=45 onwards suggests **K=25–45** is a reasonable range to explore
+
+3.  **Which metric should we trust?**
+
+    -   **CaoJuan2009**: Measures topic distinctiveness (how different topics are from each other)
+    
+    -   **Arun2010**: Measures how well the topic distribution fits the data's structure
+    
+    -   **Griffiths2004**: Measures overall model fit — the plateau is a useful signal for selecting K
+    
+    -   **Deveaud2014**: Measures topic divergence, but its linear decline here makes it less useful for this dataset
+
+------------------------------------------------------------------------
+
+### 3.6 Choosing Optimal K
+
+Based on our coherence analysis, the metrics point to **K = 25** as the 
+optimal number of topics — this is where Griffiths2004 shows its steepest 
+gains before beginning to plateau, and where CaoJuan2009 and Arun2010 show 
+meaningful improvement over smaller K values.
+
+**However, for this class exercise we will use K = 5.** Here's why:
+
+**Why K=25 would be ideal?**
+
+1. **Griffiths2004 plateaus around K=25–45** — additional topics beyond this range add little new information
+
+2. **CaoJuan2009 and Arun2010 both improve substantially** up to K=25 before gains slow down
+
+3. **25 topics offers a good balance** between capturing discourse complexity and maintaining topic distinctiveness
+
+**Why we're using K=5 instead:**
+
+1. **Interpretability** — 5 broad themes are much easier to understand, explain, and discuss in class
+
+2. **Demonstration purposes** — fewer topics makes it easier to see how LDA works and to manually validate topic labels
+
+3. **Computational speed** — faster to fit and re-run during the exercise
+
+**What about K=45, K=65, or K=85?**
+
+- The metrics continue to improve or plateau at these values, but the topics become increasingly fragmented and harder to interpret meaningfully
+
+- More topics ≠ better topics for our purposes
+
+Let's now fit our LDA model with K=5 topics!
+------------------------------------------------------------------------
+
+## 4. LDA Model
+
+LDA converts the document-word matrix (we had above as `tidy_dfm`) into
+two other matrices:
+
+1.  **Topic-Word matrix (Beta (β))** - The probability of each word
+    belonging to each topic
+
+2.  **Document-Topic matrix (Gamma (γ))** - The probability of each
+    document belonging to each topic
+
+![](https://cdn.analyticsvidhya.com/wp-content/uploads/2021/06/26864dtm.webp)
+
+*image from:
+<https://cdn.analyticsvidhya.com/wp-content/uploads/2021/06/26864dtm.webp>*
+
+**How LDA works:**
+
+-   **Input**: Document-Term Matrix (DTM)
+
+    -   Rows = documents (Reddit comments)
+
+    -   Columns = words (vocabulary)
+
+    -   Values = word counts
+
+-   **LDA Processing**: Discovers latent topics by finding patterns in
+    word co-occurrence
+
+-   **Output**: Two probability matrices
+
+    -   **Beta (β)**: For each topic, what words are most probable?
+
+    -   **Gamma (γ)**: For each document, what topics are most probable?
+
+------------------------------------------------------------------------
+
+### 4.1 Train the LDA Model with the Optimal Topics
+
+LDA objects take a lot of memory so we should always clean up the memory
+from no longer used objects.
+
+```{r}
+# Clean up workspace - keep only essential objects
+# This frees up memory and keeps the environment organized
+
+# List of objects to KEEP
+keep_objects <- c(
+  "data",         # Original sampled dataset
+  "data2",        # cleaned dataset
+  "data3",        # last dataset
+  "mystopwords",  # Custom stopwords list
+  "tidy_dfm"      # LDA object we will delete after
+)
+
+# Remove everything except the objects we want to keep
+rm(list = setdiff(ls(), keep_objects))
+
+# Run garbage collection to free up memory
+gc()
+
+# Check what we have left
+print("Remaining objects in workspace:")
+print(ls())
+```
+
+Now let's train our LDA model with K=5 topics.
+
+```{r}
+# Set seed for reproducibility
+set.seed(42)
+
+# Train LDA model with K=5 topics
+# Note: This may take a few minutes!
+start_time <- Sys.time()
+print(paste("Training LDA model with K=5..."))
+print(paste("Start time:", format(start_time, "%H:%M:%S")))
+
+lda_model_k5 <- LDA(
+  tidy_dfm, 
+  k = 5, 
+  method = "Gibbs",
+  control = list(
+    verbose = 500,   # Print progress every 500 iterations
+    seed = 42,       # For reproducibility
+    iter = 2000,     # Number of iterations
+    burnin = 500     # Burn-in period
+  )
+)
+
+end_time <- Sys.time()
+print(paste("Finished at:", format(end_time, "%H:%M:%S")))
+print(paste("Total time:", round(difftime(end_time, start_time, units = "mins"), 2), "minutes"))
+```
+
+**What do these parameters mean?**
+
+-   `k = 5`: Number of topics (based on our coherence analysis)
+
+-   `method = "Gibbs"`: Gibbs sampling algorithm (standard for LDA)
+
+-   `iter = 2000`: Run 2000 iterations of the algorithm
+
+-   `burnin = 500`: Discard first 500 iterations (model is still
+    "warming up")
+
+-   `thin = 10`: Keep every 10th iteration after burnin (reduces
+    autocorrelation)
+
+-   `seed = 42`: Ensures reproducibility
+
+------------------------------------------------------------------------
+
+### 4.2 Save Your Work
+
+Before continuing, it's a good idea to save your workspace. LDA models
+take time to train, so you don't want to lose your work!
+
+```{r, eval=FALSE}
+# Save the entire workspace
+save.image("../data/Lecture9_LDA_k5.RData")
+
+# Alternatively, save just the LDA model
+# save(lda_model_k5, file = "../data/lda_model_k5.RData")
+
+# To load it later:
+# load("../data/Lecture9_LDA_k5.RData")
+```
+
+**Why save your work?**
+
+-   LDA training can take 5-15 minutes (or longer for large datasets)
+
+-   If R crashes or you close your session, you'd have to retrain
+
+-   `save.image()` saves everything in your workspace
+
+-   `save()` saves specific objects (more efficient if you only need the
+    model)
+
+------------------------------------------------------------------------
+
+### 4.3 Look Inside the LDA Model
+
+```{r}
+# Examine the model structure
+str(lda_model_k5)
+```
+
+**Key components we see:**
+```
+Formal class 'LDA_Gibbs' [package "topicmodels"] with 16 slots
+  ..@ k              : int `r lda_model_k5@k`                                            # Number of topics
+  ..@ terms          : chr [1:`r length(lda_model_k5@terms)`]                            # Vocabulary
+  ..@ documents      : chr [1:`r length(lda_model_k5@documents)`]                        # Document IDs
+  ..@ beta           : num [1:`r lda_model_k5@k`, 1:`r length(lda_model_k5@terms)`]         # Topic-word probabilities
+  ..@ gamma          : num [1:`r length(lda_model_k5@documents)`, 1:`r lda_model_k5@k`]     # Document-topic probabilities
+  ..@ alpha          : num `r lda_model_k5@alpha`                                         # Prior for document-topic distribution
+  ..@ iter           : int `r lda_model_k5@iter`                                          # Total iterations run
+  ..@ loglikelihood  : num `r round(lda_model_k5@loglikelihood, 0)`                       # Model fit
+```
+
+**What these components mean:**
+
+-   **`@k`**: We trained `r lda_model_k5@k` topics (as planned)
+
+-   **`@terms`**: All `r format(length(lda_model_k5@terms), big.mark=",")` unique words in our vocabulary
+
+-   **`@documents`**: All `r format(length(lda_model_k5@documents), big.mark=",")` index we created
+
+-   **`@beta`**: The Topic-Word matrix (which words belong to which topics?)
+
+-   **`@gamma`**: The Document-Topic matrix (which topics appear in which documents?)
+
+-   **`@alpha`**: Hyperparameter controlling topic distribution (`r lda_model_k5@alpha` = fairly diffuse)
+
+-   **`@loglikelihood`**: How well the model fits the data (`r round(lda_model_k5@loglikelihood, 0)` — more negative = worse fit)
+
+------------------------------------------------------------------------
+
+## 5. The Beta & Gamma Matrices
+
+### 5.1 Beta (β): Topic-Word Probabilities
+
+**Beta (β): The per-topic-per-word probabilities**
+
+-   Beta is the proportion of the topic that is made up of words from the vocabulary
+
+-   Shows which words are most important to each topic
+
+-   Dimensions: Topics × Words (`r lda_model_k5@k` × `r format(length(lda_model_k5@terms), big.mark=",")` in our case)
+
+**Gamma (γ): The per-document-per-topic probabilities**
+
+-   Gamma is the proportion of the document that is made up of words from the assigned topic
+
+-   Shows which topics are present in each document
+
+-   Dimensions: Documents × Topics (`r format(length(lda_model_k5@documents), big.mark=",")` × `r lda_model_k5@k` in our case)
+
+------------------------------------------------------------------------
+
+### 5.2 Top Words per Topic - The Beta (β) Matrix using Tidy
+
+```{r}
+# Extract beta matrix using tidytext
+lda_topics <- tidy(lda_model_k5, matrix = "beta")
+head(lda_topics, 20)
+```
+
+-   **Topic 1:** $\beta =$ `r lda_topics |> filter(term == "actions", topic == 1) |> pull(beta) |> round(6)`
+
+-   **Topic 2:** $\beta =$ `r lda_topics |> filter(term == "actions", topic == 2) |> pull(beta) |> round(6)`
+
+-   **Topic 3:** $\beta =$ `r lda_topics |> filter(term == "actions", topic == 3) |> pull(beta) |> round(6)`
+
+-   **Topic 4:** $\beta =$ `r lda_topics |> filter(term == "actions", topic == 4) |> pull(beta) |> round(6)`
+
+-   **Topic 5:** $\beta =$ `r lda_topics |> filter(term == "actions", topic == 5) |> pull(beta) |> round(6)`
+
+Similarly, for "ador":
+
+-   Most strongly associated with **Topic 3** ($\beta =$ `r lda_topics |> filter(term == "ador", topic == 3) |> pull(beta) |> round(4)`)
+
+------------------------------------------------------------------------
+
+### 5.3 Top 10 Words per Topic
+
+```{r}
+# Get top 10 words for each topic
+lda_top_terms <- lda_topics |> 
+  group_by(topic) |> 
+  slice_max(beta, n = 10) |> 
+  ungroup() |> 
+  arrange(topic, -beta)
+
+# View the results
+print(lda_top_terms)
+```
+
+**Interpreting the results:**
+
+Look at the top words for each topic. Do they form coherent themes?
+
+**Questions to ask yourself:**
+
+1.  **Do the words in each topic relate to each other?**
+
+    -   Topic 1's top words are: `r lda_topics |> filter(topic == 1) |> slice_max(beta, n = 5) |> pull(term) |> paste(collapse = ", ")`
+    
+    -   Do these suggest a coherent theme?
+
+2.  **Are the topics distinct from each other?**
+
+    -   Topic 1 top word: `r lda_topics |> filter(topic == 1) |> slice_max(beta, n = 1) |> pull(term)`
+    
+    -   Topic 2 top word: `r lda_topics |> filter(topic == 2) |> slice_max(beta, n = 1) |> pull(term)`
+    
+    -   Do they have different top words, or do they share many? (if so, might need different K)
+
+3.  **Can you give each topic a meaningful label?**
+
+    -   Based on the top 10 words, what would you call each topic?
+    
+    -   Examples: "Fan Discussions", "Artist News", "Music Reviews", etc.
+
+**What makes a good topic?**
+
+-   Words are semantically related
+
+-   Topic has a clear, interpretable theme
+
+-   Topics are distinct from each other (minimal overlap in top words)
+
+------------------------------------------------------------------------
+
+### 5.4 Visualize Top Words
+
+```{r}
+# Visualize top 10 words per topic
+lda_top_terms |> 
+  mutate(term = reorder_within(term, beta, topic)) |> 
+  ggplot(aes(beta, term, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free") +
+  scale_y_reordered() +
+  labs(
+    title = "Top 10 Words per Topic (K=5)",
+    x = "Beta (Word Probability in Topic)",
+    y = NULL
+  ) +
+  theme_minimal()
+```
+
+**Interpreting the visualization:**
+
+-   **Each panel** shows one topic (1-5)
+
+-   **Longer bars** = higher probability in that topic
+
+-   **Y-axis** shows the top 10 words for that topic
+
+-   **X-axis** shows the beta value (word probability)
+
+**What to look for:**
+
+1.  **Clear themes**: Do the words in each panel make sense together?
+
+2.  **Distinct topics**: Are the words different across panels?
+
+3.  **Probability distribution**: Are the beta values concentrated (few dominant words) or spread out (many equally important words)?
+
+Let's examine what each topic represents based on its top words:
+
+**Topic 1 (Red)**: *Subreddit Rules & Content Moderation*
+
+-   Top words: rules, message, questions, reason, pop, content, made, compose, removed, wiki
+
+-   Theme: Meta-discussion about the subreddit itself — posting rules, removed content, wiki references
+
+-   Beta range: 0.010 - 0.024
+
+**Topic 2 (Yellow-Green)**: *Music Appreciation & Reactions*
+
+-   Top words: song, good, songs, album, lol, hope, music, video, makes, thought
+
+-   Theme: Personal reactions to music, casual sentiment around songs and albums
+
+-   Beta range: 0.010 - 0.033 (highest beta of all topics!)
+
+**Topic 3 (Green)**: *HYBE-ADOR Controversy*
+
+-   Top words: hybe, mhj, newjeans, ador, case, illit, side, contract, court, members
+
+-   Theme: Specific legal/industry controversy (HYBE vs. Min Heejin/NewJeans)
+
+-   Beta range: 0.010 - 0.031
+
+**Topic 4 (Blue)**: *Fan Sentiment & General Reactions*
+
+-   Top words: love, back, girls, show, day, bad, world, give, gonna, girl
+
+-   Theme: General emotional reactions and fan commentary — affective language
+
+-   Beta range: 0.005 - 0.031
+
+**Topic 5 (Purple)**: *K-pop Industry & Group Discussions*
+
+-   Top words: people, group, time, year, company, groups, make, years, thing, lot
+
+-   Theme: Broader discussion of groups, companies, and industry dynamics over time
+
+-   Beta range: 0.010 - 0.029
+
+**Key Observations:**
+
+1.  **Clear thematic separation**: Each topic has distinct vocabulary with minimal overlap
+
+2.  **Topic 2 has the highest beta values**: Music appreciation is the most concentrated topic
+
+3.  **Topic 3 is highly specific**: Captures a particular industry event (HYBE-ADOR dispute)
+
+4.  **Topic 1 is meta**: About the subreddit itself, not K-pop content
+
+5.  **Topics 4 and 5**: Capture fan affect and broader industry discourse respectively
+
+**Quality Assessment:**
+
+-   Topics are interpretable
+
+-   Topics are distinct (minimal word overlap)
+
+-   Captures both content (music) and community dynamics (rules, discussions)
+
+-   Topic 3 may be too narrow — it reflects a time-specific controversy that may not generalize
+
+
+------------------------------------------------------------------------
+
+### 5.5 Top Documents per Topic - The Gamma (γ) Matrix using Tidy
+
+Now let's look at **Gamma**: which topics appear in which documents?
+
+```{r}
+# Extract gamma matrix
+lda_documents <- tidy(lda_model_k5, matrix = "gamma")
+
+head(lda_documents, 20)
+```
+
+**What are we seeing?**
+
+Each row shows:
+
+-   `document`: Reddit comment ID (1, 2, 3, ...)
+
+-   `topic`: Topic number (1-5)
+
+-   `gamma`: Probability that this document is about this topic
+
+**Understanding Document 1:**
+
+-   Topic 1 (Subreddit Rules): γ = 0.219 (21.9%) ← **Dominant topic**
+
+-   Topic 2 (Music Appreciation): γ = 0.146 (14.6%)
+
+-   Topic 3 (HYBE-ADOR Controversy): γ = 0.159 (15.9%)
+
+-   Topic 4 (Fan Sentiment): γ = 0.196 (19.6%)
+
+-   Topic 5 (Industry & Groups): γ = 0.196 (19.6%)
+
+**Interpretation:** Document 1 is primarily about **subreddit rules**
+(Topic 1), but has relatively balanced contributions from all topics.
+This suggests a comment that touches on multiple themes — common in 
+Reddit discussions.
+
+**Key observations:**
+
+1.  **Mixed topics are common**: Most documents don't belong to just one topic — gamma values here are fairly balanced across all 5 topics
+
+2.  **Gamma values add up to 1.0** for each document (probabilities must sum to 100%)
+
+3.  **Topic dominance varies**: Some documents have a clear dominant topic, others are more balanced — the relatively even distribution in Document 1 (~0.15-0.22 per topic) is a sign of a short, general comment
+
+------------------------------------------------------------------------
+
+### 5.6 Visualizing Document-Topic Distributions
+
+```{r}
+# Visualize gamma distributions for first few documents
+lda_documents |> 
+  filter(as.numeric(document) <= 10) |>  # First 10 documents only
+  mutate(document = factor(document)) |> 
+  ggplot(aes(x = factor(topic), y = gamma, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ document, ncol = 5) +
+  labs(
+    title = "Topic Distribution in First 10 Documents",
+    x = "Topic",
+    y = "Gamma (Topic Probability)"
+  ) +
+  theme_minimal()
+```
+
+**What this shows:**
+
+-   Each panel = one Reddit comment (Documents 1-10)
+
+-   Bar colors: Red (Topic 1: Subreddit Rules), Yellow-green (Topic 2: Music Appreciation), Green (Topic 3: HYBE-ADOR Controversy), Blue (Topic 4: Fan Sentiment), Purple (Topic 5: Industry & Groups)
+
+-   Taller bars = topic is more dominant in that comment
+
+-   Y-axis goes up to 0.5 (50% probability)
+
+**What do we see?**
+
+-   **Documents with a clear dominant topic:**
+
+    -   **Document 6**: Topic 3 (HYBE-ADOR) ~52% - strongly focused on the controversy
+    
+    -   **Document 3**: Topic 2 (Music Appreciation) ~32% - likely a comment reacting to a song or album
+    
+    -   **Document 1**: Topic 3 (HYBE-ADOR) ~28% - another controversy-leaning comment
+
+-   **Documents with balanced/mixed topics:**
+
+    -   **Documents 2, 4, 5, 7, 8, 9, 10**: All show relatively even distribution across 5 topics (~20% each)
+    
+    -   This represents comments that touch on multiple themes simultaneously
+
+-   **Why is Topic 3 so dominant in some documents?**
+
+    -   The HYBE-ADOR controversy generated highly specific, recurring vocabulary (hybe, mhj, newjeans, court, contract) that clusters tightly — making it easier for the model to assign documents confidently to this topic
+
+-   **Why are most other documents balanced?**
+
+    -   Real K-pop discussions often blend themes:
+    
+        -   Reacting to **music** (Topic 2) while discussing the **artist's company** (Topic 5)
+        
+        -   Expressing **fan sentiment** (Topic 4) about **industry events** (Topic 3)
+        
+        -   General commentary that mixes **rules, music, and group discussion** (Topics 1, 2, 5 mixed)
+
+------------------------------------------------------------------------
+
+### 5.7 Finding Representative Documents for Each Topic
+
+Which documents are the **best examples** of each topic? Let's find
+documents with the highest gamma values for each topic:
+
+```{r}
+# Find top 3 documents for each topic
+top_documents <- lda_documents |> 
+  group_by(topic) |> 
+  slice_max(gamma, n = 3) |> 
+  arrange(topic, -gamma)
+
+print(top_documents)
+```
+
+**What are we finding?**
+
+For each topic, we're identifying the 3 documents that are **most
+strongly associated** with that topic (highest gamma values).
+
+------------------------------------------------------------------------
+
+### 5.8 Examining Representative Document Content
+
+Now let's see what these highly-representative documents actually say:
+
+```{r}
+# Join with original text to see the content
+top_docs_with_text  <- 
+  top_documents |> 
+  mutate(document = as.integer(document)) |>  # Convert character to integer
+  left_join(data3 |> select(comment_index, text, author, score), 
+            by = c("document" = "comment_index")) |> 
+  arrange(topic, -gamma)
+
+# View Topic 1 (Music Appreciation) examples
+top_docs_with_text |> 
+  filter(topic == 1) |> 
+  select(document, gamma, text) |> 
+  head(3)
+```
+
+**Topic 1 (Subreddit Rules & Moderation) - Top Documents:**
+
+-   **What we see:** The three most strongly assigned documents are:
+
+    -   Document 407 (γ = 0.728): Highest probability — very likely a rule-related post
+    
+    -   Document 1012 (γ = 0.722): Closely tied for second
+    
+    -   Document 1188 (γ = 0.722): Identical gamma to Document 1012
+
+-   These documents likely contain:
+
+    -   Moderator removal messages ("Your post has been removed because...")
+    
+    -   Rule clarification or meta-discussion about subreddit guidelines
+    
+    -   Wiki or FAQ references
+    
+    -   Formulaic, repetitive language that clusters tightly around Topic 1 vocabulary (rules, message, compose, wiki, removed)
+
+-   The relatively high gamma values (~0.72) indicate these documents are **strongly assigned** to Topic 1 with much less mixing than the typical document we saw earlier
+
+```{r}
+data3 |> filter(comment_index %in% c(407, 1012, 1188)) |> select(text)
+```
+
+
+Let's examine what a "pure" subreddit rules comment looks like.
+```{r}
+# View Topic 1 (Subreddit Rules) examples
+top_docs_with_text |> 
+  filter(topic == 1) |> 
+  select(document, gamma, text) |> 
+  head(3)
+```
+
+**Discussion questions:**
+
+-   What label would you give each topic based on the comments you see?
+
+-   Do the top words from the beta matrix match what you're reading in the actual comments?
+
+-   Are there any topics that surprise you or are hard to label?
+
+Now it's your turn! Run the code below for each remaining topic and try to interpret what theme each one captures based on the actual comment text.
+
+```{r}
+# View Topic 2 examples -- what theme do you see?
+top_docs_with_text |> 
+  filter(topic == 2) |> 
+  select(document, gamma, text) |> 
+  head(3)
+```
+
+```{r}
+# View Topic 3 examples -- what theme do you see?
+top_docs_with_text |> 
+  filter(topic == 3) |> 
+  select(document, gamma, text) |> 
+  head(3)
+```
+
+```{r}
+# View Topic 4 examples -- what theme do you see?
+top_docs_with_text |> 
+  filter(topic == 4) |> 
+  select(document, gamma, text) |> 
+  head(3)
+```
+
+```{r}
+# View Topic 5 examples -- what theme do you see?
+top_docs_with_text |> 
+  filter(topic == 5) |> 
+  select(document, gamma, text) |> 
+  head(3)
+```
+
+
+------------------------------------------------------------------------
+
+### 5.9 Summary of Representative Documents
+
+Now that you've examined the top documents for each topic, answer the following questions to validate your LDA model:
+
+**Part 1: Complete the validation table**
+
+Based on what you saw in the high-gamma documents, fill in the table:
+
+| **Topic** | **Top Gamma** | **Document Type** | **Does it match the top words?** |
+|-----------|--------------|-------------------|----------------------------------|
+| **Topic 1** | ? | ? | Yes / No / Partially |
+| **Topic 2** | ? | ? | Yes / No / Partially |
+| **Topic 3** | ? | ? | Yes / No / Partially |
+| **Topic 4** | ? | ? | Yes / No / Partially |
+| **Topic 5** | ? | ? | Yes / No / Partially |
+
+**Part 2: Gamma patterns**
+
+1. Which topic had the **highest** gamma values? Why do you think that is?
+
+2. Which topic had the **lowest** gamma values? What does that tell you about the nature of those comments?
+
+3. Did any topic surprise you — either in the documents it captured or the gamma values it produced?
+
+**Part 3: Topic validation**
+
+4. Do the actual comment texts match the top words you saw in the beta matrix (Section 5.4)? Give one example where they matched well and one where they didn't.
+
+5. Would you relabel any of your topics now that you've read the actual documents? If so, which ones and why?
+
+**Part 4: Gamma thresholds**
+
+Looking at your results, what kinds of documents tend to have:
+
+-   Very high gamma (> 0.7)?
+
+-   Mid-range gamma (0.4 - 0.6)?
+
+-   Low, balanced gamma (~0.2 per topic)?
+
+**Part 5: Limitations**
+
+6. We only examined the **top 3 documents** per topic — how might this bias our interpretation?
+
+7. Topic 3 (HYBE-ADOR) is specific to a particular moment in time. What does this mean for using this model on data from a different time period?
+
+8. If you were going to **retrain** this model, what would you change and why?
+
+------------------------------------------------------------------------
+
+### 5.10 Distribution of Dominant Topics
+
+Let's see how many documents are **primarily** about each topic:
+
+```{r}
+# Find the dominant topic for each document
+dominant_topics <- lda_documents |> 
+  group_by(document) |> 
+  slice_max(gamma, n = 1) |> 
+  ungroup()
+
+# Count documents by dominant topic
+topic_distribution <- dominant_topics |> 
+  count(topic) |> 
+  mutate(percentage = n / sum(n) * 100)
+
+knitr::kable(topic_distribution, 
+             col.names = c("Topic", "Number of Documents", "Percentage (%)"),
+             caption = "Distribution of Dominant Topics",
+             digits = 2)
+```
+
+
+**Results:**
+
+-   **Topic 1 (Subreddit Rules)**: `r topic_distribution |> filter(topic == 1) |> pull(n)` documents (`r topic_distribution |> filter(topic == 1) |> pull(percentage) |> round(2)`%)
+
+-   **Topic 2 (Music Appreciation)**: `r topic_distribution |> filter(topic == 2) |> pull(n)` documents (`r topic_distribution |> filter(topic == 2) |> pull(percentage) |> round(2)`%)
+
+-   **Topic 3 (HYBE-ADOR Controversy)**: `r topic_distribution |> filter(topic == 3) |> pull(n)` documents (`r topic_distribution |> filter(topic == 3) |> pull(percentage) |> round(2)`%)
+
+-   **Topic 4 (Fan Sentiment)**: `r topic_distribution |> filter(topic == 4) |> pull(n)` documents (`r topic_distribution |> filter(topic == 4) |> pull(percentage) |> round(2)`%)
+
+-   **Topic 5 (Industry & Groups)**: `r topic_distribution |> filter(topic == 5) |> pull(n)` documents (`r topic_distribution |> filter(topic == 5) |> pull(percentage) |> round(2)`%)
+
+**Total**: `r format(sum(topic_distribution$n), big.mark=",")` documents analyzed
+
+**Key Findings:**
+
+**1. Music Appreciation is the Largest Topic (`r topic_distribution |> filter(topic == 2) |> pull(percentage) |> round(1)`%)**
+
+-   Over 1 in 4 comments is primarily about songs, albums, and music reactions
+
+-   Confirms r/kpop is fundamentally music-driven
+
+**2. HYBE-ADOR Controversy is Substantial (`r topic_distribution |> filter(topic == 3) |> pull(percentage) |> round(1)`%)**
+
+-   Nearly 1 in 5 comments dominated by the legal dispute
+
+-   Shows July 2025 discourse was heavily shaped by this event
+
+-   Time-specific: would likely be near 0% in other months
+
+**3. Subreddit Rules is the Smallest Topic (`r topic_distribution |> filter(topic == 1) |> pull(percentage) |> round(1)`%)**
+
+-   Automated moderation messages are present but not overwhelming
+
+-   Safe to filter out for analysis of organic user discourse
+
+**4. Relatively Balanced Distribution**
+
+-   No single topic dominates (largest is only `r topic_distribution |> slice_max(n, n=1) |> pull(percentage) |> round(1)`%)
+
+-   Suggests diverse community interests across music, controversy, sentiment, and industry discussion
+
+**Interpretation:**
+
+**What this tells us about r/kpop in July 2025:**
+
+-   Music remains central despite ongoing drama — the largest topic is music appreciation, validating the subreddit's core identity
+
+-   The HYBE controversy is significant but not all-consuming — `r 100 - (topic_distribution |> filter(topic == 3) |> pull(percentage) |> round(0))`% of discourse continues on structural topics
+
+-   The community is diverse: engaging with music, fan sentiment, industry news, and major events simultaneously
+
+
+```{r fig.width=10, fig.height=6}
+# Visualize the distribution
+ggplot(topic_distribution, aes(x = factor(topic), y = n, fill = factor(topic))) +
+  geom_col() +
+  geom_text(aes(label = paste0(format(n, big.mark = ","), "\n(", 
+                                round(percentage, 1), "%)")), 
+            vjust = -0.5, size = 4, fontface = "bold") +
+  scale_fill_manual(
+    values = c("1" = "coral", "2" = "darkgoldenrod3", "3" = "darkseagreen", 
+               "4" = "steelblue", "5" = "orchid3"),
+    labels = c("1: Music", "2: Discussions", "3: Rules", "4: Groups", "5: HYBE")
+  ) +
+  labs(
+    title = "Distribution of Dominant Topics Across All Documents",
+    subtitle = "Each document assigned to topic with highest gamma value (July 2025)",
+    x = "Topic",
+    y = "Number of Documents",
+    fill = "Topic"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  scale_y_continuous(labels = scales::comma, 
+                     expand = expansion(mult = c(0, 0.15)))
+```
+
+**Research Questions Answered:**
+
+**1. What do K-pop fans talk about most?**
+
+-   Answer: Fan discussions dominate at `r topic_distribution |> filter(topic == 2) |> pull(percentage) |> round(1)`%, followed by Industry & Groups (`r topic_distribution |> filter(topic == 5) |> pull(percentage) |> round(1)`%) and Groups (`r topic_distribution |> filter(topic == 4) |> pull(percentage) |> round(1)`%)
+
+-   No single topic is overwhelming — relatively balanced engagement across all five
+
+**2. Is the HYBE controversy dominating discourse?**
+
+-   Answer: No. At `r topic_distribution |> filter(topic == 5) |> pull(percentage) |> round(1)`%, it is substantial but not dominant
+
+-   Roughly 4 out of 5 comments are about other topics
+
+-   Shows community resilience to event-driven discourse
+
+**3. How much is meta-discussion vs. content discussion?**
+
+-   **Meta (Rules/Moderation)**: `r topic_distribution |> filter(topic == 3) |> pull(percentage) |> round(1)`%
+
+-   **Content (Music + Groups + HYBE)**: `r (topic_distribution |> filter(topic %in% c(1, 4, 5)) |> pull(percentage) |> sum() |> round(1))`%
+
+-   **Community/Discussions**: `r topic_distribution |> filter(topic == 2) |> pull(percentage) |> round(1)`%
+
+-   Clear preference for content over administration
+
+**4. Are discussions focused or diffuse?**
+
+-   These percentages reflect **forced** single-topic assignment — each document assigned to its highest gamma topic
+
+-   Remember: most documents are mixed (low gamma values from Section 5.8)
+
+-   These percentages show plurality, not purity
+
+**Important Caveat:**
+
+This analysis assigns each document to its **dominant** topic, but:
+
+```{r}
+# How many documents have a CLEAR dominant topic (gamma > 0.5)?
+clear_dominance <- dominant_topics |> 
+  filter(gamma > 0.5) |> 
+  nrow()
+
+total_docs <- nrow(dominant_topics)
+
+mixed_topics <- total_docs - clear_dominance
+
+cat("Documents with clear dominant topic (gamma > 0.5):", 
+    format(clear_dominance, big.mark = ","), 
+    paste0("(", round(clear_dominance/total_docs * 100, 1), "%)"), "\n")
+
+cat("Documents with mixed topics (gamma < 0.5):", 
+    format(mixed_topics, big.mark = ","),
+    paste0("(", round(mixed_topics/total_docs * 100, 1), "%)"), "\n")
+```
+
+
+
+**What this means:**
+
+-   Only `r round(clear_dominance/total_docs * 100, 1)`% of documents (`r format(clear_dominance, big.mark=",")`) are **truly** single-topic (gamma > 0.5)
+
+-   The remaining `r round(mixed_topics/total_docs * 100, 1)`% (`r format(mixed_topics, big.mark=",")` documents) are genuinely mixed across multiple topics
+
+-   A document with gamma = [0.25, 0.24, 0.21, 0.18, 0.12] gets assigned to Topic 1, but it's really **balanced across all topics** — only 25% Topic 1
+
+-   The distribution chart in Section 5.10 shows **plurality**, not purity
+
+**Class Exercise**
+
+Using the code chunks below, redo the distribution table and bar chart filtering only for documents where gamma > 0.5. How does the picture change compared to Section 5.10?
+
+- Which topics gain share? Which lose share?
+
+- What does this tell you about which topics generate more "focused" comments vs. mixed discussion?
+
+
+```{r}
+# Your code here: filter dominant_topics for gamma > 0.5 and recount
+```
+
+
+------------------------------------------------------------------------
+
+### 5.11 Topics Over Time
+
+Now let's see how topics change throughout July 2025 using **average
+gamma values** (not just dominant topics):
+
+```{r}
+# First, let's check the date range in our data
+date_range <- data3 |> 
+  summarize(
+    start_date = min(date),
+    end_date = max(date),
+    total_days = as.numeric(difftime(max(date), min(date), units = "days"))
+  )
+
+cat("Date Range:", format(date_range$start_date, "%B %d, %Y"), 
+    "to", format(date_range$end_date, "%B %d, %Y"), "\n")
+cat("Total Days:", date_range$total_days, "\n")
+```
+
+**Results:**
+
+-   **Start Date**: July 1, 2025
+
+-   **End Date**: July 31, 2025
+
+-   **Total Days**: 30 days (complete month)
+
+**Prepare temporal data with ALL topics:**
+
+```{r}
+# Join ALL topic-document probabilities with date information
+topics_over_time <- lda_documents |> 
+  mutate(document = as.integer(document)) |> 
+  left_join(
+    data3 |> select(comment_index, date),
+    by = c("document" = "comment_index")
+  ) 
+
+# Check for any missing dates
+missing_dates <- topics_over_time |> 
+  filter(is.na(date)) |> 
+  nrow()
+
+cat("Documents with missing dates:", missing_dates, "\n")
+cat("Total topic-document pairs:", nrow(topics_over_time), "\n")
+cat("Unique documents:", length(unique(topics_over_time$document)), "\n")
+```
+
+**Important difference from Section 5.10:**
+
+-   **Section 5.10**: Counted documents by dominant topic (forced single
+    assignment)
+
+-   **Section 5.11**: Uses average gamma across ALL documents each day
+
+-   **Why better**: Captures mixed-topic nature and true topic
+    prevalence
+
+**Daily Average Gamma by Topic:**
+
+```{r fig.width=12, fig.height=6}
+# Calculate daily average gamma for each topic
+daily_topic_averages <- topics_over_time |> 
+  group_by(date, topic) |> 
+  summarize(
+    mean_gamma = mean(gamma),
+    median_gamma = median(gamma),
+    n_docs = n_distinct(document),
+    .groups = "drop"
+  )
+
+# Plot daily average gamma
+ggplot(daily_topic_averages, aes(x = date, y = mean_gamma, color = factor(topic))) +
+  geom_line(size = 1) +
+  geom_point(size = 2, alpha = 0.6) +
+  scale_color_manual(
+    values = c("1" = "coral", "2" = "darkgoldenrod3", "3" = "darkseagreen", 
+               "4" = "steelblue", "5" = "orchid3"),
+    labels = c("1: Music", "2: Discussions", "3: Rules", "4: Groups", "5: HYBE")
+  ) +
+  scale_x_date(date_breaks = "3 days", date_labels = "%b %d") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Daily Average Topic Prevalence (July 2025)",
+    subtitle = "Mean gamma (topic probability) across all documents each day",
+    x = "Date",
+    y = "Average Topic Probability (Gamma)",
+    color = "Topic"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "bottom"
+  )
+```
+
+**What this shows:**
+
+-   **Y-axis**: Average probability that a random comment on that day
+    belongs to each topic
+
+-   **Higher line**: Topic is more prevalent in discourse that day
+
+-   **Lines sum to 1.0**: On any given day, all topic probabilities add
+    to 100%
+
+-   **Changes over time**: Shows how topic prevalence shifts through the
+    month
+
+**Smoothed Trends (LOESS):**
+
+```{r fig.width=12, fig.height=6}
+# Smooth trends with loess
+ggplot(daily_topic_averages, aes(x = date, y = mean_gamma, color = factor(topic))) +
+  geom_smooth(method = "loess", se = TRUE, size = 1.2, span = 0.3, alpha = 0.2) +
+  scale_color_manual(
+    values = c("1" = "coral", "2" = "darkgoldenrod3", "3" = "darkseagreen", 
+               "4" = "steelblue", "5" = "orchid3"),
+    labels = c("1: Music", "2: Discussions", "3: Rules", "4: Groups", "5: HYBE")
+  ) +
+  scale_x_date(date_breaks = "3 days", date_labels = "%b %d") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Smoothed Topic Prevalence Trends (July 2025)",
+    subtitle = "LOESS smoothing (span=0.3) shows underlying patterns in average gamma",
+    x = "Date",
+    y = "Average Topic Probability (Gamma)",
+    color = "Topic"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "bottom"
+  )
+```
+
+**Why smoothing matters:**
+
+-   Daily data has noise (random variation in comment mix)
+
+-   LOESS reveals the **trend** beneath the noise
+
+-   Confidence bands show uncertainty in the trend
+
+-   Easier to see if topics are rising, falling, or stable
+
+**Individual Topic Trends (Faceted View):**
+
+```{r fig.width=12, fig.height=10}
+# Faceted view for each topic
+ggplot(daily_topic_averages, aes(x = date, y = mean_gamma)) +
+  geom_line(size = 1, color = "steelblue") +
+  geom_point(size = 2, color = "steelblue", alpha = 0.6) +
+  geom_smooth(method = "loess", se = TRUE, color = "red", size = 0.8, 
+              span = 0.3, alpha = 0.2) +
+  facet_wrap(~ topic, ncol = 1, scales = "free_y",
+             labeller = labeller(topic = c(
+               "1" = "Topic 1: Music Appreciation",
+               "2" = "Topic 2: Fan Discussions",
+               "3" = "Topic 3: Rules/Moderation",
+               "4" = "Topic 4: Groups/Industry",
+               "5" = "Topic 5: HYBE-ADOR Controversy"
+             ))) +
+  scale_x_date(date_breaks = "3 days", date_labels = "%b %d") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Individual Topic Trends Over Time (July 2025)",
+    subtitle = "Daily average gamma with smoothed trend lines (red)",
+    x = "Date",
+    y = "Average Topic Probability (Gamma)"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    strip.text = element_text(face = "bold", size = 11)
+  )
+```
+
+**Analyzing each panel:**
+
+**Topic 1 (Music Appreciation):** Starts around 19%, rises to a peak of ~21.5% around July 5-6, dips mid-month (July 14-23), then recovers toward the end of July. The mid-month dip likely reflects displacement by the Rules/Moderation spike during the same period — when moderation activity surges, music discussion gets crowded out.
+
+**Topic 2 (Fan Discussions):** Starts as the highest topic (~22%) and shows a gradual declining trend across the month, settling around 20% by late July. The smoothed red line is the clearest downward slope of any topic — early July was more discussion-heavy, possibly because major events hadn't yet driven more focused conversation.
+
+**Topic 3 (Rules/Moderation):** The most dramatic trend of all five panels. Starts flat and low (~18.5%), remains suppressed through early July, then rises sharply from July 13 onward — peaking around July 24-25 at ~24-25%. This is a sustained increase, not just a one-day spike, suggesting a prolonged wave of moderation activity in the second half of the month.
+
+**Topic 4 (Groups/Industry):** Relatively stable around 20% for most of the month, with a notable spike around July 20 (~22.5%) before declining toward the end of July. The late-month downward trend is the clearest of any topic — group and industry discussion fades as July closes.
+
+**Topic 5 (HYBE-ADOR Controversy):** The most stable topic overall — oscillates narrowly between 19-21% throughout the entire month with no dramatic spikes or troughs. Interestingly, HYBE discussion does not spike sharply at any single point, suggesting the controversy generated consistent sustained attention rather than discrete event-driven surges.
+
+**Day of Week Patterns:**
+
+```{r fig.width=10, fig.height=6}
+# Add day of week
+topics_by_weekday <- topics_over_time |> 
+  mutate(weekday = weekdays(date)) |> 
+  group_by(weekday, topic) |> 
+  summarize(mean_gamma = mean(gamma), .groups = "drop") |> 
+  mutate(weekday = factor(weekday, 
+                         levels = c("Monday", "Tuesday", "Wednesday", 
+                                   "Thursday", "Friday", "Saturday", "Sunday")))
+
+ggplot(topics_by_weekday, aes(x = weekday, y = mean_gamma, fill = factor(topic))) +
+  geom_col(position = "fill") +
+  scale_fill_manual(
+    values = c("1" = "coral", "2" = "darkgoldenrod3", "3" = "darkseagreen", 
+               "4" = "steelblue", "5" = "orchid3"),
+    labels = c("1: Music", "2: Discussions", "3: Rules", "4: Groups", "5: HYBE")
+  ) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Topic Prevalence by Day of Week",
+    subtitle = "Average gamma (stacked to 100%) by day",
+    x = "Day of Week",
+    y = "Average Topic Probability",
+    fill = "Topic"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "bottom"
+  )
+```
+
+**Research Questions:**
+
+-   Do music discussions increase on weekends (listening time)?
+
+-   Does moderation intensity vary by day?
+
+-   Are industry announcements timed to specific days?
+
+-   Is controversy discussion consistent across the week?
+
+**Weekend vs. Weekday Analysis:**
+
+**Interpretation:**
+
+-   **Positive difference**: Topic probability increases on weekends
+
+-   **Negative difference**: Topic probability decreases on weekends
+
+-   **% Change**: Magnitude of weekend effect
+
+```{r}
+# Categorize weekend vs weekday
+topics_weekend <- topics_over_time |> 
+  mutate(
+    weekday = weekdays(date),
+    is_weekend = weekday %in% c("Saturday", "Sunday")
+  ) |> 
+  group_by(is_weekend, topic) |> 
+  summarize(mean_gamma = mean(gamma), .groups = "drop")
+
+# Calculate difference
+weekend_effect <- topics_weekend |> 
+  pivot_wider(names_from = is_weekend, values_from = mean_gamma, 
+              names_prefix = "weekend_") |> 
+  mutate(
+    difference = weekend_TRUE - weekend_FALSE,
+    pct_change = (difference / weekend_FALSE) * 100
+  ) |> 
+  arrange(desc(abs(difference)))
+
+knitr::kable(weekend_effect, 
+             digits = 4,
+             col.names = c("Topic", "Weekday Gamma", "Weekend Gamma", 
+                          "Difference", "% Change"),
+             caption = "Weekend Effect on Topic Prevalence")
+```
+
+**Weekend Effect on Topic Prevalence**
+
+The table quantifies what the stacked bar chart suggested visually — differences between weekday and weekend gamma are tiny:
+
+**Topic 1 (Music Appreciation)** is the only topic that increases on weekends (+6.2%, from 0.193 to 0.205). This makes intuitive sense: fans have more leisure time on weekends to listen to music and write longer, more detailed reactions and reviews.
+
+**All other topics decline slightly on weekends:**
+
+-   Topic 5 (HYBE-ADOR): -2.6% — legal and industry news may be less likely to break on weekends
+
+-   Topic 3 (Rules/Moderation): -1.7% — moderation activity may be slightly lower when fewer staff are active
+
+-   Topic 2 (Fan Discussions): -1.2% — marginal decline, essentially flat
+
+-   Topic 4 (Groups/Industry): -0.5% — virtually no change
+
+**Key Takeaway:**
+
+All differences are well under 10% and span a range of only 0.012 gamma points — substantively negligible. The weekend effect on r/kpop discourse is essentially non-existent, with the minor exception of slightly elevated music appreciation on weekends. For research purposes, day-of-week is unlikely to be a meaningful confound in this dataset and does not need to be controlled for in further analysis.
+
+```{r}
+# Check if topics compete or co-occur
+topic_correlations <- daily_topic_averages |> 
+  select(date, topic, mean_gamma) |> 
+  pivot_wider(names_from = topic, values_from = mean_gamma, 
+              names_prefix = "topic_") |> 
+  select(-date) |> 
+  cor()
+
+# Display as heatmap
+library(reshape2)
+cor_melted <- melt(topic_correlations)
+
+ggplot(cor_melted, aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  geom_text(aes(label = round(value, 2)), color = "white", size = 4) +
+  scale_fill_gradient2(low = "blue", mid = "white", high = "red", 
+                       midpoint = 0, limits = c(-1, 1)) +
+  labs(
+    title = "Topic Correlation Matrix",
+    subtitle = "Do topics rise and fall together over time?",
+    x = "Topic",
+    y = "Topic",
+    fill = "Correlation"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+**Interpretation of Correlation Results:**
+
+**Strongest pattern: Topic 2 (Music Appreciation) ↔ Topic 3 (HYBE-ADOR): r = -0.85**
+
+-   The strongest relationship in the matrix — when HYBE controversy discussion rises, music appreciation falls proportionally
+
+-   Suggests controversy directly crowds out content-focused discussion — a zero-sum attention dynamic
+
+**Second strongest: Topic 1 (Subreddit Rules) ↔ Topic 3 (HYBE-ADOR): r = -0.54**
+
+-   When HYBE discussion increases, moderation activity decreases
+
+-   Possibly because controversy threads stay up longer and generate less rule-breaking content than general posts
+
+**Positive co-occurrence: Topic 2 (Music) ↔ Topic 4 (Fan Sentiment): r = 0.37**
+
+-   Music appreciation and fan sentiment rise and fall together — active music days also produce more emotional fan reactions
+
+**Everything else is weak (|r| < 0.4)**
+
+-   Topic 5 (Industry & Groups) shows no strong relationship with any other topic — it operates largely independently
+
+**Statistical note:** With 30 data points (days in July), correlations above |0.36| are significant at p < 0.05. The -0.85 finding is highly significant (p < 0.001).
+
+------------------------------------------------------------------------
+
+## Lecture 9 Cheat Sheet: Topic Modeling (LDA)
+
+| **Function/Concept** | **Description** | **Code Example** |
+|---------------------------|----------------------|-----------------------|
+| **LDA Concept** | Unsupervised ML technique that discovers latent topics. Each document = mixture of topics; each topic = mixture of words. | Two key principles:<br>1. Documents contain multiple topics<br>2. Topics contain multiple words |
+| **Document-Term Matrix (DTM)** | Rows = documents, columns = words, values = counts. Sparse matrix (mostly zeros). | `cast_dtm(comment_index, word, n)` |
+| **Sparsity** | Percentage of matrix that is zeros. Text data is naturally 95%+ sparse. | `tidy_dfm@Dim` shows dimensions |
+| **Language Detection** | Identify language of text using Google's CLD2 package. | `cld2::detect_language(data$text)` |
+| **Remove Duplicates** | Keep only unique texts to avoid bias from repeated content. | `distinct(text, .keep_all = TRUE)` |
+| **Custom Stopwords** | Combine multiple stopword sources + domain-specific terms. | `c(stopwords("en"), stopwords(source = "smart"), "custom")` |
+| **TF-IDF Filtering** | Remove words that are too common (appear in \>75% of docs) or too rare (\<0.1% of docs). | `doc_freq = n() / templength`<br>`filter(doc_freq < maxndoc & doc_freq > minndoc)` |
+| **FindTopicsNumber()** | Tests multiple K values with different coherence metrics (CaoJuan, Deveaud). | `FindTopicsNumber(dtm, topics = seq(2, 20, 1), metrics = c("CaoJuan2009"))` |
+| **CaoJuan2009** | Minimize this metric. Lower = topics are more distinct. | Shows steady decline, minimum = optimal K |
+| **Deveaud2014** | Maximize this metric. Higher = better topic divergence. Often noisy. | More variable than CaoJuan |
+| **Choosing K** | Balance coherence (quality) with interpretability. Look for "elbow" in coherence plot. | K=5 had best coherence (-160.46) in our example |
+| **LDA()** | Train LDA model using Gibbs sampling method. | `LDA(dtm, k = 5, method = "Gibbs", control = list(seed = 42, iter = 2000))` |
+| **LDA Parameters** | `k`: number of topics<br>`iter`: iterations to run<br>`burnin`: discard first N iterations<br>`seed`: reproducibility | `control = list(verbose = 500, seed = 42, iter = 2000, burnin = 500)` |
+| **Beta (β) Matrix** | Topic-word probabilities. Dimensions: Topics × Words (5 × 2,683). Shows which words define each topic. | `tidy(lda_model_k5, matrix = "beta")` |
+| **Gamma (γ) Matrix** | Document-topic probabilities. Dimensions: Documents × Topics (22,316 × 5). Shows which topics appear in each document. | `tidy(lda_model_k5, matrix = "gamma")` |
+| **slice_max()** | Get top N rows by a value. Used to find top words per topic. | `group_by(topic) |> slice_max(beta, n = 10)` |
+| **reorder_within()** | Reorder terms within each facet for better visualization. | `mutate(term = reorder_within(term, beta, topic))` |
+| **scale_y_reordered()** | Scale y-axis for faceted plots with reorder_within(). | Pairs with `reorder_within()` in faceted plots |
+| **Interpreting Beta** | Higher beta = word is more important to that topic. Compare relative values across topics, not absolute. | β = 0.043 for "song" in Topic 1 is very high |
+| **Interpreting Gamma** | Gamma values sum to 1.0 per document. Gamma \> 0.5 = clear dominant topic; gamma \< 0.5 = mixed topics. | Document with [0.25, 0.24, 0.21, 0.18, 0.12] is mixed |
+| **Dominant Topic** | Topic with highest gamma for a document. Useful for categorizing documents. | `group_by(document) |> slice_max(gamma, n = 1)` |
+| **Representative Documents** | Documents with highest gamma for each topic. Best examples of "pure" topics. | Gamma \> 0.7 = very pure (e.g., template text) |
+| **Topic Distribution** | Count how many documents belong primarily to each topic. | `count(topic) |> mutate(percentage = n/sum(n)*100)` |
+| **Temporal Analysis** | Track how topic prevalence changes over time using average gamma by date. | `group_by(date, topic) |> summarize(mean_gamma = mean(gamma))` |
+| **LOESS Smoothing** | Smooth noisy time series to reveal underlying trends. | `geom_smooth(method = "loess", span = 0.3)` |
+| **Weekend Effect** | Compare topic prevalence on weekends vs. weekdays. | `mutate(is_weekend = weekday %in% c("Saturday", "Sunday"))` |
+| **Topic Correlation** | Correlation between topics' daily prevalence. Positive = co-occur; negative = compete. | `pivot_wider(names_from = topic) |> cor()` |
+| **Zero-Sum Attention** | Strong negative correlation (r \< -0.7) means topics compete for attention. | Topic 1 ↔ Topic 5: r = -0.85 (very strong competition) |
+| **Complementary Topics** | Positive correlation (r \> 0.4) means topics rise together. | Topic 1 ↔ Topic 4: r = 0.47 (content topics co-occur) |
+| **Validation Strategy** | Check if high-gamma documents match beta-based topic interpretations. | Examine top 3 docs per topic for thematic consistency |
+| **Template Detection** | Very high gamma (\>0.7) often indicates formulaic/template text (mod messages). | Can filter out for organic discourse analysis |
+| **Data Loss Tracking** | Track documents removed at each preprocessing step. | Original → Language filter → Deduplication → TF-IDF filter |
+| **Memory Management** | Remove unused objects and run garbage collection for large models. | `rm(list = setdiff(ls(), keep_objects))`<br>`gc()` |
+| **Save Workspace** | Save entire workspace or specific objects for later use. | `save.image("file.RData")`<br>`save(lda_model_k5, file = "model.RData")` |
+| **Interpretation Principle** | Topics are probabilistic and mixed. No document is purely one topic. Focus on relative probabilities. | Most documents have gamma \< 0.5 for dominant topic |
+| **Quality Indicators** | ✅ High coherence<br>✅ Distinct topics (minimal word overlap)<br>✅ Interpretable themes<br>✅ Representative docs match beta words | K=5 achieved all quality criteria in example |
+| **Common Pitfall** | Interpreting gamma as hard categories. Documents are mixtures! | Document [0.28, 0.23, 0.21, 0.18, 0.10] isn't "Topic 1" |
+| **Research Applications** | Content categorization, trend analysis, event detection, community discourse structure, attention dynamics. | Used to answer "What do fans discuss?" and "How does discourse shift over time?" |

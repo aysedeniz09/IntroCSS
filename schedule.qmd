@@ -15,12 +15,12 @@ title: "Course Schedule - Masters"
 | | Mar 9 | **SPRING BREAK - No Class** | | |
 | 6 | Mar 16 | Statistics | | [View](#readings-6) |
 | 7 | Mar 23 | Text as Data: Dictionary Methods and Word Embeddings | | [View](#readings-7) |
-| 8 | Mar 30 | **Midterm Exam** | **Midterm** | |
-| 9 | Apr 6 | Text as Data: Topic Modeling | | [View](#readings-9) |
-| 10 | Apr 13 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-10) |
-| 11 | Apr 22* | Predictive modelling | | [View](#readings-11) |
-| | Apr 23 | **Yotam Ophir CRC DeFleur Lecture at 3:00 pm** | | |
-| 13 | Apr 27 | From Data to Conclusions | | [View](#readings-13) |
+|  | Mar 30 | **Midterm Exam** | **Midterm** | |
+| 8 | Apr 6 | Text as Data: Topic Modeling | | [View](#readings-8) |
+| 9 | Apr 13 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-9) |
+| 10 | Apr 22* | Predictive modelling | | [View](#readings-10) |
+|  | Apr 23 | **Yotam Ophir CRC DeFleur Lecture at 3:00 pm** | | |
+| 11 | Apr 27 | From Data to Conclusions | | [View](#readings-12) |
 | | **May 1** | | **Final Papers Due** | |
 
 *Monday schedule (university holiday adjustment)
@@ -38,13 +38,14 @@ title: "Course Schedule - Masters"
 | 5 | Feb 18 | Descriptive Data | | [View](#readings-5) |
 | 6 | Feb 25 | Statistics |  | [View](#readings-6) |
 | 7 | Mar 4 | Text as Data: Dictionary Methods and Word Embeddings | **Benchmark 1 Due** | [View](#readings-7) |
-| 8 | Mar 18 | Text as Data: Topic Modeling | | [View](#readings-9) |
-| 9 | Mar 25 | **Midterm Exam** | **Midterm** | |
-| 10 | Apr 1 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-10) |
-| 11 | Apr 8 | Predictive modelling | | [View](#readings-11) |
-| 12 | Apr 15 | Networks | | [View](#readings-12) |
-| 13 | Apr 29 | From Data to Conclusions | | [View](#readings-13) |
-| | **May 4** | | **Final Papers Due** | |
+| 8 | Mar 18 | Text as Data: Topic Modeling | | [View](#readings-8) |
+|  | Mar 25 | **Midterm Exam** | **Midterm** | |
+| 9 | Apr 1 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-9) |
+| 10 | Apr 8 | Predictive modelling | | [View](#readings-10) |
+| 11 | Apr 15 | Networks | | [View](#readings-11) |
+|  | Apr 23 | **Yotam Ophir CRC DeFleur Lecture at 3:00 pm** | | |
+| 12 | Apr 29 | From Data to Conclusions | | [View](#readings-12) |
+|  | **May 4** | | **Final Papers Due** | |
 
 ---
 
@@ -138,7 +139,7 @@ title: "Course Schedule - Masters"
 
 ---
 
-### Session 9: Text as Data - Topic Modeling {#readings-9}
+### Session 8: Text as Data - Topic Modeling {#readings-8}
 
 - DiMaggio, P., Nag, M., & Blei, D. (2013). Exploiting affinities between topic modeling and the sociological perspective on culture: Application to newspaper coverage of U.S. government arts funding. *Poetics*, 41(6), 570-606. https://doi.org/10.1016/j.poetic.2013.08.004
 
@@ -148,9 +149,10 @@ title: "Course Schedule - Masters"
 
 [Back to Schedule](#section-a---mondays-230-515-pm)
 
+
 ---
 
-### Session 10: Text as Data - Unsupervised Machine Learning Continued {#readings-10}
+### Session 9: Text as Data - Unsupervised Machine Learning Continued {#readings-9}
 
 No assigned readings for this session.
 
@@ -160,7 +162,7 @@ No assigned readings for this session.
 
 ---
 
-### Session 11: Predictive modelling {#readings-11}
+### Session 10: Predictive modelling {#readings-10}
 
 - Breiger, R. L. (1974). The Duality of Persons and Groups. *Social Forces*, 53(2), 181. https://doi.org/10.2307/2576011
 
@@ -178,7 +180,7 @@ No assigned readings for this session.
 
 ---
 
-### Session 12: Networks {#readings-12}
+### Session 11: Networks {#readings-11}
 
 - Breiger, R. L. (1974). The Duality of Persons and Groups. *Social Forces*, 53(2), 181. https://doi.org/10.2307/2576011
 
@@ -192,7 +194,7 @@ No assigned readings for this session.
 
 ---
 
-### Session 13: From Data to Conclusions {#readings-13}
+### Session 12: From Data to Conclusions {#readings-12}
 
 - Bower, B. (2018, July 27). 'Replication crisis' spurs reforms in how science studies are done. *Science News*. https://www.sciencenews.org/blog/science-the-public/replication-crisis-psychology-science-studies-statistics
 

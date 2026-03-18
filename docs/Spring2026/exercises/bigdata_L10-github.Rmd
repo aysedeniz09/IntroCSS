@@ -1,8 +1,8 @@
 ---
-title: "Text as Data: Unsupervised machine learning continuedText as Data: Unsupervised machine learning continued"
+title: "Predictive Modeling"
 subtitle: "COM EM757"
 author: "Dr. Ayse D. Lokmanoglu"
-date: 'Lecture 10, (B) April 6, (A) April 1'
+date: 'Lecture 11, (B) April 8, (A) April 13'
 output: github_document
 always_allow_html: true
 editor_options: 
@@ -20,1909 +20,1863 @@ knitr::opts_chunk$set(
 
 # R Exercises
 
-## Table of Contents
+## Lecture 11 Table of Contents
 
 | Section | Topic |
 |---------|-------|
-| 1 | Loading L9 Results and Creating Meta-Theta DataFrame |
-| 1.1 | Load Workspace from L9 |
-| 1.2 | Extract Gamma Matrix |
-| 1.3 | Create Meta-Theta DataFrame |
-| 1.4 | Verify Data Structure |
-| 2 | Sentiment Analysis |
-| 2.1 | Tokenize the Text |
-| 2.2 | AFINN Sentiment Dictionary |
-| 2.3 | Bing Sentiment Dictionary |
-| 2.4 | NRC Emotion Lexicon |
-| 2.5 | Comparing All Three Dictionaries |
-| 2.5.1 | Coverage Comparison |
-| 2.5.2 | Sentiment Distribution Comparison |
-| 2.5.3 | Correlation Between Dictionaries |
-| 2.5.4 | Which Dictionary Should We Use? |
-| 3 | Sentiment by Topic Analysis |
-| 3.1 | Create Sentiment-Topic Dataset |
-| 3.2 | Aggregate Sentiment by Topic |
-| 3.3 | Visualize Topic Sentiment |
-| 3.4 | Statistical Significance |
-| 3.5 | Class Exercise: Changing the Reference Category |
-| 3.6 | Sentiment Over Time |
-| 3.6.1 | Prepare Temporal Data |
-| 3.6.2 | Overall Sentiment Trend |
-| 3.6.3 | Sentiment by Topic Over Time |
-| 3.6.4 | Topic Prevalence Over Time |
-| 4 | Comprehensive Class Exercise |
+| 1 | Introduction to Predictive Modeling |
+| 2 | Music Lyrics Dataset: Country vs Hip Hop |
+| 2.1 | Loading the Data |
+| 2.2 | Exploring the Data |
+| 2.3 | Genre Distribution |
+| 3 | Feature Engineering from Text |
+| 3.1 | Creating the Text Recipe |
+| 3.2 | Preparing the Recipe |
+| 3.3 | Applying the Recipe to Create Features |
+| 4 | Tidymodels Workflow |
+| 4.1 | Split the Data |
+| 4.2 | Create the Recipe |
+| 4.3 | Specify a Model |
+| 4.4 | Create a Workflow |
+| 4.5 | Fit the Model |
+| 4.6 | Make Predictions |
+| 4.7 | Evaluate Performance |
+| 4.8 | Feature Importance |
+| 5 | Model Comparison |
+| 5.1 | Define Models |
+| 5.2 | Create Workflows and Fit Models |
+| 5.3 | Generate Predictions |
+| 5.4 | Compare Model Performance |
+| 5.5 | Understanding ROC Curves |
+| 5.6 | Interpret Results |
+| 6 | Testing on "Old Town Road" |
+| 6.1 | Prepare the Lyrics |
+| 6.2 | Get Predictions from All Models |
+| 6.3 | Get Probability Estimates |
+| 6.4 | Interpretation |
+| 7 | Class Exercise: Test Your Own Song! |
+| 7.1 | Instructions |
+| 7.2 | Discussion Questions |
+| 7.3 | Optional: Compare Multiple Songs |
 
 ------------------------------------------------------------------------
 
-
-
-
 **ALWAYS** Let's load our libraries
+
 ```{r}
-library(tidyverse)    # Data manipulation and visualization
-library(tidytext)     # Text mining using tidy data principles
-library(ggplot2)      # Data visualization
-library(topicmodels)  # For working with LDA models
-library(lubridate)    # Date handling
+# 1. CORE DATA MANIPULATION & VISUALIZATION
+# ----------------------------------------------------------------------------
+library(tidyverse)    # Suite of packages (dplyr, ggplot2, tidyr, readr, stringr) for data manipulation and visualization
+
+# ----------------------------------------------------------------------------
+# 2. TEXT MINING & PREPROCESSING
+# ----------------------------------------------------------------------------
+library(textrecipes)  # tidymodels extension for text feature engineering (BoW, TF-IDF, tokenization, etc.)
+
+# ----------------------------------------------------------------------------
+# 3. TIDYMODELS ECOSYSTEM (Modern ML Framework)
+# ----------------------------------------------------------------------------
+library(tidymodels)   # Meta-package for predictive modeling (includes rsample, recipes, parsnip, yardstick, workflows, broom)
+                      # - rsample: data splitting and resampling
+                      # - recipes: feature engineering pipeline
+                      # - parsnip: unified model interface
+                      # - yardstick: model performance metrics
+                      # - workflows: combine preprocessing and models
+                      # - broom: tidy model outputs
+
+# ----------------------------------------------------------------------------
+# 4. ML MODEL ENGINES (called by parsnip)
+# ----------------------------------------------------------------------------
+library(ranger)       # Fast Random Forest implementation (engine for parsnip)
+library(kernlab)      # Support Vector Machines with kernel methods (engine for parsnip)
+library(naivebayes)   # Naive Bayes classifier (engine for parsnip)
+library(discrim)      # Discriminant analysis models (provides Naive Bayes interface for tidymodels)
+
 ```
 
+## 1. Introduction to Predictive Modeling
 
-## 1. Loading L9 Results and Creating Meta-Theta DataFrame
+Predictive modeling is the process of using statistical and machine
+learning techniques to **predict future outcomes** based on historical
+data. Unlike descriptive analysis (which tells us *what happened*) or
+diagnostic analysis (which tells us *why it happened*), predictive
+modeling tells us **what is likely to happen**.
 
-In Lecture 9, we trained an LDA model with K=5 topics on K-pop Reddit comments. 
-Now we'll extract the topic probabilities (gamma values) and combine them with 
-the original comment data for sentiment analysis and regression modeling.
+The basic workflow:
 
-### 1.1 Load Workspace from L9
+1.  **Train** a model on historical data where outcomes are known
 
-```{r}
-# Load the saved workspace from Lecture 9
-# load("../data/Lecture9_LDA_k5.RData")
+2.  **Identify patterns** that distinguish different outcomes
 
-# Load from url
-load(url("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/Lecture9_LDA_k5.RData"))
+3.  **Apply** those patterns to new data to make predictions
 
-rm(end_time, start_time)
+**Why Predictive Modeling in Big Data?**
 
-# Check what objects we have
-ls()
+In the era of big data, we have unprecedented access to information
+about human behavior through social media (billions of posts, comments,
+likes, shares), digital traces (clicks, views, time spent), and
+real-time data streams. This wealth of data allows us to forecast trends
+before they go viral, identify influential content early, personalize
+experiences based on predicted preferences, detect anomalies like
+misinformation, and optimize strategies for content creation and
+distribution.
+
+**Predictive Modeling for Social Media Insights**
+
+Social media platforms generate massive amounts of unstructured data.
+Predictive modeling helps answer critical questions:
+
+-   **Content virality**: Will this video/post go viral?
+
+-   **User engagement**: Which users are likely to engage with specific
+    content?
+
+-   **Influence detection**: Who are the emerging influencers?
+
+-   **Crisis prediction**: Can we detect brewing controversies before
+    they explode?
+
+-   **Campaign optimization**: Which message will resonate with which
+    audience?
+
+Real-world applications include YouTube's recommendation algorithm
+predicting which videos you'll watch next, Twitter (X) predicting which
+tweets to show in your feed, TikTok predicting which videos will go
+viral and promoting them early, and political campaigns predicting voter
+behavior to target messaging.
+
+Today in class we will build predictive models using two very different
+types of data:
+
+1.  **Text + Metadata**: YouTube video data to predict virality (feature
+    engineering from text: sentiment, length, keywords; combining text
+    features with numeric metadata)
+
+2.  **Numeric Features**: Titanic passenger data to predict survival
+    (traditional numeric feature engineering; handling missing data)
+
+Both use the same machine learning algorithms, demonstrating how the
+**same techniques** work across **different data types**.
+
+------------------------------------------------------------------------
+
+## 2. Music Lyrics Dataset: Country vs Hip Hop
+
+### 2.1 Loading the Data
+
+For this exercise, we'll use a dataset of song lyrics from two genres: **Country** and **Hip Hop**. Our goal is to build a model that can predict a song's genre based solely on its lyrics.
+
+This dataset became famous in 2019 when Lil Nas X's "Old Town Road" sparked a debate: Is it Country or Hip Hop? Billboard removed it from the Country charts, claiming it wasn't country enough. We'll build a model to make this decision ourselves! I learned ML on this dataset in Dror Walter's class as well! 
+
+**Dataset Source**: 
+<https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/lyricsDror.csv>
+
+```{r, eval=TRUE}
+# Load the data
+lyrics <- read_csv("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/lyricsDror.csv")
+
+# Quick check
+dim(lyrics)
 ```
 
-We should see:
+**Dataset Size**: 51,251 songs - a substantial dataset for predictive modeling!
 
-- `lda_model_k5`: The trained LDA model
+------------------------------------------------------------------------
 
-- `data`: Original comment data
+### 2.2 Exploring the Data
 
-- `data2`: Clean comment data
+Let's look at the structure of our data:
 
-- `data3`: Final cleaned data we will use
+```{r, eval=TRUE}
+# First few rows
+head(lyrics)
 
-- `tidy_dfm`: The document-term matrix
+# Structure
+str(lyrics)
 
-- `mystopwords`: Stopwords we used in cleaning 
+# Column names
+colnames(lyrics)
+```
 
+**Column Names (6 columns):**
 
+- `index`: Unique song identifier
 
-### 1.2 Extract Gamma Matrix
+- `song`: Song title
 
-The **gamma matrix** contains the probability that each document belongs to each topic.
-For our data:
+- `year`: Year the song was released
 
-- Rows = comments (22,408 comments)
+- `artist`: Artist name
 
-- Columns = topics (5 topics)
+- `genre`: Music genre (Country or HipHop) - **our outcome variable**
 
-- Values = probabilities (sum to 1.0 per row)
+- `text`: Song lyrics (text) - **our main predictor**
+
+**Data Types:**
+
+- `genre` is already a **factor** with 2 levels: Country and HipHop
+
+- `text` contains the full lyrics as character strings
+
+- `year` ranges from when to when?
+
+- `artist` tells us who performed the song
+
+------------------------------------------------------------------------
+
+### 2.3 Genre Distribution
+
+First, let's see how balanced our dataset is between Country and Hip Hop:
+
+1. Count by genre
+
+```{r, eval=TRUE}
+# Count by genre
+lyrics |>
+  count(genre)
+```
+
+2. Proportion by genre
 
 ```{r}
-# Extract gamma values using tidy()
-gamma_df <- tidy(lda_model_k5, matrix = "gamma")
+# Proportion by genre
+lyrics |>
+  count(genre) |>
+  mutate(proportion = n / sum(n))
+```
 
-# Look at the structure
-head(gamma_df)
+3. Visualize
+
+```{r}
+# Visualize genre distribution
+lyrics |>
+  count(genre) |>
+  ggplot(aes(x = genre, y = n, fill = genre)) +
+  geom_col() +
+  geom_text(aes(label = scales::comma(n)), vjust = -0.5) +
+  scale_fill_manual(values = c("Country" = "goldenrod", "HipHop" = "purple")) +
+  labs(
+    title = "Distribution of Songs by Genre",
+    x = "Genre",
+    y = "Number of Songs"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+**What do we observe?**
+
+Our dataset contains:
+
+- **Country**: 17,286 songs (33.7%)
+
+- **Hip Hop**: 33,965 songs (66.3%)
+
+This is a **roughly 1:2 imbalance**. Hip Hop songs outnumber Country songs by about 2 to 1.
+
+**Why does this matter for modeling?**
+
+- This imbalance is **moderate** - not severely skewed like 90/10, but still meaningful
+
+- A naive model could achieve 66.3% accuracy by always predicting "Hip Hop"
+
+- We need to use **stratified sampling** when splitting our data to maintain this proportion in both training and testing sets
+
+- We should evaluate our model using metrics beyond just accuracy (e.g., precision, recall, F1-score for each class)
+
+- Later in Section 4, we'll use `initial_split(strata = genre)` to ensure both our training and test sets maintain this ~34%/66% split
+
+**Good news:** This level of imbalance is manageable! Many real-world datasets are far more imbalanced (e.g., fraud detection at 99/1). Our 34/66 split means both genres are well-represented.
+
+------------------------------------------------------------------------
+
+## 3. Feature Engineering from Text
+
+Before we can build our predictive model, we need to transform raw lyrics into numerical features that machine learning algorithms can understand. 
+
+**The Challenge:**
+
+- Machine learning models work with numbers, not text
+
+- We have song lyrics as raw strings in the `text` column
+
+- We need to extract meaningful numeric features that capture the **essence** of Country vs Hip Hop
+
+**Our Approach: Bag of Words**
+
+We'll use a classic text mining approach called **Bag of Words (BoW)**:
+
+1. **Tokenize**: Break lyrics into individual words
+
+2. **Clean**: Remove stopwords, punctuation, numbers
+
+3. **Stem**: Reduce words to their root form (e.g., "running" → "run")
+
+4. **Count**: Create word frequency features
+
+5. **Filter**: Keep only words that appear in 1-90% of documents (remove very rare and very common words)
+
+This creates a **document-feature matrix** where each row is a song and each column is a word's frequency.
+
+In tidymodels, we'll use the [`textrecipes`](https://textrecipes.tidymodels.org/) package to handle all text preprocessing within our recipe!
+
+------------------------------------------------------------------------
+
+### 3.1 Creating the Text Recipe
+
+Let's build a recipe that preprocesses our text data following the same approach as the original analysis:
+
+```{r, eval=TRUE}
+# Create a text preprocessing recipe
+text_recipe <- recipe(genre ~ text, data = lyrics) |>
+  
+  # Step 1: Tokenize the text into words
+  step_tokenize(text) |>
+  
+  # Step 2: Remove stopwords (common words like "the", "and", etc.)
+  step_stopwords(text) |>
+  
+  # Step 3: Stem words to their root form
+  step_stem(text) |>
+  
+  # Step 4: Filter tokens - keep words appearing in 1-90% of documents
+  step_tokenfilter(text, 
+                   min_times = 513,       # Must appear in at least ~1% of 51,251 songs
+                   max_times = 46126,     # Must appear in at most ~90% of 51,251 songs
+                   percentage = FALSE) |> # Use absolute counts
+  
+  # Step 5: Create term frequency features (word counts)
+  step_tf(text)
+
+# View the recipe
+# str(text_recipe)
+```
+
+**What does each step do?**
+
+1. **`step_tokenize(text)`**: Splits lyrics into individual words
+
+   - "I love country music" → ["I", "love", "country", "music"]
+
+2. **`step_stopwords(text)`**: Removes common words that don't distinguish genres
+
+   - Removes: "the", "a", "and", "I", "you", etc.
+   
+   - Keeps: content words that might be genre-specific
+
+3. **`step_stem(text)`**: Reduces words to their root form
+
+   - "running", "runs", "ran" → "run"
+   
+   - "loving", "loved", "loves" → "love"
+
+4. **`step_tokenfilter(text, min_times = 513, max_times = 46126)`**: 
+
+   - Removes very rare words (< 513 songs)
+   
+   - Removes very common words (> 46,126 songs)
+   
+   - Keeps discriminative words that might distinguish Country from Hip Hop
+
+5. **`step_tf(text)`**: Converts tokens into numeric term frequency features
+
+   - Creates one column per remaining word
+   
+   - Values = how many times that word appears in each song
+
+
+------------------------------------------------------------------------
+
+### 3.2 Preparing the Recipe
+
+Before we can use the recipe, we need to **prep** it on our data to learn the vocabulary:
+
+```{r, eval=TRUE}
+# Prep the recipe (learns vocabulary from training data)
+prepped_recipe <- prep(text_recipe)
+
+# How many features did we create?
+# str(prepped_recipe)
+```
+
+**What happens during `prep()`?**
+
+- The recipe examines all the lyrics
+
+- It builds a vocabulary of words that pass our filtering criteria
+
+- It determines which words to keep (appearing in 1-90% of documents)
+
+- It creates the stemming dictionary
+
+**How many features?**
+
+After tokenization, stopword removal, stemming, and filtering, we'll likely have **several hundred to a few thousand word features** - each representing a stemmed word's frequency.
+
+**What happened during our prep?**
+
+- The recipe examined all 51,251 songs
+
+- Built a vocabulary of all unique stemmed words
+
+- Applied the filtering rules (keep words in 513-46,126 songs)
+
+- Identified **99 words** that meet our criteria
+
+These 99 words will become our features for modeling!
+
+
+------------------------------------------------------------------------
+
+### 3.3 Applying the Recipe to Create Features
+
+Now let's use `bake()` to transform our raw text into numeric features:
+
+```{r, eval=TRUE}
+# Apply the recipe to transform the data
+lyrics_features <- bake(prepped_recipe, lyrics)
+
+# View the structure
+dim(lyrics_features)
+colnames(lyrics_features)[1:20]  # First 20 features
+
+# Preview the data
+head(lyrics_features[, 1:10])
+```
+
+**What do we have now?**
+
+- **100 columns total**:
+
+  - 1 column: `genre` (our outcome)
+  
+  - 99 columns: `tf_text_[word]` (word frequency features)
+  
+- Each row is a song
+
+- Each word column contains the count of that word in the song
+
+- This is our **document-feature matrix** - ready for machine learning!
+
+For example, looking at the first few songs:
+
+- Most Hip Hop songs have 0 occurrences of "alwai" (always)
+
+- One song has "ass" appearing 3 times
+
+- "back" appears 1-3 times in different songs
+
+------------------------------------------------------------------------
+
+## 4. Tidymodels Workflow
+
+Now we'll build, train, and evaluate machine learning models using the tidymodels framework. Here's our roadmap:
+
+1. **Split the data** into training and test sets
+
+2. **Create a recipe** (we already have this!)
+
+3. **Specify a model** 
+
+4. **Create a workflow** (combine recipe + model)
+
+5. **Fit the model** on training data
+
+6. **Make predictions** on test data
+
+7. **Evaluate performance**
+
+### 4.1 Split the Data
+
+First, let's split into training (75%) and test (25%) sets:
+
+```{r, eval=TRUE}
+# Set seed for reproducibility
+set.seed(123)
+
+# Split the data, stratifying by genre to maintain 34%/66% ratio
+lyrics_split <- initial_split(lyrics, 
+                               prop = 0.75, 
+                               strata = genre)
+
+# Create training and test sets
+lyrics_train <- training(lyrics_split)
+lyrics_test <- testing(lyrics_split)
+
+# Check the splits
+nrow(lyrics_train)  # ~38,438 songs
+nrow(lyrics_test)   # ~12,813 songs
+
+# Verify stratification worked
+table(lyrics_train$genre)
+table(lyrics_test$genre)
+```
+
+```{r, eval=TRUE}
+# Verify stratification maintained the genre proportions
+prop.table(table(lyrics_train$genre))
+prop.table(table(lyrics_test$genre))
+```
+
+**Key observations:**
+
+- Training set: 38,437 songs (75%)
+
+  - Country: 12,964 (33.7%)
+  
+  - Hip Hop: 25,473 (66.3%)
+
+- Test set: 12,814 songs (25%)
+
+  - Country: 4,322 (33.7%)
+  
+  - Hip Hop: 8,492 (66.3%)
+
+The stratification worked great!!! Both sets maintain the same 34%/66% split as the original data.
+
+------------------------------------------------------------------------
+
+### 4.2 Create the Recipe
+
+Good news - we already created our text recipe in Section 3! We can reuse it:
+
+```{r, eval=TRUE}
+# Our recipe from Section 3
+head(text_recipe)
+```
+
+This recipe will:
+
+1. Tokenize the text
+
+2. Remove stopwords
+
+3. Stem words
+
+4. Filter to 99 most informative words
+
+5. Create word frequency features
+
+------------------------------------------------------------------------
+
+### 4.3 Specify a Model
+
+Now we'll specify our first model - **logistic regression**. In tidymodels, we use the [`parsnip`](https://parsnip.tidymodels.org/) package to define models in a consistent way.
+
+```{r, eval=TRUE}
+# Specify a logistic regression model
+logistic_model <- logistic_reg() |>
+  set_engine("glm") |>
+  set_mode("classification")
+
+# View the model specification
+logistic_model
+```
+
+**Understanding the model specification:**
+
+- `logistic_reg()`: The model type (logistic regression for binary classification)
+
+- `set_engine("glm")`: The computational engine (R's built-in `glm` function)
+
+- `set_mode("classification")`: We're predicting categories (Country vs Hip Hop), not numbers
+
+**Why logistic regression?**
+
+- Simple, interpretable baseline model
+
+- Works well with text features
+
+- Fast to train
+
+- Shows us which words are most predictive of each genre
+
+We'll compare this to other models (Random Forest, SVM, Naive Bayes) later, but logistic regression is a great starting point!
+
+------------------------------------------------------------------------
+
+### 4.4 Create a Workflow
+
+A workflow combines our recipe (feature engineering) with our model (algorithm). This keeps everything organized:
+
+```{r, eval=TRUE}
+# Create a workflow
+logistic_wf <- workflow() |>
+  add_recipe(text_recipe) |>
+  add_model(logistic_model)
+
+# View the workflow
+logistic_wf
+```
+
+**What's in our workflow?**
+
+1. **Preprocessor (Recipe)**: Tokenize → Remove stopwords → Stem → Filter → Count words
+
+2. **Model**: Logistic regression
+
+Think of the workflow as a pipeline: raw lyrics go in, genre predictions come out!
+
+------------------------------------------------------------------------
+
+### 4.5 Fit the Model
+
+Now we'll train (fit) our workflow on the training data:
+
+```{r, eval=TRUE}
+# Fit the workflow to training data
+logistic_fit <- logistic_wf |>
+  fit(data = lyrics_train)
+
+# View the fitted model
+logistic_fit
+```
+
+**What just happened?**
+
+1. The recipe processed all 38,437 training songs:
+
+   - Tokenized the lyrics
+   
+   - Removed stopwords and stemmed words
+   
+   - Filtered to our 99 selected words
+   
+   - Created word frequency features
+
+2. The logistic regression learned patterns:
+
+   - Which words are more common in Country songs?
+   
+   - Which words are more common in Hip Hop songs?
+   
+   - How to combine these words to predict genre
+
+**How long did this take?**
+
+With 38,437 songs and 99 features, the model trains in seconds - one advantage of keeping our feature set focused!
+
+**Look at those coefficients!** 
+
+Notice the patterns:
+- **Strongest Hip Hop words** (large positive coefficients): `shit` (2.58), `fuck` (2.15), `bitch` (1.95), `yo` (1.71)
+
+- **Strongest Country words** (large negative coefficients): `well` (-0.43), `heart` (-0.39), `little` (-0.36), `home` (-0.27)
+
+The model learned exactly what we'd expect - profanity and slang for Hip Hop, traditional/emotional words for Country!
+
+------------------------------------------------------------------------
+
+### 4.6 Make Predictions
+
+Let's use our trained model to predict genres for the test set:
+
+```{r, eval=TRUE}
+# Make predictions on test data
+logistic_predictions <- logistic_fit |>
+  predict(new_data = lyrics_test) |>
+  bind_cols(lyrics_test)
+
+# View first few predictions
+logistic_predictions |>
+  select(.pred_class, genre, song, artist) |>
+  head(10)
 ```
 
 **Understanding the output:**
 
-- `document`: The comment_index (as character)
+- `.pred_class`: The model's prediction (Country or HipHop)
 
-- `topic`: Which topic (1-5)
+- `genre`: The actual genre (ground truth)
 
-- `gamma`: Probability this document belongs to this topic
+- When `.pred_class` matches `genre`, the model got it right!
 
-Let's look at one comment's topic distribution:
-
-```{r}
-# Example: Topic probabilities for comment 1
-gamma_df |> 
-  filter(document == "1") |> 
-  arrange(desc(gamma))
-
-# Verify probabilities sum to 1
-gamma_df |> 
-  filter(document == "1") |> 
-  summarise(total_gamma = sum(gamma))
-```
-
-### 1.3 Create Meta-Theta DataFrame
-
-Now we'll reshape gamma from long to wide format and join with original data:
-
-```{r}
-# Convert document to numeric to match comment_index
-gamma_df <- gamma_df |> 
-  mutate(comment_index = as.numeric(document))
-
-# Pivot to wide format: one column per topic
-gamma_wide <- gamma_df |> 
-  select(-document) |> 
-  pivot_wider(names_from = topic, 
-              values_from = gamma,
-              names_prefix = "topic_")
-
-head(gamma_wide)
-```
-
-Now join with original comment data:
-
-```{r}
-# Create meta_theta_df: original data + topic probabilities
-meta_theta_df <- data3 |> 
-  select(comment_index, text, date, score, text_length, controversiality, downs) |> 
-  inner_join(gamma_wide, by = "comment_index")  # inner_join ensures we only keep documents in the model
-
-# View structure
-glimpse(meta_theta_df)
-```
-
-### 1.4 Verify Data Structure
-
-Let's verify everything looks correct:
-
-```{r}
-# Check: do we have all our comments?
-nrow(data3)
-nrow(meta_theta_df)
-
-# Check: do gamma values sum to 1 for each comment?
-meta_theta_df |> 
-  mutate(gamma_sum = topic_1 + topic_2 + topic_3 + topic_4 + topic_5) |> 
-  pull(gamma_sum) |> 
-  summary()
-
-# Should all be 1.000 (or very close due to rounding)
-
-# Check: what are the distributions of topic probabilities?
-meta_theta_df |> 
-  select(starts_with("topic_")) |> 
-  summary()
-```
-
-**What the Summary Statistics Tell Us:**
-
-- Means ≈ 0.20: Confirms topics are roughly balanced across the corpus
-
-- Medians ≈ 0.19-0.20: Most comments have near-equal topic distribution
-
-- Max values vary:
-   - Topic 5 (HYBE): 0.832 - some comments are 83% about the controversy!
-   
-   - Topic 2 (Discussions): 0.449 - lower ceiling, more general discussions
-   
-   - Topic 1 (Music): 0.768 - strong music-focused comments exist
+- When they differ, the model made a mistake
 
 
-Let's visualize the topic distributions:
+**Perfect predictions!** All 10 Eazy-E songs correctly identified as Hip Hop. Let's see the probabilities:
 
+Let's also get prediction probabilities:
 
-**What to look for:**
+```{r, eval=TRUE}
+# Get prediction probabilities
+logistic_probs <- logistic_fit |>
+  predict(new_data = lyrics_test, type = "prob") |>
+  bind_cols(lyrics_test)
 
-- Most comments have low gamma for most topics (left-skewed)
-
-- Some comments have high gamma for one topic (right tail)
-
-
-```{r}
-# Reshape for visualization
-topic_dist <- meta_theta_df |>
-  select(comment_index, starts_with("topic_")) |>
-  pivot_longer(cols = starts_with("topic_"),
-               names_to = "topic",
-               values_to = "gamma",
-               names_prefix = "topic_") |>
-  mutate(topic = factor(topic, levels = 1:5,
-                        labels = c("Topic 1: Music",
-                                   "Topic 2: Discussions", 
-                                   "Topic 3: Rules",
-                                   "Topic 4: Groups",
-                                   "Topic 5: HYBE")))
-
-# Distribution of gamma values by topic
-ggplot(topic_dist, aes(x = gamma, fill = topic)) +
-  geom_histogram(bins = 50, alpha = 0.7) +
-  facet_wrap(~topic, ncol = 1) +
-  labs(title = "Distribution of Topic Probabilities",
-       subtitle = "How strongly do comments belong to each topic?",
-       x = "Gamma (Topic Probability)",
-       y = "Number of Comments") +
-  theme_minimal() +
-  theme(legend.position = "none")
+# View first few with probabilities
+logistic_probs |>
+  select(.pred_Country, .pred_HipHop, genre, song, artist) |>
+  head(20)
 ```
 
 
+**Understanding probabilities:**
 
-**Interpreting the Visualization:**
+- `.pred_Country`: Probability the song is Country (0-1)
 
-The histograms show how topic probabilities (gamma values) are distributed across all 22,316 comments. Each panel represents one topic, and the x-axis shows the probability that a comment belongs to that topic.
+- `.pred_HipHop`: Probability the song is Hip Hop (0-1)
+
+- These always sum to 1.0
+
+- Higher probability = more confident prediction
+
+------------------------------------------------------------------------
+
+### 4.7 Evaluate Performance
+
+First, let's convert genre to a factor in our predictions:
+
+```{r, eval=TRUE}
+logistic_predictions <- logistic_predictions |>
+  mutate(genre = factor(genre, levels = c("Country", "HipHop")))
+
+logistic_probs <- logistic_probs |>
+  mutate(genre = factor(genre, levels = c("Country", "HipHop")))
+```
+
+Now let's measure how well our model performed:
+
+```{r, eval=TRUE}
+# ROC AUC - specify HipHop as the event level
+logistic_probs |>
+  roc_auc(truth = genre, .pred_HipHop, event_level = "second")
+```
+
+```{r, eval=TRUE}
+# Accuracy (needs hard class predictions)
+logistic_predictions |>
+  accuracy(truth = genre, .pred_class)
+```
+
+```{r, eval=TRUE}
+# Precision
+logistic_predictions |>
+  yardstick::precision(truth = genre, .pred_class)
+```
+
+```{r, eval=TRUE}
+# Recall (Sensitivity)
+logistic_predictions |>
+  yardstick::sensitivity(truth = genre, .pred_class)
+```
+
+```{r, eval=TRUE}
+# F1 Score
+logistic_predictions |>
+  f_meas(truth = genre, .pred_class)
+```
+
+**Interpretation of Results:**
+
+- **ROC AUC**: 0.889 - Excellent ability to distinguish between Country and HipHop (0.5 = random, 1.0 = perfect)
+
+- **Accuracy**: 83.2% - The model correctly classified 83% of all songs
+
+- **Precision**: 83.6% - Of songs predicted as HipHop, 84% actually were HipHop
+
+- **Recall**: 62.6% - Of all actual HipHop songs, we caught 63%
+
+- **F1 Score**: 71.6% - Harmonic mean of precision and recall
+
+
+**Confusion Matrix:**
+
+```{r, eval=TRUE}
+logistic_predictions |>
+  conf_mat(truth = genre, estimate = .pred_class)
+```
+
+**Visualize:**
+```{r, eval=TRUE}
+logistic_predictions |>
+  conf_mat(truth = genre, estimate = .pred_class) |>
+  autoplot(type = "heatmap") +
+  labs(title = "Logistic Regression Confusion Matrix")
+```
+
+
+**Reading the Confusion Matrix:**
+
+|  | **Actually Country** | **Actually HipHop** |
+|---|---|---|
+| **Predicted Country** | 2,706 ✓ | 531 ✗ |
+| **Predicted HipHop** | 1,616 ✗ | 7,961 ✓ |
 
 **Key Observations:**
 
-1. **Most comments are mixed-topic** (gamma ≈ 0.20)
+1. **Strong at identifying HipHop**: 7,961 out of 8,492 HipHop songs correctly identified (93.7%)
 
-   - The peak around 0.20 for all topics makes sense: 1/5 = 0.20
-   
-   - This means most comments don't strongly belong to any single topic
-   
-   - Instead, they contain a mixture of themes
+2. **Weaker at identifying Country**: 2,706 out of 4,322 Country songs correctly identified (62.6%)
 
-2. **Right-skewed distributions**
+3. **Class imbalance effect**: The model has more HipHop training data (66%), so it performs better on HipHop
 
-   - All topics show a right tail extending toward higher gamma values
-   
-   - This represents comments that ARE strongly about one specific topic
-   
-   - For example, Topic 5 (HYBE controversy) has comments with gamma up to 0.83
+4. **Asymmetric errors**: The model misclassifies 1,616 Country songs as HipHop, but only 531 HipHop songs as Country
 
-3. **Topic-specific patterns**
+The model is biased toward predicting HipHop, which makes sense given the 2:1 ratio of HipHop to Country songs in the training data.
 
-   - **Topic 1 (Music)**: Wider spread, some very music-focused comments
-   
-   - **Topic 3 (Rules)**: Tighter distribution, template moderation messages likely
-   
-   - **Topic 5 (HYBE)**: Longest right tail, indicating polarizing controversy content
 
+### 4.8 Feature Importance
 
-**Why This Matters for Sentiment Analysis:**
+Feature importance shows us which words have the strongest influence on the model's predictions. We can extract this from the logistic regression coefficients:
 
-Understanding these distributions is crucial before we add sentiment scores because:
-
-1. We can analyze sentiment within topics (e.g., "Is HYBE controversy more negative than music appreciation?")
-
-2. We can identify "pure" topic comments (high gamma) vs. "mixed" comments (low gamma)
-
-3. We can see if sentiment varies by how strongly a comment belongs to a topic
-
-------------------------------------------------------------------------
-
-## 2. Sentiment Analysis
-
-In this section, we'll analyze the sentiment of K-pop Reddit comments and compare different sentiment dictionaries to see which works best for our data.
-
-### 2.1 Tokenize the Text
-
-First, we need to break the text into individual words (tokens) and remove stopwords:
-
-```{r}
-# Tokenize comments - keep topic probabilities for later analysis
-tokens <- meta_theta_df |> 
-  select(comment_index, text, score, starts_with("topic_")) |> 
-  unnest_tokens(word, text) |> 
-  anti_join(stop_words, by = "word")
-
-# Check structure
-head(tokens, 20)
-
-# How many words do we have?
-nrow(tokens) ##total toekns
-n_distinct(tokens$word)## unique tokens
-round(nrow(tokens) / n_distinct(tokens$comment_index), 1) ## avreage words/comment
-```
-
-**What we're doing:**
-
-1. **`unnest_tokens(word, text)`**: Splits each comment into individual words
-
-   - Converts to lowercase automatically
-   
-   - Removes punctuation
-   
-   - Creates one row per word
-
-2. **`anti_join(stop_words)`**: Removes common words like "the", "and", "is"
-
-   - Stopwords don't carry sentiment
-   
-   - Focusing on content words improves sentiment accuracy
-
-3. **Keeping topic probabilities**: We maintain the topic_1 through topic_5 columns so we can later analyze sentiment by topic
-
-**What this tells us:**
-
-- **405,126 total words**: After removing stopwords, we have ~18 meaningful words per comment
-
-- **29,730 unique words**: Very diverse vocabulary - K-pop fans use rich, varied language
-
-- **18.2 words per comment**: Typical for Reddit comments - not too short (spam) or too long (essays)
-
-- This vocabulary size is excellent for sentiment analysis - plenty of words to match against sentiment dictionaries
-
-------------------------------------------------------------------------
-
-### 2.2 AFINN Sentiment Dictionary
-
-**Reminder from [Lecture 7](https://aysedeniz09.github.io/IntroCSS/Spring2026/LectureSlides/bigdata_L7-github.html#sentiment-analysis-with-dictionary-methods):**
-
-AFINN is a lexicon of English words rated for valence on a scale from **-5** (very negative) to **+5** (very positive).
-
-- ✅ **Numeric scale**: Captures intensity (e.g., "good" = +3, "excellent" = +4)
-
-- ✅ **Great for regression**: Numeric outcome works well in statistical models
-
-- ❌ **Smaller vocabulary**: ~2,477 words
-
-Let's apply AFINN to our K-pop comments and see how it performs:
-
-```{r}
-# Apply AFINN sentiment dictionary
-afinn_sentiment <- tokens |> 
-  inner_join(get_sentiments("afinn"), by = "word") |> 
-  group_by(comment_index) |> 
-  summarise(
-    sentiment_afinn = sum(value),        # Total sentiment score
-    n_sentiment_words = n(),             # How many sentiment words found
-    avg_sentiment = mean(value)          # Average sentiment per word
-  ) |> 
-  ungroup()
-
-# Check results
-head(afinn_sentiment, 10)
-
-# Summary statistics
-summary(afinn_sentiment$sentiment_afinn)
-summary(afinn_sentiment$n_sentiment_words)
-summary(afinn_sentiment$avg_sentiment)
-```
-
-**Understanding the Output:**
-
-- **`sentiment_afinn`**: Sum of all sentiment word scores in the comment
-
-  - Positive = overall positive comment, Negative = overall negative comment
-  
-- **`n_sentiment_words`**: How many AFINN words were found
-
-  - More words = more confident score
-  
-- **`avg_sentiment`**: Average sentiment per word
-
-  - Better for comparing short vs. long comments
-
-
-**Interpreting the Results:**
-
-- Overall Sentiment (sentiment_afinn):
-
-   - Median = 1.0, Mean = 1.028: K-pop comments are slightly positive overall
-   
-   - Range: -80 to +126: Some extremely positive/negative comments exist
-   
-   - IQR: -2 to +3: Most comments fall in a narrow range around neutral
-
-```
-# sentiment_afinn (sum of scores)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--80.000  -2.000   1.000   1.028   3.000 126.000 
-```
-
-
-- Sentiment Word Count (n_sentiment_words):
- 
-   - Median = 2, Mean = 3: Most comments contain only 1-3 sentiment words
-
-   - Max = 88: Some very long, emotionally-charged comments exist
-   
-   - This low count suggests many comments are factual/informational rather than opinion-based
-
-```
-# n_sentiment_words (count of words)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  1.000   1.000   2.000   2.995   3.000  88.000 
-```
-
-
-- Average Sentiment (avg_sentiment):
-
-   - Median = 0.67, Mean = 0.50: Slight positive bias per sentiment word
-   
-   - Full range: -5 to +5: Some comments use only extreme words
-   
-   - Better metric than sum for comparing short vs. long comments
-
-```
-# avg_sentiment (average per word)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--5.0000 -1.0000  0.6667  0.5019  2.0000  5.0000
-```
-
-
-**Visualize the distribution:**
-
-```{r}
-# Distribution of AFINN scores
-ggplot(afinn_sentiment, aes(x = sentiment_afinn)) +
-  geom_histogram(bins = 50, fill = "steelblue", alpha = 0.7) +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "red", size = 1) +
-  labs(
-    title = "Distribution of AFINN Sentiment Scores",
-    subtitle = paste0("K-pop Reddit comments (n = ", nrow(afinn_sentiment), ")"),
-    x = "AFINN Sentiment Score",
-    y = "Number of Comments"
-  ) +
-  theme_minimal()
-```
-
-
-**What does this tell us about K-pop Reddit?**
-
-Looking at the distribution:
-
-- **Strong concentration near zero**: The histogram shows a tall, narrow peak centered just above 0 (the red dashed line), indicating most comments are neutral to slightly positive
-
-- **Right-skewed**: The distribution has a longer tail toward positive values, confirming K-pop Reddit is more positive than negative overall
-
-- **Few extreme negatives**: The left tail is very short with almost no comments below -20, suggesting the community rarely expresses intense negativity
-
-- **Positive outliers exist**: Some comments reach scores of +50 to +120, likely expressing extreme enthusiasm about artists, music, or performances
-
-- **Most comments fall in [-5, +15] range**: The bulk of the distribution is concentrated in this narrow window, suggesting moderate emotional expression in most comments
-
-**Coverage: How many comments were scored?**
-```{r}
-# Calculate coverage
-afinn_coverage <- nrow(afinn_sentiment)
-print(afinn_coverage)
-
-coverage_pct <- round(afinn_coverage / nrow(meta_theta_df) * 100, 1)
-print(coverage_pct)
-
-```
-
-**What does coverage tell us?**
-
-- **74% coverage is good** for social media data—AFINN captured sentiment in about 3 out of 4 comments
-
-- The **5,809 unscored comments** (26%) are likely:
-
-  - Factual/informational posts (comeback announcements, chart positions, tour dates)
-  
-  - Very short comments (single words, acronyms)
-  
-  - K-pop-specific slang not in AFINN ("bias", "stan", "ult", "comeback", "bop")
-  
-  - Links, usernames, or technical discussions
-
-This is typical for domain-specific communities like K-pop fandom subreddits.
-
-**Example: Top positive and negative comments**
-
-```{r}
-# Join AFINN scores back to original text
-afinn_with_text <- afinn_sentiment |> 
-  inner_join(meta_theta_df |> select(comment_index, text, score), 
-             by = "comment_index")
-
-# Most positive comments
-afinn_with_text |> 
-  arrange(desc(sentiment_afinn)) |> 
-  select(sentiment_afinn, n_sentiment_words, text) |> 
-  head(3) |> 
-  print()
-
-afinn_with_text |> 
-  arrange(sentiment_afinn) |> 
-  select(sentiment_afinn, n_sentiment_words, text) |> 
-  head(3) |> 
-  print()
-```
-
-------------------------------------------------------------------------
-
-### 2.3 Bing Sentiment Dictionary
-
-**Reminder from [Lecture 7](https://aysedeniz09.github.io/IntroCSS/Spring2026/LectureSlides/bigdata_L7-github.html#sentiment-analysis-with-dictionary-methods):**
-
-Bing is a binary sentiment lexicon that classifies words as either **positive** or **negative**.
-
-- ✅ **Larger vocabulary**: ~6,786 words (more coverage than AFINN)
-
-- ✅ **Simple interpretation**: Just positive vs. negative
-
-- ❌ **No intensity**: "good" and "excellent" both = positive (no difference)
-
-- ❌ **Binary only**: Can't use in regression models (need numeric scores)
-
-Let's apply Bing and compare to AFINN:
-
-```{r}
-# Apply Bing sentiment dictionary
-bing_sentiment <- tokens |> 
-  inner_join(get_sentiments("bing"), by = "word") |> 
-  group_by(comment_index) |> 
-  summarise(
-    n_positive = sum(sentiment == "positive"),   # Count positive words
-    n_negative = sum(sentiment == "negative"),   # Count negative words
-    n_sentiment_words = n(),                     # Total sentiment words
-    sentiment_bing = n_positive - n_negative     # Net sentiment score
-  ) |> 
-  ungroup()
-
-# Check results
-head(bing_sentiment, 10)
-
-# Summary statistics
-summary(bing_sentiment$sentiment_bing)
-summary(bing_sentiment$n_sentiment_words)
-```
-
-**Interpreting the Results:**
-
-- Net Sentiment (sentiment_bing):
-
-   - Median = 0, Mean = -0.075: Comments are essentially neutral with a tiny negative lean
-   
-   - Range: -41 to +56: Similar range to AFINN, some very strong opinions exist
-   
-   - IQR: -1 to +1: Most comments fall in a very narrow range (1 more positive or negative word)
-
-```
-# sentiment_bing (net score: positive - negative)
-   Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
--41.0000  -1.0000   0.0000  -0.0753   1.0000  56.0000 
-```
-
-- Sentiment Word Count (n_sentiment_words):
-
-   - Median = 2, Mean = 3.14: Bing found slightly more sentiment words than AFINN (mean 3.14 vs. 2.995)
-   
-   - Max = 81: Similar to AFINN (88), capturing long emotional comments
-   
-   - Bing's larger vocabulary helps detect more sentiment words
-   
-```
-# n_sentiment_words (count of words)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   1.00    1.00    2.00    3.14    4.00   81.00
-```
-
-**Visualize the distribution:**
-
-```{r}
-# Distribution of Bing net sentiment scores
-ggplot(bing_sentiment, aes(x = sentiment_bing)) +
-  geom_histogram(binwidth = 1, fill = "coral", alpha = 0.7) +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "red", size = 1) +
-  labs(
-    title = "Distribution of Bing Net Sentiment Scores",
-    subtitle = "K-pop Reddit comments (positive words - negative words)",
-    x = "Bing Net Sentiment Score",
-    y = "Number of Comments"
-  ) +
-  theme_minimal()
-```
-
-**What does the Bing distribution tell us?**
-
-Looking at the histogram:
-
-- **Even stronger concentration at zero**: The peak is centered almost exactly on 0 (red line), much more so than AFINN
-
-- **More symmetric distribution**: Unlike AFINN's right skew, Bing shows a more balanced distribution with similar tails on both sides
-
-- **Narrow range for most comments**: The bulk falls within [-5, +5], suggesting most comments have roughly equal positive and negative words
-
-- **Similar tail lengths**: Both positive and negative extremes exist (up to ±40-60), but neither dominates
-
-**Comparing the visualizations (AFINN vs. Bing):**
-
-| Feature | AFINN | Bing |
-|---------|-------|------|
-| **Center** | Slightly above 0 (positive) | Exactly at 0 (neutral) |
-| **Shape** | Right-skewed | Symmetric/normal |
-| **Interpretation** | Community leans positive | Community is balanced |
-
-**Why the difference?**
-
-- **AFINN** captures that K-pop fans use intense positive words ("love" = +3, "amazing" = +4)
-
-- **Bing** just counts words as positive/negative equally, missing this intensity
-
-- A comment with "I love this amazing performance!" scores:
-
-  - AFINN: +3 + 4 = **+7** (captures enthusiasm)
-  
-  - Bing: 1 + 1 = **+2** (just counts two positive words)
-
-**Takeaway:** Bing suggests K-pop Reddit is **neutral**, while AFINN suggests it's **slightly positive**. AFINN is likely more accurate because it captures the intensity of fan language.
-
-------------------------------------------------------------------------
-
-**Coverage: How does Bing compare to AFINN?**
-```{r}
-# Calculate Bing coverage
-bing_coverage <- nrow(bing_sentiment)
-print(bing_coverage)
-
-bing_coverage_pct <- round(bing_coverage / nrow(meta_theta_df) * 100, 1)
-print(bing_coverage_pct)
-```
-
-**Wait, Bing scored FEWER comments?**
-
-This is surprising! Bing has a much larger vocabulary (~6,786 words vs. ~2,477), so we'd expect *higher* coverage. Why did AFINN score 265 more comments?
-
-**Note:** We'll compare all three dictionaries in Section 2.5 to see which works best for our K-pop data.
-
-
-**Example: Positive vs. Negative comments**
-
-```{r}
-# Join Bing scores back to original text
-bing_with_text <- bing_sentiment |> 
-  inner_join(meta_theta_df |> select(comment_index, text, score), 
-             by = "comment_index")
-
-# Most positive comments (highest net positive)
-bing_with_text |> 
-  arrange(desc(sentiment_bing)) |> 
-  select(n_positive, n_negative, sentiment_bing, text) |> 
-  head(3) |> 
-  print()
-
-bing_with_text |> 
-  arrange(sentiment_bing) |> 
-  select(n_positive, n_negative, sentiment_bing, text) |> 
-  head(3) |> 
-  print()
-```
-
-------------------------------------------------------------------------
-
-### 2.4 NRC Emotion Lexicon
-
-**Reminder from [Lecture 7](https://aysedeniz09.github.io/IntroCSS/Spring2026/LectureSlides/bigdata_L7-github.html#sentiment-analysis-with-dictionary-methods):**
-
-NRC (National Research Council Canada) is an **emotion lexicon** that classifies words into multiple categories:
-
-- **8 basic emotions**: anger, fear, anticipation, trust, surprise, sadness, joy, disgust
-
-- **2 sentiments**: positive, negative
-
-- A single word can belong to multiple categories (e.g., "love" = positive, joy, trust)
-
-**Why use NRC?**
-
-- ✅ **Rich emotional profiling**: Goes beyond positive/negative to specific emotions
-
-- ✅ **Large vocabulary**: ~14,000 words (best coverage)
-
-- ✅ **Multi-dimensional**: Captures emotional complexity
-
-- ❌ **No intensity**: Like Bing, doesn't distinguish strong vs. weak emotions
-
-- ❌ **Harder to interpret**: 10 categories instead of 1-2
-
-Let's apply NRC and explore the emotional landscape of K-pop comments:
-
-**Understanding the Output:**
-
-Each column represents the **count** of words in that emotion category:
-
-- `positive`, `negative`: Overall sentiment (like Bing)
-
-- `joy`, `trust`, `anticipation`: Positive emotions
-
-- `anger`, `fear`, `sadness`, `disgust`: Negative emotions
-
-- `surprise`: Can be positive or negative
-
-
-```{r}
-# Apply NRC emotion lexicon
-nrc_emotions <- tokens |> 
-  inner_join(get_sentiments("nrc"), by = "word")
-
-# Count emotions per comment
-nrc_by_comment <- nrc_emotions |> 
-  group_by(comment_index, sentiment) |> 
-  summarise(n = n(), .groups = "drop") |> 
-  pivot_wider(
-    names_from = sentiment,
-    values_from = n,
-    values_fill = 0
-  )
-
-# Check results
-head(nrc_by_comment, 10)
-
-# Summary statistics for each emotion
-summary(nrc_by_comment |> select(-comment_index))
-```
-
-**Interpreting the Emotional Landscape:**
-
-1. Positive emotions dominate (ranked by mean):
-   - Positive (2.31): Highest overall—K-pop fans express general positivity
-   
-   - Trust (1.252): Second highest—community values authenticity, reliability
-   
-   - Anticipation (1.142): Strong—fans excited about comebacks, releases
-   
-   - Joy (0.982): Nearly 1 word per comment—happiness and celebration
-
-2. Negative emotions are lower:
-   
-   - Negative (1.42): Lower than positive (2.31)
-   
-   - Fear (0.812), Anger (0.746), Sadness (0.730): Moderate presence
-   
-   - Disgust (0.454): Lowest—rarely extreme negativity
-
-3. Key patterns:
-
-   - Positive:Negative ratio: ~1.6:1 (2.31 / 1.42)—confirms community leans positive
-   
-   - Most comments are low-emotion: Medians of 0 or 1 for most emotions
-   
-   - Emotional outliers exist: Some comments have 70+ negative words, 81+ positive words, 51+ anger words
-
-4. Surprise is rare (mean 0.53):
-
-   - K-pop discussions are about known topics (groups, songs, news)
-   
-   - Not much unexpected content
-
-What does this tell us about K-pop Reddit?
-
-- K-pop Reddit is an optimistic, trusting, anticipatory community. Positive emotions (2.31 + 1.25 + 1.14 + 0.98 = 5.68 mean) far outweigh negative emotions (1.42 + 0.81 + 0.75 + 0.73 + 0.45 = 4.16 mean). Fans express excitement, trust in artists/community, and joy, while negative emotions exist but are less prevalent.
-
-
-**Overall emotion distribution across ALL comments:**
-
-```{r}
-# Total words per emotion across entire dataset
-emotion_totals <- nrc_emotions |> 
-  count(sentiment, sort = TRUE)
-
-print(emotion_totals)
-
-# Visualize
-ggplot(emotion_totals, aes(x = reorder(sentiment, n), y = n, fill = sentiment)) +
+```{r, eval=TRUE}
+# Extract and visualize the most important features
+logistic_fit |>
+  extract_fit_parsnip() |>
+  tidy() |>
+  filter(term != "(Intercept)") |>
+  mutate(
+    term = str_remove(term, "tf_text_"),
+    term = str_remove_all(term, "`"),
+    abs_estimate = abs(estimate)
+  ) |>
+  slice_max(abs_estimate, n = 20) |>
+  mutate(
+    direction = if_else(estimate > 0, "HipHop", "Country"),
+    term = reorder(term, estimate)
+  ) |>
+  ggplot(aes(x = estimate, y = term, fill = direction)) +
   geom_col() +
+  scale_fill_manual(values = c("Country" = "steelblue", "HipHop" = "coral")) +
+  labs(
+    title = "Top 20 Most Important Words for Genre Classification",
+    subtitle = "Logistic Regression Coefficients",
+    x = "Coefficient (← Country | HipHop →)",
+    y = NULL,
+    fill = "Predicts"
+  ) +
+  theme_minimal()
+```
+
+**Interpreting the plot:**
+
+- **Bars to the RIGHT (positive)**: Words that predict **Hip Hop**
+  - Example: "shit", "fuck", "bitch", "yo" are strong Hip Hop indicators
+  
+- **Bars to the LEFT (negative)**: Words that predict **Country**
+  - Example: "well", "heart", "little", "home" are strong Country indicators
+
+**Top predictors table:**
+
+```{r, eval=TRUE}
+# Create a table of top predictors
+logistic_fit |>
+  extract_fit_parsnip() |>
+  tidy() |>
+  filter(term != "(Intercept)") |>
+  mutate(
+    term = str_remove(term, "tf_text_"),
+    term = str_remove_all(term, "`")
+  ) |>
+  slice_max(abs(estimate), n = 20) |>
+  arrange(desc(estimate)) |>
+  select(Word = term, Coefficient = estimate) |>
+  mutate(
+    Predicts = if_else(Coefficient > 0, "HipHop", "Country"),
+    Coefficient = round(Coefficient, 3)
+  )
+```
+
+**What makes this interesting?**
+
+The model learned cultural and linguistic differences between genres:
+
+- **Hip Hop words**: Urban slang, profanity, direct language ("shit", "fuck", "yo", "y'all")
+
+- **Country words**: Emotional themes, traditional values, storytelling ("well", "heart", "little", "home", "long")
+
+The coefficients tell us exactly how much each word shifts the prediction toward one genre or the other!
+
+------------------------------------------------------------------------
+
+## 5. Model Comparison
+
+Let's compare our logistic regression against Random Forest, SVM, and Naive Bayes. We'll train all models on the same data and compare their performance.
+
+### 5.1 Define Models
+
+```{r, eval=TRUE}
+# Random Forest
+rf_model <- rand_forest(trees = 100) |>
+  set_engine("ranger") |>
+  set_mode("classification")
+
+# Support Vector Machine
+svm_model <- svm_rbf() |>
+  set_engine("kernlab") |>
+  set_mode("classification")
+
+# Naive Bayes
+nb_model <- naive_Bayes() |>
+  set_engine("naivebayes") |>
+  set_mode("classification")
+```
+
+### 5.2 Create Workflows and Fit Models
+
+```{r, eval=FALSE}
+# Random Forest
+rf_wf <- workflow() |>
+  add_recipe(text_recipe) |>
+  add_model(rf_model)
+
+# Time and fit Random Forest
+start_time <- Sys.time()
+rf_fit <- rf_wf |> fit(data = lyrics_train)
+rf_time <- Sys.time() - start_time
+print(paste("Random Forest training time:", round(rf_time, 2), "seconds"))
+
+# Save Random Forest model
+save(rf_fit, file = "rf_fit.rda")
+
+# SVM
+svm_wf <- workflow() |>
+  add_recipe(text_recipe) |>
+  add_model(svm_model)
+
+# Time and fit SVM
+start_time <- Sys.time()
+svm_fit <- svm_wf |> fit(data = lyrics_train)
+svm_time <- Sys.time() - start_time
+print(paste("SVM training time:", round(svm_time, 2), "seconds"))
+
+# Save SVM model
+save(svm_fit, file = "svm_fit.rda")
+
+# Naive Bayes
+nb_wf <- workflow() |>
+  add_recipe(text_recipe) |>
+  add_model(nb_model)
+
+# Time and fit Naive Bayes
+start_time <- Sys.time()
+nb_fit <- nb_wf |> fit(data = lyrics_train)
+nb_time <- Sys.time() - start_time
+print(paste("Naive Bayes training time:", round(nb_time, 2), "seconds"))
+
+# Save Naive Bayes model
+save(nb_fit, file = "nb_fit.rda")
+```
+
+
+**To load pre-trained models (skip training):**
+
+```{r, eval=TRUE}
+# Load saved models from GitHub instead of training
+load(url("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/rf_fit.rda"))
+load(url("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/svm_fit.rda"))
+load(url("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/nb_fit.rda"))
+```
+
+
+### 5.3 Generate Predictions
+
+```{r, eval=TRUE}
+# Get predictions from all models
+rf_pred <- rf_fit |>
+  predict(lyrics_test) |>
+  bind_cols(lyrics_test |> select(genre)) |>
+  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
+         model = "Random Forest")
+
+svm_pred <- svm_fit |>
+  predict(lyrics_test) |>
+  bind_cols(lyrics_test |> select(genre)) |>
+  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
+         model = "SVM")
+
+nb_pred <- nb_fit |>
+  predict(lyrics_test) |>
+  bind_cols(lyrics_test |> select(genre)) |>
+  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
+         model = "Naive Bayes")
+
+# Add logistic regression predictions
+logistic_pred <- logistic_predictions |>
+  select(.pred_class, genre) |>
+  mutate(model = "Logistic Regression")
+
+# Combine all predictions
+all_predictions <- bind_rows(logistic_pred, rf_pred, svm_pred, nb_pred)
+```
+
+------------------------------------------------------------------------
+
+### 5.4 Compare Model Performance
+
+First, let's get probability predictions from all models for ROC AUC:
+
+```{r, eval=TRUE}
+# Get probability predictions for ROC AUC
+rf_probs <- rf_fit |>
+  predict(lyrics_test, type = "prob") |>
+  bind_cols(lyrics_test |> select(genre)) |>
+  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
+         model = "Random Forest")
+
+svm_probs <- svm_fit |>
+  predict(lyrics_test, type = "prob") |>
+  bind_cols(lyrics_test |> select(genre)) |>
+  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
+         model = "SVM")
+
+nb_probs <- nb_fit |>
+  predict(lyrics_test, type = "prob") |>
+  bind_cols(lyrics_test |> select(genre)) |>
+  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
+         model = "Naive Bayes")
+
+# Combine with logistic regression probabilities
+all_probs <- bind_rows(
+  logistic_probs |> select(.pred_HipHop, genre) |> mutate(model = "Logistic Regression"),
+  rf_probs,
+  svm_probs,
+  nb_probs
+)
+```
+
+Now calculate all metrics including ROC AUC:
+
+```{r, eval=TRUE}
+# Calculate metrics for all models
+model_metrics <- all_predictions |>
+  group_by(model) |>
+  accuracy(truth = genre, estimate = .pred_class) |>
+  select(model, .estimate) |>
+  rename(Accuracy = .estimate) |>
+  left_join(
+    all_predictions |>
+      group_by(model) |>
+      yardstick::precision(truth = genre, estimate = .pred_class) |>
+      select(model, .estimate) |>
+      rename(Precision = .estimate),
+    by = "model"
+  ) |>
+  left_join(
+    all_predictions |>
+      group_by(model) |>
+      yardstick::recall(truth = genre, estimate = .pred_class) |>
+      select(model, .estimate) |>
+      rename(Sensitivity = .estimate),  # Recall = Sensitivity
+    by = "model"
+  ) |>
+  left_join(
+    all_predictions |>
+      group_by(model) |>
+      yardstick::specificity(truth = genre, estimate = .pred_class) |>
+      select(model, .estimate) |>
+      rename(Specificity = .estimate),
+    by = "model"
+  ) |>
+  left_join(
+    all_predictions |>
+      group_by(model) |>
+      f_meas(truth = genre, estimate = .pred_class) |>
+      select(model, .estimate) |>
+      rename(F1 = .estimate),
+    by = "model"
+  ) |>
+  left_join(
+    all_probs |>
+      group_by(model) |>
+      roc_auc(truth = genre, .pred_HipHop, event_level = "second") |>
+      select(model, .estimate) |>
+      rename(ROC_AUC = .estimate),
+    by = "model"
+  ) |>
+  arrange(desc(Accuracy))
+
+model_metrics
+```
+
+**Visualize model comparison:**
+
+```{r, eval=TRUE}
+model_metrics |>
+  pivot_longer(cols = c(Accuracy, Precision, Sensitivity, Specificity, F1, ROC_AUC),
+               names_to = "Metric",
+               values_to = "Value") |>
+  ggplot(aes(x = model, y = Value, fill = Metric)) +
+  geom_col(position = "dodge") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  geom_hline(yintercept = 0.80, linetype = "dashed", color = "red", linewidth = 1) +
+  scale_fill_manual(values = c("Accuracy" = "steelblue", 
+                                "Precision" = "coral",
+                                "Sensitivity" = "gold",
+                                "Specificity" = "purple",
+                                "F1" = "seagreen",
+                                "ROC_AUC" = "darkblue")) +
+  labs(
+    title = "Model Performance Comparison",
+    subtitle = "Red dashed line indicates 80% threshold for excellent/acceptable performance",
+    x = NULL,
+    y = "Score"
+  ) +
   coord_flip() +
-  scale_fill_manual(values = c(
-    "positive" = "darkgreen", "trust" = "lightgreen", 
-    "joy" = "gold", "anticipation" = "orange",
-    "surprise" = "purple", "negative" = "darkred",
-    "sadness" = "blue", "fear" = "lightblue",
-    "anger" = "red", "disgust" = "brown"
+  theme_minimal()
+```
+
+**Training Time Comparison:**
+
+| Model | Time (seconds) |
+|-------|----------------|
+| Logistic Regression | 0.156 |
+| Random Forest | 10.871 |
+| SVM | 7.587 |
+| Naive Bayes | 6.310 |
+
+**Interpretation:**
+
+- **Logistic Regression** is by far the fastest (~0.16 seconds)
+  - Simple linear model with minimal computation
+  - Best choice for real-time predictions at scale
+
+- **Naive Bayes** is moderately fast (~6.3 seconds)
+  - Probabilistic calculations are efficient
+  - Good balance of speed and reasonable performance
+
+- **SVM** is slower (~7.6 seconds)
+  - Kernel computations are expensive
+  - Trade-off: better decision boundaries but slower inference
+
+- **Random Forest** is the slowest (~10.9 seconds)
+  - Must evaluate 100 decision trees for each prediction
+  - Trade-off: highest accuracy but slowest speed
+
+**When Speed Matters:**
+
+In production systems processing thousands of songs per second, Logistic Regression's 70× speed advantage over Random Forest could be decisive—even if it sacrifices a few percentage points of accuracy. This is a classic **accuracy vs. latency trade-off** in machine learning deployment.
+
+
+**Key Findings:**
+
+- All models achieve **80%+ accuracy** on genre classification (except Naive Bayes)
+
+- ROC AUC shows the models' ability to distinguish between genres across all thresholds
+
+- Trade-offs between precision, sensitivity (recall), and specificity vary by model
+
+- Training time varies significantly between models
+
+- The winning model balances accuracy, speed, and all metrics effectively
+
+------------------------------------------------------------------------
+
+
+### 5.5 Understanding ROC Curves
+
+**What is a ROC Curve?**
+
+A **Receiver Operating Characteristic (ROC) curve** visualizes a classifier's performance across all possible classification thresholds. It plots:
+
+- **Y-axis (Sensitivity/Recall)**: True Positive Rate - how many actual positives we correctly identify
+
+- **X-axis (1 - Specificity)**: False Positive Rate - how many negatives we incorrectly call positive
+
+**The Perfect ROC Curve**
+
+![Perfect ROC Curve image from: https://www.evidentlyai.com/classification-metrics/explain-roc-curve](https://github.com/aysedeniz09/IntroCSS/blob/main/images/ROC_Perfect.png?raw=true)
+
+**Interpreting ROC Curves:**
+
+1. **Perfect Classifier (Green line)**: 
+
+   - Goes straight up the Y-axis, then across the top
+   
+   - Achieves 100% sensitivity with 0% false positives
+   
+   - ROC AUC = 1.0 (perfect)
+
+2. **Random Classifier (Diagonal line)**:
+
+   - No better than flipping a coin
+   
+   - For every true positive gained, you get a false positive
+   
+   - ROC AUC = 0.5 (random guessing)
+
+3. **Good Classifier (Blue line)**:
+   - Bows upward toward the top-left corner
+   - Higher sensitivity at lower false positive rates
+   - ROC AUC > 0.8 (good performance)
+
+**The Area Under the Curve (AUC):**
+
+- **AUC = 1.0**: Perfect classification
+
+- **AUC = 0.9-1.0**: Excellent
+
+- **AUC = 0.8-0.9**: Good
+
+- **AUC = 0.7-0.8**: Fair
+
+- **AUC = 0.5-0.7**: Poor
+
+- **AUC = 0.5**: Random (no predictive value)
+
+```{r, eval=TRUE}
+# Calculate ROC curves for each model
+logistic_roc <- yardstick::roc_curve(logistic_probs, truth = genre, .pred_Country)
+rf_roc <- yardstick::roc_curve(rf_probs, truth = genre, .pred_Country)
+svm_roc <- yardstick::roc_curve(svm_probs, truth = genre, .pred_Country)
+nb_roc <- yardstick::roc_curve(nb_probs, truth = genre, .pred_Country)
+
+# Combine all ROC curves with model labels
+all_roc <- bind_rows(
+  logistic_roc |> mutate(Model = "Logistic Regression"),
+  rf_roc |> mutate(Model = "Random Forest"),
+  svm_roc |> mutate(Model = "SVM"),
+  nb_roc |> mutate(Model = "Naive Bayes")
+)
+
+# Plot all ROC curves together
+ggplot(all_roc, aes(x = 1 - specificity, y = sensitivity, color = Model)) +
+  geom_path(linewidth = 1) +
+  geom_abline(linetype = "dashed", color = "gray50") +  # Random classifier line
+  scale_color_manual(values = c(
+    "Logistic Regression" = "#E69F00",
+    "Random Forest" = "#56B4E9",
+    "SVM" = "#009E73",
+    "Naive Bayes" = "#F0E442"
   )) +
   labs(
-    title = "Distribution of Emotions in K-pop Reddit Comments",
-    subtitle = "Total emotion words across all comments (NRC lexicon)",
-    x = "Emotion",
-    y = "Number of Words"
+    title = "ROC Curves: Model Comparison",
+    subtitle = "Closer to top-left corner = better performance",
+    x = "False Positive Rate (1 - Specificity)",
+    y = "True Positive Rate (Sensitivity)"
   ) +
+  coord_equal() +  # Square plot for proper interpretation
   theme_minimal() +
-  theme(legend.position = "none")
+  theme(legend.position = "bottom")
 ```
 
-**Which emotions dominate K-pop discussions?**
+**What We See:**
 
-Looking at the visualization, the emotional hierarchy is clear:
+- **Random Forest** (blue): Curves highest toward the top-left corner → Best discriminative ability (AUC ≈ 0.93)
 
-**Top 5 Emotions (Most prevalent):**
+- **SVM** (green): Close behind Random Forest → Strong performance (AUC ≈ 0.90)
 
-1. **Positive** (~40,000 words): Dominates by a huge margin
+- **Logistic Regression** (orange): Solid performance but less separation → Good (AUC ≈ 0.89)
 
-2. **Negative** (~25,000 words): Present but much lower than positive
+- **Naive Bayes** (yellow): Closer to diagonal → Poor calibration (AUC ≈ 0.70)
 
-3. **Trust** (~22,000 words): High—fans trust artists, community, sources
+**Why ROC Curves Matter:**
 
-4. **Anticipation** (~20,000 words): Excitement about releases, comebacks, events
+Unlike accuracy (which uses a single threshold of 0.5), ROC curves show performance across **all possible thresholds**. This is crucial because:
 
-5. **Joy** (~18,000 words): Celebration and happiness
+1. **You can adjust the threshold** based on your priorities:
+   - High stakes (e.g., medical diagnosis): Set high threshold → fewer false positives
+   - Discovery mode (e.g., content recommendation): Set low threshold → catch more true positives
 
-**Middle Tier:**
+2. **Works with imbalanced classes**: Unlike accuracy, ROC AUC isn't inflated by predicting the majority class
 
-6. **Fear** (~14,000 words): Concerns about groups, controversies, industry
+3. **Threshold-independent comparison**: Lets you compare models fairly regardless of their default decision boundaries
 
-7. **Anger** (~13,000 words): Frustration with companies, scandals, decisions
+**Example: Adjusting Thresholds**
 
-8. **Sadness** (~13,000 words): Disappointment, nostalgia, farewells
+Suppose we want to be **very confident** before classifying a song as Country (maybe for a "Pure Country" playlist). We could:
+```{r, eval=FALSE}
+# Instead of default 0.5 threshold, require 0.8 probability
+high_confidence_country <- logistic_probs |>
+  mutate(.pred_class_adjusted = ifelse(.pred_Country >= 0.8, "Country", "HipHop"))
 
-**Least Common:**
+# This increases precision (fewer false Country predictions) 
+# but decreases recall (miss some actual Country songs)
+```
 
-9. **Surprise** (~9,000 words): Relatively rare—K-pop is a planned industry
+The ROC curve helps visualize these trade-offs across all possible thresholds!
 
-10. **Disgust** (~8,000 words): Lowest—extreme negativity is uncommon
+------------------------------------------------------------------------
+
+### 5.6 Interpret Results
+
+**Performance Metric Definitions:**
+
+| Metric | Formula | What it measures | Interpretation Guidelines |
+|--------|---------|------------------|--------------------------|
+| **Accuracy** | (TP + TN) / Total | Overall correctness of predictions | ≥ 80%: Excellent<br>70-80%: Good<br>60-70%: Moderate<br>< 60%: Poor |
+| **Precision** | TP / (TP + FP) | Of predicted HipHop, how many are actually HipHop? | Higher is better<br>Low precision = many false alarms |
+| **Sensitivity (Recall)** | TP / (TP + FN) | Of actual HipHop songs, how many did we catch? | Higher is better<br>Low sensitivity = missing true cases |
+| **Specificity** | TN / (TN + FP) | Of actual Country songs, how many did we correctly identify? | Higher is better<br>Low specificity = misclassifying negatives |
+| **F1 Score** | 2 × (Precision × Recall) / (Precision + Recall) | Harmonic mean balancing precision and recall | ≥ 0.80: Excellent agreement*<br>0.70-0.80: Acceptable*<br>0.60-0.70: Moderate*<br>< 0.60: Poor |
+| **ROC AUC** | Area under ROC curve | Ability to distinguish between classes across all thresholds | ≥ 0.90: Excellent<br>0.80-0.90: Good<br>0.70-0.80: Fair<br>< 0.70: Poor |
+
+*Note: F1 score thresholds follow automated content analysis research standards (Burscher et al., 2014; Chan et al., 2021).*
+
+*Abbreviations: TP = True Positive (HipHop→HipHop), TN = True Negative (Country→Country), FP = False Positive (Country→HipHop), FN = False Negative (HipHop→Country)*
+
+**Our Model Results:**
+```{r, eval=TRUE}
+model_metrics
+```
+
+**Performance Rankings:**
+
+1. **Random Forest** - WINNER 🏆
+
+   - Accuracy: 87.9% (**Excellent**)
+   
+   - ROC AUC: 93.0% (**Excellent**)
+   
+   - F1 Score: 80.9% (**Excellent agreement** per Burscher et al., 2014; Chan et al., 2021)
+   
+   - Sensitivity: 75.8%
+   
+   - Specificity: 94.1%
+   
+   - **Best balanced performance across all metrics**
+
+2. **SVM** - Strong Runner-up
+
+   - Accuracy: 86.8% (**Excellent**)
+   
+   - ROC AUC: 90.4% (**Excellent**)
+   
+   - F1 Score: 78.5% (**Acceptable agreement**)
+   
+   - Sensitivity: 71.7%
+   
+   - Specificity: 94.4%
+   
+   - **Very close to Random Forest, slightly lower sensitivity**
+
+3. **Logistic Regression** - Solid Baseline
+
+   - Accuracy: 83.2% (**Excellent**)
+   
+   - ROC AUC: 88.9% (**Good**)
+   
+   - F1 Score: 71.6% (**Acceptable agreement**)
+   
+   - Sensitivity: 62.6%
+   
+   - Specificity: 93.7%
+   
+   - **Simple, interpretable model with respectable performance**
+
+4. **Naive Bayes** - Poor Performer
+
+   - Accuracy: 42.2% (**Poor**)
+   
+   - ROC AUC: 70.4% (**Fair**)
+   
+   - F1 Score: 53.8% (**Poor**)
+   
+   - Sensitivity: 99.95% (nearly perfect - but meaningless!)
+   
+   - Specificity: 12.8% (terrible)
+   
+   - **Classic class imbalance failure: predicts almost everything as HipHop**
 
 **Key Insights:**
 
-- **Positive emotions dominate**: Positive + Trust + Anticipation + Joy = ~100,000 words
+- **Random Forest captures complex patterns**: The ensemble of decision trees learns nonlinear word combinations better than single models, achieving excellent performance across all metrics
 
-- **Negative emotions are secondary**: Negative + Fear + Anger + Sadness + Disgust = ~73,000 words
+- **SVM's kernel trick works well**: The RBF kernel effectively separates genres in high-dimensional word space with excellent discrimination (ROC AUC > 0.90)
 
-- **Ratio**: ~1.4:1 positive-to-negative, confirming K-pop Reddit is an optimistic space
+- **Logistic Regression is interpretable**: While not the most accurate, it achieves acceptable F1 scores and we can understand exactly which words drive predictions (see Section 4.8)
 
-- **Trust and Anticipation are high**: This reflects K-pop fan culture—loyalty to artists and excitement for content
+- **Naive Bayes fails catastrophically**: The independence assumption between words doesn't hold for this task, resulting in severe overprediction of the majority class
 
-- **Disgust is lowest**: The community rarely expresses extreme repulsion
+**The Naive Bayes Problem:**
 
-**What does this mean?**
+- With 99.95% sensitivity, it catches almost every HipHop song
 
-K-pop Reddit is a **positively-oriented, forward-looking community** where fans express trust in their favorite groups and excitement for upcoming releases. While negative emotions exist (especially around controversies), they're substantially outweighed by positive sentiment.
+- But with 36.8% precision and 12.8% specificity, it mislabels most Country songs as HipHop
 
-------------------------------------------------------------------------
+- This is classic class imbalance behavior - the model learned to simply predict the majority class (HipHop) for everything
 
-**Coverage: How many comments have NRC emotions?**
+- Despite reasonable ROC AUC (70.4%), the actual classification performance is poor
 
-```{r}
-# Calculate NRC coverage
-nrc_coverage <- nrow(nrc_by_comment)
-print(nrc_coverage)
+**Winner: Random Forest** 
 
-nrc_coverage_pct <- round(nrc_coverage / nrow(meta_theta_df) * 100, 1)
-print(nrc_coverage_pct)
+- Achieves **excellent** performance by research standards (F1 = 0.809, ROC AUC = 0.930)
 
+- Best balance of accuracy, precision, sensitivity, specificity, and F1 score
 
-```
-
-**NRC has the best coverage!**
-
-- **NRC scored 85.9%** of comments—2,672 more than AFINN and 2,937 more than Bing
-
-- With ~14,000 words, NRC's large vocabulary captures more K-pop discussions
-
-- Only 14.1% of comments (3,137) have no NRC emotion words
+- Computationally efficient enough for this dataset size
 
 
-**Example: Most emotional comments**
+**References:**
 
-```{r}
-# Calculate total emotion words per comment (excluding positive/negative to avoid double-counting)
-nrc_intensity <- nrc_by_comment |> 
-  mutate(
-    total_emotions = anger + anticipation + disgust + fear + joy + sadness + surprise + trust
-  ) |> 
-  select(comment_index, total_emotions, positive, negative, everything())
+Burscher, B., Odijk, D., Vliegenthart, R., de Rijke, M., & de Vreese, C. H. (2014). Teaching the Computer to Code Frames in News: Comparing Two Supervised Machine Learning Approaches to Frame Analysis. *Communication Methods and Measures*, *8*(3), 190–206. https://doi.org/10.1080/19312458.2014.937527
 
-# Join with original text
-nrc_with_text <- nrc_intensity |> 
-  inner_join(meta_theta_df |> select(comment_index, text, score), 
-             by = "comment_index")
-
-# Most emotionally intense comments
-nrc_with_text |> 
-  arrange(desc(total_emotions)) |> 
-  select(total_emotions, joy, anger, sadness, text) |> 
-  head(3) |> 
-  print()
-
-# Most joyful comments
-nrc_with_text |> 
-  arrange(desc(joy)) |> 
-  select(joy, positive, text) |> 
-  head(3) |> 
-  print()
-
-# Most angry comments
-nrc_with_text |> 
-  arrange(desc(anger)) |> 
-  select(anger, negative, text) |> 
-  head(3) |> 
-  print()
-```
+Chan, C., Bajjalieh, J., Auvil, L., Wessler, H., Althaus, S., Welbers, K., Van Atteveldt, W., & Jungblut, M. (2021). Four best practices for measuring news sentiment using 'off-the-shelf' dictionaries: A large-scale p-hacking experiment. *Computational Communication Research*, *3*(1), 1–27. https://doi.org/10.5117/CCR2021.1.001.CHAN
 
 ------------------------------------------------------------------------
 
-### 2.5 Comparing All Three Dictionaries
+## 6. Testing on "Old Town Road"
 
-Now that we've applied AFINN, Bing, and NRC to our K-pop comments, let's compare them systematically to determine **which dictionary is best for analyzing this data**.
+Let's test our models on a controversial song: [**"Old Town Road"**](https://www.youtube.com/watch?v=5ho88VXJTBg) by Lil Nas X featuring [Billy Ray Cyrus](https://www.youtube.com/watch?v=KnSIVZaHeWw). This song famously sparked debate about genre classification when Billboard removed it from the Hot Country Songs chart in 2019, claiming it "does not embrace enough elements of today's country music" ([Wikipedia](https://en.wikipedia.org/wiki/Old_Town_Road)).
 
-#### 2.5.1 Coverage Comparison
+The song blends:
 
-**Which dictionary scores the most comments?**
+- **Country elements**: Horses, tractors, cowboy imagery, banjo
 
-```{r}
-# Create comparison table
-coverage_comparison <- data.frame(
-  Dictionary = c("AFINN", "Bing", "NRC"),
-  Comments_Scored = c(afinn_coverage, bing_coverage, nrc_coverage),
-  Total_Comments = c(nrow(meta_theta_df), nrow(meta_theta_df), nrow(meta_theta_df)),
-  Coverage_Pct = c(coverage_pct, bing_coverage_pct, nrc_coverage_pct),
-  Vocabulary_Size = c("~2,477 words", "~6,786 words", "~14,000 words")
+- **Hip Hop elements**: Trap beats, rap delivery, urban slang
+
+### 6.1 Prepare the Lyrics
+
+```{r, eval=TRUE}
+# Old Town Road lyrics (excerpt)
+old_town_road <- data.frame(
+  text = "Yeah, I'm gonna take my horse to the old town road
+I'm gonna ride 'til I can't no more
+I'm gonna take my horse to the old town road
+I'm gonna ride 'til I can't no more
+(Kio, Kio)
+I got the horses in the back
+Horse tack is attached
+Hat is matte black
+Got the boots that's black to match
+Ridin' on a horse, ha
+You can whip your Porsche
+I been in the valley
+You ain't been up off that porch, now
+Can't nobody tell me nothin'
+You can't tell me nothin'
+Can't nobody tell me nothin'
+You can't tell me nothin'
+Ridin' on a tractor
+Lean all in my bladder
+Cheated on my baby
+You can go and ask her
+My life is a movie
+Bull ridin' and boobies
+Cowboy hat from Gucci
+Wrangler on my booty
+Can't nobody tell me nothin'
+You can't tell me nothin'
+Can't nobody tell me nothin'
+You can't tell me nothin'
+Yeah, I'm gonna take my horse to the old town road
+I'm gonna ride 'til I can't no more
+I'm gonna take my horse to the old town road
+I'm gonna ride 'til I can't no more
+I got the",
+  genre = NA  # Unknown - this is what we want to predict!
+)
+```
+
+### 6.2 Get Predictions from All Models
+
+```{r, eval=TRUE}
+# Predict with each model
+otr_predictions <- data.frame(
+  Model = c("Logistic Regression", "Random Forest", "SVM", "Naive Bayes"),
+  Prediction = c(
+    as.character(predict(logistic_fit, old_town_road)$.pred_class),
+    as.character(predict(rf_fit, old_town_road)$.pred_class),
+    as.character(predict(svm_fit, old_town_road)$.pred_class),
+    as.character(predict(nb_fit, old_town_road)$.pred_class)
+  )
 )
 
-print(coverage_comparison)
-
-# Visualize coverage
-ggplot(coverage_comparison, aes(x = Dictionary, y = Coverage_Pct, fill = Dictionary)) +
-  geom_col() +
-  geom_text(aes(label = paste0(Coverage_Pct, "%")), vjust = -0.5, size = 5) +
-  ylim(0, 100) +
-  labs(
-    title = "Dictionary Coverage Comparison",
-    subtitle = "Percentage of K-pop comments with sentiment scores",
-    x = "Dictionary",
-    y = "Coverage (%)"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
+otr_predictions
 ```
 
-**Winner: NRC (85.9%)** has the best coverage, followed by AFINN (74%) and Bing (72.8%).
+### 6.3 Get Probability Estimates
 
-- **Surprise finding**: Despite having 3x the vocabulary, Bing scored *fewer* comments than AFINN
+Let's see how confident each model is:
 
-- **NRC's advantage**: Large vocabulary (~14K words) captures more K-pop language
+```{r, eval=TRUE}
+# Get probabilities from each model
+otr_probs <- data.frame(
+  Model = c("Logistic Regression", "Random Forest", "SVM", "Naive Bayes"),
+  Country_Prob = c(
+    predict(logistic_fit, old_town_road, type = "prob")$.pred_Country,
+    predict(rf_fit, old_town_road, type = "prob")$.pred_Country,
+    predict(svm_fit, old_town_road, type = "prob")$.pred_Country,
+    predict(nb_fit, old_town_road, type = "prob")$.pred_Country
+  ),
+  HipHop_Prob = c(
+    predict(logistic_fit, old_town_road, type = "prob")$.pred_HipHop,
+    predict(rf_fit, old_town_road, type = "prob")$.pred_HipHop,
+    predict(svm_fit, old_town_road, type = "prob")$.pred_HipHop,
+    predict(nb_fit, old_town_road, type = "prob")$.pred_HipHop
+  )
+)
 
-- **AFINN's efficiency**: Good coverage with smallest vocabulary
-
-------------------------------------------------------------------------
-
-#### 2.5.2 Sentiment Distribution Comparison
-
-**How do the dictionaries characterize K-pop sentiment?**
-
-```{r}
-# Create combined sentiment scores for comparison
-# Need to join all three back to comment_index
-sentiment_comparison <- meta_theta_df |> 
-  select(comment_index) |> 
-  left_join(afinn_sentiment |> select(comment_index, sentiment_afinn), by = "comment_index") |> 
-  left_join(bing_sentiment |> select(comment_index, sentiment_bing), by = "comment_index") |> 
-  left_join(nrc_by_comment |> 
-              select(comment_index, positive, negative) |> 
-              mutate(sentiment_nrc = positive - negative), 
-            by = "comment_index")
-
-# Summary statistics
-summary(sentiment_comparison$sentiment_afinn)
-
-summary(sentiment_comparison$sentiment_bing)
-
-summary(sentiment_comparison$sentiment_nrc)
+otr_probs
 ```
 
-**Key Differences:**
+**Visualize the predictions:**
 
-| Dictionary | Median | Mean | Interpretation |
-|------------|--------|------|----------------|
-| **AFINN** | +1.0 | +1.028 | Slightly positive |
-| **Bing** | 0.0 | -0.075 | Neutral/very slightly negative |
-| **NRC** | +1.0 | +0.889 | Slightly positive (agrees with AFINN!) |
-
-**Important Findings:**
-
-1. **AFINN and NRC agree** (both medians = +1.0, means ~+1.0): K-pop Reddit is slightly positive
-
-2. **Bing disagrees** (median = 0.0, mean = -0.075): Suggests neutral/slightly negative
-
-3. **Why?** Bing doesn't capture intensity, so "love" = "like" = +1 word
-
-4. **Range differences**: AFINN has widest range (-80 to +126) because it's based on weighted scores, not counts
-
-
-
-**Compare distributions side-by-side:**
-
-```{r}
-# Reshape for faceted plot
-sentiment_long <- sentiment_comparison |> 
-  select(comment_index, sentiment_afinn, sentiment_bing, sentiment_nrc) |> 
-  pivot_longer(
-    cols = starts_with("sentiment_"),
-    names_to = "dictionary",
-    values_to = "sentiment",
-    names_prefix = "sentiment_"
-  ) |> 
-  filter(!is.na(sentiment)) |> 
-  mutate(dictionary = toupper(dictionary))
-
-# Faceted histogram
-ggplot(sentiment_long, aes(x = sentiment, fill = dictionary)) +
-  geom_histogram(bins = 50, alpha = 0.7) +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "red") +
-  facet_wrap(~ dictionary, scales = "free", ncol = 1) +
+```{r, eval=TRUE}
+otr_probs |>
+  pivot_longer(cols = c(Country_Prob, HipHop_Prob),
+               names_to = "Genre",
+               values_to = "Probability") |>
+  mutate(Genre = str_remove(Genre, "_Prob")) |>
+  ggplot(aes(x = Model, y = Probability, fill = Genre)) +
+  geom_col(position = "dodge") +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray30") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  scale_fill_manual(values = c("Country" = "steelblue", "HipHop" = "coral")) +
   labs(
-    title = "Sentiment Distribution Comparison",
-    subtitle = "How each dictionary scores K-pop Reddit comments",
-    x = "Sentiment Score",
-    y = "Number of Comments"
+    title = "Old Town Road: Genre Classification Probabilities",
+    subtitle = "Which genre does each model predict?",
+    x = NULL,
+    y = "Probability"
   ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-**What the distributions show:**
-
-Comparing the three panels:
-
-1. **AFINN** (top panel):
-
-   - Right-skewed distribution centered just above 0
-   
-   - Captures positive lean with intensity weighting
-   
-   - Widest range due to -5 to +5 scoring system
-
-2. **Bing** (middle panel):
-
-   - Nearly symmetric, centered exactly at 0
-   
-   - Narrower range (only counts, not weights)
-   
-   - Suggests neutrality (missing the intensity of K-pop language)
-
-3. **NRC** (bottom panel):
-
-   - Right-skewed like AFINN
-   
-   - Centered slightly above 0
-   
-   - Agrees with AFINN that K-pop Reddit is positive
-   
-   - Narrower range than AFINN but more balanced than Bing
-
-**Key Insight:** AFINN and NRC agree on the positive lean; Bing's binary counting misses this signal.
-
-
-------------------------------------------------------------------------
-
-#### 2.5.3 Correlation Between Dictionaries
-
-**Do the dictionaries agree on which comments are positive/negative?**
-
-*Reminder: Interpreting Correlations:*
-
-- **High correlation (>0.7)**: Dictionaries generally agree
-
-- **Moderate correlation (0.4-0.7)**: Some agreement but differences exist
-
-- **Low correlation (<0.4)**: Dictionaries measure different things
-
-```{r}
-# Calculate correlations (only for comments scored by all three)
-complete_cases <- sentiment_comparison |> 
-  filter(!is.na(sentiment_afinn) & !is.na(sentiment_bing) & !is.na(sentiment_nrc))
-
-# Scatter plot: AFINN vs. Bing
-ggplot(complete_cases, aes(x = sentiment_afinn, y = sentiment_bing)) +
-  geom_point(alpha = 0.1) +
-  geom_smooth(method = "lm", color = "red") +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  geom_vline(xintercept = 0, linetype = "dashed") +
-  labs(
-    title = "AFINN vs. Bing: Do They Agree?",
-    subtitle = paste0("Correlation: ", round(cor(complete_cases$sentiment_afinn, complete_cases$sentiment_bing), 3)),
-    x = "AFINN Sentiment",
-    y = "Bing Sentiment"
-  ) +
+  coord_flip() +
   theme_minimal()
 ```
 
+### 6.4 Interpretation
 
-**Interpreting the Correlations:**
+**The Verdict: All Models Predict COUNTRY**
 
-- **AFINN vs. Bing: 0.757** (High correlation)
+But with very different confidence levels:
 
-  - The dictionaries generally agree on positive vs. negative
-  
-  - Strong positive relationship visible in scatter plot
-  
-  - Despite different scoring methods, they capture similar sentiment signals
+| Model | Prediction | Country Probability | HipHop Probability |
+|-------|------------|--------------------|--------------------|
+| Logistic Regression | Country | **56.68%** | 43.32% |
+| Random Forest | Country | **73.25%** | 26.75% |
+| SVM | Country | **64.94%** | 35.06% |
+| Naive Bayes | Country | **100.00%** | ~0% |
 
-- **AFINN vs. NRC: 0.645** (Moderate-high correlation)
+**Key Insights:**
 
-  - Good agreement but some divergence
-  
-  - NRC's multi-emotion approach captures different dimensions
+1. **Logistic Regression is uncertain** (56.68% Country)
 
-- **Bing vs. NRC: 0.592** (Moderate correlation)
+   - Barely above the 50% threshold
+   
+   - Recognizes the song has strong HipHop elements (43.32%)
+   
+   - Most calibrated prediction
 
-  - Lowest correlation of the three pairs
-  
-  - Both use binary/count methods but differ in vocabulary
+2. **Random Forest is confident** (73.25% Country)
 
-**What the scatter plot shows:**
+   - Our best-performing model sees clear Country patterns
+   
+   - Likely picks up on: "horse," "tractor," "cowboy," "boots," "valley"
 
-- Strong linear relationship (correlation = 0.757)
+3. **SVM is moderate** (64.94% Country)
 
-- Most points cluster near zero (neutral comments)
+   - Comfortable with Country classification
+   
+   - Still acknowledges some ambiguity
 
-- Clear positive slope: when AFINN is positive, Bing tends to be positive too
+4. **Naive Bayes is overconfident** (100% Country)
 
-- Some scatter: comments can have different scores depending on intensity vs. counts
+   - Extreme probability is a known NB issue (poor calibration)
+   
+   - Should not be trusted for decision-making
 
-- Outliers exist: some comments very positive on AFINN but moderate on Bing (intensity effect)
+**The Irony: Machine Learning vs. Human Gatekeeping**
 
-**Key Finding:** 62% of comments (13,956 out of 22,316) were scored by all three dictionaries, and they show strong-to-moderate agreement on sentiment direction.
+All our models predict Country, yet Billboard **removed** "Old Town Road" from the Country charts in March 2019, claiming it "does not embrace enough elements of today's country music."
 
+**Why the disconnect?**
+
+Our models learned from **historical genre patterns in lyrics**:
+
+- Words like "horse," "tractor," "cowboy," "boots" → Country
+
+- Narrative themes of rural life → Country
+
+But Billboard considered **musical elements** our models cannot detect:
+
+- Trap beat and 808 bass → HipHop production
+
+- Rap delivery style → HipHop performance
+
+- Lack of traditional country instrumentation
+
+**The Bigger Picture: What This Teaches Us About ML**
+
+1. **Models reflect their training data**: Our models learned from decades of traditionally-classified country songs. They reproduce those historical boundaries.
+
+2. **Feature limitations matter**: We only used bag-of-words (lyrics). Music genre depends on **sound**, **delivery**, **production** - features we didn't include.
+
+3. **Cultural context is invisible to algorithms**: The controversy around "Old Town Road" involved questions about:
+
+   - Who gets to define "country"?
+   
+   - Is genre gatekeeping protecting tradition or excluding innovation?
+   
+   - Does removing Black artists from country charts reflect racial bias?
+   
+   Our models cannot address these questions - they only see word frequencies.
+
+4. **High accuracy ≠ "correct"**: Our Random Forest achieved 87.9% accuracy on the test set, yet all models might be "wrong" about this specific song depending on how we define genre.
+
+**The Lesson for Computational Social Science:**
+
+Machine learning models are powerful tools for pattern recognition, but they:
+
+- Learn historical patterns, including biases
+
+- Cannot incorporate cultural context or ethical considerations
+
+- Should inform, not replace, human judgment on subjective questions
+
+- Require critical interpretation, especially when classifications are contested
+
+"Old Town Road" is a perfect case study: it's not that our models are broken - they accurately learned what Country lyrics look like. The question is whether **purely lyrical patterns** should define genre, or whether we need richer feature sets (audio, cultural context, artist identity) for meaningful classification.
 
 ------------------------------------------------------------------------
 
-#### 2.5.4 Which Dictionary Should We Use?
+## 7. Class Exercise: Test Your Own Song! 🎵
 
-**Decision criteria for K-pop Reddit analysis:**
+Now it's your turn to explore genre classification with a song of your choice.
 
-```{r}
-# Create decision matrix
-decision_matrix <- data.frame(
-  Criterion = c("Coverage", "Intensity", "Interpretability", "Regression-ready", "Emotion detail"),
-  AFINN = c("74%", "YES", "Simple", "YES", "NO"),
-  Bing = c("72.8%", "NO", "Simple", "NO", "NO"),
-  NRC = c("85.9%", "NO", "Complex", "NO", "YES")
-)
+### 7.1 Instructions
 
+**Step 1: Choose a Song**
 
-print(decision_matrix)
-```
+Pick a song that interests you! Consider songs that:
+- Blend multiple genres (like "Old Town Road")
 
-**Our Recommendation: AFINN**
+- Challenge traditional genre boundaries
 
-**Why AFINN is best for this analysis:**
+- Have lyrics you find meaningful
 
-1. *Captures intensity**: K-pop fans use strong positive language ("love", "amazing", "perfect")—AFINN's -5 to +5 scale captures this better than binary dictionaries
+- Come from artists who've been genre-misclassified
 
-2. **Good coverage**: 74% is sufficient (only 11% less than NRC)
+**Some interesting suggestions:**
 
-3. **High correlation with others**: r=0.76 with Bing, r=0.65 with NRC—validates findings
+- "Meant to Be" by Bebe Rexha & Florida Georgia Line (Country-Pop crossover)
 
-4. **Regression-ready**: Numeric scores work in statistical models (Section 5)
+- "24K Magic" by Bruno Mars (Funk/R&B/Pop blend)
 
-5. **Simple interpretation**: One number = easy to understand and visualize
+- "Wagon Wheel" by Darius Rucker 
 
-6. **Matches intuition**: Median +1, mean +1.028 aligns with K-pop Reddit being a positive space
+- "Old Dominion" songs (Pop-Country debate)
 
-7. **NRC validation**: NRC (median +1, mean +0.89) confirms AFINN's positive finding
+- Any song from the "country trap" or "country rap" movement
 
-**When to use others:**
+**Step 2: Get the Lyrics**
 
-- **Bing**: If you only need positive/negative classification for machine learning
+Find lyrics from a legitimate source like:
 
-- **NRC**: If you need detailed emotional profiling (joy, anger, fear) or want maximum coverage (85.9%)
+- The artist's official website
 
-**Going forward:** We'll use **AFINN sentiment scores** to analyze sentiment by topic (Section 2.6) and predict engagement (Section 5).
+- Licensed lyrics sites (Genius, AZLyrics, MetroLyrics)
 
+- Album liner notes
 
-```{r}
-rm(list=setdiff(ls(), c("data3", "meta_theta_df", "lda_model_k5", "afinn_sentiment")))
-```
-
-------------------------------------------------------------------------
-
-## 3 Sentiment by Topic Analysis
-
-Now that we've selected AFINN as our sentiment measure, let's explore: **Do different topics have different sentiment?**
-
-Recall our 5 topics from Lecture 9:
-
-- **Topic 1**: Music and appreciation
-
-- **Topic 2**: Fan discussions and community
-
-- **Topic 3**: Rules and moderation
-
-- **Topic 4**: Groups and industry
-
-- **Topic 5**: HYBE controversy
-
-**Research Question:** Are some topics more positive or negative than others?
-
-
-------------------------------------------------------------------------
-
-### 3.1 Create Sentiment-Topic Dataset
-
-First, we need to combine AFINN sentiment scores with topic probabilities:
-
-```{r}
-# Join AFINN sentiment with meta_theta_df (which has topic gammas)
-meta_theta_df <- meta_theta_df |> 
-  left_join(afinn_sentiment |> select(comment_index, sentiment_afinn, avg_sentiment), 
-            by = "comment_index")
-
-# Check how many comments have both sentiment and topic data
-n_with_both <- sum(!is.na(meta_theta_df$sentiment_afinn))
-print(round(n_with_both / nrow(meta_theta_df) * 100, 1))
-
-# Preview the data
-head(meta_theta_df |> select(comment_index, sentiment_afinn, topic_1:topic_5), 10)
-```
-
-**Note:** Comments without AFINN scores (NA) will be excluded from this analysis. We expect 16,507 comments (74% coverage from Section 2.2).
-
-------------------------------------------------------------------------
-
-### 3.1 Create Weighted Sentiment-Topic Scores
-
-For each comment, we'll multiply its sentiment by each topic's probability (gamma):
-
-```{r}
-
-
-# Create weighted sentiment scores: sentiment × topic probability
-meta_theta_df  <- meta_theta_df |> 
-  filter(!is.na(sentiment_afinn)) |> 
-  mutate(
-    sentiment_topic_1 = sentiment_afinn * topic_1,
-    sentiment_topic_2 = sentiment_afinn * topic_2,
-    sentiment_topic_3 = sentiment_afinn * topic_3,
-    sentiment_topic_4 = sentiment_afinn * topic_4,
-    sentiment_topic_5 = sentiment_afinn * topic_5
-  )
-
-# Preview
-head(meta_theta_df |> select(comment_index, sentiment_afinn, topic_1:topic_5, 
-                                 sentiment_topic_1:sentiment_topic_5), 10)
-```
-
-**What we're doing:**
-
-- **sentiment_topic_1 = sentiment_afinn × topic_1**: If a comment is 80% Topic 1 (gamma=0.8) with sentiment +5, it contributes 4 points to Topic 1's sentiment
-
-- **sentiment_topic_2 = sentiment_afinn × topic_2**: Same comment might be 20% Topic 2 (gamma=0.2), contributing 1 point to Topic 2's sentiment
-
-This weighted approach uses the **full topic distribution**.
-
-------------------------------------------------------------------------
-
-### 3.2 Aggregate Sentiment by Topic
-
-Now we aggregate weighted sentiment across all comments to get average sentiment per topic:
-
-- **Total_Gamma_Mass**: Sum of all gamma probabilities for this topic across all comments (how "present" the topic is overall)
-
-- **Total_Weighted_Sentiment**: Sum of sentiment × gamma for this topic
-
-- **Avg_Sentiment**: Average sentiment associated with this topic (Total_Weighted_Sentiment / Total_Gamma_Mass)
-
-This gives us the **average sentiment when this topic is discussed**.
-
-
-```{r}
-# Sum weighted sentiment across all comments for each topic
-topic_sentiment_totals <- meta_theta_df |> 
-  summarise(
-    total_sentiment_topic_1 = sum(sentiment_topic_1),
-    total_sentiment_topic_2 = sum(sentiment_topic_2),
-    total_sentiment_topic_3 = sum(sentiment_topic_3),
-    total_sentiment_topic_4 = sum(sentiment_topic_4),
-    total_sentiment_topic_5 = sum(sentiment_topic_5),
-    total_gamma_topic_1 = sum(topic_1),
-    total_gamma_topic_2 = sum(topic_2),
-    total_gamma_topic_3 = sum(topic_3),
-    total_gamma_topic_4 = sum(topic_4),
-    total_gamma_topic_5 = sum(topic_5)
-  )
-
-# Calculate average sentiment per topic (weighted by gamma mass)
-topic_sentiment_avg <- data.frame(
-  Topic = c("Topic 1: Music", "Topic 2: Fans", "Topic 3: Rules", 
-            "Topic 4: Groups", "Topic 5: HYBE"),
-  Total_Weighted_Sentiment = c(
-    topic_sentiment_totals$total_sentiment_topic_1,
-    topic_sentiment_totals$total_sentiment_topic_2,
-    topic_sentiment_totals$total_sentiment_topic_3,
-    topic_sentiment_totals$total_sentiment_topic_4,
-    topic_sentiment_totals$total_sentiment_topic_5
-  ),
-  Total_Gamma_Mass = c(
-    topic_sentiment_totals$total_gamma_topic_1,
-    topic_sentiment_totals$total_gamma_topic_2,
-    topic_sentiment_totals$total_gamma_topic_3,
-    topic_sentiment_totals$total_gamma_topic_4,
-    topic_sentiment_totals$total_gamma_topic_5
-  )
-) |> 
-  mutate(
-    Avg_Sentiment = Total_Weighted_Sentiment / Total_Gamma_Mass
-  ) |> 
-  arrange(desc(Avg_Sentiment))
-
-print(topic_sentiment_avg)
-```
-
-
-**Key Findings:**
-
-1. **Topic 1 (Music)**: **Highest sentiment (1.58)**
-
-   - Music appreciation drives the most positive discussions
-   
-   - Comments about performances, songs, and choreography are enthusiastic
-
-2. **Topic 3 (Rules)**: **Second highest (1.35)**
-
-   - Surprisingly positive! Moderation posts tend to be polite/constructive
-   
-   - Template-like language may include positive framing
-
-3. **Topic 4 (Groups)**: **Moderate positive (1.14)**
-
-   - General group discussions are positive but less enthusiastic than music
-
-4. **Topic 2 (Fans)**: **Mildly positive (0.70)**
-
-   - Fan community discussions are positive but more neutral
-   
-   - May include debates, disagreements alongside support
-
-5. **Topic 5 (HYBE)**: **Lowest sentiment (0.39)**
-
-   - Controversy-focused discussions are least positive
-   
-   - Still slightly positive overall (not negative!)—fans express frustration but not extreme negativity
-
-**Important Note:** Even the "most negative" topic (HYBE) has positive average sentiment (0.39). This confirms K-pop Reddit is generally a positive space, but sentiment varies by topic.
-
-**Gamma Mass Distribution:** All topics have similar Total_Gamma_Mass (~3,150-3,360), meaning topics are roughly equally prevalent in the dataset. No single topic dominates.
-
-------------------------------------------------------------------------
-
-### 3.3 Visualize Topic Sentiment
-
-**Bar chart: Average sentiment by topic**
-
-```{r}
-# Bar chart of average sentiment
-ggplot(topic_sentiment_avg, aes(x = reorder(Topic, Avg_Sentiment), 
-                                  y = Avg_Sentiment, 
-                                  fill = Topic)) +
-  geom_col(alpha = 0.8) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "red", size = 1) +
-  geom_hline(yintercept = 1.028, linetype = "dotted", color = "blue", size = 1) +
-  scale_fill_manual(values = wesanderson::wes_palette("Darjeeling1", n = 5, type = "discrete")) +
-  coord_flip() +
-  labs(
-    title = "Average Sentiment by Topic",
-    subtitle = "Weighted by topic probability (gamma). Blue line = overall mean (1.028)",
-    x = "Topic",
-    y = "Average AFINN Sentiment"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-**NB**: What the blue dotted line shows -  Overall mean sentiment from Section 2.2 (1.028). Topics above this line are more positive than average; topics below are less positive.
-
-
-**What the bar chart shows:**
-
-Looking at the visualization:
-
-1. **Clear hierarchy exists**: Topic sentiment ranges from 0.39 (HYBE) to 1.58 (Music)—a 1.2 point spread
-
-2. **Three topics exceed overall mean** (blue dotted line at 1.028):
-
-   - **Topic 1 (Music)**: Far exceeds average—music appreciation is exceptionally positive
-   
-   - **Topic 3 (Rules)**: Moderately above average—moderation language is constructive
-   
-   - **Topic 4 (Groups)**: Just above average—group discussions are positive
-
-3. **Two topics below overall mean**:
-
-   - **Topic 2 (Fans)**: Notably below average—fan discussions are more neutral/mixed
-   
-   - **Topic 5 (HYBE)**: Well below average—controversy discussions are least positive
-
-4. **All topics are positive** (above red line at 0):
-
-   - Even HYBE controversy (0.39) is positive on average
-   
-   - No topic is predominantly negative
-   
-   - Confirms K-pop Reddit's overall positive tone
-
-**Key Insight:** Music appreciation (Topic 1) is 4× more positive than HYBE controversy (Topic 5), showing that **what K-pop fans discuss matters for sentiment**—content about music is celebratory while corporate controversies generate frustration.
-
-------------------------------------------------------------------------
-
-**Alternative visualization: Boxplots for prominent topics**
-
-
-To see the full distribution, let's look at comments where each topic is prominent (gamma > 0.3):
-
-**Why filter at gamma > 0.3?**
-
-- LDA assigns probabilities to all topics, but many are very small
-
-- Gamma > 0.3 means "this topic accounts for at least 30% of the comment's content"
-
-- This gives us comments that are **genuinely about** each topic
-
-- Allows us to see sentiment distributions, not just averages
-
-```{r}
-# Reshape to long format for boxplots
-sentiment_topic_long <- meta_theta_df |> 
-  select(comment_index, sentiment_afinn, topic_1:topic_5) |> 
-  pivot_longer(
-    cols = topic_1:topic_5,
-    names_to = "topic",
-    values_to = "gamma",
-    names_prefix = "topic_"
-  ) |> 
-  mutate(
-    topic = case_when(
-      topic == "1" ~ "Topic 1: Music",
-      topic == "2" ~ "Topic 2: Fans",
-      topic == "3" ~ "Topic 3: Rules",
-      topic == "4" ~ "Topic 4: Groups",
-      topic == "5" ~ "Topic 5: HYBE"
-    )
-  ) |> 
-  filter(gamma > 0.3)  # Only include comments where topic is prominent (>30%)
-
-# Count comments per topic (with gamma > 0.3)
-table(sentiment_topic_long$topic)
-```
-
-
-```{r}
-# Boxplot of sentiment for comments where each topic is prominent
-ggplot(sentiment_topic_long, aes(x = reorder(topic, sentiment_afinn, FUN = median), 
-                                   y = sentiment_afinn, 
-                                   fill = topic)) +
-  geom_boxplot(alpha = 0.7, outlier.alpha = 0.2) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
-  geom_hline(yintercept = 1.028, linetype = "dotted", color = "blue") +
-  coord_flip() +
-  labs(
-    title = "Sentiment for Comments Where Each Topic is Prominent",
-    subtitle = "Only comments where topic probability > 30%. Blue line = overall mean",
-    x = "Topic",
-    y = "AFINN Sentiment Score"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-
-Remember boxplots:
-
-- Box center line: Median sentiment for comments strongly about this topic
-
-- Box height: Middle 50% of sentiment scores
-
-- Whiskers & dots: Full range and outliers
-
-- Compare to blue line (overall mean) to see which topics exceed average sentiment
-
-**Key patterns:**
-
-- **Topic 1 (Music)**: Median above 0, narrow spread, positive outliers → consistently positive
-
-- **Topic 4 (Groups)**: Similar to Music, median ~1
-
-- **Topic 3 (Rules)**: Box straddles zero → neutral/factual
-
-- **Topic 5 (HYBE)**: Wide outlier spread → polarizing topic (extreme views on both sides)
-
-- **Topic 2 (Fans)**: Median slightly negative → most mixed/neutral discussions
-
-*Why boxplot order differs from Section 3.2: Weighted averages account for mixed comments; boxplot shows only comments primarily about each topic (gamma > 0.3).*
-
-------------------------------------------------------------------------
-
-### 3.4 Statistical Significance
-
-**Can we test if topics differ significantly in sentiment?**
-
-- **Intercept**: Average sentiment for reference topic (Topic 1: Music)
-
-- **Coefficients**: Difference in sentiment compared to Music
-
-  - Negative = less positive than Music
-  
-  - Positive = more positive than Music
-  
-- **p-values**: Statistical significance of differences
-
-  - p < 0.05 = significantly different from Music
-  
-- **Weights = gamma**: Comments with higher topic probability have more influence
-
-We'll use weighted regression where each comment-topic pair is weighted by its gamma probability:
-
-```{r}
-# Reshape for regression: create one row per comment-topic pair
-sentiment_topic_pairs <- meta_theta_df |> 
-  select(comment_index, sentiment_afinn, topic_1:topic_5) |> 
-  pivot_longer(
-    cols = topic_1:topic_5,
-    names_to = "topic",
-    values_to = "gamma",
-    names_prefix = "topic_"
-  ) |> 
-  mutate(
-    topic = factor(topic, levels = c("1", "2", "3", "4", "5"),
-                   labels = c("Music", "Fans", "Rules", "Groups", "HYBE"))
-  )
-
-# Weighted regression: sentiment ~ topic, weighted by gamma
-weighted_model <- lm(sentiment_afinn ~ topic, 
-                     data = sentiment_topic_pairs, 
-                     weights = gamma)
-
-summary(weighted_model)
-```
-
-
-**Key Findings:**
-
-- **Intercept (1.585)**: Average sentiment for Music topic
-
-- **All topics significantly differ from Music** (all p < 0.001)
-
-- **Largest difference**: HYBE (-1.20 points) vs. Music
-
-- **Smallest difference**: Rules (-0.24 points) vs. Music
-
-- **Overall model**: Highly significant (p < 2.2e-16), but R² = 0.005 (topic explains only 0.5% of sentiment variance—most variation is within topics, not between them)
-
-
-**Coefficient plot: Visualize differences from Music**
-
-```{r}
-# Extract coefficients and confidence intervals
-library(broom)
-coef_data <- tidy(weighted_model, conf.int = TRUE) |> 
-  filter(term != "(Intercept)") |> 
-  mutate(
-    topic = gsub("topic", "", term),
-    topic = factor(topic, levels = c("HYBE", "Fans", "Groups", "Rules"))
-  )
-
-# Coefficient plot
-ggplot(coef_data, aes(x = estimate, y = topic, color = topic)) +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "gray50") +
-  geom_point(size = 4) +
-  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0.2, size = 1) +
-  scale_color_manual(values = wesanderson::wes_palette("Darjeeling1", n = 4, type = "discrete")) +
-  labs(
-    title = "Sentiment Difference from Music Topic",
-    subtitle = "Weighted regression coefficients with 95% confidence intervals",
-    x = "Difference in AFINN Sentiment (compared to Music)",
-    y = "Topic"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-- **HYBE**: -1.20 points less positive than Music (largest difference)
-
-- **Fans**: -0.89 points less positive than Music
-
-- **Groups**: -0.45 points less positive than Music
-
-- **Rules**: -0.24 points less positive than Music (smallest difference)
-
-- **All error bars left of zero**: All differences statistically significant
-
-- **No overlap with zero line**: Strong evidence topics differ from Music
-
-------------------------------------------------------------------------
-
-### 3.5 Class Exercise: Changing the Reference Category
-
-**Current analysis:** We used Music (Topic 1) as the reference category. All other topics are compared to Music.
-
-**Question:** What if we used **Rules (Topic 3)** as the reference instead? Would this make sense? What would change?
-
-**Your task:**
-
-1. **Recode the topic variable** to make Rules the reference category
-
-2. **Re-run the weighted regression**
-
-3. **Create a new coefficient plot**
-
-4. **Interpret the results**
-
-**Starter code:**
-
-```{r, eval = FALSE}
-# Step 1: Recode topic with Rules as reference
-sentiment_topic_pairs_rules <- sentiment_topic_pairs |> 
-  mutate(
-    topic = factor(topic, levels = c("Rules", "Music", "Fans", "Groups", "HYBE"))
-  )
-
-# Step 2: Re-run weighted regression
-weighted_model_rules <- lm()
-
-summary(weighted_model_rules)
-
-# Step 3: Extract coefficients and create plot
-coef_data_rules <- 
-  
-# Coefficient plot
-ggplot(coef_data_rules, aes(x = estimate, y = topic, color = topic)) +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "gray50") +
-  geom_point(size = 4) +
-  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0.2, size = 1) +
-  scale_color_manual(values = wesanderson::wes_palette("Darjeeling1", n = 4, type = "discrete")) +
-  labs(
-    title = "Sentiment Difference from Rules Topic",
-    subtitle = "Weighted regression coefficients with 95% confidence intervals",
-    x = "Difference in AFINN Sentiment (compared to Rules)",
-    y = "Topic"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-**Questions to answer:**
-
-1. **What is the new intercept?** What does it represent?
-
-2. **How do the coefficients change?** 
-
-   - Compare Music's coefficient in the new model to the old model
-   
-   - Hint: Think about the relationship between Rules and Music
-
-3. **Does using Rules as reference make sense?**
-
-   - Why or why not?
-   
-   - When might you want Rules as the reference?
-   
-   - When is Music a better reference?
-
-4. **Do the conclusions change?** 
-
-   - Are the same topics significantly different?
-   
-   - Does the story about topic sentiment change?
-
-**Think about:** The choice of reference category affects interpretation but not the underlying relationships. Choose a reference that makes your research question easiest to answer!
-
-------------------------------------------------------------------------
-
-### 3.6 Sentiment Over Time
-
-Now that we understand sentiment varies by topic, let's explore how sentiment changes over time. Do K-pop Reddit discussions become more or less positive over time? Are certain time periods associated with specific topics or sentiment patterns?
-
-**Research questions:**
-
-- Does overall sentiment change over time?
-
-- Do different topics have different temporal patterns?
-
-- Are there specific time periods with sentiment spikes or drops?
-
-------------------------------------------------------------------------
-
-#### 3.6.1 Prepare temporal data
-
-First, let's check our date variable and prepare the data for time series analysis.
-
-```{r}
-# Check date range
-range(meta_theta_df$date)
-
-# Summary of dates
-summary(meta_theta_df$date)
-
-```
-
-
-------------------------------------------------------------------------
-
-#### 3.6.2 Overall sentiment trend
-
-Let's start by visualizing how overall sentiment changes over time.
-
-**Note:** For more details on formatting date axes in ggplot2, see [Lecture 3: Date Scales](https://aysedeniz09.github.io/IntroCSS/Spring2026/LectureSlides/bigdata_L3-github.html#date-scales).
-
-
-```{r}
-# Aggregate sentiment by month
-sentiment_time <- meta_theta_df |> 
-  group_by(date) |> 
-  summarise(
-    mean_sentiment = mean(sentiment_afinn, na.rm = TRUE),
-    median_sentiment = median(sentiment_afinn, na.rm = TRUE),
-    n_comments = n(),
-    .groups = "drop"
-  )
-
-ggplot(sentiment_time, aes(x = date, y = mean_sentiment)) +
-  geom_line(color = NatParksPalettes::natparks.pals("Yellowstone", n = 5)[1], size = 1) +
-  geom_point(color = NatParksPalettes::natparks.pals("Yellowstone", n = 5)[1], size = 2) +
-  geom_hline(yintercept = 1.028, linetype = "dashed", color = "gray50") +
-  geom_hline(yintercept = 0, linetype = "dotted", color = "red") +
-  geom_smooth(method = "loess", se = TRUE, 
-              color = NatParksPalettes::natparks.pals("Yellowstone", n = 5)[2], 
-              fill = NatParksPalettes::natparks.pals("Yellowstone", n = 5)[2], 
-              alpha = 0.2) +
-  scale_x_date(
-    date_breaks = "1 days",
-    date_labels = "%d-%b-%y"
-  ) +
-  scale_y_continuous(limits = c(-2, 3), breaks = seq(-2, 3, by = 0.5)) +
-  labs(
-    title = "K-pop Reddit Sentiment Over Time",
-    subtitle = "Monthly average AFINN sentiment with LOESS trend",
-    x = "Date",
-    y = "Mean AFINN Sentiment",
-    caption = paste0("Dashed line = overall mean (1.028). N = ", nrow(meta_theta_df), " comments")
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
-
-```
-
-**Interpretation guidance:** 
-
-- The dashed grey line shows the overall mean (1.028)
-
-- The dotted red line shows 0
-
-- The LOESS curve shows the general trend
-
-- Look for: Upward/downward trends, seasonal patterns, sudden changes
-
-
-**Class Questions:**
-
-Using the plot above and the `sentiment_time` data frame, answer the following:
-
-1. **When was the most positive month?** What was the mean sentiment score?
-
-   - Hint: Use `which.max()` or `slice_max()`
-
-2. **When was the most negative month?** What was the mean sentiment score?
-
-   - Hint: Use `which.min()` or `slice_min()`
-
-3. **Overall trend:** Is K-pop Reddit sentiment increasing or decreasing over time? 
-
-   - Look at the LOESS curve (tan/yellow line)
-   
-   - What might explain any major drops or spikes?
-
-4. **Volatility:** How much does sentiment vary month-to-month?
-
-   - Calculate: `sd(sentiment_time$mean_sentiment)`
-   
-   - What does high volatility suggest about K-pop fan discussions?
-
-
-**Try this code:**
+**Step 3: Prepare Your Data**
 
 ```{r, eval=FALSE}
-# Your exploration here
-# 1. Most positive month
-sentiment_time |> slice_max(mean_sentiment, n = 1)
+# Replace this with your song's lyrics
+your_song <- data.frame(
+  text = "PASTE YOUR SONG LYRICS HERE",
+  genre = NA  # Unknown - we want to predict this!
+)
+```
 
-# 2. Most negative month
-sentiment_time |> slice_min(mean_sentiment, n = 1)
+**Step 4: Get Predictions**
 
-# 3. Simple trend test
-cor.test(as.numeric(sentiment_time$date), sentiment_time$mean_sentiment)
+```{r, eval=FALSE}
+# Predict with all four models
+your_predictions <- data.frame(
+  Model = c("Logistic Regression", "Random Forest", "SVM", "Naive Bayes"),
+  Prediction = c(
+    as.character(predict(logistic_fit, your_song)$.pred_class),
+    as.character(predict(rf_fit, your_song)$.pred_class),
+    as.character(predict(svm_fit, your_song)$.pred_class),
+    as.character(predict(nb_fit, your_song)$.pred_class)
+  )
+)
 
-# 4. Volatility
-sd(sentiment_time$mean_sentiment)
+print(your_predictions)
+
+# Get probability estimates
+your_probs <- data.frame(
+  Model = c("Logistic Regression", "Random Forest", "SVM", "Naive Bayes"),
+  Country_Prob = c(
+    predict(logistic_fit, your_song, type = "prob")$.pred_Country,
+    predict(rf_fit, your_song, type = "prob")$.pred_Country,
+    predict(svm_fit, your_song, type = "prob")$.pred_Country,
+    predict(nb_fit, your_song, type = "prob")$.pred_Country
+  ),
+  HipHop_Prob = c(
+    predict(logistic_fit, your_song, type = "prob")$.pred_HipHop,
+    predict(rf_fit, your_song, type = "prob")$.pred_HipHop,
+    predict(svm_fit, your_song, type = "prob")$.pred_HipHop,
+    predict(nb_fit, your_song, type = "prob")$.pred_HipHop
+  )
+)
+
+print(your_probs)
+```
+
+**Step 5: Visualize the Results**
+
+```{r, eval=FALSE}
+your_probs |>
+  pivot_longer(cols = c(Country_Prob, HipHop_Prob),
+               names_to = "Genre",
+               values_to = "Probability") |>
+  mutate(Genre = str_remove(Genre, "_Prob")) |>
+  ggplot(aes(x = Model, y = Probability, fill = Genre)) +
+  geom_col(position = "dodge") +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray30") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  scale_fill_manual(values = c("Country" = "steelblue", "HipHop" = "coral")) +
+  labs(
+    title = "YOUR SONG TITLE: Genre Classification Probabilities",
+    subtitle = "Which genre does each model predict?",
+    x = NULL,
+    y = "Probability"
+  ) +
+  coord_flip() +
+  theme_minimal()
+```
+
+### 7.2 Discussion Questions
+
+After testing your song, consider:
+
+1. **Agreement vs. Disagreement**
+
+   - Do all models agree on the genre?
+   
+   - Which model is most/least confident?
+   
+   - If models disagree, what might explain the differences?
+
+2. **Lyrical Content Analysis**
+
+   - What specific words or themes might have influenced the predictions?
+   
+   - Does the song use vocabulary typical of one genre?
+   
+   - Are there any surprising word choices that might confuse the models?
+
+3. **Limitations of Bag-of-Words**
+
+   - What aspects of the song's genre identity are NOT captured by lyrics alone?
+   
+   - How would the prediction change if we included audio features (beat, tempo, instruments)?
+   
+   - Does the artist's identity or cultural context matter for genre classification?
+
+4. **Real-World Classification**
+
+   - How is this song actually classified by streaming services, radio stations, or award shows?
+   
+   - Do you agree with that classification?
+   
+   - If the model's prediction differs from the "official" genre, which seems more accurate?
+
+5. **Bias and Fairness**
+
+   - Could the model's prediction reflect historical biases in genre classification?
+   
+   - Are certain artists or cultural groups more likely to be misclassified?
+   
+   - How might we make genre classification more fair and inclusive?
+
+### 7.3 Optional: Compare Multiple Songs
+
+For extra exploration, test several songs and compare:
+
+- Different artists from the same genre
+
+- The same artist across different albums
+
+- Cover versions of the same song by different artists
+
+- Songs from different decades
+
+**Example comparison:**
+
+```{r, eval=FALSE}
+# Test multiple songs and combine results
+song_comparison <- bind_rows(
+  predict(rf_fit, song1, type = "prob") |> mutate(Song = "Song 1"),
+  predict(rf_fit, song2, type = "prob") |> mutate(Song = "Song 2"),
+  predict(rf_fit, song3, type = "prob") |> mutate(Song = "Song 3")
+)
+
+song_comparison |>
+  pivot_longer(cols = starts_with(".pred"),
+               names_to = "Genre",
+               values_to = "Probability") |>
+  mutate(Genre = str_remove(Genre, ".pred_")) |>
+  ggplot(aes(x = Song, y = Probability, fill = Genre)) +
+  geom_col(position = "dodge") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(title = "Genre Classification Across Multiple Songs") +
+  theme_minimal()
 ```
 
 ------------------------------------------------------------------------
 
-#### 3.6.3 Sentiment by topic over time
-
-Now let's see how sentiment for each topic changes over time using our weighted approach.
-
-```{r}
-# Recreate sentiment_topic_pairs WITH the date column
-sentiment_topic_pairs <- sentiment_topic_pairs |> 
-  left_join(meta_theta_df |> select(comment_index, date), by = "comment_index")
-
-sentiment_topic_time <- sentiment_topic_pairs |> 
-  group_by(date, topic) |> 
-  summarise(
-    weighted_sentiment = weighted.mean(sentiment_afinn, gamma, na.rm = TRUE),
-    total_gamma = sum(gamma, na.rm = TRUE),
-    n_comments = n(),
-    .groups = "drop"
-  )
-
-# Plot sentiment by topic over time
-ggplot(sentiment_topic_time, aes(x = date, y = weighted_sentiment, color = topic)) +
-  geom_line(size = 1) +
-  geom_point(size = 1.5) +
-    scale_x_date(
-    date_breaks = "1 days",
-    date_labels = "%d-%b-%y"
-  ) +
-  scale_y_continuous(limits = c(-3, 3), breaks = seq(-3, 3, by = 0.5)) +
-  scale_color_manual(values = NatParksPalettes::natparks.pals("Yellowstone", n = 5, type = "continuous")) +
-  labs(
-    title = "Sentiment Trends by Topic",
-    subtitle = "Daily weighted average AFINN sentiment for each topic",
-    x = "Date",
-    y = "Weighted Mean AFINN Sentiment",
-    color = "Topic"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "right",
-        axis.text.x = element_text(angle = 90, hjust = 1))
-
-```
-
-
-Let's do a faceted version remember [Lecture 3  7. Facets](https://aysedeniz09.github.io/IntroCSS/Spring2026/LectureSlides/bigdata_L3-github.html#facets)
-
-```{r, fig.dim = c(6, 8)}
-ggplot(sentiment_topic_time, aes(x = date, y = weighted_sentiment, color = topic)) +
-  geom_line(size = 1) +
-  geom_point(size = 1.5) +
-  geom_smooth(method = "loess", se = TRUE, alpha = 0.2) +
-    scale_x_date(
-    date_breaks = "1 days",
-    date_labels = "%d-%b-%y"
-  ) +
-  scale_y_continuous(limits = c(-3, 3), breaks = seq(-3, 3, by = 1)) +  # Wider breaks for small panels
-  scale_color_manual(values = NatParksPalettes::natparks.pals("Yellowstone", n = 5, type = "continuous")) +
-  facet_wrap(~ topic, ncol = 1, scales = "fixed") +  # Fixed y-scale to compare across topics
-  labs(
-    title = "Sentiment Trends by Topic",
-    subtitle = "Daily weighted average with LOESS trend line",
-    x = "Date",
-    y = "Weighted Mean AFINN Sentiment"
-  ) +
-  theme_minimal() +
-  theme(
-    legend.position = "none",  # No legend needed with facets
-    axis.text.x = element_text(angle = 90, hjust = 1, size = 8),
-    strip.text = element_text(face = "bold", size = 10)
-  )
-```
-
-
-**Questions to explore:**
-
-- Which topic shows the most day-to-day variation?
-
-- Are there synchronized changes (all topics move together on certain days)?
-
-- Do certain topics show clearer trends than others within the month?
-
 ------------------------------------------------------------------------
 
-## Lecture 10 Cheat Sheet
+## Lecture 11 Cheat Sheet
 
 | **Function/Concept** | **Description** | **Code Example** |
 |---------------------|-----------------|------------------|
-| `get_sentiments("afinn")` | Load AFINN sentiment dictionary (-5 to +5) | `tokens |> inner_join(get_sentiments("afinn"))` |
-| `get_sentiments("bing")` | Load Bing sentiment dictionary (positive/negative) | `tokens |> inner_join(get_sentiments("bing"))` |
-| `get_sentiments("nrc")` | Load NRC emotion lexicon (8 emotions) | `tokens |> inner_join(get_sentiments("nrc"))` |
-| `pivot_longer()` | Convert topic columns to long format | `pivot_longer(topic_1:topic_5, names_to = "topic", values_to = "gamma")` |
-| `weighted.mean(x, w)` | Calculate weighted average | `summarise(weighted_sent = weighted.mean(sentiment, gamma))` |
-| `lm(y ~ x, weights = w)` | Weighted linear regression | `lm(sentiment ~ topic, weights = gamma)` |
-| `tidy(model, conf.int = TRUE)` | Extract coefficients with confidence intervals | `broom::tidy(model, conf.int = TRUE)` |
-| `factor(x, levels = c())` | Set reference category | `factor(topic, levels = c("Music", "Fans"))` |
-| `floor_date(date, "month")` | Aggregate dates to month | `mutate(year_month = floor_date(date, "month"))` |
-| `scale_x_date()` | Format date axis | `scale_x_date(date_breaks = "5 days", date_labels = "%d-%b")` |
-| `geom_smooth(method = "loess")` | Add smoothed trend line | `geom_smooth(method = "loess", se = TRUE)` |
-| `geom_area()` | Create stacked area chart | `geom_area(aes(x = date, y = prop, fill = topic))` |
-| `geom_errorbarh()` | Horizontal error bars for coefficients | `geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))` |
-| `natparks.pals()` | National Parks color palettes | `scale_color_manual(values = natparks.pals("Yellowstone", n = 5))` |
+| **tidymodels Ecosystem** | Meta-package for modern predictive modeling workflow | `library(tidymodels)` |
+| **rsample Package** | Data splitting and resampling (part of tidymodels) | `initial_split(data, prop = 0.75, strata = genre)` |
+| **recipes Package** | Feature engineering pipeline (part of tidymodels) | `recipe(genre ~ text, data = music)` |
+| **parsnip Package** | Unified model interface (part of tidymodels) | `logistic_reg() %>% set_engine("glm")` |
+| **yardstick Package** | Model performance metrics (part of tidymodels) | `accuracy(predictions, truth = genre, estimate = .pred_class)` |
+| **workflows Package** | Combine preprocessing and models (part of tidymodels) | `workflow() %>% add_recipe(recipe) %>% add_model(model)` |
+| **textrecipes Package** | Text preprocessing for tidymodels | `library(textrecipes)` |
+| `initial_split()` | Split data into training and testing sets with stratification | `music_split <- initial_split(music, prop = 0.75, strata = genre)` |
+| `training()` | Extract training data from split object | `music_train <- training(music_split)` |
+| `testing()` | Extract test data from split object | `music_test <- testing(music_split)` |
+| `recipe()` | Define preprocessing steps for modeling | `recipe(genre ~ text, data = music_train)` |
+| `step_tokenize()` | Split text into individual words | `step_tokenize(text, token = "words")` |
+| `step_stopwords()` | Remove common stopwords | `step_stopwords(text, language = "en")` |
+| `step_stem()` | Reduce words to root form | `step_stem(text, options = list(language = "en"))` |
+| `step_tokenfilter()` | Filter tokens by frequency | `step_tokenfilter(text, min_times = 500, max_times = 50000, max_tokens = 100)` |
+| `step_tf()` | Calculate term frequency for tokens | `step_tf(text)` |
+| `prep()` | Estimate preprocessing parameters from training data | `music_prep <- prep(music_recipe)` |
+| `bake()` | Apply preprocessing to new data | `music_baked <- bake(music_prep, new_data = NULL)` |
+| `logistic_reg()` | Specify logistic regression model | `logistic_reg() %>% set_engine("glm") %>% set_mode("classification")` |
+| `rand_forest()` | Specify Random Forest model | `rand_forest(trees = 100) %>% set_engine("ranger") %>% set_mode("classification")` |
+| `svm_rbf()` | Specify Support Vector Machine with RBF kernel | `svm_rbf() %>% set_engine("kernlab") %>% set_mode("classification")` |
+| `naive_Bayes()` | Specify Naive Bayes model | `naive_Bayes() %>% set_engine("naivebayes") %>% set_mode("classification")` |
+| `set_engine()` | Choose computational engine for model | `set_engine("ranger")` |
+| `set_mode()` | Specify classification or regression task | `set_mode("classification")` |
+| `workflow()` | Create workflow object | `workflow()` |
+| `add_recipe()` | Add preprocessing recipe to workflow | `workflow() %>% add_recipe(music_recipe)` |
+| `add_model()` | Add model specification to workflow | `workflow() %>% add_model(logistic_spec)` |
+| `fit()` | Train the model on data | `logistic_fit <- fit(logistic_wf, data = music_train)` |
+| `predict()` | Generate class predictions | `predict(logistic_fit, new_data = music_test)` |
+| `predict(type = "prob")` | Generate probability predictions | `predict(logistic_fit, new_data = music_test, type = "prob")` |
+| `bind_cols()` | Attach predictions to original data | `predictions %>% bind_cols(music_test)` |
+| `yardstick::accuracy()` | Calculate overall classification accuracy | `yardstick::accuracy(predictions, truth = genre, estimate = .pred_class)` |
+| `yardstick::precision()` | Calculate precision (positive predictive value) | `yardstick::precision(predictions, truth = genre, estimate = .pred_class)` |
+| `yardstick::recall()` | Calculate recall/sensitivity (true positive rate) | `yardstick::recall(predictions, truth = genre, estimate = .pred_class)` |
+| `yardstick::specificity()` | Calculate specificity (true negative rate) | `yardstick::specificity(predictions, truth = genre, estimate = .pred_class)` |
+| `yardstick::f_meas()` | Calculate F1 score (harmonic mean of precision/recall) | `yardstick::f_meas(predictions, truth = genre, estimate = .pred_class)` |
+| `yardstick::roc_auc()` | Calculate area under ROC curve | `yardstick::roc_auc(probs, truth = genre, .pred_Country)` |
+| `metric_set()` | Calculate multiple metrics at once | `metric_set(accuracy, precision, recall, specificity, f_meas)` |
+| `extract_fit_parsnip()` | Extract fitted model from workflow | `extract_fit_parsnip(logistic_fit)` |
+| `vip::vip()` | Visualize variable importance | `extract_fit_parsnip(rf_fit) %>% vip::vip(num_features = 20)` |
+| `system.time()` | Measure execution time | `system.time({ predictions <- predict(model, data) })` |
+| `bind_rows()` | Combine metrics from multiple models | `bind_rows(logistic_metrics, rf_metrics, svm_metrics, nb_metrics)` |
+| `pivot_wider()` | Convert metrics to wide format for comparison | `pivot_wider(names_from = .metric, values_from = .estimate)` |
+| `geom_col(position = "dodge")` | Side-by-side grouped bar chart | `geom_col(aes(x = Model, y = value, fill = Metric), position = "dodge")` |
+| `geom_hline()` | Add horizontal reference line | `geom_hline(yintercept = 0.80, linetype = "dashed", color = "red")` |
+| `coord_flip()` | Flip x and y axes for horizontal bars | `coord_flip()` |
+| `scales::percent_format()` | Format axis as percentages | `scale_y_continuous(labels = scales::percent_format())` |
+| `count(data, column)` | Count observations by group | `count(music, genre) %>% mutate(prop = n/sum(n))` |
+| `.pred_class` | Column name for predicted class | `predictions$.pred_class` |
+| `.pred_Country` | Column name for Country probability | `probs$.pred_Country` |
+| `.pred_HipHop` | Column name for HipHop probability | `probs$.pred_HipHop` |
+| **Stratified Sampling** | Preserves class proportions in train/test split | `initial_split(data, strata = genre)` |
+| **Bag of Words (BoW)** | Text representation using word frequencies only | `step_tokenize() %>% step_tf()` |
+| **Term Frequency (TF)** | Count of how often each word appears | `step_tf(text)` |
+| **Stemming** | Reduce words to root form (e.g., "running" → "run") | `step_stem(text, options = list(language = "en"))` |
+| **Stopwords** | Common words removed from analysis | `step_stopwords(text, language = "en")` |
+| **Confusion Matrix** | TP, TN, FP, FN for classification evaluation | Accuracy = (TP + TN) / Total |
+| **Precision Formula** | TP / (TP + FP) | Positive Predictive Value |
+| **Recall Formula** | TP / (TP + FN) | Sensitivity / True Positive Rate |
+| **Specificity Formula** | TN / (TN + FP) | True Negative Rate |
+| **F1 Score Formula** | 2 × (Precision × Recall) / (Precision + Recall) | Harmonic mean of precision and recall |
+| **ROC AUC** | Area under Receiver Operating Characteristic curve | Values: 0.5 (random) to 1.0 (perfect) |
+| **Performance Thresholds** | Accuracy: ≥80% Excellent; F1: ≥0.80 Excellent; ROC AUC: ≥0.90 Excellent | Research standards (Burscher et al., 2014) |
+| **Class Imbalance** | When one class has far more examples than another | Use stratified sampling and check metrics carefully |
+| **Model Interpretability** | Logistic Regression = interpretable; Random Forest = black box | Trade-off between accuracy and explainability |
 
-
-
-
+------------------------------------------------------------------------

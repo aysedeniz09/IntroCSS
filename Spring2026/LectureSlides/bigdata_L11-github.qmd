@@ -1,2385 +1,2249 @@
-Predictive Modeling
+Networks
 ================
 Dr. Ayse D. Lokmanoglu
-Lecture 11, (B) April 8, (A) April 13
+Lecture 12, (B) April 15, (A) April 22
 
-# R Exercises
+## Lecture 12 Table of Contents
 
-## Lecture 11 Table of Contents
+| Section | Topic                                                     |
+|---------|-----------------------------------------------------------|
+| 1       | Building Networks: Nodes and Edges                        |
+| 1.1     | Understanding Network Components                          |
+| 1.2     | Creating Networks from Data Frames                        |
+| 1.3     | Understanding Directed vs Undirected Networks             |
+| 1.4     | Adding Node Attributes                                    |
+| 1.5     | Adding Edge Attributes (Weights)                          |
+| 1.6     | Extracting Network Information                            |
+| 1.7     | Basic Network Statistics                                  |
+| 1.8     | Quick Method: graph_from_literal()                        |
+| 2       | Network Structures: Theory Meets Practice                 |
+| 2.1     | Basic Network Structures                                  |
+| 2.2     | Random and Theoretical Network Models                     |
+| 2.3     | Comparing Network Structures                              |
+| 2.4     | Famous Example: Zachary’s Karate Club                     |
+| 2.5     | Network Operations                                        |
+| 3       | Real World Data: College Communication Network            |
+| 3.1     | Understanding Real Network Data                           |
+| 3.2     | Loading Real Network Data (The Tidy Way)                  |
+| 3.3     | Exploring the Data Before Building the Network            |
+| 3.4     | Temporal Patterns: When Do Students Communicate?          |
+| 3.5     | Building the Network Graph                                |
+| 3.6     | Visualizing the Full Network                              |
+| 3.7     | Creating a Meaningful Subnetwork                          |
+| 3.8     | Network Statistics: Who is Important?                     |
+| 3.9     | Betweenness Centrality: Who Bridges Different Groups?     |
+| 3.10    | Reciprocity: Do Students Message Each Other Back?         |
+| 4       | Clustering & Communities                                  |
+| 4.1     | Transitivity (Clustering Coefficient)                     |
+| 4.2     | Community Detection (Louvain Method)                      |
+| 4.3     | Visualizing Communities                                   |
+| 4.4     | Comparing Communities                                     |
+| 4.5     | Edge Betweenness Community Detection (Alternative Method) |
+| 5       | Gephi                                                     |
+| 5.1     | Exporting to Gephi                                        |
+| 5.2     | Opening in Gephi                                          |
+| 5.3     | Quick Overview of the Gephi Interface                     |
+| 5.4     | Copy Name to Label                                        |
+| 5.5     | Running Community Detection                               |
+| 5.6     | Coloring Nodes by Community                               |
+| 5.7     | Sizing Nodes by Degree                                    |
+| 5.8     | Applying a Layout Algorithm                               |
+| 5.9     | Filtering the Network                                     |
+| 5.10    | Preview and Export                                        |
+| 5.11    | Summary of Gephi Workflow                                 |
 
-| Section | Topic                                    |
-|---------|------------------------------------------|
-| 1       | Introduction to Predictive Modeling      |
-| 2       | Music Lyrics Dataset: Country vs Hip Hop |
-| 2.1     | Loading the Data                         |
-| 2.2     | Exploring the Data                       |
-| 2.3     | Genre Distribution                       |
-| 3       | Feature Engineering from Text            |
-| 3.1     | Creating the Text Recipe                 |
-| 3.2     | Preparing the Recipe                     |
-| 3.3     | Applying the Recipe to Create Features   |
-| 4       | Tidymodels Workflow                      |
-| 4.1     | Split the Data                           |
-| 4.2     | Create the Recipe                        |
-| 4.3     | Specify a Model                          |
-| 4.4     | Create a Workflow                        |
-| 4.5     | Fit the Model                            |
-| 4.6     | Make Predictions                         |
-| 4.7     | Evaluate Performance                     |
-| 4.8     | Feature Importance                       |
-| 5       | Model Comparison                         |
-| 5.1     | Define Models                            |
-| 5.2     | Create Workflows and Fit Models          |
-| 5.3     | Generate Predictions                     |
-| 5.4     | Compare Model Performance                |
-| 5.5     | Understanding ROC Curves                 |
-| 5.6     | Interpret Results                        |
-| 6       | Testing on “Old Town Road”               |
-| 6.1     | Prepare the Lyrics                       |
-| 6.2     | Get Predictions from All Models          |
-| 6.3     | Get Probability Estimates                |
-| 6.4     | Interpretation                           |
-| 7       | Class Exercise: Test Your Own Song!      |
-| 7.1     | Instructions                             |
-| 7.2     | Discussion Questions                     |
-| 7.3     | Optional: Compare Multiple Songs         |
+## Introduction: What are Networks?
+
+Before we dive into R code, let’s understand what networks are and why
+they matter for social science research.
+
+### Networks as Social Structures
+
+A **network** (or **graph**) consists of:
+
+- **Nodes** (also called vertices): The entities in your network
+  (people, organizations, websites, etc.)
+
+- **Edges** (also called ties or links): The relationships or
+  interactions between nodes
+
+Networks help us understand:
+
+- **Structure**: How are entities connected?
+
+- **Position**: Who is central or peripheral?
+
+- **Patterns**: Are there clusters or communities?
+
+- **Dynamics**: How does information, influence, or resources flow?
 
 ------------------------------------------------------------------------
+
+### Why Networks Matter in Social Science
+
+From our readings:
+
+**1. The Duality of Persons and Groups (Breiger, 1974)**
+
+Breiger introduced a fundamental concept: people are connected through
+group memberships, and groups are connected through shared members.
+
+- **Example**: Students connect through classes, clubs, or friend groups
+
+- Network analysis reveals both individual positions AND group
+  structures
+
+- Some students bridge different social circles
+
+**2. Networks Reveal Hidden Patterns**
+
+- You can’t understand social influence by looking at individuals alone
+
+- Network position matters: being a “bridge” between groups is powerful
+
+- Communication patterns reveal underlying social structure
+
+- Networks can predict information flow, influence, and behavior
+
+**3. Networks in Communication Research (Ophir et al., 2021)**
+
+- Media framing creates connections between concepts and communities
+
+- Network analysis reveals how information spreads across social media
+
+- Community structure affects message reception and interpretation
+
+------------------------------------------------------------------------
+
+# R Exercises
 
 **ALWAYS** Let’s load our libraries
 
 ``` r
-# 1. CORE DATA MANIPULATION & VISUALIZATION
-# ----------------------------------------------------------------------------
-library(tidyverse)    # Suite of packages (dplyr, ggplot2, tidyr, readr, stringr) for data manipulation and visualization
-
-# ----------------------------------------------------------------------------
-# 2. TEXT MINING & PREPROCESSING
-# ----------------------------------------------------------------------------
-library(textrecipes)  # tidymodels extension for text feature engineering (BoW, TF-IDF, tokenization, etc.)
-
-# ----------------------------------------------------------------------------
-# 3. TIDYMODELS ECOSYSTEM (Modern ML Framework)
-# ----------------------------------------------------------------------------
-library(tidymodels)   # Meta-package for predictive modeling (includes rsample, recipes, parsnip, yardstick, workflows, broom)
-                      # - rsample: data splitting and resampling
-                      # - recipes: feature engineering pipeline
-                      # - parsnip: unified model interface
-                      # - yardstick: model performance metrics
-                      # - workflows: combine preprocessing and models
-                      # - broom: tidy model outputs
-
-# ----------------------------------------------------------------------------
-# 4. ML MODEL ENGINES (called by parsnip)
-# ----------------------------------------------------------------------------
-library(ranger)       # Fast Random Forest implementation (engine for parsnip)
-library(kernlab)      # Support Vector Machines with kernel methods (engine for parsnip)
-library(naivebayes)   # Naive Bayes classifier (engine for parsnip)
-library(discrim)      # Discriminant analysis models (provides Naive Bayes interface for tidymodels)
+library(tidyverse)
+library(dplyr)
+library(igraph)
 ```
 
-## 1. Introduction to Predictive Modeling
+## 1. Building Networks: Nodes and Edges
 
-Predictive modeling is the process of using statistical and machine
-learning techniques to **predict future outcomes** based on historical
-data. Unlike descriptive analysis (which tells us *what happened*) or
-diagnostic analysis (which tells us *why it happened*), predictive
-modeling tells us **what is likely to happen**.
+### 1.1 Understanding Network Components
 
-The basic workflow:
+Every network has two fundamental components:
 
-1.  **Train** a model on historical data where outcomes are known
+**Nodes (Vertices):**
 
-2.  **Identify patterns** that distinguish different outcomes
+- The entities in your network
 
-3.  **Apply** those patterns to new data to make predictions
+- Examples: people, organizations, websites, words
 
-**Why Predictive Modeling in Big Data?**
+- Can have **attributes** (age, gender, location, etc.)
 
-In the era of big data, we have unprecedented access to information
-about human behavior through social media (billions of posts, comments,
-likes, shares), digital traces (clicks, views, time spent), and
-real-time data streams. This wealth of data allows us to forecast trends
-before they go viral, identify influential content early, personalize
-experiences based on predicted preferences, detect anomalies like
-misinformation, and optimize strategies for content creation and
-distribution.
+**Edges (Links/Ties):**
 
-**Predictive Modeling for Social Media Insights**
+- The relationships or connections between nodes
 
-Social media platforms generate massive amounts of unstructured data.
-Predictive modeling helps answer critical questions:
+- Examples: friendships, messages, citations, co-occurrence
 
-- **Content virality**: Will this video/post go viral?
+- Can be **directed** (A → B) or **undirected** (A — B)
 
-- **User engagement**: Which users are likely to engage with specific
-  content?
-
-- **Influence detection**: Who are the emerging influencers?
-
-- **Crisis prediction**: Can we detect brewing controversies before they
-  explode?
-
-- **Campaign optimization**: Which message will resonate with which
-  audience?
-
-Real-world applications include YouTube’s recommendation algorithm
-predicting which videos you’ll watch next, Twitter (X) predicting which
-tweets to show in your feed, TikTok predicting which videos will go
-viral and promoting them early, and political campaigns predicting voter
-behavior to target messaging.
-
-Today in class we will build predictive models using two very different
-types of data:
-
-1.  **Text + Metadata**: YouTube video data to predict virality (feature
-    engineering from text: sentiment, length, keywords; combining text
-    features with numeric metadata)
-
-2.  **Numeric Features**: Titanic passenger data to predict survival
-    (traditional numeric feature engineering; handling missing data)
-
-Both use the same machine learning algorithms, demonstrating how the
-**same techniques** work across **different data types**.
+- Can have **weights** (strength of connection)
 
 ------------------------------------------------------------------------
 
-## 2. Music Lyrics Dataset: Country vs Hip Hop
+### 1.2 Creating Networks from Data Frames
 
-### 2.1 Loading the Data
+The most common way to represent network data is as an **edge list** – a
+data frame where each row is a connection.
 
-For this exercise, we’ll use a dataset of song lyrics from two genres:
-**Country** and **Hip Hop**. Our goal is to build a model that can
-predict a song’s genre based solely on its lyrics.
-
-This dataset became famous in 2019 when Lil Nas X’s “Old Town Road”
-sparked a debate: Is it Country or Hip Hop? Billboard removed it from
-the Country charts, claiming it wasn’t country enough. We’ll build a
-model to make this decision ourselves! I learned ML on this dataset in
-Dror Walter’s class as well!
-
-**Dataset Source**:
-<https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/lyricsDror.csv>
+Let’s create a simple friendship network:
 
 ``` r
-# Load the data
-lyrics <- read_csv("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/lyricsDror.csv")
-
-# Quick check
-dim(lyrics)
-```
-
-    ## [1] 51251     6
-
-**Dataset Size**: 51,251 songs - a substantial dataset for predictive
-modeling!
-
-------------------------------------------------------------------------
-
-### 2.2 Exploring the Data
-
-Let’s look at the structure of our data:
-
-``` r
-# First few rows
-head(lyrics)
-```
-
-    ## # A tibble: 6 × 6
-    ##   index song                  year artist genre  text                           
-    ##   <dbl> <chr>                <dbl> <chr>  <chr>  <chr>                          
-    ## 1   250 i-got-that            2007 eazy-e HipHop "(horns)...\n(chorus)\nTimbo- …
-    ## 2   251 8-ball-remix          2007 eazy-e HipHop "Verse 1:\nI don't drink brass…
-    ## 3   252 extra-special-thankz  2007 eazy-e HipHop "19 muthaphukkin 93,\nand I'm …
-    ## 4   253 boyz-in-da-hood       2007 eazy-e HipHop "Hey yo man, remember that shi…
-    ## 5   254 automoblie            2007 eazy-e HipHop "Yo, Dre, man, I take this bit…
-    ## 6   255 i-d-rather-fuck-you   2007 eazy-e HipHop "Aah, this is one of them song…
-
-``` r
-# Structure
-str(lyrics)
-```
-
-    ## spc_tbl_ [51,251 × 6] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-    ##  $ index : num [1:51251] 250 251 252 253 254 255 256 257 258 259 ...
-    ##  $ song  : chr [1:51251] "i-got-that" "8-ball-remix" "extra-special-thankz" "boyz-in-da-hood" ...
-    ##  $ year  : num [1:51251] 2007 2007 2007 2007 2007 ...
-    ##  $ artist: chr [1:51251] "eazy-e" "eazy-e" "eazy-e" "eazy-e" ...
-    ##  $ genre : chr [1:51251] "HipHop" "HipHop" "HipHop" "HipHop" ...
-    ##  $ text  : chr [1:51251] "(horns)...\n(chorus)\nTimbo- When you hit me on my phone betta know what cha want, when you call me, you alread"| __truncated__ "Verse 1:\nI don't drink brass monkey, like to be funky\nNickname Eazy-E your 8 ball junkie\nBass drum kickin', "| __truncated__ "19 muthaphukkin 93,\nand I'm back in this bitch,\nEazy- muthaphukkin- E, the hip hop thugster...\nShouts go out"| __truncated__ "Hey yo man, remember that shit Eazy did a while back\nMotherfuckers said it wasn't gonna work\nThat crazy shit,"| __truncated__ ...
-    ##  - attr(*, "spec")=
-    ##   .. cols(
-    ##   ..   index = col_double(),
-    ##   ..   song = col_character(),
-    ##   ..   year = col_double(),
-    ##   ..   artist = col_character(),
-    ##   ..   genre = col_character(),
-    ##   ..   text = col_character()
-    ##   .. )
-    ##  - attr(*, "problems")=<externalptr>
-
-``` r
-# Column names
-colnames(lyrics)
-```
-
-    ## [1] "index"  "song"   "year"   "artist" "genre"  "text"
-
-**Column Names (6 columns):**
-
-- `index`: Unique song identifier
-
-- `song`: Song title
-
-- `year`: Year the song was released
-
-- `artist`: Artist name
-
-- `genre`: Music genre (Country or HipHop) - **our outcome variable**
-
-- `text`: Song lyrics (text) - **our main predictor**
-
-**Data Types:**
-
-- `genre` is already a **factor** with 2 levels: Country and HipHop
-
-- `text` contains the full lyrics as character strings
-
-- `year` ranges from when to when?
-
-- `artist` tells us who performed the song
-
-------------------------------------------------------------------------
-
-### 2.3 Genre Distribution
-
-First, let’s see how balanced our dataset is between Country and Hip
-Hop:
-
-1.  Count by genre
-
-``` r
-# Count by genre
-lyrics |>
-  count(genre)
-```
-
-    ## # A tibble: 2 × 2
-    ##   genre       n
-    ##   <chr>   <int>
-    ## 1 Country 17286
-    ## 2 HipHop  33965
-
-2.  Proportion by genre
-
-``` r
-# Proportion by genre
-lyrics |>
-  count(genre) |>
-  mutate(proportion = n / sum(n))
-```
-
-    ## # A tibble: 2 × 3
-    ##   genre       n proportion
-    ##   <chr>   <int>      <dbl>
-    ## 1 Country 17286      0.337
-    ## 2 HipHop  33965      0.663
-
-3.  Visualize
-
-``` r
-# Visualize genre distribution
-lyrics |>
-  count(genre) |>
-  ggplot(aes(x = genre, y = n, fill = genre)) +
-  geom_col() +
-  geom_text(aes(label = scales::comma(n)), vjust = -0.5) +
-  scale_fill_manual(values = c("Country" = "goldenrod", "HipHop" = "purple")) +
-  labs(
-    title = "Distribution of Songs by Genre",
-    x = "Genre",
-    y = "Number of Songs"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-![](bigdata_L11-github_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
-
-**What do we observe?**
-
-Our dataset contains:
-
-- **Country**: 17,286 songs (33.7%)
-
-- **Hip Hop**: 33,965 songs (66.3%)
-
-This is a **roughly 1:2 imbalance**. Hip Hop songs outnumber Country
-songs by about 2 to 1.
-
-**Why does this matter for modeling?**
-
-- This imbalance is **moderate** - not severely skewed like 90/10, but
-  still meaningful
-
-- A naive model could achieve 66.3% accuracy by always predicting “Hip
-  Hop”
-
-- We need to use **stratified sampling** when splitting our data to
-  maintain this proportion in both training and testing sets
-
-- We should evaluate our model using metrics beyond just accuracy (e.g.,
-  precision, recall, F1-score for each class)
-
-- Later in Section 4, we’ll use `initial_split(strata = genre)` to
-  ensure both our training and test sets maintain this ~34%/66% split
-
-**Good news:** This level of imbalance is manageable! Many real-world
-datasets are far more imbalanced (e.g., fraud detection at 99/1). Our
-34/66 split means both genres are well-represented.
-
-------------------------------------------------------------------------
-
-## 3. Feature Engineering from Text
-
-Before we can build our predictive model, we need to transform raw
-lyrics into numerical features that machine learning algorithms can
-understand.
-
-**The Challenge:**
-
-- Machine learning models work with numbers, not text
-
-- We have song lyrics as raw strings in the `text` column
-
-- We need to extract meaningful numeric features that capture the
-  **essence** of Country vs Hip Hop
-
-**Our Approach: Bag of Words**
-
-We’ll use a classic text mining approach called **Bag of Words (BoW)**:
-
-1.  **Tokenize**: Break lyrics into individual words
-
-2.  **Clean**: Remove stopwords, punctuation, numbers
-
-3.  **Stem**: Reduce words to their root form (e.g., “running” → “run”)
-
-4.  **Count**: Create word frequency features
-
-5.  **Filter**: Keep only words that appear in 1-90% of documents
-    (remove very rare and very common words)
-
-This creates a **document-feature matrix** where each row is a song and
-each column is a word’s frequency.
-
-In tidymodels, we’ll use the
-[`textrecipes`](https://textrecipes.tidymodels.org/) package to handle
-all text preprocessing within our recipe!
-
-------------------------------------------------------------------------
-
-### 3.1 Creating the Text Recipe
-
-Let’s build a recipe that preprocesses our text data following the same
-approach as the original analysis:
-
-``` r
-# Create a text preprocessing recipe
-text_recipe <- recipe(genre ~ text, data = lyrics) |>
-  
-  # Step 1: Tokenize the text into words
-  step_tokenize(text) |>
-  
-  # Step 2: Remove stopwords (common words like "the", "and", etc.)
-  step_stopwords(text) |>
-  
-  # Step 3: Stem words to their root form
-  step_stem(text) |>
-  
-  # Step 4: Filter tokens - keep words appearing in 1-90% of documents
-  step_tokenfilter(text, 
-                   min_times = 513,       # Must appear in at least ~1% of 51,251 songs
-                   max_times = 46126,     # Must appear in at most ~90% of 51,251 songs
-                   percentage = FALSE) |> # Use absolute counts
-  
-  # Step 5: Create term frequency features (word counts)
-  step_tf(text)
-
-# View the recipe
-# str(text_recipe)
-```
-
-**What does each step do?**
-
-1.  **`step_tokenize(text)`**: Splits lyrics into individual words
-
-    - “I love country music” → \[“I”, “love”, “country”, “music”\]
-
-2.  **`step_stopwords(text)`**: Removes common words that don’t
-    distinguish genres
-
-    - Removes: “the”, “a”, “and”, “I”, “you”, etc.
-
-    - Keeps: content words that might be genre-specific
-
-3.  **`step_stem(text)`**: Reduces words to their root form
-
-    - “running”, “runs”, “ran” → “run”
-
-    - “loving”, “loved”, “loves” → “love”
-
-4.  **`step_tokenfilter(text, min_times = 513, max_times = 46126)`**:
-
-    - Removes very rare words (\< 513 songs)
-
-    - Removes very common words (\> 46,126 songs)
-
-    - Keeps discriminative words that might distinguish Country from Hip
-      Hop
-
-5.  **`step_tf(text)`**: Converts tokens into numeric term frequency
-    features
-
-    - Creates one column per remaining word
-
-    - Values = how many times that word appears in each song
-
-------------------------------------------------------------------------
-
-### 3.2 Preparing the Recipe
-
-Before we can use the recipe, we need to **prep** it on our data to
-learn the vocabulary:
-
-``` r
-# Prep the recipe (learns vocabulary from training data)
-prepped_recipe <- prep(text_recipe)
-
-# How many features did we create?
-# str(prepped_recipe)
-```
-
-**What happens during `prep()`?**
-
-- The recipe examines all the lyrics
-
-- It builds a vocabulary of words that pass our filtering criteria
-
-- It determines which words to keep (appearing in 1-90% of documents)
-
-- It creates the stemming dictionary
-
-**How many features?**
-
-After tokenization, stopword removal, stemming, and filtering, we’ll
-likely have **several hundred to a few thousand word features** - each
-representing a stemmed word’s frequency.
-
-**What happened during our prep?**
-
-- The recipe examined all 51,251 songs
-
-- Built a vocabulary of all unique stemmed words
-
-- Applied the filtering rules (keep words in 513-46,126 songs)
-
-- Identified **99 words** that meet our criteria
-
-These 99 words will become our features for modeling!
-
-------------------------------------------------------------------------
-
-### 3.3 Applying the Recipe to Create Features
-
-Now let’s use `bake()` to transform our raw text into numeric features:
-
-``` r
-# Apply the recipe to transform the data
-lyrics_features <- bake(prepped_recipe, lyrics)
-
-# View the structure
-dim(lyrics_features)
-```
-
-    ## [1] 51251   100
-
-``` r
-colnames(lyrics_features)[1:20]  # First 20 features
-```
-
-    ##  [1] "genre"          "tf_text_alwai"  "tf_text_around" "tf_text_ass"   
-    ##  [5] "tf_text_awai"   "tf_text_babi"   "tf_text_back"   "tf_text_better"
-    ##  [9] "tf_text_big"    "tf_text_bitch"  "tf_text_boi"    "tf_text_bout"  
-    ## [13] "tf_text_call"   "tf_text_caus"   "tf_text_choru"  "tf_text_come"  
-    ## [17] "tf_text_da"     "tf_text_dai"    "tf_text_de"     "tf_text_die"
-
-``` r
-# Preview the data
-head(lyrics_features[, 1:10])
-```
-
-    ## # A tibble: 6 × 10
-    ##   genre  tf_text_alwai tf_text_around tf_text_ass tf_text_awai tf_text_babi
-    ##   <fct>          <int>          <int>       <int>        <int>        <int>
-    ## 1 HipHop             0              0           0            0            0
-    ## 2 HipHop             0              1           3            0            0
-    ## 3 HipHop             0              0           0            0            1
-    ## 4 HipHop             5              0           2            0            0
-    ## 5 HipHop             0              0           2            0            0
-    ## 6 HipHop             0              0           3            0            1
-    ## # ℹ 4 more variables: tf_text_back <int>, tf_text_better <int>,
-    ## #   tf_text_big <int>, tf_text_bitch <int>
-
-**What do we have now?**
-
-- **100 columns total**:
-
-  - 1 column: `genre` (our outcome)
-
-  - 99 columns: `tf_text_[word]` (word frequency features)
-
-- Each row is a song
-
-- Each word column contains the count of that word in the song
-
-- This is our **document-feature matrix** - ready for machine learning!
-
-For example, looking at the first few songs:
-
-- Most Hip Hop songs have 0 occurrences of “alwai” (always)
-
-- One song has “ass” appearing 3 times
-
-- “back” appears 1-3 times in different songs
-
-------------------------------------------------------------------------
-
-## 4. Tidymodels Workflow
-
-Now we’ll build, train, and evaluate machine learning models using the
-tidymodels framework. Here’s our roadmap:
-
-1.  **Split the data** into training and test sets
-
-2.  **Create a recipe** (we already have this!)
-
-3.  **Specify a model**
-
-4.  **Create a workflow** (combine recipe + model)
-
-5.  **Fit the model** on training data
-
-6.  **Make predictions** on test data
-
-7.  **Evaluate performance**
-
-### 4.1 Split the Data
-
-First, let’s split into training (75%) and test (25%) sets:
-
-``` r
-# Set seed for reproducibility
-set.seed(123)
-
-# Split the data, stratifying by genre to maintain 34%/66% ratio
-lyrics_split <- initial_split(lyrics, 
-                               prop = 0.75, 
-                               strata = genre)
-
-# Create training and test sets
-lyrics_train <- training(lyrics_split)
-lyrics_test <- testing(lyrics_split)
-
-# Check the splits
-nrow(lyrics_train)  # ~38,438 songs
-```
-
-    ## [1] 38437
-
-``` r
-nrow(lyrics_test)   # ~12,813 songs
-```
-
-    ## [1] 12814
-
-``` r
-# Verify stratification worked
-table(lyrics_train$genre)
-```
-
-    ## 
-    ## Country  HipHop 
-    ##   12964   25473
-
-``` r
-table(lyrics_test$genre)
-```
-
-    ## 
-    ## Country  HipHop 
-    ##    4322    8492
-
-``` r
-# Verify stratification maintained the genre proportions
-prop.table(table(lyrics_train$genre))
-```
-
-    ## 
-    ##   Country    HipHop 
-    ## 0.3372792 0.6627208
-
-``` r
-prop.table(table(lyrics_test$genre))
-```
-
-    ## 
-    ##   Country    HipHop 
-    ## 0.3372873 0.6627127
-
-**Key observations:**
-
-- Training set: 38,437 songs (75%)
-
-  - Country: 12,964 (33.7%)
-
-  - Hip Hop: 25,473 (66.3%)
-
-- Test set: 12,814 songs (25%)
-
-  - Country: 4,322 (33.7%)
-
-  - Hip Hop: 8,492 (66.3%)
-
-The stratification worked great!!! Both sets maintain the same 34%/66%
-split as the original data.
-
-------------------------------------------------------------------------
-
-### 4.2 Create the Recipe
-
-Good news - we already created our text recipe in Section 3! We can
-reuse it:
-
-``` r
-# Our recipe from Section 3
-head(text_recipe)
-```
-
-    ## $var_info
-    ## # A tibble: 2 × 4
-    ##   variable type      role      source  
-    ##   <chr>    <list>    <chr>     <chr>   
-    ## 1 text     <chr [3]> predictor original
-    ## 2 genre    <chr [3]> outcome   original
-    ## 
-    ## $term_info
-    ## # A tibble: 2 × 4
-    ##   variable type      role      source  
-    ##   <chr>    <list>    <chr>     <chr>   
-    ## 1 text     <chr [3]> predictor original
-    ## 2 genre    <chr [3]> outcome   original
-    ## 
-    ## $steps
-    ## $steps[[1]]
-
-    ## 
-    ## $steps[[2]]
-
-    ## 
-    ## $steps[[3]]
-
-    ## 
-    ## $steps[[4]]
-
-    ## 
-    ## $steps[[5]]
-
-    ## 
-    ## 
-    ## $template
-    ## # A tibble: 51,251 × 2
-    ##    text                                                                    genre
-    ##    <chr>                                                                   <chr>
-    ##  1 "(horns)...\n(chorus)\nTimbo- When you hit me on my phone betta know w… HipH…
-    ##  2 "Verse 1:\nI don't drink brass monkey, like to be funky\nNickname Eazy… HipH…
-    ##  3 "19 muthaphukkin 93,\nand I'm back in this bitch,\nEazy- muthaphukkin-… HipH…
-    ##  4 "Hey yo man, remember that shit Eazy did a while back\nMotherfuckers s… HipH…
-    ##  5 "Yo, Dre, man, I take this bitch out to the movies and shit man\nWe're… HipH…
-    ##  6 "Aah, this is one of them songs\nYou can kick back and smoke a joint t… HipH…
-    ##  7 "Hey yo man, remember that shit Eazy did a while back\nMotherfuckers s… HipH…
-    ##  8 "Artist: Master P ++++++++++\nAlbum: Ghetto Dope\nSong: Pass Me Da Gre… HipH…
-    ##  9 "Yes Im too smart to get dicked...or so the case may be\nthat's how th… HipH…
-    ## 10 "Hey yo man, remember that shit Eazy did a while back\nMotherfuckers s… HipH…
-    ## # ℹ 51,241 more rows
-    ## 
-    ## $levels
-    ## NULL
-    ## 
-    ## $retained
-    ## [1] NA
-
-This recipe will:
-
-1.  Tokenize the text
-
-2.  Remove stopwords
-
-3.  Stem words
-
-4.  Filter to 99 most informative words
-
-5.  Create word frequency features
-
-------------------------------------------------------------------------
-
-### 4.3 Specify a Model
-
-Now we’ll specify our first model - **logistic regression**. In
-tidymodels, we use the [`parsnip`](https://parsnip.tidymodels.org/)
-package to define models in a consistent way.
-
-``` r
-# Specify a logistic regression model
-logistic_model <- logistic_reg() |>
-  set_engine("glm") |>
-  set_mode("classification")
-
-# View the model specification
-logistic_model
-```
-
-    ## Logistic Regression Model Specification (classification)
-    ## 
-    ## Computational engine: glm
-
-**Understanding the model specification:**
-
-- `logistic_reg()`: The model type (logistic regression for binary
-  classification)
-
-- `set_engine("glm")`: The computational engine (R’s built-in `glm`
-  function)
-
-- `set_mode("classification")`: We’re predicting categories (Country vs
-  Hip Hop), not numbers
-
-**Why logistic regression?**
-
-- Simple, interpretable baseline model
-
-- Works well with text features
-
-- Fast to train
-
-- Shows us which words are most predictive of each genre
-
-We’ll compare this to other models (Random Forest, SVM, Naive Bayes)
-later, but logistic regression is a great starting point!
-
-------------------------------------------------------------------------
-
-### 4.4 Create a Workflow
-
-A workflow combines our recipe (feature engineering) with our model
-(algorithm). This keeps everything organized:
-
-``` r
-# Create a workflow
-logistic_wf <- workflow() |>
-  add_recipe(text_recipe) |>
-  add_model(logistic_model)
-
-# View the workflow
-logistic_wf
-```
-
-    ## ══ Workflow ════════════════════════════════════════════════════════════════════
-    ## Preprocessor: Recipe
-    ## Model: logistic_reg()
-    ## 
-    ## ── Preprocessor ────────────────────────────────────────────────────────────────
-    ## 5 Recipe Steps
-    ## 
-    ## • step_tokenize()
-    ## • step_stopwords()
-    ## • step_stem()
-    ## • step_tokenfilter()
-    ## • step_tf()
-    ## 
-    ## ── Model ───────────────────────────────────────────────────────────────────────
-    ## Logistic Regression Model Specification (classification)
-    ## 
-    ## Computational engine: glm
-
-**What’s in our workflow?**
-
-1.  **Preprocessor (Recipe)**: Tokenize → Remove stopwords → Stem →
-    Filter → Count words
-
-2.  **Model**: Logistic regression
-
-Think of the workflow as a pipeline: raw lyrics go in, genre predictions
-come out!
-
-------------------------------------------------------------------------
-
-### 4.5 Fit the Model
-
-Now we’ll train (fit) our workflow on the training data:
-
-``` r
-# Fit the workflow to training data
-logistic_fit <- logistic_wf |>
-  fit(data = lyrics_train)
-
-# View the fitted model
-logistic_fit
-```
-
-    ## ══ Workflow [trained] ══════════════════════════════════════════════════════════
-    ## Preprocessor: Recipe
-    ## Model: logistic_reg()
-    ## 
-    ## ── Preprocessor ────────────────────────────────────────────────────────────────
-    ## 5 Recipe Steps
-    ## 
-    ## • step_tokenize()
-    ## • step_stopwords()
-    ## • step_stem()
-    ## • step_tokenfilter()
-    ## • step_tf()
-    ## 
-    ## ── Model ───────────────────────────────────────────────────────────────────────
-    ## 
-    ## Call:  stats::glm(formula = ..y ~ ., family = stats::binomial, data = data)
-    ## 
-    ## Coefficients:
-    ##     (Intercept)  `tf_text_ain't`   tf_text_around      tf_text_ass  
-    ##        0.265216        -0.013695        -0.162873         1.242105  
-    ##    tf_text_awai     tf_text_babi     tf_text_back   tf_text_better  
-    ##       -0.105878         0.067251        -0.067808         0.044715  
-    ##     tf_text_big    tf_text_bitch      tf_text_boi     tf_text_call  
-    ##       -0.047069         1.952853        -0.007173        -0.027618  
-    ##     tf_text_can     tf_text_caus    tf_text_choru     tf_text_come  
-    ##       -0.007648         0.129789         0.087512         0.002476  
-    ##      tf_text_da      tf_text_dai       tf_text_de      tf_text_die  
-    ##        0.082057        -0.067766         0.109121         0.120831  
-    ##       tf_text_e       tf_text_em     tf_text_even     tf_text_ever  
-    ##        0.237703         0.081647         0.081691        -0.161403  
-    ##   tf_text_everi       tf_text_ey     tf_text_feel     tf_text_fuck  
-    ##       -0.061913        -0.150589         0.082835         2.153714  
-    ##    tf_text_game     tf_text_girl     tf_text_give       tf_text_go  
-    ##        0.271700         0.204218         0.089275         0.014508  
-    ##    tf_text_gone    tf_text_gonna     tf_text_good    tf_text_gotta  
-    ##       -0.147935        -0.107931        -0.064124         0.130561  
-    ##    tf_text_hand     tf_text_hard     tf_text_head    tf_text_heart  
-    ##       -0.116885        -0.071164        -0.010178        -0.394498  
-    ##     tf_text_hit     tf_text_hold     tf_text_home     tf_text_keep  
-    ##        0.360981        -0.117090        -0.270471         0.016348  
-    ##      tf_text_la     tf_text_leav      tf_text_let     tf_text_life  
-    ##        0.004785        -0.134918         0.013938         0.059014  
-    ##   tf_text_littl     tf_text_live     tf_text_long     tf_text_look  
-    ##       -0.358351         0.006409        -0.187351        -0.050022  
-    ##    tf_text_love     tf_text_make      tf_text_man     tf_text_mind  
-    ##       -0.060827         0.032029         0.025633        -0.014867  
-    ##   tf_text_monei     tf_text_need    tf_text_never      tf_text_new  
-    ##        0.143463         0.090393        -0.036171        -0.003437  
-    ##   tf_text_night      tf_text_now       tf_text_oh       tf_text_on  
-    ##       -0.168085         0.017522        -0.003163        -0.030539  
-    ##    tf_text_plai      tf_text_put      tf_text_que     tf_text_real  
-    ##       -0.016092         0.114395        -0.014443         0.239755  
-    ##  tf_text_realli    tf_text_right      tf_text_run      tf_text_sai  
-    ##        0.028405         0.038395         0.043143         0.016048  
-    ##    tf_text_said      tf_text_see     tf_text_shit     tf_text_show  
-    ##       -0.078949         0.059204         2.576050         0.151500  
-    ##    tf_text_stai    tf_text_start    tf_text_still     tf_text_stop  
-    ##        0.077753        -0.043576        -0.128076         0.103218  
-    ##    tf_text_take     tf_text_talk     tf_text_tell    tf_text_thing  
-    ##       -0.017276         0.056965         0.017047        -0.083363  
-    ##   tf_text_think     tf_text_time      tf_text_try     tf_text_turn  
-    ##       -0.029965        -0.051901         0.060197        -0.043184  
-    ##     tf_text_two        tf_text_u      tf_text_wai    tf_text_wanna  
-    ##       -0.076569         0.107314        -0.079105         0.116684  
-    ## 
-    ## ...
-    ## and 8 more lines.
-
-**What just happened?**
-
-1.  The recipe processed all 38,437 training songs:
-
-    - Tokenized the lyrics
-
-    - Removed stopwords and stemmed words
-
-    - Filtered to our 99 selected words
-
-    - Created word frequency features
-
-2.  The logistic regression learned patterns:
-
-    - Which words are more common in Country songs?
-
-    - Which words are more common in Hip Hop songs?
-
-    - How to combine these words to predict genre
-
-**How long did this take?**
-
-With 38,437 songs and 99 features, the model trains in seconds - one
-advantage of keeping our feature set focused!
-
-**Look at those coefficients!**
-
-Notice the patterns: - **Strongest Hip Hop words** (large positive
-coefficients): `shit` (2.58), `fuck` (2.15), `bitch` (1.95), `yo` (1.71)
-
-- **Strongest Country words** (large negative coefficients): `well`
-  (-0.43), `heart` (-0.39), `little` (-0.36), `home` (-0.27)
-
-The model learned exactly what we’d expect - profanity and slang for Hip
-Hop, traditional/emotional words for Country!
-
-------------------------------------------------------------------------
-
-### 4.6 Make Predictions
-
-Let’s use our trained model to predict genres for the test set:
-
-``` r
-# Make predictions on test data
-logistic_predictions <- logistic_fit |>
-  predict(new_data = lyrics_test) |>
-  bind_cols(lyrics_test)
-
-# View first few predictions
-logistic_predictions |>
-  select(.pred_class, genre, song, artist) |>
-  head(10)
-```
-
-    ## # A tibble: 10 × 4
-    ##    .pred_class genre  song                  artist
-    ##    <fct>       <chr>  <chr>                 <chr> 
-    ##  1 HipHop      HipHop automoblie            eazy-e
-    ##  2 HipHop      HipHop boyz-n-the-hood-g-mix eazy-e
-    ##  3 HipHop      HipHop exxtra-special-thankz eazy-e
-    ##  4 HipHop      HipHop sorry-louie           eazy-e
-    ##  5 HipHop      HipHop gimmie-that-nutt      eazy-e
-    ##  6 HipHop      HipHop creep-n-crawl         eazy-e
-    ##  7 HipHop      HipHop black-nigga-killa     eazy-e
-    ##  8 HipHop      HipHop prelude               eazy-e
-    ##  9 HipHop      HipHop extra-special-thanx   eazy-e
-    ## 10 HipHop      HipHop 24-hours-to-live      eazy-e
-
-**Understanding the output:**
-
-- `.pred_class`: The model’s prediction (Country or HipHop)
-
-- `genre`: The actual genre (ground truth)
-
-- When `.pred_class` matches `genre`, the model got it right!
-
-- When they differ, the model made a mistake
-
-**Perfect predictions!** All 10 Eazy-E songs correctly identified as Hip
-Hop. Let’s see the probabilities:
-
-Let’s also get prediction probabilities:
-
-``` r
-# Get prediction probabilities
-logistic_probs <- logistic_fit |>
-  predict(new_data = lyrics_test, type = "prob") |>
-  bind_cols(lyrics_test)
-
-# View first few with probabilities
-logistic_probs |>
-  select(.pred_Country, .pred_HipHop, genre, song, artist) |>
-  head(20)
-```
-
-    ## # A tibble: 20 × 5
-    ##    .pred_Country .pred_HipHop genre   song                             artist   
-    ##            <dbl>        <dbl> <chr>   <chr>                            <chr>    
-    ##  1      3.28e- 8        1.000 HipHop  automoblie                       eazy-e   
-    ##  2      2.22e-16        1     HipHop  boyz-n-the-hood-g-mix            eazy-e   
-    ##  3      1.38e- 4        1.000 HipHop  exxtra-special-thankz            eazy-e   
-    ##  4      2.22e-16        1     HipHop  sorry-louie                      eazy-e   
-    ##  5      1.32e- 8        1.000 HipHop  gimmie-that-nutt                 eazy-e   
-    ##  6      1.92e-11        1.000 HipHop  creep-n-crawl                    eazy-e   
-    ##  7      1.79e- 5        1.000 HipHop  black-nigga-killa                eazy-e   
-    ##  8      2.22e-16        1     HipHop  prelude                          eazy-e   
-    ##  9      1.38e- 4        1.000 HipHop  extra-special-thanx              eazy-e   
-    ## 10      1.67e- 9        1.000 HipHop  24-hours-to-live                 eazy-e   
-    ## 11      2.22e-16        1     HipHop  eazy-1-2-3                       eazy-e   
-    ## 12      3.75e- 1        0.625 HipHop  intro-new-year-s-e-vil           eazy-e   
-    ## 13      4.34e- 1        0.566 HipHop  rev-skit                         eazy-e   
-    ## 14      2.22e-16        1     HipHop  nobody-move                      eazy-e   
-    ## 15      2.22e-16        1     HipHop  eazy-duz-it                      eazy-e   
-    ## 16      2.22e-16        1     HipHop  boyz-n-the-hood-remix            eazy-e   
-    ## 17      4.34e- 1        0.566 Country this-could-go-on-forever         gene-wat…
-    ## 18      4.34e- 1        0.566 Country this-country-s-bigger-than-texas gene-wat…
-    ## 19      4.34e- 1        0.566 Country the-workin-end-of-a-hoe          gene-wat…
-    ## 20      4.10e- 1        0.590 Country love-in-the-hot-afternoon        gene-wat…
-
-**Understanding probabilities:**
-
-- `.pred_Country`: Probability the song is Country (0-1)
-
-- `.pred_HipHop`: Probability the song is Hip Hop (0-1)
-
-- These always sum to 1.0
-
-- Higher probability = more confident prediction
-
-------------------------------------------------------------------------
-
-### 4.7 Evaluate Performance
-
-First, let’s convert genre to a factor in our predictions:
-
-``` r
-logistic_predictions <- logistic_predictions |>
-  mutate(genre = factor(genre, levels = c("Country", "HipHop")))
-
-logistic_probs <- logistic_probs |>
-  mutate(genre = factor(genre, levels = c("Country", "HipHop")))
-```
-
-Now let’s measure how well our model performed:
-
-``` r
-# ROC AUC - specify HipHop as the event level
-logistic_probs |>
-  roc_auc(truth = genre, .pred_HipHop, event_level = "second")
-```
-
-    ## # A tibble: 1 × 3
-    ##   .metric .estimator .estimate
-    ##   <chr>   <chr>          <dbl>
-    ## 1 roc_auc binary         0.889
-
-``` r
-# Accuracy (needs hard class predictions)
-logistic_predictions |>
-  accuracy(truth = genre, .pred_class)
-```
-
-    ## # A tibble: 1 × 3
-    ##   .metric  .estimator .estimate
-    ##   <chr>    <chr>          <dbl>
-    ## 1 accuracy binary         0.832
-
-``` r
-# Precision
-logistic_predictions |>
-  yardstick::precision(truth = genre, .pred_class)
-```
-
-    ## # A tibble: 1 × 3
-    ##   .metric   .estimator .estimate
-    ##   <chr>     <chr>          <dbl>
-    ## 1 precision binary         0.836
-
-``` r
-# Recall (Sensitivity)
-logistic_predictions |>
-  yardstick::sensitivity(truth = genre, .pred_class)
-```
-
-    ## # A tibble: 1 × 3
-    ##   .metric     .estimator .estimate
-    ##   <chr>       <chr>          <dbl>
-    ## 1 sensitivity binary         0.626
-
-``` r
-# F1 Score
-logistic_predictions |>
-  f_meas(truth = genre, .pred_class)
-```
-
-    ## # A tibble: 1 × 3
-    ##   .metric .estimator .estimate
-    ##   <chr>   <chr>          <dbl>
-    ## 1 f_meas  binary         0.716
-
-**Interpretation of Results:**
-
-- **ROC AUC**: 0.889 - Excellent ability to distinguish between Country
-  and HipHop (0.5 = random, 1.0 = perfect)
-
-- **Accuracy**: 83.2% - The model correctly classified 83% of all songs
-
-- **Precision**: 83.6% - Of songs predicted as HipHop, 84% actually were
-  HipHop
-
-- **Recall**: 62.6% - Of all actual HipHop songs, we caught 63%
-
-- **F1 Score**: 71.6% - Harmonic mean of precision and recall
-
-**Confusion Matrix:**
-
-``` r
-logistic_predictions |>
-  conf_mat(truth = genre, estimate = .pred_class)
-```
-
-    ##           Truth
-    ## Prediction Country HipHop
-    ##    Country    2706    531
-    ##    HipHop     1616   7961
-
-**Visualize:**
-
-``` r
-logistic_predictions |>
-  conf_mat(truth = genre, estimate = .pred_class) |>
-  autoplot(type = "heatmap") +
-  labs(title = "Logistic Regression Confusion Matrix")
-```
-
-![](bigdata_L11-github_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
-
-**Reading the Confusion Matrix:**
-
-|                       | **Actually Country** | **Actually HipHop** |
-|-----------------------|----------------------|---------------------|
-| **Predicted Country** | 2,706 ✓              | 531 ✗               |
-| **Predicted HipHop**  | 1,616 ✗              | 7,961 ✓             |
-
-**Key Observations:**
-
-1.  **Strong at identifying HipHop**: 7,961 out of 8,492 HipHop songs
-    correctly identified (93.7%)
-
-2.  **Weaker at identifying Country**: 2,706 out of 4,322 Country songs
-    correctly identified (62.6%)
-
-3.  **Class imbalance effect**: The model has more HipHop training data
-    (66%), so it performs better on HipHop
-
-4.  **Asymmetric errors**: The model misclassifies 1,616 Country songs
-    as HipHop, but only 531 HipHop songs as Country
-
-The model is biased toward predicting HipHop, which makes sense given
-the 2:1 ratio of HipHop to Country songs in the training data.
-
-### 4.8 Feature Importance
-
-Feature importance shows us which words have the strongest influence on
-the model’s predictions. We can extract this from the logistic
-regression coefficients:
-
-``` r
-# Extract and visualize the most important features
-logistic_fit |>
-  extract_fit_parsnip() |>
-  tidy() |>
-  filter(term != "(Intercept)") |>
-  mutate(
-    term = str_remove(term, "tf_text_"),
-    term = str_remove_all(term, "`"),
-    abs_estimate = abs(estimate)
-  ) |>
-  slice_max(abs_estimate, n = 20) |>
-  mutate(
-    direction = if_else(estimate > 0, "HipHop", "Country"),
-    term = reorder(term, estimate)
-  ) |>
-  ggplot(aes(x = estimate, y = term, fill = direction)) +
-  geom_col() +
-  scale_fill_manual(values = c("Country" = "steelblue", "HipHop" = "coral")) +
-  labs(
-    title = "Top 20 Most Important Words for Genre Classification",
-    subtitle = "Logistic Regression Coefficients",
-    x = "Coefficient (← Country | HipHop →)",
-    y = NULL,
-    fill = "Predicts"
-  ) +
-  theme_minimal()
-```
-
-![](bigdata_L11-github_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
-
-**Interpreting the plot:**
-
-- **Bars to the RIGHT (positive)**: Words that predict **Hip Hop**
-  - Example: “shit”, “fuck”, “bitch”, “yo” are strong Hip Hop indicators
-- **Bars to the LEFT (negative)**: Words that predict **Country**
-  - Example: “well”, “heart”, “little”, “home” are strong Country
-    indicators
-
-**Top predictors table:**
-
-``` r
-# Create a table of top predictors
-logistic_fit |>
-  extract_fit_parsnip() |>
-  tidy() |>
-  filter(term != "(Intercept)") |>
-  mutate(
-    term = str_remove(term, "tf_text_"),
-    term = str_remove_all(term, "`")
-  ) |>
-  slice_max(abs(estimate), n = 20) |>
-  arrange(desc(estimate)) |>
-  select(Word = term, Coefficient = estimate) |>
-  mutate(
-    Predicts = if_else(Coefficient > 0, "HipHop", "Country"),
-    Coefficient = round(Coefficient, 3)
-  )
-```
-
-    ## # A tibble: 20 × 3
-    ##    Word   Coefficient Predicts
-    ##    <chr>        <dbl> <chr>   
-    ##  1 shit         2.58  HipHop  
-    ##  2 fuck         2.15  HipHop  
-    ##  3 bitch        1.95  HipHop  
-    ##  4 yo           1.71  HipHop  
-    ##  5 ass          1.24  HipHop  
-    ##  6 wit          0.843 HipHop  
-    ##  7 y'all        0.83  HipHop  
-    ##  8 ya           0.452 HipHop  
-    ##  9 hit          0.361 HipHop  
-    ## 10 game         0.272 HipHop  
-    ## 11 real         0.24  HipHop  
-    ## 12 e            0.238 HipHop  
-    ## 13 girl         0.204 HipHop  
-    ## 14 around      -0.163 Country 
-    ## 15 night       -0.168 Country 
-    ## 16 long        -0.187 Country 
-    ## 17 home        -0.27  Country 
-    ## 18 littl       -0.358 Country 
-    ## 19 heart       -0.394 Country 
-    ## 20 well        -0.428 Country
-
-**What makes this interesting?**
-
-The model learned cultural and linguistic differences between genres:
-
-- **Hip Hop words**: Urban slang, profanity, direct language (“shit”,
-  “fuck”, “yo”, “y’all”)
-
-- **Country words**: Emotional themes, traditional values, storytelling
-  (“well”, “heart”, “little”, “home”, “long”)
-
-The coefficients tell us exactly how much each word shifts the
-prediction toward one genre or the other!
-
-------------------------------------------------------------------------
-
-## 5. Model Comparison
-
-Let’s compare our logistic regression against Random Forest, SVM, and
-Naive Bayes. We’ll train all models on the same data and compare their
-performance.
-
-### 5.1 Define Models
-
-``` r
-# Random Forest
-rf_model <- rand_forest(trees = 100) |>
-  set_engine("ranger") |>
-  set_mode("classification")
-
-# Support Vector Machine
-svm_model <- svm_rbf() |>
-  set_engine("kernlab") |>
-  set_mode("classification")
-
-# Naive Bayes
-nb_model <- naive_Bayes() |>
-  set_engine("naivebayes") |>
-  set_mode("classification")
-```
-
-### 5.2 Create Workflows and Fit Models
-
-``` r
-# Random Forest
-rf_wf <- workflow() |>
-  add_recipe(text_recipe) |>
-  add_model(rf_model)
-
-# Time and fit Random Forest
-start_time <- Sys.time()
-rf_fit <- rf_wf |> fit(data = lyrics_train)
-rf_time <- Sys.time() - start_time
-print(paste("Random Forest training time:", round(rf_time, 2), "seconds"))
-
-# Save Random Forest model
-save(rf_fit, file = "rf_fit.rda")
-
-# SVM
-svm_wf <- workflow() |>
-  add_recipe(text_recipe) |>
-  add_model(svm_model)
-
-# Time and fit SVM
-start_time <- Sys.time()
-svm_fit <- svm_wf |> fit(data = lyrics_train)
-svm_time <- Sys.time() - start_time
-print(paste("SVM training time:", round(svm_time, 2), "seconds"))
-
-# Save SVM model
-save(svm_fit, file = "svm_fit.rda")
-
-# Naive Bayes
-nb_wf <- workflow() |>
-  add_recipe(text_recipe) |>
-  add_model(nb_model)
-
-# Time and fit Naive Bayes
-start_time <- Sys.time()
-nb_fit <- nb_wf |> fit(data = lyrics_train)
-nb_time <- Sys.time() - start_time
-print(paste("Naive Bayes training time:", round(nb_time, 2), "seconds"))
-
-# Save Naive Bayes model
-save(nb_fit, file = "nb_fit.rda")
-```
-
-**To load pre-trained models (skip training):**
-
-``` r
-# Load saved models from GitHub instead of training
-load(url("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/rf_fit.rda"))
-load(url("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/svm_fit.rda"))
-load(url("https://github.com/aysedeniz09/IntroCSS/raw/refs/heads/main/data/nb_fit.rda"))
-```
-
-### 5.3 Generate Predictions
-
-``` r
-# Get predictions from all models
-rf_pred <- rf_fit |>
-  predict(lyrics_test) |>
-  bind_cols(lyrics_test |> select(genre)) |>
-  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
-         model = "Random Forest")
-
-svm_pred <- svm_fit |>
-  predict(lyrics_test) |>
-  bind_cols(lyrics_test |> select(genre)) |>
-  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
-         model = "SVM")
-
-nb_pred <- nb_fit |>
-  predict(lyrics_test) |>
-  bind_cols(lyrics_test |> select(genre)) |>
-  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
-         model = "Naive Bayes")
-
-# Add logistic regression predictions
-logistic_pred <- logistic_predictions |>
-  select(.pred_class, genre) |>
-  mutate(model = "Logistic Regression")
-
-# Combine all predictions
-all_predictions <- bind_rows(logistic_pred, rf_pred, svm_pred, nb_pred)
-```
-
-------------------------------------------------------------------------
-
-### 5.4 Compare Model Performance
-
-First, let’s get probability predictions from all models for ROC AUC:
-
-``` r
-# Get probability predictions for ROC AUC
-rf_probs <- rf_fit |>
-  predict(lyrics_test, type = "prob") |>
-  bind_cols(lyrics_test |> select(genre)) |>
-  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
-         model = "Random Forest")
-
-svm_probs <- svm_fit |>
-  predict(lyrics_test, type = "prob") |>
-  bind_cols(lyrics_test |> select(genre)) |>
-  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
-         model = "SVM")
-
-nb_probs <- nb_fit |>
-  predict(lyrics_test, type = "prob") |>
-  bind_cols(lyrics_test |> select(genre)) |>
-  mutate(genre = factor(genre, levels = c("Country", "HipHop")),
-         model = "Naive Bayes")
-
-# Combine with logistic regression probabilities
-all_probs <- bind_rows(
-  logistic_probs |> select(.pred_HipHop, genre) |> mutate(model = "Logistic Regression"),
-  rf_probs,
-  svm_probs,
-  nb_probs
+# Create an edge list as a tibble (tidy data frame)
+friendships <- tibble(
+  from = c("Alice", "Alice", "Bob", "Carol", "David"),
+  to   = c("Bob", "Carol", "Carol", "David", "Alice")
 )
+
+# View the edge list
+print(friendships)
 ```
 
-Now calculate all metrics including ROC AUC:
+    ## # A tibble: 5 × 2
+    ##   from  to   
+    ##   <chr> <chr>
+    ## 1 Alice Bob  
+    ## 2 Alice Carol
+    ## 3 Bob   Carol
+    ## 4 Carol David
+    ## 5 David Alice
+
+**What does this mean?**
+
+- Alice is friends with Bob and Carol
+
+- Bob is friends with Carol
+
+- Carol is friends with David
+
+- David is friends with Alice
+
+Now convert this to an igraph network object:
 
 ``` r
-# Calculate metrics for all models
-model_metrics <- all_predictions |>
-  group_by(model) |>
-  accuracy(truth = genre, estimate = .pred_class) |>
-  select(model, .estimate) |>
-  rename(Accuracy = .estimate) |>
-  left_join(
-    all_predictions |>
-      group_by(model) |>
-      yardstick::precision(truth = genre, estimate = .pred_class) |>
-      select(model, .estimate) |>
-      rename(Precision = .estimate),
-    by = "model"
-  ) |>
-  left_join(
-    all_predictions |>
-      group_by(model) |>
-      yardstick::recall(truth = genre, estimate = .pred_class) |>
-      select(model, .estimate) |>
-      rename(Sensitivity = .estimate),  # Recall = Sensitivity
-    by = "model"
-  ) |>
-  left_join(
-    all_predictions |>
-      group_by(model) |>
-      yardstick::specificity(truth = genre, estimate = .pred_class) |>
-      select(model, .estimate) |>
-      rename(Specificity = .estimate),
-    by = "model"
-  ) |>
-  left_join(
-    all_predictions |>
-      group_by(model) |>
-      f_meas(truth = genre, estimate = .pred_class) |>
-      select(model, .estimate) |>
-      rename(F1 = .estimate),
-    by = "model"
-  ) |>
-  left_join(
-    all_probs |>
-      group_by(model) |>
-      roc_auc(truth = genre, .pred_HipHop, event_level = "second") |>
-      select(model, .estimate) |>
-      rename(ROC_AUC = .estimate),
-    by = "model"
-  ) |>
-  arrange(desc(Accuracy))
+# Convert edge list to network
+g_friends <- graph_from_data_frame(friendships, directed = FALSE)
 
-model_metrics
+# Plot it
+plot(g_friends,
+     vertex.size = 30,
+     vertex.color = "lightblue",
+     vertex.label.color = "black",
+     edge.color = "gray",
+     main = "Friendship Network")
 ```
 
-    ## # A tibble: 4 × 7
-    ##   model               Accuracy Precision Sensitivity Specificity    F1 ROC_AUC
-    ##   <chr>                  <dbl>     <dbl>       <dbl>       <dbl> <dbl>   <dbl>
-    ## 1 Random Forest          0.879     0.867       0.758       0.941 0.809   0.930
-    ## 2 SVM                    0.868     0.868       0.717       0.944 0.785   0.904
-    ## 3 Logistic Regression    0.832     0.836       0.626       0.937 0.716   0.889
-    ## 4 Naive Bayes            0.422     0.368       1.000       0.128 0.538   0.704
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-**Visualize model comparison:**
+------------------------------------------------------------------------
+
+### 1.3 Understanding Directed vs Undirected Networks
+
+**Undirected networks:** Relationships are mutual (A—B means A connects
+to B AND B connects to A)
+
+- Examples: Facebook friends, co-authorship, physical proximity
+
+**Directed networks:** Relationships have direction (A→B doesn’t mean
+B→A)
+
+- Examples: Twitter follows, email sent, advice seeking
+
+Let’s create a **directed** network of who follows whom on social media:
 
 ``` r
-model_metrics |>
-  pivot_longer(cols = c(Accuracy, Precision, Sensitivity, Specificity, F1, ROC_AUC),
-               names_to = "Metric",
-               values_to = "Value") |>
-  ggplot(aes(x = model, y = Value, fill = Metric)) +
-  geom_col(position = "dodge") +
-  scale_y_continuous(labels = scales::percent_format()) +
-  geom_hline(yintercept = 0.80, linetype = "dashed", color = "red", linewidth = 1) +
-  scale_fill_manual(values = c("Accuracy" = "steelblue", 
-                                "Precision" = "coral",
-                                "Sensitivity" = "gold",
-                                "Specificity" = "purple",
-                                "F1" = "seagreen",
-                                "ROC_AUC" = "darkblue")) +
-  labs(
-    title = "Model Performance Comparison",
-    subtitle = "Red dashed line indicates 80% threshold for excellent/acceptable performance",
-    x = NULL,
-    y = "Score"
-  ) +
-  coord_flip() +
+# Create a directed edge list
+follows <- tibble(
+  follower = c("Alice", "Alice", "Bob", "Carol", "David", "David"),
+  following = c("Bob", "Carol", "Carol", "David", "Alice", "Bob")
+)
+
+# View it
+print(follows)
+```
+
+    ## # A tibble: 6 × 2
+    ##   follower following
+    ##   <chr>    <chr>    
+    ## 1 Alice    Bob      
+    ## 2 Alice    Carol    
+    ## 3 Bob      Carol    
+    ## 4 Carol    David    
+    ## 5 David    Alice    
+    ## 6 David    Bob
+
+``` r
+# Create directed network
+g_follows <- graph_from_data_frame(follows, directed = TRUE)
+
+# Plot with arrows
+plot(g_follows,
+     vertex.size = 30,
+     vertex.color = "lightcoral",
+     vertex.label.color = "black",
+     edge.arrow.size = 0.5,
+     edge.color = "gray",
+     main = "Twitter Follow Network (Directed)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+**Notice the arrows!** Alice follows Bob, but Bob doesn’t follow Alice
+back.
+
+------------------------------------------------------------------------
+
+### 1.4 Adding Node Attributes
+
+Networks become more interesting when nodes have attributes. Let’s add
+information about our users:
+
+``` r
+# Create a node attribute data frame
+user_info <- tibble(
+  name = c("Alice", "Bob", "Carol", "David"),
+  age = c(20, 22, 21, 23),
+  major = c("Communication", "Computer Science", "Communication", "Biology")
+)
+
+# View it
+print(user_info)
+```
+
+    ## # A tibble: 4 × 3
+    ##   name    age major           
+    ##   <chr> <dbl> <chr>           
+    ## 1 Alice    20 Communication   
+    ## 2 Bob      22 Computer Science
+    ## 3 Carol    21 Communication   
+    ## 4 David    23 Biology
+
+``` r
+# Create network with node attributes
+g_with_attr <- graph_from_data_frame(
+  d = follows,           # Edge list
+  directed = TRUE,
+  vertices = user_info   # Node attributes
+)
+
+# Check the attributes
+vertex_attr(g_with_attr)
+```
+
+    ## $name
+    ## [1] "Alice" "Bob"   "Carol" "David"
+    ## 
+    ## $age
+    ## [1] 20 22 21 23
+    ## 
+    ## $major
+    ## [1] "Communication"    "Computer Science" "Communication"    "Biology"
+
+Now we can use these attributes in our visualization:
+
+``` r
+# Color nodes by major
+V(g_with_attr)$color <- ifelse(V(g_with_attr)$major == "Communication", 
+                                "lightblue", "lightgreen")
+
+# Size nodes by age
+V(g_with_attr)$size <- V(g_with_attr)$age * 2
+
+# Plot
+plot(g_with_attr,
+     vertex.label.color = "black",
+     edge.arrow.size = 0.5,
+     edge.color = "gray",
+     main = "Network with Attributes\n(Blue = Communication, Green = Other)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+------------------------------------------------------------------------
+
+### 1.5 Adding Edge Attributes (Weights)
+
+Edges can also have attributes, most commonly **weights** that indicate
+strength.
+
+``` r
+# Create weighted edge list (number of messages sent)
+messages <- tibble(
+  from = c("Alice", "Alice", "Bob", "Carol", "David"),
+  to = c("Bob", "Carol", "Carol", "David", "Alice"),
+  n_messages = c(15, 8, 3, 12, 20)  # Number of messages
+)
+
+print(messages)
+```
+
+    ## # A tibble: 5 × 3
+    ##   from  to    n_messages
+    ##   <chr> <chr>      <dbl>
+    ## 1 Alice Bob           15
+    ## 2 Alice Carol          8
+    ## 3 Bob   Carol          3
+    ## 4 Carol David         12
+    ## 5 David Alice         20
+
+``` r
+# Create weighted network
+g_weighted <- graph_from_data_frame(messages, directed = TRUE)
+
+# Plot with edge width proportional to weight
+plot(g_weighted,
+     vertex.size = 30,
+     vertex.color = "lightyellow",
+     vertex.label.color = "black",
+     edge.width = E(g_weighted)$n_messages / 3,  # Scale edge width
+     edge.arrow.size = 0.5,
+     edge.color = "darkblue",
+     main = "Weighted Network\n(Edge width = number of messages)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+------------------------------------------------------------------------
+
+### 1.6 Extracting Network Information
+
+Once you have a network, you can extract information back into data
+frames:
+
+Edge List:
+
+``` r
+# Get edge list back as a data frame
+edge_df <- as_data_frame(g_weighted, what = "edges")
+print(edge_df)
+```
+
+    ##    from    to n_messages
+    ## 1 Alice   Bob         15
+    ## 2 Alice Carol          8
+    ## 3   Bob Carol          3
+    ## 4 Carol David         12
+    ## 5 David Alice         20
+
+Node List:
+
+``` r
+# Get node list with attributes
+node_df <- as_data_frame(g_weighted, what = "vertices")
+print(node_df)
+```
+
+    ##        name
+    ## Alice Alice
+    ## Bob     Bob
+    ## Carol Carol
+    ## David David
+
+------------------------------------------------------------------------
+
+### 1.7 Basic Network Statistics
+
+Let’s calculate some basic network properties:
+
+Number of nodes and edges:
+
+``` r
+print(paste("Number of users:", vcount(g_weighted)))
+```
+
+    ## [1] "Number of users: 4"
+
+``` r
+print(paste("Number of connections:", ecount(g_weighted)))
+```
+
+    ## [1] "Number of connections: 5"
+
+Degree: how many connections each person has:
+
+``` r
+# Degree: how many connections each person has
+degrees <- degree(g_weighted, mode = "all")
+print(degrees)
+```
+
+    ## Alice   Bob Carol David 
+    ##     3     2     3     2
+
+In-degree: how many people send messages TO this person:
+
+``` r
+# In-degree: how many people send messages TO this person
+in_degrees <- degree(g_weighted, mode = "in")
+print(in_degrees)
+```
+
+    ## Alice   Bob Carol David 
+    ##     1     1     2     1
+
+Out-degree: how many people THIS person sends messages to:
+
+``` r
+# Out-degree: how many people THIS person sends messages to
+out_degrees <- degree(g_weighted, mode = "out")
+print(out_degrees)
+```
+
+    ## Alice   Bob Carol David 
+    ##     2     1     1     1
+
+**Interpretation:** - Carol has the highest in-degree (3) – receives
+messages from many people
+
+- Alice and David are most active (high out-degree)
+
+------------------------------------------------------------------------
+
+### 1.8 Quick Method: graph_from_literal()
+
+For quick prototyping, igraph offers `graph_from_literal()`:
+
+``` r
+# Undirected network
+g_simple <- graph_from_literal(Alice--Bob, Bob--Carol, Carol--David)
+plot(g_simple, main = "Using graph_from_literal()")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+``` r
+# Directed network
+g_directed <- graph_from_literal(Alice+-Bob, Bob+-Carol, Carol+-David)
+plot(g_directed, main = "Directed with +-")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+**Note:** The data frame method is better for real data because:
+
+1.  Your data is usually already in a spreadsheet/CSV
+
+2.  You can add attributes easily
+
+3.  It’s reproducible and follows tidy principles
+
+------------------------------------------------------------------------
+
+### Class Exercise 1:
+
+Create your own small network:
+
+1.  Make a tibble edge list of 5-6 people and their connections
+
+2.  Add a `strength` column (1-10 scale)
+
+3.  Convert to igraph network
+
+4.  Plot with edge width based on strength
+
+5.  Calculate and interpret the degrees
+
+``` r
+# Your workspace:
+```
+
+------------------------------------------------------------------------
+
+## 2. Network Structures: Theory Meets Practice
+
+Why do network structures matter? Different social phenomena create
+different network patterns. Understanding these patterns helps us:
+
+1.  **Identify** what kind of social process created the network
+
+2.  **Compare** real networks to theoretical models
+
+3.  **Predict** how information, influence, or resources flow
+
+**Additional Resource:** For more in-depth tutorials on network analysis
+in R, see [Katya Ognyanova’s excellent
+tutorials](https://kateto.net/tutorials/) - highly recommended for
+expanding your network analysis skills!
+
+------------------------------------------------------------------------
+
+### 2.1 Basic Network Structures
+
+These are building blocks that help us understand more complex
+real-world networks.
+
+#### Empty Graph
+
+A network with nodes but no connections. This represents the starting
+point before any relationships form.
+
+``` r
+# 20 people who haven't met yet
+empty_net <- make_empty_graph(20)
+plot(empty_net, 
+     vertex.size = 15, 
+     vertex.color = "lightgray",
+     vertex.label = NA,
+     main = "Empty Network\n(No connections yet)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+
+**Real-world example:** A new online platform before users start
+connecting.
+
+------------------------------------------------------------------------
+
+#### Complete Graph (Fully Connected)
+
+Every node connects to every other node. This represents maximum
+possible connectivity where all relationships exist.
+
+``` r
+# Small group where everyone knows everyone
+complete_net <- make_full_graph(8)
+plot(complete_net, 
+     vertex.size = 20, 
+     vertex.color = "lightblue",
+     vertex.label = NA,
+     main = "Complete Network\n(Everyone knows everyone)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+
+**Real-world example:** A small work team or friend group where everyone
+interacts with everyone else.
+
+**Question:** Why are complete graphs rare in large networks?
+
+------------------------------------------------------------------------
+
+#### Star Network
+
+One central hub connected to all others, but periphery nodes don’t
+connect to each other. This creates a single point of control where all
+information flows through the center.
+
+``` r
+# One influencer with many followers
+star_net <- make_star(15, mode = "undirected")
+plot(star_net, 
+     vertex.size = c(30, rep(15, 14)),  # Make center larger
+     vertex.color = c("red", rep("lightblue", 14)),
+     vertex.label = NA,
+     main = "Star Network\n(Central hub)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+
+**Real-world examples:**
+
+- An influencer and their followers (who don’t follow each other)
+
+- A professor and students in office hours
+
+- A help desk and clients
+
+**Key insight:** Central node has enormous power and control over
+information flow.
+
+------------------------------------------------------------------------
+
+#### Ring Network
+
+Each node connects to two neighbors, forming a closed loop. Information
+must pass through many intermediaries to travel across the network.
+
+``` r
+# People sitting in a circle
+ring_net <- make_ring(20)
+plot(ring_net, 
+     vertex.size = 15, 
+     vertex.color = "lightgreen",
+     vertex.label = NA,
+     layout = layout_in_circle,
+     main = "Ring Network\n(Local connections only)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+
+**Real-world example:**
+
+- Neighbors on a street (you know the house to your left and right)
+
+- A “telephone game” or rumor chain
+
+**Key insight:** Information takes a long time to spread across the
+network.
+
+------------------------------------------------------------------------
+
+#### Tree/Hierarchical Network
+
+Branching structure with no cycles where you can’t return to a node by
+following edges. This represents formal organizational hierarchies with
+clear authority paths.
+
+``` r
+# Organizational chart
+tree_net <- make_tree(40, children = 3, mode = "undirected")
+plot(tree_net, 
+     vertex.size = 10, 
+     vertex.color = "lightyellow",
+     vertex.label = NA,
+     main = "Tree Network\n(Hierarchical structure)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+
+**Real-world examples:**
+
+- Corporate org charts
+
+- Family trees
+
+- File systems on computers
+
+**Key insight:** Clear hierarchy, efficient information flow up and
+down, but no shortcuts.
+
+------------------------------------------------------------------------
+
+### 2.2 Random and Theoretical Network Models
+
+These models help us understand how real networks form and function.
+
+#### Erdős-Rényi Random Graph
+
+Connections are formed completely at random with equal probability
+between any two nodes. This serves as a null model - what would happen
+if social forces didn’t exist?
+
+``` r
+# Random connections: 100 nodes, 200 random edges
+random_net <- sample_gnm(n = 100, m = 200)
+plot(random_net, 
+     vertex.size = 5, 
+     vertex.color = "lightcoral",
+     vertex.label = NA,
+     main = "Random Network\n(Erdős-Rényi Model)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+
+**Question:** Do real social networks look like this? (Hint: No!)
+
+**Why not?** People don’t befriend others randomly - we have homophily
+(like attracts like), triadic closure (friends of friends become
+friends), etc.
+
+------------------------------------------------------------------------
+
+#### Small-World Network (Watts-Strogatz Model)
+
+Combines local clustering (you know your neighbors’ neighbors) with
+occasional long-range connections (shortcuts across the network). This
+explains the “six degrees of separation” phenomenon where distant people
+are connected by surprisingly short paths.
+
+``` r
+# Most connections are local, with a few long-distance links
+small_world <- sample_smallworld(dim = 1, size = 30, nei = 2, p = 0.05)
+plot(small_world, 
+     vertex.size = 8, 
+     vertex.color = "lightblue",
+     vertex.label = NA, 
+     layout = layout_in_circle,
+     main = "Small-World Network\n('Six degrees of separation')")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+
+**Real-world examples:** - Social networks (you know your friends and
+their friends, plus a few random connections)
+
+- The famous “six degrees of separation” phenomenon
+
+- Neural networks in the brain
+
+**Key insight:** Explains why information can spread quickly despite
+most connections being local.
+
+------------------------------------------------------------------------
+
+#### Scale-Free Network (Barabási-Albert Model)
+
+“Rich get richer” via preferential attachment - new nodes preferentially
+connect to already well-connected nodes, creating **hubs**. This creates
+power-law degree distributions where most nodes have few connections but
+a few hubs have many.
+
+``` r
+# Preferential attachment: popular nodes get more connections
+scale_free <- sample_pa(n = 100, power = 1, m = 2, directed = FALSE)
+
+# Calculate degree to identify hubs
+deg <- degree(scale_free)
+
+# Color hubs differently
+V(scale_free)$color <- ifelse(deg > 10, "red", "lightblue")
+V(scale_free)$size <- sqrt(deg) * 3
+
+plot(scale_free, 
+     vertex.label = NA,
+     main = "Scale-Free Network\n(Red = Hubs with many connections)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
+
+**Real-world examples:**
+
+- Twitter (celebrities have millions of followers, most people have few)
+
+- Citation networks (seminal papers get cited thousands of times)
+
+- World Wide Web (some sites have millions of links)
+
+- Airline networks (major hubs like Atlanta, Chicago)
+
+**Key insight:**
+
+- A few nodes (hubs) have massive influence
+
+- “Removing” hubs can collapse the network
+
+- Information spreads very quickly through hubs
+
+------------------------------------------------------------------------
+
+### 2.3 Comparing Network Structures
+
+Let’s visualize degree distributions to see the difference:
+
+``` r
+# Calculate degrees for each model
+deg_random <- degree(random_net)
+deg_scale_free <- degree(scale_free)
+
+# Create comparison data frame
+comparison <- tibble(
+  model = c(rep("Random", length(deg_random)), 
+            rep("Scale-Free", length(deg_scale_free))),
+  degree = c(deg_random, deg_scale_free)
+)
+
+# Plot
+ggplot(comparison, aes(x = degree, fill = model)) +
+  geom_histogram(alpha = 0.6, position = "identity", bins = 20) +
+  labs(title = "Degree Distribution: Random vs Scale-Free",
+       x = "Degree (number of connections)",
+       y = "Count",
+       fill = "Network Type") +
   theme_minimal()
 ```
 
-![](bigdata_L11-github_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
-
-**Training Time Comparison:**
-
-| Model               | Time (seconds) |
-|---------------------|----------------|
-| Logistic Regression | 0.156          |
-| Random Forest       | 10.871         |
-| SVM                 | 7.587          |
-| Naive Bayes         | 6.310          |
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
 **Interpretation:**
 
-- **Logistic Regression** is by far the fastest (~0.16 seconds)
-  - Simple linear model with minimal computation
-  - Best choice for real-time predictions at scale
-- **Naive Bayes** is moderately fast (~6.3 seconds)
-  - Probabilistic calculations are efficient
-  - Good balance of speed and reasonable performance
-- **SVM** is slower (~7.6 seconds)
-  - Kernel computations are expensive
-  - Trade-off: better decision boundaries but slower inference
-- **Random Forest** is the slowest (~10.9 seconds)
-  - Must evaluate 100 decision trees for each prediction
-  - Trade-off: highest accuracy but slowest speed
+- **Random network:** Most nodes have similar degrees (bell curve)
 
-**When Speed Matters:**
-
-In production systems processing thousands of songs per second, Logistic
-Regression’s 70× speed advantage over Random Forest could be
-decisive—even if it sacrifices a few percentage points of accuracy. This
-is a classic **accuracy vs. latency trade-off** in machine learning
-deployment.
-
-**Key Findings:**
-
-- All models achieve **80%+ accuracy** on genre classification (except
-  Naive Bayes)
-
-- ROC AUC shows the models’ ability to distinguish between genres across
-  all thresholds
-
-- Trade-offs between precision, sensitivity (recall), and specificity
-  vary by model
-
-- Training time varies significantly between models
-
-- The winning model balances accuracy, speed, and all metrics
-  effectively
+- **Scale-free network:** A few hubs with many connections, most nodes
+  have few connections (power-law distribution)
 
 ------------------------------------------------------------------------
 
-### 5.5 Understanding ROC Curves
+### 2.4 Famous Example: Zachary’s Karate Club
 
-**What is a ROC Curve?**
-
-A **Receiver Operating Characteristic (ROC) curve** visualizes a
-classifier’s performance across all possible classification thresholds.
-It plots:
-
-- **Y-axis (Sensitivity/Recall)**: True Positive Rate - how many actual
-  positives we correctly identify
-
-- **X-axis (1 - Specificity)**: False Positive Rate - how many negatives
-  we incorrectly call positive
-
-**The Perfect ROC Curve**
-
-<figure>
-<img
-src="https://github.com/aysedeniz09/IntroCSS/blob/main/images/ROC_Perfect.png?raw=true"
-alt="Perfect ROC Curve" />
-<figcaption aria-hidden="true">Perfect ROC Curve</figcaption>
-</figure>
-
-**Interpreting ROC Curves:**
-
-1.  **Perfect Classifier (Blue line)**:
-
-    - Goes straight up the Y-axis, then across the top
-
-    - Achieves 100% sensitivity with 0% false positives
-
-    - ROC AUC = 1.0 (perfect)
-
-2.  **Random Classifier (Diagonal line)**:
-
-    - No better than flipping a coin
-
-    - For every true positive gained, you get a false positive
-
-    - ROC AUC = 0.5 (random guessing)
-
-3.  **Good Classifier (Green line)**:
-
-    - Bows upward toward the top-left corner
-    - Higher sensitivity at lower false positive rates
-    - ROC AUC \> 0.8 (good performance)
-
-**The Area Under the Curve (AUC):**
-
-- **AUC = 1.0**: Perfect classification
-
-- **AUC = 0.9-1.0**: Excellent
-
-- **AUC = 0.8-0.9**: Good
-
-- **AUC = 0.7-0.8**: Fair
-
-- **AUC = 0.5-0.7**: Poor
-
-- **AUC = 0.5**: Random (no predictive value)
+A real-world social network collected by Wayne Zachary in the 1970s. It
+shows friendships in a karate club that eventually split into two groups
+due to a conflict between the instructor and administrator.
 
 ``` r
-# Calculate ROC curves for each model
-logistic_roc <- yardstick::roc_curve(logistic_probs, truth = genre, .pred_Country)
-rf_roc <- yardstick::roc_curve(rf_probs, truth = genre, .pred_Country)
-svm_roc <- yardstick::roc_curve(svm_probs, truth = genre, .pred_Country)
-nb_roc <- yardstick::roc_curve(nb_probs, truth = genre, .pred_Country)
+# Load the famous karate club network
+karate <- graph("Zachary")
 
-# Combine all ROC curves with model labels
-all_roc <- bind_rows(
-  logistic_roc |> mutate(Model = "Logistic Regression"),
-  rf_roc |> mutate(Model = "Random Forest"),
-  svm_roc |> mutate(Model = "SVM"),
-  nb_roc |> mutate(Model = "Naive Bayes")
-)
-
-# Plot all ROC curves together
-ggplot(all_roc, aes(x = 1 - specificity, y = sensitivity, color = Model)) +
-  geom_path(linewidth = 1) +
-  geom_abline(linetype = "dashed", color = "gray50") +  # Random classifier line
-  scale_color_manual(values = c(
-    "Logistic Regression" = "#E69F00",
-    "Random Forest" = "#56B4E9",
-    "SVM" = "#009E73",
-    "Naive Bayes" = "#F0E442"
-  )) +
-  labs(
-    title = "ROC Curves: Model Comparison",
-    subtitle = "Closer to top-left corner = better performance",
-    x = "False Positive Rate (1 - Specificity)",
-    y = "True Positive Rate (Sensitivity)"
-  ) +
-  coord_equal() +  # Square plot for proper interpretation
-  theme_minimal() +
-  theme(legend.position = "bottom")
+# Plot
+plot(karate, 
+     vertex.size = 15,
+     vertex.color = "orange",
+     main = "Zachary's Karate Club\n(Real social network from 1977)")
 ```
 
-![](bigdata_L11-github_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
 
-**What We See:**
+**Why is this dataset famous?**
 
-- **Random Forest** (blue): Curves highest toward the top-left corner →
-  Best discriminative ability (AUC ≈ 0.93)
+- Real social network data from systematic observation
 
-- **SVM** (green): Close behind Random Forest → Strong performance (AUC
-  ≈ 0.90)
+- Documents a social fission (club split due to conflict)
 
-- **Logistic Regression** (orange): Solid performance but less
-  separation → Good (AUC ≈ 0.89)
+- Used to test community detection algorithms
 
-- **Naive Bayes** (yellow): Closer to diagonal → Poor calibration (AUC ≈
-  0.70)
+- Gold standard for validating network analysis methods
 
-**Why ROC Curves Matter:**
-
-Unlike accuracy (which uses a single threshold of 0.5), ROC curves show
-performance across **all possible thresholds**. This is crucial because:
-
-1.  **You can adjust the threshold** based on your priorities:
-
-    - High stakes (e.g., medical diagnosis): Set high threshold → fewer
-      false positives
-    - Discovery mode (e.g., content recommendation): Set low threshold →
-      catch more true positives
-
-2.  **Works with imbalanced classes**: Unlike accuracy, ROC AUC isn’t
-    inflated by predicting the majority class
-
-3.  **Threshold-independent comparison**: Lets you compare models fairly
-    regardless of their default decision boundaries
-
-**Example: Adjusting Thresholds**
-
-Suppose we want to be **very confident** before classifying a song as
-Country (maybe for a “Pure Country” playlist). We could:
-
-``` r
-# Instead of default 0.5 threshold, require 0.8 probability
-high_confidence_country <- logistic_probs |>
-  mutate(.pred_class_adjusted = ifelse(.pred_Country >= 0.8, "Country", "HipHop"))
-
-# This increases precision (fewer false Country predictions) 
-# but decreases recall (miss some actual Country songs)
-```
-
-The ROC curve helps visualize these trade-offs across all possible
-thresholds!
+We’ll analyze this more later!
 
 ------------------------------------------------------------------------
 
-### 5.6 Interpret Results
+### 2.5 Network Operations
 
-**Performance Metric Definitions:**
+Sometimes we need to modify or combine networks for analysis or
+comparison.
 
-| Metric | Formula | What it measures | Interpretation Guidelines |
-|----|----|----|----|
-| **Accuracy** | (TP + TN) / Total | Overall correctness of predictions | ≥ 80%: Excellent<br>70-80%: Good<br>60-70%: Moderate<br>\< 60%: Poor |
-| **Precision** | TP / (TP + FP) | Of predicted HipHop, how many are actually HipHop? | Higher is better<br>Low precision = many false alarms |
-| **Sensitivity (Recall)** | TP / (TP + FN) | Of actual HipHop songs, how many did we catch? | Higher is better<br>Low sensitivity = missing true cases |
-| **Specificity** | TN / (TN + FP) | Of actual Country songs, how many did we correctly identify? | Higher is better<br>Low specificity = misclassifying negatives |
-| **F1 Score** | 2 × (Precision × Recall) / (Precision + Recall) | Harmonic mean balancing precision and recall | ≥ 0.80: Excellent agreement*<br>0.70-0.80: Acceptable*<br>0.60-0.70: Moderate\*<br>\< 0.60: Poor |
-| **ROC AUC** | Area under ROC curve | Ability to distinguish between classes across all thresholds | ≥ 0.90: Excellent<br>0.80-0.90: Good<br>0.70-0.80: Fair<br>\< 0.70: Poor |
+#### Rewiring Edges
 
-*Note: F1 score thresholds follow automated content analysis research
-standards (Burscher et al., 2014; Chan et al., 2021).*
-
-*Abbreviations: TP = True Positive (HipHop→HipHop), TN = True Negative
-(Country→Country), FP = False Positive (Country→HipHop), FN = False
-Negative (HipHop→Country)*
-
-**Our Model Results:**
+Randomly rewire some connections while preserving the degree
+distribution. This creates null models for statistical comparison.
 
 ``` r
-model_metrics
+# Original ring network
+original <- make_ring(20)
+
+# Rewire 20% of edges randomly
+rewired <- rewire(original, each_edge(prob = 0.2))
+
+# Compare
+par(mfrow = c(1, 2))
+plot(original, 
+     vertex.size = 10, 
+     vertex.label = NA,
+     layout = layout_in_circle,
+     main = "Original Ring")
+plot(rewired, 
+     vertex.size = 10, 
+     vertex.label = NA,
+     layout = layout_in_circle,
+     main = "After Rewiring")
 ```
 
-    ## # A tibble: 4 × 7
-    ##   model               Accuracy Precision Sensitivity Specificity    F1 ROC_AUC
-    ##   <chr>                  <dbl>     <dbl>       <dbl>       <dbl> <dbl>   <dbl>
-    ## 1 Random Forest          0.879     0.867       0.758       0.941 0.809   0.930
-    ## 2 SVM                    0.868     0.868       0.717       0.944 0.785   0.904
-    ## 3 Logistic Regression    0.832     0.836       0.626       0.937 0.716   0.889
-    ## 4 Naive Bayes            0.422     0.368       1.000       0.128 0.538   0.704
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
 
-**Performance Rankings:**
+``` r
+par(mfrow = c(1, 1))
+```
 
-1.  **Random Forest** - WINNER 🏆
-
-    - Accuracy: 87.9% (**Excellent**)
-
-    - ROC AUC: 93.0% (**Excellent**)
-
-    - F1 Score: 80.9% (**Excellent agreement** per Burscher et al.,
-      2014; Chan et al., 2021)
-
-    - Sensitivity: 75.8%
-
-    - Specificity: 94.1%
-
-    - **Best balanced performance across all metrics**
-
-2.  **SVM** - Strong Runner-up
-
-    - Accuracy: 86.8% (**Excellent**)
-
-    - ROC AUC: 90.4% (**Excellent**)
-
-    - F1 Score: 78.5% (**Acceptable agreement**)
-
-    - Sensitivity: 71.7%
-
-    - Specificity: 94.4%
-
-    - **Very close to Random Forest, slightly lower sensitivity**
-
-3.  **Logistic Regression** - Solid Baseline
-
-    - Accuracy: 83.2% (**Excellent**)
-
-    - ROC AUC: 88.9% (**Good**)
-
-    - F1 Score: 71.6% (**Acceptable agreement**)
-
-    - Sensitivity: 62.6%
-
-    - Specificity: 93.7%
-
-    - **Simple, interpretable model with respectable performance**
-
-4.  **Naive Bayes** - Poor Performer
-
-    - Accuracy: 42.2% (**Poor**)
-
-    - ROC AUC: 70.4% (**Fair**)
-
-    - F1 Score: 53.8% (**Poor**)
-
-    - Sensitivity: 99.95% (nearly perfect - but meaningless!)
-
-    - Specificity: 12.8% (terrible)
-
-    - **Classic class imbalance failure: predicts almost everything as
-      HipHop**
-
-**Key Insights:**
-
-- **Random Forest captures complex patterns**: The ensemble of decision
-  trees learns nonlinear word combinations better than single models,
-  achieving excellent performance across all metrics
-
-- **SVM’s kernel trick works well**: The RBF kernel effectively
-  separates genres in high-dimensional word space with excellent
-  discrimination (ROC AUC \> 0.90)
-
-- **Logistic Regression is interpretable**: While not the most accurate,
-  it achieves acceptable F1 scores and we can understand exactly which
-  words drive predictions (see Section 4.8)
-
-- **Naive Bayes fails catastrophically**: The independence assumption
-  between words doesn’t hold for this task, resulting in severe
-  overprediction of the majority class
-
-**The Naive Bayes Problem:**
-
-- With 99.95% sensitivity, it catches almost every HipHop song
-
-- But with 36.8% precision and 12.8% specificity, it mislabels most
-  Country songs as HipHop
-
-- This is classic class imbalance behavior - the model learned to simply
-  predict the majority class (HipHop) for everything
-
-- Despite reasonable ROC AUC (70.4%), the actual classification
-  performance is poor
-
-**Winner: Random Forest**
-
-- Achieves **excellent** performance by research standards (F1 = 0.809,
-  ROC AUC = 0.930)
-
-- Best balance of accuracy, precision, sensitivity, specificity, and F1
-  score
-
-- Computationally efficient enough for this dataset size
-
-**References:**
-
-Burscher, B., Odijk, D., Vliegenthart, R., de Rijke, M., & de Vreese, C.
-H. (2014). Teaching the Computer to Code Frames in News: Comparing Two
-Supervised Machine Learning Approaches to Frame Analysis. *Communication
-Methods and Measures*, *8*(3), 190–206.
-<https://doi.org/10.1080/19312458.2014.937527>
-
-Chan, C., Bajjalieh, J., Auvil, L., Wessler, H., Althaus, S., Welbers,
-K., Van Atteveldt, W., & Jungblut, M. (2021). Four best practices for
-measuring news sentiment using ‘off-the-shelf’ dictionaries: A
-large-scale p-hacking experiment. *Computational Communication
-Research*, *3*(1), 1–27. <https://doi.org/10.5117/CCR2021.1.001.CHAN>
+**Use case:** Testing whether network structure affects an outcome, or
+creating null models for statistical comparison.
 
 ------------------------------------------------------------------------
 
-## 6. Testing on “Old Town Road”
+#### Extracting Subgraphs
 
-Let’s test our models on a controversial song: [**“Old Town
-Road”**](https://www.youtube.com/watch?v=5ho88VXJTBg) by Lil Nas X
-featuring [Billy Ray
-Cyrus](https://www.youtube.com/watch?v=KnSIVZaHeWw). This song famously
-sparked debate about genre classification when Billboard removed it from
-the Hot Country Songs chart in 2019, claiming it “does not embrace
-enough elements of today’s country music”
-([Wikipedia](https://en.wikipedia.org/wiki/Old_Town_Road)).
-
-The song blends:
-
-- **Country elements**: Horses, tractors, cowboy imagery, banjo
-
-- **Hip Hop elements**: Trap beats, rap delivery, urban slang
-
-### 6.1 Prepare the Lyrics
+Extract a subset of nodes and their connections to focus analysis on
+specific communities or influential actors.
 
 ``` r
-# Old Town Road lyrics (excerpt)
-old_town_road <- data.frame(
-  text = "Yeah, I'm gonna take my horse to the old town road
-I'm gonna ride 'til I can't no more
-I'm gonna take my horse to the old town road
-I'm gonna ride 'til I can't no more
-(Kio, Kio)
-I got the horses in the back
-Horse tack is attached
-Hat is matte black
-Got the boots that's black to match
-Ridin' on a horse, ha
-You can whip your Porsche
-I been in the valley
-You ain't been up off that porch, now
-Can't nobody tell me nothin'
-You can't tell me nothin'
-Can't nobody tell me nothin'
-You can't tell me nothin'
-Ridin' on a tractor
-Lean all in my bladder
-Cheated on my baby
-You can go and ask her
-My life is a movie
-Bull ridin' and boobies
-Cowboy hat from Gucci
-Wrangler on my booty
-Can't nobody tell me nothin'
-You can't tell me nothin'
-Can't nobody tell me nothin'
-You can't tell me nothin'
-Yeah, I'm gonna take my horse to the old town road
-I'm gonna ride 'til I can't no more
-I'm gonna take my horse to the old town road
-I'm gonna ride 'til I can't no more
-I got the",
-  genre = NA  # Unknown - this is what we want to predict!
-)
+# Create a larger network
+full_net <- sample_pa(n = 100, m = 2, directed = FALSE)
+
+# Extract only nodes with degree > 5 (the most connected)
+high_degree_nodes <- V(full_net)[degree(full_net) > 5]
+subgraph <- induced_subgraph(full_net, high_degree_nodes)
+
+# Compare
+par(mfrow = c(1, 2))
+plot(full_net, 
+     vertex.size = 5, 
+     vertex.label = NA,
+     main = "Full Network")
+plot(subgraph, 
+     vertex.size = 10, 
+     vertex.label = NA,
+     main = "High-Degree Subgraph")
 ```
 
-### 6.2 Get Predictions from All Models
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
 
 ``` r
-# Predict with each model
-otr_predictions <- data.frame(
-  Model = c("Logistic Regression", "Random Forest", "SVM", "Naive Bayes"),
-  Prediction = c(
-    as.character(predict(logistic_fit, old_town_road)$.pred_class),
-    as.character(predict(rf_fit, old_town_road)$.pred_class),
-    as.character(predict(svm_fit, old_town_road)$.pred_class),
-    as.character(predict(nb_fit, old_town_road)$.pred_class)
-  )
-)
-
-otr_predictions
+par(mfrow = c(1, 1))
 ```
 
-    ##                 Model Prediction
-    ## 1 Logistic Regression    Country
-    ## 2       Random Forest    Country
-    ## 3                 SVM    Country
-    ## 4         Naive Bayes    Country
+**Use case:** Focusing on influencers or core members of a community.
 
-### 6.3 Get Probability Estimates
+------------------------------------------------------------------------
 
-Let’s see how confident each model is:
+### Class Exercise 2:
+
+1.  Create a scale-free network with 50 nodes
+
+2.  Calculate the degree of each node
+
+3.  Identify the top 3 “hubs” (nodes with highest degree)
+
+4.  Create a subgraph containing only these hubs and their immediate
+    neighbors
+
+5.  Plot both networks and compare
+
+**Bonus:** What happens if you remove the hubs from a scale-free
+network? Try it!
 
 ``` r
-# Get probabilities from each model
-otr_probs <- data.frame(
-  Model = c("Logistic Regression", "Random Forest", "SVM", "Naive Bayes"),
-  Country_Prob = c(
-    predict(logistic_fit, old_town_road, type = "prob")$.pred_Country,
-    predict(rf_fit, old_town_road, type = "prob")$.pred_Country,
-    predict(svm_fit, old_town_road, type = "prob")$.pred_Country,
-    predict(nb_fit, old_town_road, type = "prob")$.pred_Country
-  ),
-  HipHop_Prob = c(
-    predict(logistic_fit, old_town_road, type = "prob")$.pred_HipHop,
-    predict(rf_fit, old_town_road, type = "prob")$.pred_HipHop,
-    predict(svm_fit, old_town_road, type = "prob")$.pred_HipHop,
-    predict(nb_fit, old_town_road, type = "prob")$.pred_HipHop
-  )
-)
-
-otr_probs
+# Your workspace:
 ```
 
-    ##                 Model Country_Prob  HipHop_Prob
-    ## 1 Logistic Regression    0.5668495 4.331505e-01
-    ## 2       Random Forest    0.7324563 2.675437e-01
-    ## 3                 SVM    0.6494134 3.505866e-01
-    ## 4         Naive Bayes    1.0000000 3.614448e-24
+------------------------------------------------------------------------
 
-**Visualize the predictions:**
+**Additional Resources:**
+
+- [Katya Ognyanova’s Network Tutorials](https://kateto.net/tutorials/) -
+  comprehensive guides for network visualization and analysis
+
+- [igraph documentation](https://r.igraph.org/) - official package
+  reference
+
+------------------------------------------------------------------------
+
+Let’s clean up our workspace before moving to real data:
 
 ``` r
-otr_probs |>
-  pivot_longer(cols = c(Country_Prob, HipHop_Prob),
-               names_to = "Genre",
-               values_to = "Probability") |>
-  mutate(Genre = str_remove(Genre, "_Prob")) |>
-  ggplot(aes(x = Model, y = Probability, fill = Genre)) +
-  geom_col(position = "dodge") +
-  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray30") +
-  scale_y_continuous(labels = scales::percent_format()) +
-  scale_fill_manual(values = c("Country" = "steelblue", "HipHop" = "coral")) +
-  labs(
-    title = "Old Town Road: Genre Classification Probabilities",
-    subtitle = "Which genre does each model predict?",
-    x = NULL,
-    y = "Probability"
-  ) +
-  coord_flip() +
+rm(list = ls())
+```
+
+------------------------------------------------------------------------
+
+## 3. Real World Data: College Communication Network
+
+### 3.1 Understanding Real Network Data
+
+Now let’s work with a **real communication network** from UC Irvine.
+This dataset contains private messages sent on an online platform
+between students over 193 days in 2004.
+
+**Why this dataset?**
+
+- Real human communication patterns
+
+- Directed network (messages have a sender and receiver)
+
+- Temporal data (we can see when messages were sent)
+
+- Relevant to students - college communication!
+
+**Dataset info:**
+
+- **Nodes:** 1,899 students
+
+- **Edges:** 20,296 messages
+
+- **Time period:** 193 days (April-October 2004)
+
+- **Source:** [Stanford
+  SNAP](https://snap.stanford.edu/data/CollegeMsg.html) Pietro
+  Panzarasa, Tore Opsahl, and Kathleen M. Carley. “Patterns and dynamics
+  of users’ behavior and interaction: Network analysis of an online
+  community.” Journal of the American Society for Information Science
+  and Technology 60.5 (2009): 911-932.
+
+------------------------------------------------------------------------
+
+### 3.2 Loading Real Network Data (The Tidy Way)
+
+Network data often comes as an **edge list** - a table where each row is
+a connection. Let’s load and explore it:
+
+``` r
+# Load the data from GitHub backup
+url <- "https://raw.githubusercontent.com/aysedeniz09/IntroCSS/refs/heads/main/data/CollegeMsg.txt"
+college_msg <- read.table(url, header = FALSE, 
+                          col.names = c("sender", "receiver", "timestamp"))
+
+# Convert to tibble for tidy operations
+college_msg <- as_tibble(college_msg)
+
+# View the data
+head(college_msg)
+```
+
+    ## # A tibble: 6 × 3
+    ##   sender receiver  timestamp
+    ##    <int>    <int>      <int>
+    ## 1      1        2 1082040961
+    ## 2      3        4 1082155839
+    ## 3      5        2 1082414391
+    ## 4      6        7 1082439619
+    ## 5      8        7 1082439756
+    ## 6      9       10 1082440403
+
+**What does each row mean?**
+
+- `sender`: Student ID who sent the message
+
+- `receiver`: Student ID who received the message
+
+- `timestamp`: Unix timestamp (seconds since January 1, 1970)
+
+Let’s make the timestamp more readable:
+
+``` r
+# Convert Unix timestamp to readable date
+college_msg <- college_msg |>
+  mutate(date = as.POSIXct(timestamp, origin = "1970-01-01"),
+         month = lubridate::month(date, label = TRUE),
+         day_of_week = lubridate::wday(date, label = TRUE))
+
+# View the updated data
+head(college_msg)
+```
+
+    ## # A tibble: 6 × 6
+    ##   sender receiver  timestamp date                month day_of_week
+    ##    <int>    <int>      <int> <dttm>              <ord> <ord>      
+    ## 1      1        2 1082040961 2004-04-15 10:56:01 Apr   Thu        
+    ## 2      3        4 1082155839 2004-04-16 18:50:39 Apr   Fri        
+    ## 3      5        2 1082414391 2004-04-19 18:39:51 Apr   Mon        
+    ## 4      6        7 1082439619 2004-04-20 01:40:19 Apr   Tue        
+    ## 5      8        7 1082439756 2004-04-20 01:42:36 Apr   Tue        
+    ## 6      9       10 1082440403 2004-04-20 01:53:23 Apr   Tue
+
+``` r
+print(paste("Date range:", min(college_msg$date), "to", max(college_msg$date)))
+```
+
+    ## [1] "Date range: 2004-04-15 10:56:01 to 2004-10-26 03:52:22"
+
+------------------------------------------------------------------------
+
+### 3.3 Exploring the Data Before Building the Network
+
+Before creating the network, let’s explore the data using tidy
+principles:
+
+``` r
+# How many unique students?
+n_students <- length(unique(c(college_msg$sender, college_msg$receiver)))
+print(paste("Number of students:", n_students))
+```
+
+    ## [1] "Number of students: 1899"
+
+``` r
+# How many messages total?
+print(paste("Total messages:", nrow(college_msg)))
+```
+
+    ## [1] "Total messages: 59835"
+
+``` r
+# Who are the most active senders?
+top_senders <- college_msg |>
+  count(sender, sort = TRUE) |>
+  head(10)
+
+print("Top 10 most active senders:")
+```
+
+    ## [1] "Top 10 most active senders:"
+
+``` r
+print(top_senders)
+```
+
+    ## # A tibble: 10 × 2
+    ##    sender     n
+    ##     <int> <int>
+    ##  1      9  1091
+    ##  2    323  1012
+    ##  3     12   993
+    ##  4    103   739
+    ##  5    105   686
+    ##  6   1624   640
+    ##  7     41   561
+    ##  8    249   493
+    ##  9    372   485
+    ## 10     32   457
+
+``` r
+# Who receives the most messages?
+top_receivers <- college_msg |>
+  count(receiver, sort = TRUE) |>
+  head(10)
+
+print("Top 10 most contacted students:")
+```
+
+    ## [1] "Top 10 most contacted students:"
+
+``` r
+print(top_receivers)
+```
+
+    ## # A tibble: 10 × 2
+    ##    receiver     n
+    ##       <int> <int>
+    ##  1     1624   558
+    ##  2      323   534
+    ##  3       32   501
+    ##  4      103   440
+    ##  5      372   428
+    ##  6      454   377
+    ##  7      475   372
+    ##  8      254   351
+    ##  9      617   351
+    ## 10      105   345
+
+**Question:** What does it mean if someone is a top sender but not a top
+receiver?
+
+------------------------------------------------------------------------
+
+### 3.4 Temporal Patterns: When Do Students Communicate?
+
+Let’s explore communication patterns over time:
+
+``` r
+# Messages per month
+messages_per_month <- college_msg |>
+  group_by(month) |>
+  summarize(n_messages = n())
+
+# Plot
+ggplot(messages_per_month, aes(x = month, y = n_messages)) +
+  geom_col(fill = "steelblue") +
+  labs(title = "Messages Sent Per Month",
+       x = "Month",
+       y = "Number of Messages") +
   theme_minimal()
 ```
 
-![](bigdata_L11-github_files/figure-gfm/unnamed-chunk-41-1.png)<!-- -->
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
 
-### 6.4 Interpretation
+``` r
+# Messages per day of week
+messages_per_day <- college_msg |>
+  group_by(day_of_week) |>
+  summarize(n_messages = n())
 
-**The Verdict: All Models Predict COUNTRY**
+# Plot
+ggplot(messages_per_day, aes(x = day_of_week, y = n_messages)) +
+  geom_col(fill = "coral") +
+  labs(title = "Messages Sent Per Day of Week",
+       x = "Day of Week",
+       y = "Number of Messages") +
+  theme_minimal()
+```
 
-But with very different confidence levels:
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
 
-| Model               | Prediction | Country Probability | HipHop Probability |
-|---------------------|------------|---------------------|--------------------|
-| Logistic Regression | Country    | **56.68%**          | 43.32%             |
-| Random Forest       | Country    | **73.25%**          | 26.75%             |
-| SVM                 | Country    | **64.94%**          | 35.06%             |
-| Naive Bayes         | Country    | **100.00%**         | ~0%                |
+**Class discussion:**
 
-**Key Insights:**
+- When are students most/least active?
 
-1.  **Logistic Regression is uncertain** (56.68% Country)
+- What might explain these patterns?
 
-    - Barely above the 50% threshold
-
-    - Recognizes the song has strong HipHop elements (43.32%)
-
-    - Most calibrated prediction
-
-2.  **Random Forest is confident** (73.25% Country)
-
-    - Our best-performing model sees clear Country patterns
-
-    - Likely picks up on: “horse,” “tractor,” “cowboy,” “boots,”
-      “valley”
-
-3.  **SVM is moderate** (64.94% Country)
-
-    - Comfortable with Country classification
-
-    - Still acknowledges some ambiguity
-
-4.  **Naive Bayes is overconfident** (100% Country)
-
-    - Extreme probability is a known NB issue (poor calibration)
-
-    - Should not be trusted for decision-making
-
-**The Irony: Machine Learning vs. Human Gatekeeping**
-
-All our models predict Country, yet Billboard **removed** “Old Town
-Road” from the Country charts in March 2019, claiming it “does not
-embrace enough elements of today’s country music.”
-
-**Why the disconnect?**
-
-Our models learned from **historical genre patterns in lyrics**:
-
-- Words like “horse,” “tractor,” “cowboy,” “boots” → Country
-
-- Narrative themes of rural life → Country
-
-But Billboard considered **musical elements** our models cannot detect:
-
-- Trap beat and 808 bass → HipHop production
-
-- Rap delivery style → HipHop performance
-
-- Lack of traditional country instrumentation
-
-**The Bigger Picture: What This Teaches Us About ML**
-
-1.  **Models reflect their training data**: Our models learned from
-    decades of traditionally-classified country songs. They reproduce
-    those historical boundaries.
-
-2.  **Feature limitations matter**: We only used bag-of-words (lyrics).
-    Music genre depends on **sound**, **delivery**, **production** -
-    features we didn’t include.
-
-3.  **Cultural context is invisible to algorithms**: The controversy
-    around “Old Town Road” involved questions about:
-
-    - Who gets to define “country”?
-
-    - Is genre gatekeeping protecting tradition or excluding innovation?
-
-    - Does removing Black artists from country charts reflect racial
-      bias?
-
-    Our models cannot address these questions - they only see word
-    frequencies.
-
-4.  **High accuracy ≠ “correct”**: Our Random Forest achieved 87.9%
-    accuracy on the test set, yet all models might be “wrong” about this
-    specific song depending on how we define genre.
-
-**The Lesson for Computational Social Science:**
-
-Machine learning models are powerful tools for pattern recognition, but
-they:
-
-- Learn historical patterns, including biases
-
-- Cannot incorporate cultural context or ethical considerations
-
-- Should inform, not replace, human judgment on subjective questions
-
-- Require critical interpretation, especially when classifications are
-  contested
-
-“Old Town Road” is a perfect case study: it’s not that our models are
-broken - they accurately learned what Country lyrics look like. The
-question is whether **purely lyrical patterns** should define genre, or
-whether we need richer feature sets (audio, cultural context, artist
-identity) for meaningful classification.
+- How does this relate to Breiger’s (1974) concept of duality - students
+  connected through temporal patterns?
 
 ------------------------------------------------------------------------
 
-## 7. Class Exercise: Test Your Own Song! 🎵
+### 3.5 Building the Network Graph
 
-Now it’s your turn to explore genre classification with a song of your
-choice.
-
-### 7.1 Instructions
-
-**Step 1: Choose a Song**
-
-Pick a song that interests you! Consider songs that: - Blend multiple
-genres (like “Old Town Road”)
-
-- Challenge traditional genre boundaries
-
-- Have lyrics you find meaningful
-
-- Come from artists who’ve been genre-misclassified
-
-**Some interesting suggestions:**
-
-- “Meant to Be” by Bebe Rexha & Florida Georgia Line (Country-Pop
-  crossover)
-
-- “24K Magic” by Bruno Mars (Funk/R&B/Pop blend)
-
-- “Wagon Wheel” by Darius Rucker
-
-- “Old Dominion” songs (Pop-Country debate)
-
-- Any song from the “country trap” or “country rap” movement
-
-**Step 2: Get the Lyrics**
-
-Find lyrics from a legitimate source like:
-
-- The artist’s official website
-
-- Licensed lyrics sites (Genius, AZLyrics, MetroLyrics)
-
-- Album liner notes
-
-**Step 3: Prepare Your Data**
+Now let’s create the network from our edge list:
 
 ``` r
-# Replace this with your song's lyrics
-your_song <- data.frame(
-  text = "PASTE YOUR SONG LYRICS HERE",
-  genre = NA  # Unknown - we want to predict this!
+# Create network from edge list
+# Note: This is a DIRECTED network (sender → receiver)
+g_college <- graph_from_data_frame(
+  d = college_msg |> select(sender, receiver),  # Edge list
+  directed = TRUE  # Messages have direction
 )
+
+# Check the network object
+print(g_college)
 ```
 
-**Step 4: Get Predictions**
+    ## IGRAPH b11a3d8 DN-- 1899 59835 -- 
+    ## + attr: name (v/c)
+    ## + edges from b11a3d8 (vertex names):
+    ##  [1] 1 ->2  3 ->4  5 ->2  6 ->7  8 ->7  9 ->10 9 ->11 12->13 9 ->14 9 ->15
+    ## [11] 9 ->16 9 ->17 9 ->14 9 ->18 19->18 20->21 19->22 8 ->23 9 ->24 9 ->22
+    ## [21] 25->21 26->7  27->28 29->25 30->31 30->31 30->31 30->31 32->33 34->35
+    ## [31] 34->33 36->37 38->39 36->40 41->15 41->11 41->14 41->13 41->39 41->42
+    ## [41] 41->43 9 ->40 44->45 46->22 44->46 47->46 48->46 9 ->49 36->50 44->51
+    ## [51] 32->52 36->32 53->54 36->55 56->57 36->32 36->58 44->59 51->58 44->14
+    ## [61] 36->56 36->60 56->61 62->50 36->60 32->59 36->60 36->50 41->63 41->64
+    ## [71] 41->65 41->56 41->61 41->43 41->52 41->58 41->59 9 ->64 9 ->58 12->66
+    ## + ... omitted several edges
+
+**Understanding the output:**
+
+- `DN--` means Directed, Named network
+
+- First number = nodes (students)
+
+- Second number = edges (messages)
 
 ``` r
-# Predict with all four models
-your_predictions <- data.frame(
-  Model = c("Logistic Regression", "Random Forest", "SVM", "Naive Bayes"),
-  Prediction = c(
-    as.character(predict(logistic_fit, your_song)$.pred_class),
-    as.character(predict(rf_fit, your_song)$.pred_class),
-    as.character(predict(svm_fit, your_song)$.pred_class),
-    as.character(predict(nb_fit, your_song)$.pred_class)
-  )
-)
-
-print(your_predictions)
-
-# Get probability estimates
-your_probs <- data.frame(
-  Model = c("Logistic Regression", "Random Forest", "SVM", "Naive Bayes"),
-  Country_Prob = c(
-    predict(logistic_fit, your_song, type = "prob")$.pred_Country,
-    predict(rf_fit, your_song, type = "prob")$.pred_Country,
-    predict(svm_fit, your_song, type = "prob")$.pred_Country,
-    predict(nb_fit, your_song, type = "prob")$.pred_Country
-  ),
-  HipHop_Prob = c(
-    predict(logistic_fit, your_song, type = "prob")$.pred_HipHop,
-    predict(rf_fit, your_song, type = "prob")$.pred_HipHop,
-    predict(svm_fit, your_song, type = "prob")$.pred_HipHop,
-    predict(nb_fit, your_song, type = "prob")$.pred_HipHop
-  )
-)
-
-print(your_probs)
+# Basic network statistics
+print(paste("Number of students:", vcount(g_college)))
 ```
 
-**Step 5: Visualize the Results**
+    ## [1] "Number of students: 1899"
 
 ``` r
-your_probs |>
-  pivot_longer(cols = c(Country_Prob, HipHop_Prob),
-               names_to = "Genre",
-               values_to = "Probability") |>
-  mutate(Genre = str_remove(Genre, "_Prob")) |>
-  ggplot(aes(x = Model, y = Probability, fill = Genre)) +
-  geom_col(position = "dodge") +
-  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray30") +
-  scale_y_continuous(labels = scales::percent_format()) +
-  scale_fill_manual(values = c("Country" = "steelblue", "HipHop" = "coral")) +
+print(paste("Number of messages:", ecount(g_college)))
+```
+
+    ## [1] "Number of messages: 59835"
+
+``` r
+print(paste("Network density:", round(edge_density(g_college), 4)))
+```
+
+    ## [1] "Network density: 0.0166"
+
+**Network density:** What proportion of all possible connections
+actually exist?
+
+- Dense networks: High interconnection
+
+- Sparse networks: Few connections relative to possible connections
+
+**Question:** Why is this network so sparse? What does this tell us
+about college communication?
+
+------------------------------------------------------------------------
+
+### 3.6 Visualizing the Full Network
+
+``` r
+# WARNING: This network is too large to visualize meaningfully
+# Let's try it anyway to see what happens
+
+plot(g_college,
+     vertex.size = 2,
+     vertex.label = NA,
+     edge.arrow.size = 0.1,
+     edge.color = rgb(0, 0, 0, 0.1),  # Transparent edges
+     main = "Full College Network\n(Hard to interpret!)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-38-1.png)<!-- -->
+
+**Problem:** With 1,899 nodes and 20,296 edges, the full network is a
+“hairball” - impossible to interpret visually!
+
+**Solution:** We need to focus on meaningful subsets.
+
+------------------------------------------------------------------------
+
+### 3.7 Creating a Meaningful Subnetwork
+
+Let’s focus on the **most active communicators** - students who sent at
+least 50 messages:
+
+``` r
+# Identify active students
+active_senders <- college_msg |>
+  group_by(sender) |>
+  summarize(n_sent = n()) |>
+  filter(n_sent >= 50) |>
+  pull(sender)
+
+print(paste("Number of active senders:", length(active_senders)))
+```
+
+    ## [1] "Number of active senders: 298"
+
+``` r
+# Also include anyone they communicated with
+active_network <- college_msg |>
+  filter(sender %in% active_senders | receiver %in% active_senders)
+
+print(paste("Messages in active subnetwork:", nrow(active_network)))
+```
+
+    ## [1] "Messages in active subnetwork: 54947"
+
+Now create a network from this subset:
+
+``` r
+# Create subnetwork
+g_active <- graph_from_data_frame(
+  d = active_network |> select(sender, receiver),
+  directed = TRUE
+)
+
+print(g_active)
+```
+
+    ## IGRAPH e45a7a0 DN-- 1712 54947 -- 
+    ## + attr: name (v/c)
+    ## + edges from e45a7a0 (vertex names):
+    ##  [1] 1 ->2  3 ->4  6 ->7  8 ->7  9 ->10 9 ->11 12->13 9 ->14 9 ->15 9 ->16
+    ## [11] 9 ->17 9 ->14 9 ->18 19->18 19->22 8 ->23 9 ->24 9 ->22 26->7  27->28
+    ## [21] 32->33 34->35 34->33 36->37 38->39 36->40 41->15 41->11 41->14 41->13
+    ## [31] 41->39 41->42 41->43 9 ->40 44->45 44->46 48->46 9 ->49 36->50 44->51
+    ## [41] 32->52 36->32 53->54 36->55 36->32 36->58 44->59 51->58 44->14 36->56
+    ## [51] 36->60 62->50 36->60 32->59 36->60 36->50 41->63 41->64 41->65 41->56
+    ## [61] 41->61 41->43 41->52 41->58 41->59 9 ->64 9 ->58 12->66 32->58 12->66
+    ## [71] 67->32 41->32 67->32 32->68 68->56 67->32 67->32 68->61 67->32 67->8 
+    ## + ... omitted several edges
+
+``` r
+# Plot the subnetwork
+plot(g_active,
+     vertex.size = 5,
+     vertex.label = NA,
+     vertex.color = "lightblue",
+     edge.arrow.size = 0.3,
+     edge.color = rgb(0, 0, 0, 0.2),
+     main = "Active Communicators Subnetwork\n(Students who sent 50+ messages)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-40-1.png)<!-- -->
+
+**Much better!** Now we can see structure.
+
+------------------------------------------------------------------------
+
+### 3.8 Network Statistics: Who is Important?
+
+#### 3.8.1 Degree Centrality
+
+**Degree** = number of connections. In directed networks:
+
+- **Out-degree:** Number of messages SENT
+
+- **In-degree:** Number of messages RECEIVED
+
+- **Total degree:** Sum of both
+
+``` r
+# Calculate degrees for the active network
+out_deg <- degree(g_active, mode = "out")
+in_deg <- degree(g_active, mode = "in")
+total_deg <- degree(g_active, mode = "all")
+
+# Create a summary data frame
+degree_summary <- tibble(
+  student = V(g_active)$name,
+  out_degree = out_deg,
+  in_degree = in_deg,
+  total_degree = total_deg
+)
+
+# Top 10 by out-degree (most active senders)
+top_senders_degree <- degree_summary |>
+  arrange(desc(out_degree)) |>
+  head(10)
+
+print("Top 10 Most Active Senders (Out-Degree):")
+```
+
+    ## [1] "Top 10 Most Active Senders (Out-Degree):"
+
+``` r
+print(top_senders_degree)
+```
+
+    ## # A tibble: 10 × 4
+    ##    student out_degree in_degree total_degree
+    ##    <chr>        <dbl>     <dbl>        <dbl>
+    ##  1 9             1091       198         1289
+    ##  2 323           1012       534         1546
+    ##  3 12             993       217         1210
+    ##  4 103            739       440         1179
+    ##  5 105            686       345         1031
+    ##  6 1624           640       558         1198
+    ##  7 41             561       186          747
+    ##  8 249            493       257          750
+    ##  9 372            485       428          913
+    ## 10 32             457       501          958
+
+``` r
+# Top 10 by in-degree (most popular receivers)
+top_receivers_degree <- degree_summary |>
+  arrange(desc(in_degree)) |>
+  head(10)
+
+print("Top 10 Most Popular Receivers (In-Degree):")
+```
+
+    ## [1] "Top 10 Most Popular Receivers (In-Degree):"
+
+``` r
+print(top_receivers_degree)
+```
+
+    ## # A tibble: 10 × 4
+    ##    student out_degree in_degree total_degree
+    ##    <chr>        <dbl>     <dbl>        <dbl>
+    ##  1 1624           640       558         1198
+    ##  2 323           1012       534         1546
+    ##  3 32             457       501          958
+    ##  4 103            739       440         1179
+    ##  5 372            485       428          913
+    ##  6 454            227       377          604
+    ##  7 475            181       372          553
+    ##  8 254            213       351          564
+    ##  9 617            394       351          745
+    ## 10 105            686       345         1031
+
+**Interpretation:**
+
+- High out-degree = Very active sender
+
+- High in-degree = Very popular/central receiver
+
+- High total degree = Overall hub in the network
+
+``` r
+# Visualize degree distribution
+ggplot(degree_summary, aes(x = total_degree)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+  labs(title = "Degree Distribution",
+       x = "Total Degree",
+       y = "Number of Students") +
+  theme_minimal()
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-42-1.png)<!-- -->
+
+**What do we see?** Most students have few connections, a few students
+have many - this is a **scale-free** pattern!
+
+------------------------------------------------------------------------
+
+#### 3.8.2 Visualize Network with Degree
+
+Let’s size nodes by their total degree:
+
+``` r
+# Size nodes by degree
+V(g_active)$size <- sqrt(total_deg) * 2
+
+# Color by in-degree (popularity)
+# Create color gradient
+color_scale <- colorRampPalette(c("lightblue", "darkred"))(max(in_deg) + 1)
+V(g_active)$color <- color_scale[in_deg + 1]
+
+plot(g_active,
+     vertex.label = NA,
+     edge.arrow.size = 0.2,
+     edge.color = rgb(0, 0, 0, 0.2),
+     main = "College Network by Degree\n(Size = total degree, Color = in-degree/popularity)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+
+**Red nodes** = Students who receive many messages (popular)
+
+**Large nodes** = Students with many connections overall
+
+------------------------------------------------------------------------
+
+### 3.9 Betweenness Centrality: Who Bridges Different Groups?
+
+**Betweenness** measures how often a node lies on the shortest path
+between other nodes. High betweenness = **broker** or **bridge** between
+different groups.
+
+``` r
+# Calculate betweenness (this can take a moment for larger networks)
+betw <- betweenness(g_active, directed = TRUE)
+
+# Add to our summary
+degree_summary$betweenness <- betw
+
+# Top 10 by betweenness
+top_brokers <- degree_summary |>
+  arrange(desc(betweenness)) |>
+  head(10)
+
+print("Top 10 Brokers (Highest Betweenness):")
+```
+
+    ## [1] "Top 10 Brokers (Highest Betweenness):"
+
+``` r
+print(top_brokers)
+```
+
+    ## # A tibble: 10 × 5
+    ##    student out_degree in_degree total_degree betweenness
+    ##    <chr>        <dbl>     <dbl>        <dbl>       <dbl>
+    ##  1 32             457       501          958     125242.
+    ##  2 103            739       440         1179     105055.
+    ##  3 105            686       345         1031     100941.
+    ##  4 42             346       263          609      96759.
+    ##  5 400            443       236          679      95504.
+    ##  6 9             1091       198         1289      86611.
+    ##  7 713            446       196          642      70779.
+    ##  8 249            493       257          750      68428.
+    ##  9 638            397       231          628      67989.
+    ## 10 372            485       428          913      66930.
+
+**Key insight from Breiger (1974):** These students act as bridges
+between different social circles. They may not be the most popular, but
+they connect different groups!
+
+``` r
+# Visualize with betweenness
+V(g_active)$size <- sqrt(betw) / 3
+V(g_active)$color <- ifelse(betw > median(betw), "orange", "lightblue")
+
+plot(g_active,
+     vertex.label = NA,
+     edge.arrow.size = 0.2,
+     edge.color = rgb(0, 0, 0, 0.1),
+     main = "College Network by Betweenness\n(Orange = High betweenness brokers)")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
+
+------------------------------------------------------------------------
+
+### 3.10 Reciprocity: Do Students Message Each Other Back?
+
+In communication networks, **reciprocity** is important - do people
+respond to messages?
+
+``` r
+# Calculate reciprocity
+recip <- reciprocity(g_active)
+print(paste("Reciprocity:", round(recip, 3)))
+```
+
+    ## [1] "Reciprocity: 0.611"
+
+**Interpretation:**
+
+- Reciprocity = 0: No mutual communication
+
+- Reciprocity = 1: All communication is mutual
+
+- Our value = ?
+
+Let’s find examples of reciprocal vs non-reciprocal relationships:
+
+``` r
+# Find mutual edges (both A→B and B→A exist)
+mutual_edges <- which_mutual(g_active)
+print(paste("Number of mutual connections:", sum(mutual_edges)))
+```
+
+    ## [1] "Number of mutual connections: 42805"
+
+``` r
+# Calculate percentage
+pct_mutual <- (sum(mutual_edges) / ecount(g_active)) * 100
+print(paste("Percentage of edges that are mutual:", round(pct_mutual, 1), "%"))
+```
+
+    ## [1] "Percentage of edges that are mutual: 77.9 %"
+
+------------------------------------------------------------------------
+
+### Class Exercise 3:
+
+Using the full `g_college` network:
+
+1.  Calculate the in-degree for all students
+
+2.  Create a histogram of in-degree distribution
+
+3.  Identify the top 5 “popular” students (highest in-degree)
+
+4.  Create a subnetwork containing only these 5 students and their
+    immediate neighbors
+
+5.  Calculate the reciprocity of this subnetwork
+
+**Questions to consider:**
+
+- How does this subnetwork’s reciprocity compare to the full network?
+
+- What does this tell us about communication patterns around popular
+  students?
+
+``` r
+# Your workspace:
+```
+
+------------------------------------------------------------------------
+
+## 4. Clustering & Communities
+
+Community detection helps us understand how networks are organized into
+groups. In social networks, communities represent groups of people who
+interact more with each other than with outsiders.
+
+**Why This Matters:**
+
+- Identify friend groups or cliques
+
+- Understand information flow patterns
+
+- Detect organizational substructures
+
+- Find isolated or bridge communities
+
+------------------------------------------------------------------------
+
+### 4.1 Transitivity (Clustering Coefficient)
+
+**Transitivity** measures how “clique-like” a network is. If student A
+messages student B, and student B messages student C, how likely is it
+that student A also messages student C?
+
+**High transitivity** → tight-knit groups (e.g., close friend circles)
+
+**Low transitivity** → loose connections (e.g., broadcasting to many)
+
+``` r
+# Calculate global transitivity for the full network
+trans_full <- transitivity(g_college, type = "global")
+print(paste("Global transitivity:", round(trans_full, 3)))
+```
+
+    ## [1] "Global transitivity: 0.057"
+
+``` r
+# Calculate for our active students subnetwork
+trans_sub <- transitivity(g_active, type = "global")
+print(paste("Active students transitivity:", round(trans_sub, 3)))
+```
+
+    ## [1] "Active students transitivity: 0.055"
+
+**Interpretation:**
+
+- Values range from 0 (no triangles) to 1 (all possible triangles exist)
+
+- Social networks typically have higher transitivity than random
+  networks
+
+- Compare these values to a random network with the same size:
+
+``` r
+# Create a random network with same number of nodes and edges
+random_net <- sample_gnm(n = vcount(g_active), m = ecount(g_active), directed = TRUE)
+trans_random <- transitivity(random_net, type = "global")
+
+print(paste("Random network transitivity:", round(trans_random, 3)))
+```
+
+    ## [1] "Random network transitivity: 0.037"
+
+The college network should have **higher** transitivity than random,
+showing real social structure.
+
+------------------------------------------------------------------------
+
+### 4.2 Community Detection (Louvain Method)
+
+The **Louvain algorithm** finds groups of students who message each
+other frequently. It maximizes **modularity** - a measure of how
+separated communities are.
+
+Citation: Blondel, V. D., Guillaume, J.-L., Lambiotte, R., & Lefebvre,
+E. (2008). Fast unfolding of communities in large networks. Journal of
+Statistical Mechanics: Theory and Experiment, 10, 1–12.
+<https://doi.org/10.1088/1742-5468/2008/10/P10008>
+
+**Important Note:** Louvain works on **undirected** networks, so we’ll
+create an undirected version:
+
+``` r
+# Convert directed network to undirected
+g_active_undirected <- as_undirected(g_active, mode = "collapse")
+
+# Detect communities using Louvain method
+communities <- cluster_louvain(g_active_undirected)
+
+# Summary statistics
+print(paste("Number of communities found:", length(communities)))
+```
+
+    ## [1] "Number of communities found: 8"
+
+``` r
+print(paste("Modularity score:", round(modularity(communities), 3)))
+```
+
+    ## [1] "Modularity score: 0.248"
+
+``` r
+# Show community sizes
+community_sizes <- sizes(communities)
+print("Community sizes:")
+```
+
+    ## [1] "Community sizes:"
+
+``` r
+print(sort(community_sizes, decreasing = TRUE))
+```
+
+    ## Community sizes
+    ##   2   6   4   3   1   5   7   8 
+    ## 443 350 259 226 215 172  34  13
+
+**What is Modularity?**
+
+- Measures how well-separated communities are
+
+- Ranges from -0.5 to 1
+
+- Higher values (\>0.3) indicate strong community structure
+
+- Values \< 0.3 suggest weak or no communities
+
+------------------------------------------------------------------------
+
+### 4.3 Visualizing Communities
+
+Let’s visualize the communities with different colors:
+
+``` r
+# Create a color palette for communities
+num_communities <- length(communities)
+colors <- rainbow(num_communities)
+
+# Assign colors to nodes based on their community
+V(g_active_undirected)$color <- colors[membership(communities)]
+
+# Plot with communities highlighted
+plot(communities, g_active_undirected,
+     vertex.size = 5,
+     vertex.label = NA,
+     edge.arrow.size = 0.3,
+     main = "Student Communication Communities")
+```
+
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-52-1.png)<!-- -->
+
+**What do the communities represent?**
+
+- Friend groups or social circles
+
+- Academic cohorts (e.g., same major, same dorm)
+
+- Study groups or project teams
+
+- Different communication patterns
+
+------------------------------------------------------------------------
+
+### 4.4 Comparing Communities
+
+Let’s analyze community characteristics:
+
+``` r
+# Create a tibble with node information
+node_info <- tibble(
+  student_id = V(g_active_undirected)$name,
+  community = membership(communities),
+  degree = degree(g_active_undirected),
+  betweenness = betweenness(g_active_undirected)
+)
+
+# Summarize by community
+community_summary <- node_info |>
+  group_by(community) |>
+  summarise(
+    n_students = n(),
+    avg_degree = mean(degree),
+    avg_betweenness = mean(betweenness),
+    .groups = "drop"
+  ) |>
+  arrange(desc(n_students))
+
+print(community_summary)
+```
+
+    ## # A tibble: 8 × 4
+    ##   community  n_students avg_degree avg_betweenness
+    ##   <membrshp>      <int>      <dbl>           <dbl>
+    ## 1 2                 443      11.9            1759.
+    ## 2 6                 350      17.4            1813.
+    ## 3 4                 259      11.3            1619.
+    ## 4 3                 226      18.4            1480.
+    ## 5 1                 215      13.1            1465.
+    ## 6 5                 172      11.7            1649.
+    ## 7 7                  34       8.53           1272.
+    ## 8 8                  13      13.8            1003.
+
+**Visualize community characteristics:**
+
+``` r
+# Boxplot of degree by community (top 5 largest communities)
+top_5_communities <- community_summary |>
+  slice_max(n_students, n = 5) |>
+  pull(community)
+
+node_info |>
+  filter(community %in% top_5_communities) |>
+  ggplot(aes(x = factor(community), y = degree, fill = factor(community))) +
+  geom_boxplot() +
   labs(
-    title = "YOUR SONG TITLE: Genre Classification Probabilities",
-    subtitle = "Which genre does each model predict?",
-    x = NULL,
-    y = "Probability"
+    title = "Degree Distribution by Community",
+    x = "Community",
+    y = "Degree (Number of Connections)",
+    fill = "Community"
   ) +
-  coord_flip() +
   theme_minimal()
 ```
 
-### 7.2 Discussion Questions
+![](bigdata_L12-github_files/figure-gfm/unnamed-chunk-54-1.png)<!-- -->
 
-After testing your song, consider:
+------------------------------------------------------------------------
 
-1.  **Agreement vs. Disagreement**
+### 4.5 Edge Betweenness Community Detection (Alternative Method)
 
-    - Do all models agree on the genre?
-
-    - Which model is most/least confident?
-
-    - If models disagree, what might explain the differences?
-
-2.  **Lyrical Content Analysis**
-
-    - What specific words or themes might have influenced the
-      predictions?
-
-    - Does the song use vocabulary typical of one genre?
-
-    - Are there any surprising word choices that might confuse the
-      models?
-
-3.  **Limitations of Bag-of-Words**
-
-    - What aspects of the song’s genre identity are NOT captured by
-      lyrics alone?
-
-    - How would the prediction change if we included audio features
-      (beat, tempo, instruments)?
-
-    - Does the artist’s identity or cultural context matter for genre
-      classification?
-
-4.  **Real-World Classification**
-
-    - How is this song actually classified by streaming services, radio
-      stations, or award shows?
-
-    - Do you agree with that classification?
-
-    - If the model’s prediction differs from the “official” genre, which
-      seems more accurate?
-
-5.  **Bias and Fairness**
-
-    - Could the model’s prediction reflect historical biases in genre
-      classification?
-
-    - Are certain artists or cultural groups more likely to be
-      misclassified?
-
-    - How might we make genre classification more fair and inclusive?
-
-### 7.3 Optional: Compare Multiple Songs
-
-For extra exploration, test several songs and compare:
-
-- Different artists from the same genre
-
-- The same artist across different albums
-
-- Cover versions of the same song by different artists
-
-- Songs from different decades
-
-**Example comparison:**
+Another algorithm that works with **directed** networks:
 
 ``` r
-# Test multiple songs and combine results
-song_comparison <- bind_rows(
-  predict(rf_fit, song1, type = "prob") |> mutate(Song = "Song 1"),
-  predict(rf_fit, song2, type = "prob") |> mutate(Song = "Song 2"),
-  predict(rf_fit, song3, type = "prob") |> mutate(Song = "Song 3")
-)
+# Edge betweenness community detection (works on directed networks)
+communities_eb <- cluster_edge_betweenness(g_active)
+```
 
-song_comparison |>
-  pivot_longer(cols = starts_with(".pred"),
-               names_to = "Genre",
-               values_to = "Probability") |>
-  mutate(Genre = str_remove(Genre, ".pred_")) |>
-  ggplot(aes(x = Song, y = Probability, fill = Genre)) +
-  geom_col(position = "dodge") +
-  scale_y_continuous(labels = scales::percent_format()) +
-  labs(title = "Genre Classification Across Multiple Songs") +
-  theme_minimal()
+**Difference between methods:**
+
+- **Louvain**: Fast, good for large networks, optimizes modularity
+
+- **Edge Betweenness**: Slower, identifies “bridges” between
+  communities, works on directed networks
+
+------------------------------------------------------------------------
+
+### Class Exercise 4: Community Analysis
+
+Using the full college network (`g_college`):
+
+1.  Calculate the global transitivity coefficient
+
+2.  Create an undirected version and detect communities using Louvain
+
+3.  Find the 3 largest communities
+
+4.  Create a subnetwork containing only students from the largest
+    community
+
+5.  Calculate the average in-degree and out-degree for students in this
+    community
+
+6.  **Bonus:** Compare the transitivity of the largest community to the
+    full network - is the largest community more “clique-like”?
+
+``` r
+# Your code here
 ```
 
 ------------------------------------------------------------------------
 
+## 5. Gephi
+
+### 5.1 Exporting to Gephi
+
+[Gephi](https://gephi.org/) is a powerful, open-source software tool
+designed specifically for interactive visualization and exploration of
+networks.
+
+It provides a rich interface for analyzing structural properties,
+applying dynamic layouts, filtering, and producing high-quality visuals
+of complex networks.
+
+While `igraph` in R is excellent for building and analyzing networks,
+Gephi allows for more control over **visual layout**, **styling**, and
+**interactivity**, which makes it especially useful when preparing
+network graphics for presentations or publications.
+
+To export our graph to Gephi, we can use the `write_graph()` function
+from `igraph`:
+
+``` r
+write_graph(g_college, file = "../data/GameofThrones_Network.graphml", format = "graphml")
+```
+
 ------------------------------------------------------------------------
 
-## Lecture 11 Cheat Sheet
+### 5.2 Opening in Gephi
+
+To open the network in Gephi:
+
+1.  **Launch Gephi** and select “Open Graph File”
+
+2.  **Navigate to your .graphml file** (e.g., `college_network.graphml`)
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi1open.png?raw=true)
+
+3.  An **Import Report** will appear showing:
+
+    - Number of nodes (1,712 in this example)
+
+    - Number of edges (54,947)
+
+    - Graph type (Directed/Undirected)
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi2overview.png?raw=true)
+
+4.  Click **OK** to load the network into the **Overview** tab
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi3overview.png?raw=true)
+
+------------------------------------------------------------------------
+
+### 5.3 Quick Overview of the Gephi Interface
+
+Gephi has three main tabs:
+
+- **Overview Tab**: Where you layout, analyze, and manipulate the
+  network visually
+
+- **Data Laboratory**: A spreadsheet view of your nodes and edges (like
+  Excel)
+
+- **Preview Tab**: Renders publication-ready visuals with fine-tuned
+  styling
+
+**Key Panels in Overview:**
+
+- **Graph** (center): Visual display of your network
+
+- **Appearance** (left): Control node/edge colors and sizes
+
+- **Layout** (bottom left): Apply algorithms to position nodes
+
+- **Statistics** (right): Run network analysis metrics
+
+- **Filters** (right): Subset the network based on attributes
+
+------------------------------------------------------------------------
+
+### 5.4 Copy Name to Label
+
+Before visualizing, ensure node labels are visible:
+
+1.  Go to the **Data Laboratory** tab
+
+2.  Click **Copy data to other column**
+
+3.  Select **“Id”** or **“name”** as source, **“Label”** as target
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi4copyname.png?raw=true)
+
+4.  Return to **Overview** tab
+
+Now node names will display when you enable labels in the graph window.
+
+------------------------------------------------------------------------
+
+### 5.5 Running Community Detection
+
+To identify clusters in your network, use the **Modularity** algorithm:
+
+1.  In the **Statistics** panel (right), find **“Modularity”** under
+    **Community Detection**
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi5statistics.png?raw=true)
+
+2.  Click **Run** and a settings dialog will appear:
+
+    - **Randomize**: Check this for consistent results
+
+    - **Use weights**: Check if your edges have weight attributes
+
+    - **Resolution**: Default is 1.0 (higher = more communities)
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi6modularity.png?raw=true)
+
+3.  Click **OK** to run
+
+**Result:** Gephi adds a new node attribute called **“Modularity
+Class”**, assigning each node to a community (numbered 0, 1, 2, etc.).
+
+------------------------------------------------------------------------
+
+### 5.6 Coloring Nodes by Community
+
+Once Modularity is calculated, color nodes by their community:
+
+1.  Go to **Appearance** panel (top left) \> **Nodes** tab
+
+2.  Click the **palette icon** (Partition)
+
+3.  Select **“Modularity Class”** from the dropdown
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi7attributes.png?raw=true)
+
+4.  Gephi shows how many communities were detected (e.g., 14
+    communities)
+
+5.  You can choose a color palette or let Gephi assign random colors
+
+6.  Click **Apply**
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi8colors.png?raw=true)
+
+**Result:** Nodes are now colored by their community membership, making
+clusters visually distinct.
+
+------------------------------------------------------------------------
+
+### 5.7 Sizing Nodes by Degree
+
+Make important nodes (those with more connections) larger:
+
+1.  In **Appearance** panel \> **Nodes** tab, click the **concentric
+    circles icon** (Ranking)
+
+2.  Select **“Degree”** from the dropdown
+
+    - **Degree**: Total connections
+
+    - **In-Degree**: Incoming edges (for directed graphs)
+
+    - **Out-Degree**: Outgoing edges (for directed graphs)
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi9size.png?raw=true)
+
+3.  Adjust the **Min size** and **Max size** sliders
+
+4.  Click **Apply**
+
+**Result:** High-degree nodes (hubs) appear larger, while peripheral
+nodes remain small.
+
+------------------------------------------------------------------------
+
+### 5.8 Applying a Layout Algorithm
+
+Layouts position nodes to reveal network structure:
+
+1.  Go to the **Layout** panel (bottom left)
+
+2.  Select **ForceAtlas 2** (ideal for medium-large networks)
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi10forceatlas2.png?raw=true)
+
+3.  Adjust settings if needed:
+
+    - **Scaling**: Controls spread (higher = more spread out)
+
+    - **Stronger Gravity**: Pulls nodes toward center
+
+    - **Dissuade Hubs**: Prevents hubs from clustering too tightly
+
+4.  Click **Run** and watch the network reorganize
+
+5.  Click **Stop** once the layout stabilizes
+
+**Other useful layouts:**
+
+- **Yifan Hu**: Fast, good for large networks
+
+- **Fruchterman-Reingold**: Classic layout for small networks
+
+- **Circular**: Arranges nodes in a circle
+
+------------------------------------------------------------------------
+
+### 5.9 Filtering the Network
+
+Filter to focus on specific parts of your network:
+
+1.  Open the **Filters** panel (right side)
+
+2.  Expand **Attributes** \> **Equal**
+
+3.  Drag a filter (e.g., **“Modularity Class”**) to the **Queries** area
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi11filter.png?raw=true)
+
+4.  Select which communities to show (e.g., only Community 0 and 1)
+
+5.  Click **Filter** to apply
+
+**Other useful filters:**
+
+- **Degree Range**: Show only nodes with 10-50 connections
+
+- **Giant Component**: Isolate the largest connected cluster
+
+- **Edge Weight**: Hide weak connections
+
+------------------------------------------------------------------------
+
+### 5.10 Preview and Export
+
+Once your network looks great, export it:
+
+1.  Go to the **Preview** tab
+
+2.  Click **Refresh** to render the network
+
+![](https://github.com/aysedeniz09/IntroCSS/blob/main/images/gephi12preview.png?raw=true)
+
+3.  Adjust settings:
+
+    - **Show Labels**: Display node names
+
+    - **Edge thickness**: Adjust edge visibility
+
+    - **Background color**: Change from white to black or custom
+
+4.  Click **Export: SVG/PDF/PNG** at the bottom
+
+**Export formats:**
+
+- **PNG**: For presentations and websites (raster image)
+
+- **SVG**: For publications and further editing in Adobe Illustrator
+  (vector graphic)
+
+- **PDF**: For high-quality prints
+
+------------------------------------------------------------------------
+
+### 5.11 Summary of Gephi Workflow
+
+1.  **Import** your `.graphml` file
+
+2.  **Copy** node names to labels (Data Laboratory)
+
+3.  **Run Statistics** (e.g., Modularity for community detection)
+
+4.  **Color** nodes by community (Appearance \> Partition)
+
+5.  **Size** nodes by degree (Appearance \> Ranking)
+
+6.  **Apply Layout** (e.g., ForceAtlas 2)
+
+7.  **Filter** to focus on subsets (Filters panel)
+
+8.  **Preview** and **Export** (Preview tab)
+
+This workflow transforms raw network data into publication-ready
+visualizations that reveal hidden patterns and structures.
+
+------------------------------------------------------------------------
+
+## Lecture 11 Cheat Sheet: Network Analysis
 
 | **Function/Concept** | **Description** | **Code Example** |
 |----|----|----|
-| **tidymodels Ecosystem** | Meta-package for modern predictive modeling workflow | `library(tidymodels)` |
-| **rsample Package** | Data splitting and resampling (part of tidymodels) | `initial_split(data, prop = 0.75, strata = genre)` |
-| **recipes Package** | Feature engineering pipeline (part of tidymodels) | `recipe(genre ~ text, data = music)` |
-| **parsnip Package** | Unified model interface (part of tidymodels) | `logistic_reg() %>% set_engine("glm")` |
-| **yardstick Package** | Model performance metrics (part of tidymodels) | `accuracy(predictions, truth = genre, estimate = .pred_class)` |
-| **workflows Package** | Combine preprocessing and models (part of tidymodels) | `workflow() %>% add_recipe(recipe) %>% add_model(model)` |
-| **textrecipes Package** | Text preprocessing for tidymodels | `library(textrecipes)` |
-| `initial_split()` | Split data into training and testing sets with stratification | `music_split <- initial_split(music, prop = 0.75, strata = genre)` |
-| `training()` | Extract training data from split object | `music_train <- training(music_split)` |
-| `testing()` | Extract test data from split object | `music_test <- testing(music_split)` |
-| `recipe()` | Define preprocessing steps for modeling | `recipe(genre ~ text, data = music_train)` |
-| `step_tokenize()` | Split text into individual words | `step_tokenize(text, token = "words")` |
-| `step_stopwords()` | Remove common stopwords | `step_stopwords(text, language = "en")` |
-| `step_stem()` | Reduce words to root form | `step_stem(text, options = list(language = "en"))` |
-| `step_tokenfilter()` | Filter tokens by frequency | `step_tokenfilter(text, min_times = 500, max_times = 50000, max_tokens = 100)` |
-| `step_tf()` | Calculate term frequency for tokens | `step_tf(text)` |
-| `prep()` | Estimate preprocessing parameters from training data | `music_prep <- prep(music_recipe)` |
-| `bake()` | Apply preprocessing to new data | `music_baked <- bake(music_prep, new_data = NULL)` |
-| `logistic_reg()` | Specify logistic regression model | `logistic_reg() %>% set_engine("glm") %>% set_mode("classification")` |
-| `rand_forest()` | Specify Random Forest model | `rand_forest(trees = 100) %>% set_engine("ranger") %>% set_mode("classification")` |
-| `svm_rbf()` | Specify Support Vector Machine with RBF kernel | `svm_rbf() %>% set_engine("kernlab") %>% set_mode("classification")` |
-| `naive_Bayes()` | Specify Naive Bayes model | `naive_Bayes() %>% set_engine("naivebayes") %>% set_mode("classification")` |
-| `set_engine()` | Choose computational engine for model | `set_engine("ranger")` |
-| `set_mode()` | Specify classification or regression task | `set_mode("classification")` |
-| `workflow()` | Create workflow object | `workflow()` |
-| `add_recipe()` | Add preprocessing recipe to workflow | `workflow() %>% add_recipe(music_recipe)` |
-| `add_model()` | Add model specification to workflow | `workflow() %>% add_model(logistic_spec)` |
-| `fit()` | Train the model on data | `logistic_fit <- fit(logistic_wf, data = music_train)` |
-| `predict()` | Generate class predictions | `predict(logistic_fit, new_data = music_test)` |
-| `predict(type = "prob")` | Generate probability predictions | `predict(logistic_fit, new_data = music_test, type = "prob")` |
-| `bind_cols()` | Attach predictions to original data | `predictions %>% bind_cols(music_test)` |
-| `yardstick::accuracy()` | Calculate overall classification accuracy | `yardstick::accuracy(predictions, truth = genre, estimate = .pred_class)` |
-| `yardstick::precision()` | Calculate precision (positive predictive value) | `yardstick::precision(predictions, truth = genre, estimate = .pred_class)` |
-| `yardstick::recall()` | Calculate recall/sensitivity (true positive rate) | `yardstick::recall(predictions, truth = genre, estimate = .pred_class)` |
-| `yardstick::specificity()` | Calculate specificity (true negative rate) | `yardstick::specificity(predictions, truth = genre, estimate = .pred_class)` |
-| `yardstick::f_meas()` | Calculate F1 score (harmonic mean of precision/recall) | `yardstick::f_meas(predictions, truth = genre, estimate = .pred_class)` |
-| `yardstick::roc_auc()` | Calculate area under ROC curve | `yardstick::roc_auc(probs, truth = genre, .pred_Country)` |
-| `metric_set()` | Calculate multiple metrics at once | `metric_set(accuracy, precision, recall, specificity, f_meas)` |
-| `extract_fit_parsnip()` | Extract fitted model from workflow | `extract_fit_parsnip(logistic_fit)` |
-| `vip::vip()` | Visualize variable importance | `extract_fit_parsnip(rf_fit) %>% vip::vip(num_features = 20)` |
-| `system.time()` | Measure execution time | `system.time({ predictions <- predict(model, data) })` |
-| `bind_rows()` | Combine metrics from multiple models | `bind_rows(logistic_metrics, rf_metrics, svm_metrics, nb_metrics)` |
-| `pivot_wider()` | Convert metrics to wide format for comparison | `pivot_wider(names_from = .metric, values_from = .estimate)` |
-| `geom_col(position = "dodge")` | Side-by-side grouped bar chart | `geom_col(aes(x = Model, y = value, fill = Metric), position = "dodge")` |
-| `geom_hline()` | Add horizontal reference line | `geom_hline(yintercept = 0.80, linetype = "dashed", color = "red")` |
-| `coord_flip()` | Flip x and y axes for horizontal bars | `coord_flip()` |
-| `scales::percent_format()` | Format axis as percentages | `scale_y_continuous(labels = scales::percent_format())` |
-| `count(data, column)` | Count observations by group | `count(music, genre) %>% mutate(prop = n/sum(n))` |
-| `.pred_class` | Column name for predicted class | `predictions$.pred_class` |
-| `.pred_Country` | Column name for Country probability | `probs$.pred_Country` |
-| `.pred_HipHop` | Column name for HipHop probability | `probs$.pred_HipHop` |
-| **Stratified Sampling** | Preserves class proportions in train/test split | `initial_split(data, strata = genre)` |
-| **Bag of Words (BoW)** | Text representation using word frequencies only | `step_tokenize() %>% step_tf()` |
-| **Term Frequency (TF)** | Count of how often each word appears | `step_tf(text)` |
-| **Stemming** | Reduce words to root form (e.g., “running” → “run”) | `step_stem(text, options = list(language = "en"))` |
-| **Stopwords** | Common words removed from analysis | `step_stopwords(text, language = "en")` |
-| **Confusion Matrix** | TP, TN, FP, FN for classification evaluation | Accuracy = (TP + TN) / Total |
-| **Precision Formula** | TP / (TP + FP) | Positive Predictive Value |
-| **Recall Formula** | TP / (TP + FN) | Sensitivity / True Positive Rate |
-| **Specificity Formula** | TN / (TN + FP) | True Negative Rate |
-| **F1 Score Formula** | 2 × (Precision × Recall) / (Precision + Recall) | Harmonic mean of precision and recall |
-| **ROC AUC** | Area under Receiver Operating Characteristic curve | Values: 0.5 (random) to 1.0 (perfect) |
-| **Performance Thresholds** | Accuracy: ≥80% Excellent; F1: ≥0.80 Excellent; ROC AUC: ≥0.90 Excellent | Research standards (Burscher et al., 2014) |
-| **Class Imbalance** | When one class has far more examples than another | Use stratified sampling and check metrics carefully |
-| **Model Interpretability** | Logistic Regression = interpretable; Random Forest = black box | Trade-off between accuracy and explainability |
-
-------------------------------------------------------------------------
+| **Creating Networks** |  |  |
+| `graph()` | Create a simple graph from edge pairs | `g <- graph(edges = c(1,2, 2,3), n = 3, directed = FALSE)` |
+| `graph_from_literal()` | Create graph with intuitive syntax | `g <- graph_from_literal(A--B, B--C, C--A)` |
+| `graph_from_data_frame()` | Create network from data frame (edge list) | `g <- graph_from_data_frame(df, directed = FALSE)` |
+| **Network Properties** |  |  |
+| `vcount(g)` | Number of vertices (nodes) | `vcount(g)  # Returns 126` |
+| `ecount(g)` | Number of edges (connections) | `ecount(g)  # Returns 845` |
+| `summary(g)` | Overview of graph structure | `summary(g)` |
+| **Node/Edge Access** |  |  |
+| `V(g)` | Access vertices | `V(g)$name  # Get node names` |
+| `E(g)` | Access edges | `E(g)$weight  # Get edge weights` |
+| **Adding Node Attributes** |  |  |
+| Add attribute | Assign properties to nodes | `V(g)$color <- "blue"` |
+| Multiple attributes | Add metadata from data frame | `V(g)$house <- df$house` |
+| **Centrality Measures** |  |  |
+| `degree(g)` | Number of direct connections per node | `deg <- degree(g)` |
+| `betweenness(g)` | How often a node sits on shortest paths | `bet <- betweenness(g)` |
+| `closeness(g)` | Average distance to all other nodes | `clo <- closeness(g)` |
+| `eigen_centrality(g)` | Influence based on connections to influential nodes | `eig <- eigen_centrality(g)$vector` |
+| **Community Detection** |  |  |
+| `cluster_louvain(g)` | Louvain modularity-based communities | `comms <- cluster_louvain(g)` |
+| `cluster_walktrap(g)` | Random walk-based communities | `comms <- cluster_walktrap(g)` |
+| `cluster_fast_greedy(g)` | Fast greedy optimization | `comms <- cluster_fast_greedy(g)` |
+| `modularity(comms)` | Quality score of community structure | `modularity(comms)` |
+| **Network Metrics** |  |  |
+| `transitivity(g)` | Global clustering coefficient | `transitivity(g, type = "global")` |
+| `diameter(g)` | Longest shortest path in network | `diameter(g)` |
+| `mean_distance(g)` | Average path length | `mean_distance(g)` |
+| `edge_density(g)` | Ratio of actual to possible edges | `edge_density(g)` |
+| **Network Models** |  |  |
+| `make_empty_graph(n)` | Graph with nodes but no edges | `eg <- make_empty_graph(50)` |
+| `make_full_graph(n)` | Fully connected graph | `fg <- make_full_graph(50)` |
+| `make_star(n)` | Star network (hub and spokes) | `st <- make_star(50)` |
+| `make_ring(n)` | Ring/circle network | `rn <- make_ring(50)` |
+| `sample_gnm(n, m)` | Erdős-Rényi random graph | `er <- sample_gnm(n = 100, m = 50)` |
+| `sample_pa(n)` | Barabási-Albert scale-free network | `ba <- sample_pa(n = 100, power = 1)` |
+| **Plotting** |  |  |
+| `plot(g)` | Basic network visualization | `plot(g, vertex.size = 5, vertex.label = NA)` |
+| Vertex size by degree | Scale node size by centrality | `V(g)$size <- degree(g) / max(degree(g)) * 10` |
+| Vertex color | Color nodes by attribute | `V(g)$color <- ifelse(V(g)$gender == "F", "pink", "blue")` |
+| Edge width | Scale edge thickness by weight | `plot(g, edge.width = E(g)$weight / 2)` |
+| **Data Export** |  |  |
+| `write_graph()` | Export network for Gephi/other tools | `write_graph(g, "network.graphml", format = "graphml")` |
+| **Gephi Workflow** |  |  |
+| Import file | Open .graphml in Gephi | File \> Open Graph File |
+| Copy name to label | Make labels visible | Data Laboratory \> Copy data to other column |
+| Community detection | Run Modularity algorithm | Statistics \> Modularity \> Run |
+| Color by community | Apply partition coloring | Appearance \> Nodes \> Partition \> Modularity Class |
+| Size by degree | Scale nodes by centrality | Appearance \> Nodes \> Ranking \> Degree |
+| Apply layout | Position nodes spatially | Layout \> ForceAtlas 2 \> Run |
+| Filter network | Show subsets | Filters \> Attributes \> Equal \> Modularity Class |
+| Export visual | Save publication-ready image | Preview \> Refresh \> Export (SVG/PNG/PDF) |
