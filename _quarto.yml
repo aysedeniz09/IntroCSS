@@ -52,18 +52,16 @@ website:
             file: sessions/06/session.qmd
           - text: "Session 7 - Dictionary Methods & Word Embeddings"
             file: sessions/07/session.qmd
-          - text: "Session 8 - Midterm Exam"
+          - text: "Session 8 - Topic Modeling"
             file: sessions/08/session.qmd
-          - text: "Session 9 - Topic Modeling"
+          - text: "Session 9 - Unsupervised Machine Learning"
             file: sessions/09/session.qmd
-          - text: "Session 10 - Unsupervised Machine Learning"
+          - text: "Session 10 - Predictive Modelling"
             file: sessions/10/session.qmd
-          - text: "Session 11 - Predictive Modelling"
+          - text: "Session 11 - Networks"
             file: sessions/11/session.qmd
-          - text: "Session 12 - Networks"
+          - text: "Session 12 - From Data to Conclusions"
             file: sessions/12/session.qmd
-          - text: "Session 13 - From Data to Conclusions"
-            file: sessions/13/session.qmd
       - section: "Resources"
         contents:
           - text: "R Cheatsheets"

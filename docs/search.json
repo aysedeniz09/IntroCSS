@@ -4,12 +4,7 @@
     "href": "sessions/13/session.html",
     "title": "Session 13 - From Data to Conclusions: Issues of Big Data, Data Statements",
     "section": "",
-    "text": "LectureExercise\n\n\n\nLecture Materials\n\nView Lecture Notes\nView Source on GitHub\n\n\n\n\n\n\nExercise Materials\n\nDownload Exercise (.Rmd file)\nView on GitHub\n\nInstructions:\n\nRight-click the download link above and select “Save Link As”\nSave the .Rmd file to your computer\nOpen the file in RStudio\nComplete the exercises\n\n\n\n\n\n\n\n\n← Session 12\n\n\nSchedule\n\n\n[End of Course] →",
-    "crumbs": [
-      "Home",
-      "Class Sessions",
-      "Session 13 - From Data to Conclusions"
-    ]
+    "text": "LectureExercise\n\n\n\nLecture Materials\n\nView Lecture Notes\nView Source on GitHub\n\n\n\n\n\n\nExercise Materials\n\nDownload Exercise (.Rmd file)\nView on GitHub\n\nInstructions:\n\nRight-click the download link above and select “Save Link As”\nSave the .Rmd file to your computer\nOpen the file in RStudio\nComplete the exercises\n\n\n\n\n\n\n\n\n← Session 12\n\n\nSchedule\n\n\n[End of Course] →"
   },
   {
     "objectID": "sessions/11/session.html",
@@ -20,7 +15,7 @@
     "crumbs": [
       "Home",
       "Class Sessions",
-      "Session 11 - Predictive Modelling"
+      "Session 11 - Networks"
     ]
   },
   {
@@ -32,7 +27,7 @@
     "crumbs": [
       "Home",
       "Class Sessions",
-      "Session 9 - Topic Modeling"
+      "Session 9 - Unsupervised Machine Learning"
     ]
   },
   {
@@ -1246,7 +1241,7 @@
     "crumbs": [
       "Home",
       "Class Sessions",
-      "Session 8 - Midterm Exam"
+      "Session 8 - Topic Modeling"
     ]
   },
   {
@@ -1258,7 +1253,7 @@
     "crumbs": [
       "Home",
       "Class Sessions",
-      "Session 10 - Unsupervised Machine Learning"
+      "Session 10 - Predictive Modelling"
     ]
   },
   {
@@ -1270,7 +1265,7 @@
     "crumbs": [
       "Home",
       "Class Sessions",
-      "Session 12 - Networks"
+      "Session 12 - From Data to Conclusions"
     ]
   }
 ]
