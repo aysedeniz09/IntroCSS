@@ -45,7 +45,7 @@ title: "Course Schedule - Masters"
 | 11 | Apr 15 | Networks | | [View](#readings-11) |
 |  | Apr 23 | **Yotam Ophir CRC DeFleur Lecture at 3:00 pm** | | |
 | 12 | Apr 29 | From Data to Conclusions | | [View](#readings-12) |
-|  | **May 4** | | **Final Papers Due** | |
+|  | **May 1** | | **Final Papers Due** | |
 
 ---
 
