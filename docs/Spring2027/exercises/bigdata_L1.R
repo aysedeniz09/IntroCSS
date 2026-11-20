@@ -748,7 +748,7 @@ people |>
 
 
 ## 8.4 The pipe |> ----
-# The |> symbol is called the PIPE. Read it as "AND THEN." It takes what's on
+# This symbol, |>, is called the PIPE. Read it as "AND THEN." It takes what's on
 # the left and hands it to the function on the right. The pipe lets you chain
 # steps, top to bottom, like a recipe:
 people |>
