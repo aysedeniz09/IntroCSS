@@ -2,8 +2,8 @@
 
 # Session Generator - Links to rendered HTML pages
 # GitHub links point to .md files
-# Lectures: Spring2026/LectureSlides/bigdata_LX-github.qmd (renders to .html)
-# Exercises: Spring2026/exercises/bigdata_LX-github.Rmd
+# Lectures: Spring2027/LectureSlides/bigdata_LX-github.qmd (renders to .html)
+# Exercises: Spring2027/exercises/bigdata_LX.R
 
 echo "==================================="
 echo "Generating Session Pages"
@@ -12,18 +12,18 @@ echo ""
 
 # Session data: number|title
 declare -a sessions=(
-  "01|Why Computational Social Science?"
-  "02|Big Data: Data Collection and Wrangling"
-  "03|Big Data: Data Collection and Wrangling"
-  "04|Computational Research"
-  "05|Descriptive Data"
-  "06|Statistics"
-  "07|Text as Data: Dictionary Methods and Word Embeddings"
-  "08|Text as Data: Topic Modeling"
-  "09|Text as Data: Unsupervised Machine Learning Continued"
-  "10|Predictive Modelling"
-  "11|Networks"
-  "12|From Data to Conclusions: Issues of Big Data, Data Statements"
+  "01|Why Computational Social Science? R Basics and Your First Dataset"
+  "02|Data Wrangling"
+  "03|Collecting Data: The Arctic Shift API"
+  "04|Cleaning Text: Strings and Regular Expressions"
+  "05|Visualization and Your First Quarto Dashboard"
+  "06|Text as Data I: Tokens, KWIC, and TF-IDF"
+  "07|Text as Data II: Dictionary Methods and Sentiment"
+  "08|Text as Data III: Topic Modeling"
+  "09|Topics and Sentiment over Time"
+  "10|Topic Networks (ANTMN)"
+  "11|Presenting Data: Publishing Your Dashboard"
+  "12|Dashboard Presentations"
 )
 
 # Create sessions directory if needed
@@ -46,7 +46,7 @@ for session in "${sessions[@]}"; do
     prev_link="← [Session $prev_num](../$prev_num/session.qmd)"
   fi
   
-  if [ "$num" = "13" ]; then
+  if [ "$num" = "12" ]; then
     next_link="[End of Course] →"
   else
     next_link="[Session $next_num →](../$next_num/session.qmd)"
@@ -67,24 +67,24 @@ title: "Session SESSIONNUM - SESSIONTITLE"
 
 ### Lecture Materials
 
-- [View Lecture Notes](../../Spring2026/LectureSlides/bigdata_LFILENUM-github.html)
-- [View Source on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2026/LectureSlides/bigdata_LFILENUM-github.md)
+- [View Lecture Notes](../../Spring2027/LectureSlides/bigdata_LFILENUM-github.html)
+- [View Source on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2027/LectureSlides/bigdata_LFILENUM-github.md)
 
 ---
 
-## Exercise
+## In-Class Script
 
-### Exercise Materials
+### In-Class Script
 
-- [Download Exercise (.Rmd file)](../../Spring2026/exercises/bigdata_LFILENUM-github.Rmd)
-- [View on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2026/exercises/bigdata_LFILENUM-github.Rmd)
+- [Download the In-Class Script (.R)](../../Spring2027/exercises/bigdata_LFILENUM.R)
+- [View on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2027/exercises/bigdata_LFILENUM.R)
 
 **Instructions:**
 
 1. Right-click the download link above and select "Save Link As"
-2. Save the `.Rmd` file to your computer
+2. Save the `.R` file in your class project folder
 3. Open the file in RStudio
-4. Complete the exercises
+4. Follow along in class and complete the activities
 
 :::
 
@@ -119,8 +119,8 @@ echo "All session files created!"
 echo "==================================="
 echo ""
 echo "Files needed:"
-echo "- Spring2026/LectureSlides/bigdata_L1-github.md (for GitHub)"
-echo "- Spring2026/LectureSlides/bigdata_L1-github.qmd (for Quarto rendering)"
+echo "- Spring2027/LectureSlides/bigdata_L1-github.md (for GitHub)"
+echo "- Spring2027/LectureSlides/bigdata_L1-github.qmd (for Quarto rendering)"
 echo ""
 echo "Run 'quarto preview' to see your site!"
 echo ""

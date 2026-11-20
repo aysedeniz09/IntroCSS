@@ -1,5 +1,5 @@
 ---
-title: "Session 12 - Networks"
+title: "Session 12 - Dashboard Presentations"
 ---
 
 ::: {.panel-tabset}
@@ -8,24 +8,24 @@ title: "Session 12 - Networks"
 
 ### Lecture Materials
 
-- [View Lecture Notes](../../Spring2026/LectureSlides/bigdata_L12-github.html)
-- [View Source on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2026/LectureSlides/bigdata_L12-github.md)
+- [View Lecture Notes](../../Spring2027/LectureSlides/bigdata_L12-github.html)
+- [View Source on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2027/LectureSlides/bigdata_L12-github.md)
 
 ---
 
-## Exercise
+## In-Class Script
 
-### Exercise Materials
+### In-Class Script
 
-- [Download Exercise (.Rmd file)](../../Spring2026/exercises/bigdata_L12-github.Rmd)
-- [View on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2026/exercises/bigdata_L12-github.Rmd)
+- [Download the In-Class Script (.R)](../../Spring2027/exercises/bigdata_L12.R)
+- [View on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2027/exercises/bigdata_L12.R)
 
 **Instructions:**
 
 1. Right-click the download link above and select "Save Link As"
-2. Save the `.Rmd` file to your computer
+2. Save the `.R` file in your class project folder
 3. Open the file in RStudio
-4. Complete the exercises
+4. Follow along in class and complete the activities
 
 :::
 
@@ -39,6 +39,6 @@ title: "Session 12 - Networks"
 [Schedule](../../schedule.qmd)
 :::
 ::: {.g-col-4 style="text-align: right;"}
-[Session 13 →](../13/session.qmd)
+[End of Course] →
 :::
 :::

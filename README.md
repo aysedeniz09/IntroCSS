@@ -5,8 +5,8 @@
 
 Welcome to the **Trending Insights: Social Data Analysis and Visualization** or **Computer-Assisted Text Analysis** course!
 
-## Current Semester: Spring 2026
-**[Access Spring 2026 Course Materials](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2026)**
+## Current Semester: Spring 2027
+**[Access Spring 2027 Course Materials](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2027)**
 
 ---
 
@@ -17,7 +17,7 @@ Welcome to the **Trending Insights: Social Data Analysis and Visualization** or 
 ### Course Overview (Masters)
 - **Level:** Master's  
 - **Focus:** Social Data Analysis, Visualization Techniques, and Trend Interpretation  
-- **Skills:** Data Wrangling, Statistical Modeling, Visualization Design, and Storytelling  
+- **Skills:** Data Wrangling, Data Collection, Visualization Design, Dashboards, and Storytelling  
 
     </td>
     <td>
@@ -36,22 +36,23 @@ Welcome to the **Trending Insights: Social Data Analysis and Visualization** or 
 ## Repository Structure
 
 ### Current Semester
-- **[Spring2026](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2026)** - All current course materials including:
-  - [Lecture Slides](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2026/LectureSlides) (organized by week with code examples)
-  - [Class Exercises](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2026/exercises) (hands-on practice with datasets and R Markdown files)
+- **[Spring2027](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2027)** - All current course materials including:
+  - [Lecture Slides](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2027/LectureSlides) (organized by week with code examples)
+  - [Class Exercises](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2027/exercises) (in-class R scripts with activities)
   - [Data](https://github.com/aysedeniz09/IntroCSS/tree/main/data) files for in-class exploration
   - [Cheat Sheets](https://github.com/aysedeniz09/IntroCSS/tree/main/CheatSheets) (R reference materials)
 
 ### Archived Semesters
 Previous versions of this course are maintained for reference:
-- [Spring 2025](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring25) - Archived
+- [Spring 2026](https://github.com/aysedeniz09/IntroCSS/tree/main/ArchivedSemesters/Spring26) - Archived
+- [Spring 2025](https://github.com/aysedeniz09/IntroCSS/tree/main/ArchivedSemesters/Spring25) - Archived
 
 ---
 
 ## Getting Started
 
 ### 1. Install Required Software
-[Install R and RStudio](https://github.com/aysedeniz09/Intro_Comp_Social_Science/blob/main/install.html)
+[Install R, RStudio, and Git](https://aysedeniz09.github.io/IntroCSS/install.html)
 
 ### 2. Download Course Materials
 
@@ -59,15 +60,16 @@ Previous versions of this course are maintained for reference:
    - Click the green **Code** button at the top right
    - Select **Download ZIP** and save to your computer
    - Extract the ZIP file to a folder on your local machine
-   - Navigate to the `Spring2026/` folder for current materials
+   - Navigate to the `Spring2027/` folder for current materials
 
 **Option B: Download individual files**
-   - Browse to the [Spring2026 folder](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2026)
-   - Download specific lecture slides or exercise R Markdown files as needed
+   - Browse to the [Spring2027 folder](https://github.com/aysedeniz09/IntroCSS/tree/main/Spring2027)
+   - Download specific lecture notes or in-class R scripts as needed
 
 ### 3. Follow Along
 - Check the course schedule for weekly topics
-- Complete exercises before deadlines
+- Bring your laptop and complete the in-class activities
+- Build your dashboard page by page (see the schedule for due dates)
 - Reference cheat sheets as needed
 
 ---
@@ -78,7 +80,7 @@ Previous versions of this course are maintained for reference:
 
 **GitHub:** [@aysedeniz09](https://aysedeniz09.github.io)
 
-**Teaching Assistant:** [Max Wong](https://www.bu.edu/com/profile/maximilian-wei-jie-wong/)
+**Teaching Assistant:** [Jessy (Jiaxin) Wang](https://www.bu.edu/com/profile/jessy-jiaxin-wang/)
 
 ---
 

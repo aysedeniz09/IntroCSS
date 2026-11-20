@@ -15,10 +15,8 @@ website:
     left:
       - text: "Home"
         file: index.qmd
-      - text: "Masters Schedule"
+      - text: "Schedule"
         file: schedule.qmd
-      - text: "PhD Schedule"
-        file: schedule_phd.qmd
       - text: "Install R"
         file: install.qmd
     right:
@@ -34,33 +32,32 @@ website:
         contents:
           - index.qmd
           - schedule.qmd
-          - schedule_phd.qmd
           - install.qmd
       - section: "Class Sessions"
         contents:
-          - text: "Session 1 - Why Computational Social Science?"
+          - text: "Session 1 - Why CSS? R Basics"
             file: sessions/01/session.qmd
-          - text: "Session 2 - Data Collection and Wrangling"
+          - text: "Session 2 - Data Wrangling"
             file: sessions/02/session.qmd
-          - text: "Session 3 - Data Collection and Wrangling"
+          - text: "Session 3 - Collecting Data"
             file: sessions/03/session.qmd
-          - text: "Session 4 - Computational Research"
+          - text: "Session 4 - Cleaning Text"
             file: sessions/04/session.qmd
-          - text: "Session 5 - Descriptive Data"
+          - text: "Session 5 - Visualization & Dashboards"
             file: sessions/05/session.qmd
-          - text: "Session 6 - Statistics"
+          - text: "Session 6 - Text as Data I"
             file: sessions/06/session.qmd
-          - text: "Session 7 - Dictionary Methods & Word Embeddings"
+          - text: "Session 7 - Dictionaries & Sentiment"
             file: sessions/07/session.qmd
           - text: "Session 8 - Topic Modeling"
             file: sessions/08/session.qmd
-          - text: "Session 9 - Unsupervised Machine Learning"
+          - text: "Session 9 - Topics over Time"
             file: sessions/09/session.qmd
-          - text: "Session 10 - Predictive Modelling"
+          - text: "Session 10 - Topic Networks"
             file: sessions/10/session.qmd
-          - text: "Session 11 - Networks"
+          - text: "Session 11 - Publishing Your Dashboard"
             file: sessions/11/session.qmd
-          - text: "Session 12 - From Data to Conclusions"
+          - text: "Session 12 - Dashboard Presentations"
             file: sessions/12/session.qmd
       - section: "Resources"
         contents:
@@ -70,7 +67,7 @@ website:
             file: resources/datasets.qmd
 
   page-footer:
-    left: "© 2026 Ayse D. Lokmanoglu, Boston University"
+    left: "© 2027 Ayse D. Lokmanoglu, Boston University"
     right:
       - icon: envelope
         href: mailto:alokman@bu.edu

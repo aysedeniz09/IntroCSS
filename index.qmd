@@ -1,6 +1,6 @@
 ---
 title: "Social Data Analysis and Visualization"
-subtitle: "COM GR 787 | Spring 2026"
+subtitle: "COM EM 757 / COM GR 787 | Spring 2027"
 ---
 
 ## Welcome
@@ -13,9 +13,9 @@ As researchers, we now have various big data and tools to learn about human beha
 
 **Instructor:** Dr. Ayse D. Lokmanoglu  
 **Email:** [alokman@bu.edu](mailto:alokman@bu.edu)  
-**Office Hours:** Wednesdays 10:00 am - 1:30 pm  
+**Office Hours:** See the syllabus on Blackboard  
 
-**Teaching Assistant:** Max Wong, [maxwong@bu.edu](mailto:maxwong@bu.edu)
+**Teaching Assistant:** Jessy (Jiaxin) Wang, [jwang33@bu.edu](mailto:jwang33@bu.edu)
 
 ## Course Goals
 
@@ -74,13 +74,14 @@ By the end of the course, students will be able to:
 
 This course covers the following computational methods:
 
-| Week | Topic | Methods |
-|------|-------|---------|
-| 1-3 | **R Fundamentals** | R Studio basics, data wrangling, visualization |
-| 4-6 | **Statistical Analysis** | Descriptive statistics, regression models, trend analysis |
-| 7-10 | **Text Analysis** | Dictionary methods, sentiment analysis, topic modeling |
-| 11-12 | **Advanced Methods** | Network analysis, machine learning, predictive modeling |
-| 13 | **Ethics & Best Practices** | Data statements, reproducibility, ethical considerations |
+| Sessions | Topic | Methods |
+|----------|-------|---------|
+| 1-2 | **R Fundamentals** | RStudio basics, tidy data wrangling |
+| 3-5 | **Collecting and Presenting Data** | The Arctic Shift API, cleaning text with regular expressions, ggplot2, Quarto dashboards |
+| 6-10 | **Text Analysis** | Tidytext, dictionary methods, sentiment analysis, topic modeling, topic networks |
+| 11-12 | **Sharing Your Work** | GitHub, publishing your dashboard, presentations |
+
+Across the semester, you build one dashboard about data you collect yourself. Each assignment adds a page to it.
 
 ## Required Materials
 
@@ -98,5 +99,3 @@ Need help? Check out these resources:
 - **Dean of Students**: Support for food/housing insecurity or other challenges
 
 See [syllabus at blackboard](https://learn.bu.edu) for complete contact information.
-
-

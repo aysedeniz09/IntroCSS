@@ -1,126 +1,168 @@
 ---
-title: "How to Install R Studio"
+title: "How to Install R, RStudio, and Git"
 execute:
   eval: false
 ---
 
-## Installation Steps
+## Before the First Class
 
-**It is very important to install in order: first R, then R Studio**
+You need three things on your laptop:
 
-1. **Install R** from the download [link](https://cran.r-project.org/mirrors.html). You can pick which mirror to choose. For example, Duke Mirror: https://archive.linux.duke.edu/cran/
+| What | Why | When |
+|------|-----|------|
+| **R** | The programming language | Before class 1 |
+| **RStudio** | The program you write R in | Before class 1 |
+| **Git** + a **GitHub** account | To publish your dashboard at the end of the semester | Before class 2 (Assignment 1) |
 
-2. **Install R Studio** (free desktop version) **AFTER** you installed R, from the [link](https://www.rstudio.com/products/rstudio/download/). You will only use R Studio but need to have both on your computer.
+**It is very important to install in order: first R, then RStudio.**
 
 ---
 
-## How to Use R Studio
+## Step 1: Install R
 
-### Step 1: Open R Studio from applications folder
+Download R from CRAN: <https://cran.r-project.org/>
+
+- **Mac:** click "Download R for macOS" and pick the installer for your chip (Apple Silicon for M1/M2/M3/M4, Intel for older Macs).
+- **Windows:** click "Download R for Windows", then "base", then the download link.
+
+Open the downloaded file and follow the steps. You will not open R directly; you will use it through RStudio.
+
+---
+
+## Step 2: Install RStudio
+
+Install RStudio Desktop (free) **AFTER** you installed R: <https://posit.co/download/rstudio-desktop/>
+
+RStudio already includes **Quarto**, which we use for dashboards. To check: in RStudio, go to **File → New File**. You should see **Quarto Document...** in the list.
 
 ![](https://github.com/nwccpp/install_R/blob/images/Presentation1.jpg?raw=true)
 
-### Step 2: Create a new project
+---
 
-![](https://github.com/nwccpp/install_R/blob/images/Presentation2.jpg?raw=true)
+## Step 3: Install the Packages
 
-### Step 3: Click on "File/New File/R script"
-
-![](https://github.com/nwccpp/install_R/blob/main/R_Script_1.png?raw=true)
-
-### Step 4: Running commands
-
-Commands in R Studio can be written directly into the console area (bottom left), or in the script. To run a completed command press **Control + Enter** (Windows/Linux) or **Command + Enter** (Mac).
-
-### Step 5: Install Required Packages
-
-Type the following code in the script and run it:
+Open RStudio. Go to **File → New File → R Script**, paste this code in, highlight it, and run it with **Ctrl + Enter** (Windows) or **Cmd + Enter** (Mac). It can take 10 minutes or more. That's normal.
 
 ```r
-install.packages("tidyverse")    # data wrangling
-install.packages("tidyr")        # data wrangling
-install.packages("tidytext")     # text analysis
-install.packages("dplyr")        # data wrangling
-install.packages("tm")           # topic modeling
-install.packages("topicmodels")  # topic modeling
-install.packages("quanteda")     # text analysis
-install.packages("lubridate")    # dates
-install.packages("ggplot2")      # visualizations
-install.packages("ggthemes")     # visualizations
-install.packages("scales")       # visualizations
-install.packages("wesanderson")  # visualizations
+install.packages("tidyverse")           # data wrangling and plots
+install.packages("tidytext")            # text analysis
+install.packages("textdata")            # sentiment dictionaries
+install.packages("quanteda")            # key word in context (KWIC)
+install.packages("quanteda.textplots")  # KWIC plots
+install.packages("topicmodels")         # topic modeling
+install.packages("httr2")               # collecting data from APIs
+install.packages("jsonlite")            # reading API data
+install.packages("igraph")              # networks
+install.packages("ggraph")              # network plots
+install.packages("DT")                  # interactive tables for dashboards
+install.packages("devtools")            # installing packages from GitHub
 ```
 
+Then install `ldaOptim` (for choosing the number of topics) from GitHub:
 
-### Step 6: Load Packages into Library
+```r
+devtools::install_github("aysedeniz09/ldaOptim")
+```
 
-After installation, load the packages before using them:
+**Check that it worked.** Run these lines. If you see no red **Error** messages, you're ready. (Messages about packages being "attached" or "masked" are fine.)
 
 ```r
 library(tidyverse)
 library(tidytext)
-library(tidyr)
-library(dplyr)
-library(tm)
-library(topicmodels)
 library(quanteda)
-library(lubridate)
-library(ggplot2)
-library(ggthemes)
-library(scales)
-library(wesanderson)
+library(topicmodels)
+library(httr2)
+library(igraph)
+library(ldaOptim)
 ```
 
+---
 
-### Step 7: Getting Help
+## Step 4: Install Git and Make a GitHub Account (Assignment 1, due Feb 1)
 
-For help with any command, type `?` followed by the command name and run:
+At the end of the semester you publish your dashboard on GitHub. We set it up now, so any problems show up early.
+
+### 4a. Make a GitHub account
+
+Sign up at <https://github.com/>. Pick a username you're happy to share: it will be part of your dashboard's web address.
+
+### 4b. Install Git
+
+- **Mac:** open RStudio, click the **Terminal** tab (next to the Console), type `git --version`, and press Enter. If Git isn't installed, your Mac will offer to install the "command line developer tools." Click **Install** and wait.
+- **Windows:** download Git from <https://git-scm.com/download/win> and run the installer. The default options are fine. **Restart RStudio** afterwards.
+
+### 4c. Check that Git works
+
+In the RStudio **Terminal** tab, type:
+
+```bash
+git --version
+```
+
+You should see something like `git version 2.x.x`.
+
+### 4d. Tell Git who you are
+
+In the same Terminal, type these two lines, with your own name and the email you used for GitHub:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your_email@bu.edu"
+```
+
+### 4e. Submit Assignment 1
+
+On Blackboard, submit:
+
+1. Your GitHub username
+2. A screenshot of `git --version` working in your RStudio Terminal
+
+---
+
+## Getting Help
+
+For help with any function, type `?` followed by the function name and run it:
 
 ```r
-?merge
+?filter
 ?ggplot
-?install.packages
 ```
 
-For keyboard shortcuts in R Studio, see the [official documentation](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts-in-the-RStudio-IDE).
-
-
-**You're Ready!**
-
-Now you are ready to work in R Studio! If you have any issues with installation, please email the instructor or TA, or come to office hours.
+If you have any issues with installation, email the instructor or TA, or come to office hours. **Don't wait until the night before**: installation problems are easy to fix early.
 
 ---
 
 ## Troubleshooting
 
-**Problem: Package installation fails**
+**Package installation fails**
 
 - Make sure you're connected to the internet
+- Close RStudio, reopen it, and try again
+- Install the failing package by itself and read the error message
 
-- Try selecting a different CRAN mirror
-
-- Check if you have write permissions
-
-**Problem: R Studio won't open**
+**RStudio won't open, or says it can't find R**
 
 - Make sure R is installed first
+- Try reinstalling RStudio
 
-- Try reinstalling R Studio
+**Can't load a package ("there is no package called...")**
 
-- Check system requirements
+- Install it first with `install.packages()`
+- Check the spelling and capital letters
 
-**Problem: Can't load a package**
+**`git --version` says "command not found" (Windows)**
 
-- Make sure the package is installed first using `install.packages()`
+- Restart RStudio after installing Git
+- In RStudio: **Tools → Global Options → Git/SVN**, check that the Git path is filled in (usually `C:/Program Files/Git/bin/git.exe`)
 
-- Check the package name spelling
+**Your files are in OneDrive, iCloud, or Dropbox**
 
-- Try reinstalling the package
+- Syncing folders can cause errors with R projects and Git. Keep your class project in a regular folder, like Documents.
 
 ---
 
 ## Additional Resources
 
-- [RStudio Cheatsheets](https://rstudio.com/resources/cheatsheets/)
-
+- [RStudio Cheatsheets](https://posit.co/resources/cheatsheets/)
+- [Happy Git and GitHub for the useR](https://happygitwithr.com/) (if you get stuck with Git)
 - [Stack Overflow R Questions](https://stackoverflow.com/questions/tagged/r)

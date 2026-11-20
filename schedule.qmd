@@ -1,51 +1,47 @@
 ---
-title: "Course Schedule - Masters"
+title: "Course Schedule"
 ---
 
-## Section A - Mondays 2:30-5:15 PM
+## Mondays 2:30-5:15 PM
 
-| Session | Date | Topic | Assignment | Readings |
-|---------|------|-------|------------|----------|
-|  | Jan 26 | **SNOW DAY - No Class** | | |
-| 1 | Feb 2 | Why Computational Social Science? | | [View](#readings-1) |
-| 2 | Feb 9 | Big Data: Data Collection and Wrangling | | [View](#readings-2) |
-| 3 | Feb 17* | Big Data: Data Collection and Wrangling | | [View](#readings-3) |
-| 4 | Feb 23 | Computational Research | | [View](#readings-4) |
-| 5 | Mar 2 | Descriptive Data | **Benchmark 1 Due** | [View](#readings-5) |
-| | Mar 9 | **SPRING BREAK - No Class** | | |
-| 6 | Mar 16 | Statistics | | [View](#readings-6) |
-| 7 | Mar 23 | Text as Data: Dictionary Methods and Word Embeddings | | [View](#readings-7) |
-|  | Mar 30 | **Midterm Exam** | **Midterm** | |
-| 8 | Apr 6 | Text as Data: Topic Modeling | | [View](#readings-8) |
-| 9 | Apr 13 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-9) |
-| 10 | Apr 22* | Predictive modelling | | [View](#readings-10) |
-|  | Apr 23 | **Yotam Ophir CRC DeFleur Lecture at 3:00 pm** | | |
-| 11 | Apr 27 | From Data to Conclusions | | [View](#readings-12) |
-| | **May 1** | | **Final Papers Due** | |
+| Session | Date | Topic | Due | Readings |
+|---------|------|-------|-----|----------|
+| 1 | Jan 25 | Why Computational Social Science? R Basics and Your First Dataset | | [View](#readings-1) |
+| 2 | Feb 1 | Data Wrangling | **A1: GitHub Account + Git Installed** | [View](#readings-2) |
+| 3 | Feb 8 | Collecting Data: The Arctic Shift API | | [View](#readings-3) |
+| 4 | Feb 16* | Cleaning Text: Strings and Regular Expressions | **Data Proposal** | [View](#readings-4) |
+| 5 | Feb 22 | Visualization with ggplot2 and Your First Quarto Dashboard | | [View](#readings-5) |
+| 6 | Mar 1 | Text as Data I: Tokens, KWIC, and TF-IDF | | [View](#readings-6) |
+| | Mar 8 | **SPRING RECESS - No Class** | **A2: The Data Page (Sun, Mar 14)** | |
+| 7 | Mar 15 | Text as Data II: Dictionary Methods and Sentiment | **Oral Midterm this week** (20 min, book a slot) | [View](#readings-7) |
+| 8 | Mar 22 | Text as Data III: Topic Modeling | | [View](#readings-8) |
+| 9 | Mar 29 | Topics and Sentiment over Time | **A3: What People Say Page** | [View](#readings-9) |
+| 10 | Apr 5 | Topic Networks (ANTMN) | | [View](#readings-10) |
+| 11 | Apr 12 | Presenting Data: Publishing Your Dashboard with GitHub | | [View](#readings-11) |
+| | Apr 21* | **Buffer: Catch-Up or Dashboard Work Day** | **A4: Topics + Network Page, Published** | |
+| 12 | Apr 26 | Dashboard Presentations | **Presentation** | [View](#readings-12) |
+| | **May 2** | | **Final Dashboard Due** | |
 
-*Monday schedule (university holiday adjustment)
+*Monday schedule of classes (university holiday substitute)
 
 ---
 
-## Section B - Wednesdays 2:30-5:15 PM
+## Assignments and Grading
 
-| Session | Date | Topic | Assignment | Readings |
-|---------|------|-------|------------|----------|
-| 1 | Jan 21 | Why Computational Social Science? | | [View](#readings-1) |
-| 2 | Jan 28 | Big Data: Data Collection and Wrangling | | [View](#readings-2) |
-| 3 | Feb 4 | Big Data: Data Collection and Wrangling | | [View](#readings-3) |
-| 4 | Feb 11 | Computational Research | | [View](#readings-4) |
-| 5 | Feb 18 | Descriptive Data | | [View](#readings-5) |
-| 6 | Feb 25 | Statistics |  | [View](#readings-6) |
-| 7 | Mar 4 | Text as Data: Dictionary Methods and Word Embeddings | **Benchmark 1 Due** | [View](#readings-7) |
-| 8 | Mar 18 | Text as Data: Topic Modeling | | [View](#readings-8) |
-|  | Mar 25 | **Midterm Exam** | **Midterm** | |
-| 9 | Apr 1 | Text as Data: Unsupervised Machine Learning Continued | | [View](#readings-9) |
-| 10 | Apr 8 | Predictive modelling | | [View](#readings-10) |
-| 11 | Apr 15 | Networks | | [View](#readings-11) |
-|  | Apr 23 | **Yotam Ophir CRC DeFleur Lecture at 3:00 pm** | | |
-| 12 | Apr 29 | From Data to Conclusions | | [View](#readings-12) |
-|  | **May 1** | | **Final Papers Due** | |
+Across the semester, you build **one dashboard** about a dataset you collect yourself. Each assignment adds a page to it. The final is the polished, published version.
+
+| Assignment | Due | Points |
+|------------|-----|--------|
+| Participation (in-class activities) | Weekly | 10 |
+| A1: GitHub account + Git installed | Feb 1 | 5 |
+| Data proposal | Feb 16 | 5 |
+| A2: The Data page | Mar 14 | 10 |
+| Oral midterm (20 minutes, booked in office hours) | Week of Mar 15 | 25 |
+| A3: What People Say page | Mar 29 | 10 |
+| A4: Topics + Network page, published on GitHub | Apr 21 | 10 |
+| Presentation | Apr 26 | 10 |
+| Final dashboard | May 2 | 15 |
+| **Total** | | **100** |
 
 ---
 
@@ -57,73 +53,87 @@ title: "Course Schedule - Masters"
 
 - Lazer, D. M. J., Pentland, A., Watts, D. J., Aral, S., Athey, S., Contractor, N., Freelon, D., Gonzalez-Bailon, S., King, G., Margetts, H., Nelson, A., Salganik, M. J., Strohmaier, M., Vespignani, A., & Wagner, C. (2020). Computational social science: Obstacles and opportunities. *Science*, 369(6507), 1060-1062. https://doi.org/10.1126/science.aaz8170
 
+- Thulin, M. (2024). *Modern Statistics with R* - Chapter 2: The basics. Available at: https://www.modernstatisticswithr.com/thebasics.html
+
 - Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Whole Game: Chapters 1-8. Available at: https://r4ds.hadley.nz/
 
-**R Exercises:** R Studio Basic Grammar, Vectors, Data Frames, Data Manipulations, R Objects
+**Additional readings for PhD students:**
 
-[Back to Schedule](#section-a---mondays-230-515-pm)
+- Peng, Y., Lu, Y., & Shen, C. (2023). An Agenda for Studying Credibility Perceptions of Visual Misinformation. *Political Communication*, 40(2), 225–237. https://doi.org/10.1080/10584609.2023.2175398
+
+- Petchler, R., & González-Bailon, S. (2015). Automated content analysis of online political communication. In S. Coleman & D. Freelon (Eds.), *Handbook of Digital Politics* (pp. 433–450). Edward Elgar Publishing. https://doi.org/10.4337/9781782548768
+
+[Back to Schedule](#mondays-230-515-pm)
 
 ---
 
-### Session 2: Big Data - Data Collection and Wrangling {#readings-2}
+### Session 2: Data Wrangling {#readings-2}
 
 - Thulin, M. (2024). *Modern Statistics with R* - Chapter 5: Dealing with messy data. Available at: https://www.modernstatisticswithr.com/
 
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Chapter 5: Data tidying. Available at: https://r4ds.hadley.nz/data-tidy.html
+
 - Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Section: Transform. Available at: https://r4ds.hadley.nz/
 
-**R Exercises:** Tidy, Regular Expression
-
-[Back to Schedule](#section-a---mondays-230-515-pm)
+[Back to Schedule](#mondays-230-515-pm)
 
 ---
 
-### Session 3: Big Data - Data Collection and Wrangling {#readings-3}
+### Session 3: Collecting Data {#readings-3}
 
 - Cappella, J. N. (2017). Vectors into the Future of Mass and Interpersonal Communication Research: Big Data, Social Media, and Computational Social Science. *Human Communication Research*, 43(4), 545-558. https://doi.org/10.1111/hcre.12114
+
+- Peng, R. D. (2022). *R Programming for Data Science* - Chapters 13 & 14. Available at: https://bookdown.org/rdpeng/rprogdatascience/
+
+**Additional readings for PhD students:**
+
+- Brown, M. A., Gruen, A., Maldoff, G., Messing, S., Sanderson, Z., & Zimmer, M. (2024). Web Scraping for Research: Legal, Ethical, Institutional, and Scientific Considerations (arXiv:2410.23432). arXiv. https://doi.org/10.48550/arXiv.2410.23432
+
+- Freelon, D. (2018). Computational Research in the Post-API Age. *Political Communication*, 35(4), 665-668. https://doi.org/10.1080/10584609.2018.1477506
+
+- Theocharis, Y., & Jungherr, A. (2021). Computational Social Science and the Study of Political Communication. *Political Communication*, 38(1-2), 1-22. https://doi.org/10.1080/10584609.2020.1833121
+
+- Wickham, H. *Tidy design principles*. Available at: https://design.tidyverse.org/
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 4: Cleaning Text {#readings-4}
+
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Chapter 14: Strings. Available at: https://r4ds.hadley.nz/strings.html
+
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Chapter 15: Regular expressions. Available at: https://r4ds.hadley.nz/regexps.html
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 5: Visualization and Dashboards {#readings-5}
 
 - Healy, K. (2018). *Data Visualization: A Practical Introduction* - Chapter 2: Make a Plot. Available at: https://socviz.co/
 
 - Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Section: Visualize. Available at: https://r4ds.hadley.nz/
 
-**R Exercises:** GGPlot and Visualizations
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Chapter 28: Quarto. Available at: https://r4ds.hadley.nz/quarto.html
 
-[Back to Schedule](#section-a---mondays-230-515-pm)
+- Quarto. *Using R*. Available at: https://quarto.org/docs/computations/r.html
 
----
+- **Video:** Çetinkaya-Rundel, M. (2024). *Quarto Dashboards 1: Hello Dashboards* [Video]. Posit. https://opensource.posit.co/resources/videos/2024-11-06_quarto-dashboards-1-hello-dashboards-mine-cetinkaya-rundel-posit/
 
-### Session 4: Computational Research {#readings-4}
-
-- Peng, R. D. (2022). *R Programming for Data Science* - Chapters 13 & 14. Available at: https://bookdown.org/rdpeng/rprogdatascience/
-
-**R Exercises:** Functions and Loops, TidyText, Key Word in Context (KIWC), Term-Document Matrices
-
-[Back to Schedule](#section-a---mondays-230-515-pm)
+[Back to Schedule](#mondays-230-515-pm)
 
 ---
 
-### Session 5: Descriptive Data {#readings-5}
+### Session 6: Text as Data I {#readings-6}
 
-- Cernat, A. (2014). Introduction to Regression Models. In *Longitudinal Data Analysis Using R*.
+- Fobbe, S. *Key Word in Context (KWIC) and Lexical Dispersion*. Tutorial. Available at: https://seanfobbe.com/tutorials/kwic-lexical-dispersion/
 
-- Healy, K. (2018). *Data Visualization: A Practical Introduction* - Section 6: Work with models. Available at: https://socviz.co/
-
-**R Exercises:** Descriptive statistics
-
-[Back to Schedule](#section-a---mondays-230-515-pm)
+[Back to Schedule](#mondays-230-515-pm)
 
 ---
 
-### Session 6: Statistics {#readings-6}
-
-- Thulin, M. (2024). *Modern Statistics with R* - Chapter 8: Regression models. Available at: https://www.modernstatisticswithr.com/
-
-**R Exercises:** Coefficient plots, trend data
-
-[Back to Schedule](#section-a---mondays-230-515-pm)
-
----
-
-### Session 7: Text as Data - Dictionary Methods and Word Embeddings {#readings-7}
+### Session 7: Text as Data II - Dictionary Methods and Sentiment {#readings-7}
 
 - Carley, K. (1994). Extracting culture through textual analysis. *Poetics*, 22(4), 291-312. https://doi.org/10.1016/0304-422X(94)90011-6
 
@@ -133,76 +143,79 @@ title: "Course Schedule - Masters"
 
 - Stracqualursi, L., & Agati, P. (2022). Tweet topics and sentiments relating to distance learning among Italian Twitter users. *Scientific Reports*, 12(1). https://doi.org/10.1038/s41598-022-12915-w
 
-**R Exercises:** Sentiment Analysis, Dictionary Methods, BoWs
+**Additional readings for PhD students:**
 
-[Back to Schedule](#section-a---mondays-230-515-pm)
+- Fraser, K. C., Zeller, F., Smith, D. H., Mohammad, S., & Rudzicz, F. (2019). How do we feel when a robot dies? Emotions expressed on Twitter before and after hitchBOT's destruction. *Proceedings of the Tenth Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis*, 62–71. https://doi.org/10.18653/v1/W19-1308
+
+- Hart, R. P. (2013). The Rhetoric of Political Comedy: A Tragedy? 33.
+
+- Mora, M., Dupas de Matos, A., Fernández-Ruiz, V., Briz, T., & Chaya, C. (2020). Comparison of methods to develop an emotional lexicon of wine: Conventional vs rapid-method approach. *Food Quality and Preference*, 83, 103920. https://doi.org/10.1016/j.foodqual.2020.103920
+
+- Ophir, Y., & Walter, D. (2023). Computational Sentiment Analysis. In R. L. Nabi & J. G. Myrick, *Emotions in the Digital World: Exploring Affective Experience and Expression in Online Interactions* (pp. 114–133). Oxford University Press.
+
+[Back to Schedule](#mondays-230-515-pm)
 
 ---
 
-### Session 8: Text as Data - Topic Modeling {#readings-8}
+### Session 8: Text as Data III - Topic Modeling {#readings-8}
 
 - DiMaggio, P., Nag, M., & Blei, D. (2013). Exploiting affinities between topic modeling and the sociological perspective on culture: Application to newspaper coverage of U.S. government arts funding. *Poetics*, 41(6), 570-606. https://doi.org/10.1016/j.poetic.2013.08.004
 
 - Grimmer, J., & Stewart, B. M. (2013). Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts. *Political Analysis*, 21(3), 267-297. https://doi.org/10.1093/pan/mps028
 
-**R Exercises:** LDA
+- Silge, J., & Robinson, D. (2017). *Text Mining with R: A Tidy Approach* - Chapter 6: Topic modeling. Available at: https://www.tidytextmining.com/topicmodeling
 
-[Back to Schedule](#section-a---mondays-230-515-pm)
+- **Package:** Lokmanoglu, A. D. *ldaOptim*: choosing the number of topics (K). https://github.com/aysedeniz09/ldaOptim
 
-
----
-
-### Session 9: Text as Data - Unsupervised Machine Learning Continued {#readings-9}
-
-No assigned readings for this session.
-
-**R Exercises:** Sentiment Analysis and UML & Visualizations
-
-[Back to Schedule](#section-a---mondays-230-515-pm)
+[Back to Schedule](#mondays-230-515-pm)
 
 ---
 
-### Session 10: Predictive modelling {#readings-10}
+### Session 9: Topics and Sentiment over Time {#readings-9}
+
+- Silge, J., & Robinson, D. (2017). *Text Mining with R: A Tidy Approach* - Chapter 2: Sentiment analysis with tidy data. Available at: https://www.tidytextmining.com/sentiment
+
+**Additional readings for PhD students:**
+
+- Rudkowsky, E., Haselmayer, M., Wastian, M., Jenny, M., Emrich, Š., & Sedlmair, M. (2018). More than Bags of Words: Sentiment Analysis with Word Embeddings. *Communication Methods and Measures*, 12(2-3), 140-157. https://doi.org/10.1080/19312458.2018.1455817
+
+[Back to Schedule](#mondays-230-515-pm)
+
+---
+
+### Session 10: Topic Networks {#readings-10}
+
+- Walter, D., & Ophir, Y. (2019). News Frame Analysis: An Inductive Mixed-Method Computational Approach. *Communication Methods and Measures*. https://doi.org/10.1080/19312458.2019.1639145
+
+**Additional readings for PhD students:**
 
 - Breiger, R. L. (1974). The Duality of Persons and Groups. *Social Forces*, 53(2), 181. https://doi.org/10.2307/2576011
 
 - Ophir, Y., Walter, D., Arnon, D., Lokmanoglu, A. D., Tizzoni, M., Carota, J., D'Antiga, L., & Nicastro, E. (2021). The Framing of COVID-19 in Italian Media and Its Relationship with Community Mobility: A Mixed-Method Approach. *Journal of Health Communication*, 26(3), 161-173. https://doi.org/10.1080/10810730.2021.1899344
 
-- Silge, J. (2022). *Supervised Machine Learning for Text Analysis in R* - Section II: Machine Learning Methods. Available at: https://smltar.com/
-
-- Thulin, M. (2024). *Modern Statistics with R* - Chapter 11: Predictive modelling and machine learning. Available at: https://www.modernstatisticswithr.com/
-
-- Torres, M., & Cantú, F. (2022). Learning to See: Convolutional Neural Networks for the Analysis of Social Science Data. *Political Analysis*, 30(1), 113-131. https://doi.org/10.1017/pan.2021.9
-
-**R Exercises:** Tidy Models and supervised ML
-
-[Back to Schedule](#section-a---mondays-230-515-pm)
+[Back to Schedule](#mondays-230-515-pm)
 
 ---
 
-### Session 11: Networks {#readings-11}
+### Session 11: Presenting Data {#readings-11}
 
-- Breiger, R. L. (1974). The Duality of Persons and Groups. *Social Forces*, 53(2), 181. https://doi.org/10.2307/2576011
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* - Chapter 29: Quarto formats (especially 29.6 Websites and books). Available at: https://r4ds.hadley.nz/quarto-formats.html
 
-- Ophir, Y., Walter, D., Arnon, D., Lokmanoglu, A. D., Tizzoni, M., Carota, J., D'Antiga, L., & Nicastro, E. (2021). The Framing of COVID-19 in Italian Media and Its Relationship with Community Mobility: A Mixed-Method Approach. *Journal of Health Communication*, 26(3), 161-173. https://doi.org/10.1080/10810730.2021.1899344
-
-- Torres, M., & Cantú, F. (2022). Learning to See: Convolutional Neural Networks for the Analysis of Social Science Data. *Political Analysis*, 30(1), 113-131. https://doi.org/10.1017/pan.2021.9
-
-**R Exercises:** Community Detection Algorithms, Nodes and Edges, igraph, Gephi
-
-[Back to Schedule](#section-a---mondays-230-515-pm)
+[Back to Schedule](#mondays-230-515-pm)
 
 ---
 
-### Session 12: From Data to Conclusions {#readings-12}
+### Session 12: Dashboard Presentations {#readings-12}
 
 - Bower, B. (2018, July 27). 'Replication crisis' spurs reforms in how science studies are done. *Science News*. https://www.sciencenews.org/blog/science-the-public/replication-crisis-psychology-science-studies-statistics
 
 - Lazer, D., Kennedy, R., King, G., & Vespignani, A. (2014). The Parable of Google Flu: Traps in Big Data Analysis. *Science*, 343(6176), 1203-1205. https://doi.org/10.1126/science.1248506
 
-**R Exercises:** Final Project Consultations
+**Additional readings for PhD students:**
 
-[Back to Schedule](#section-a---mondays-230-515-pm)
+- Kasy, M. (2019). No Data in the Void: Values and Distributional Conflicts in Empirical Policy Research and Artificial Intelligence. Economics for Inclusive Prosperity. https://econfip.org/policy-briefs/no-data-in-the-void-values-and-distributional-conflicts-in-empirical-policy-research-and-artificial-intelligence/
+
+[Back to Schedule](#mondays-230-515-pm)
 
 ---
 

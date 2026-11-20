@@ -1,5 +1,5 @@
 ---
-title: "Session 02 - Big Data: Data Collection and Wrangling"
+title: "Session 02 - Data Wrangling"
 ---
 
 ::: {.panel-tabset}
@@ -8,24 +8,24 @@ title: "Session 02 - Big Data: Data Collection and Wrangling"
 
 ### Lecture Materials
 
-- [View Lecture Notes](../../Spring2026/LectureSlides/bigdata_L2-github.html)
-- [View Source on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2026/LectureSlides/bigdata_L2-github.md)
+- [View Lecture Notes](../../Spring2027/LectureSlides/bigdata_L2-github.html)
+- [View Source on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2027/LectureSlides/bigdata_L2-github.md)
 
 ---
 
-## Exercise
+## In-Class Script
 
-### Exercise Materials
+### In-Class Script
 
-- [Download Exercise (.Rmd file)](../../Spring2026/exercises/bigdata_L2-github.Rmd)
-- [View on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2026/exercises/bigdata_L2-github.Rmd)
+- [Download the In-Class Script (.R)](../../Spring2027/exercises/bigdata_L2.R)
+- [View on GitHub](https://github.com/aysedeniz09/IntroCSS/blob/main/Spring2027/exercises/bigdata_L2.R)
 
 **Instructions:**
 
 1. Right-click the download link above and select "Save Link As"
-2. Save the `.Rmd` file to your computer
+2. Save the `.R` file in your class project folder
 3. Open the file in RStudio
-4. Complete the exercises
+4. Follow along in class and complete the activities
 
 :::
 
